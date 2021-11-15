@@ -24,8 +24,6 @@ const BodyParser: React.FC<BodyParserProps> = (props) => {
             return extraComponents[blok._type];
           }
 
-          console.log(blok);
-
           if (blockFactory.getComponent(blok._type, { ...blok })) {
             return blockFactory.getComponent(blok._type, {
               ...blok,
