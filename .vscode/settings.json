@@ -36,7 +36,8 @@
     "__mocks__": true,
     "tests": true,
     "jest.config.js": true,
-    "setupTests.js": true
+    "setupTests.js": true,
+    "tailwind.config.js": true
   },
   "explorerExclude.backup": {
     "**/.git": true,
