@@ -18,7 +18,8 @@
     "paths": {
       "@components/*": ["components/*"],
       "@services/*": ["services/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "types/*": ["types/*"]
     }
   },
   "include": [

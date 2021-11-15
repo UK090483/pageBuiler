@@ -28,11 +28,9 @@
   left: -1rem;
   right: -1rem;
   top: 0;
-
   z-index: -1;
   border: red solid 1px;
   background-image: url("/underline/underline.svg");
   background-repeat: no-repeat;
-
   background-size: cover;
 }

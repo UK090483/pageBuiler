@@ -4,6 +4,7 @@ export default {
   type: "document",
   name: "page",
   title: "Page",
+
   fields: [
     {
       name: "title",
@@ -41,6 +42,9 @@ export default {
       title: "SEO / Share Settings",
       name: "seo",
       type: "seo",
+      options: {
+        collapsible: true,
+      },
     },
   ],
   preview: {

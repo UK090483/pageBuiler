@@ -5,6 +5,7 @@ import clsx from "clsx";
 
 export interface NavItemProps {
   href: string;
+  external?: boolean;
   label: string;
   size?: "s" | "m" | "l";
   divider?: boolean;
@@ -13,6 +14,7 @@ export interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({
   href,
+  external,
   label,
   size = "m",
   divider = true,
@@ -20,7 +22,7 @@ const NavItem: React.FC<NavItemProps> = ({
 }) => {
   const { closeMenu } = useMenu();
   return (
-    <Link href={href}>
+    <Link href={href} external={external}>
       <span
         onClick={closeMenu}
         className={

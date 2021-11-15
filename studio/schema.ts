@@ -37,6 +37,79 @@ export type {
 };
 
 /**
+ * Setting navigation
+ *
+ *
+ */
+export interface SettingNavigation extends SanityDocument {
+  _type: "settingNavigation";
+
+  /**
+   * name — `text`
+   *
+   *
+   */
+  name?: string;
+}
+
+/**
+ * Default SEO / Share
+ *
+ *
+ */
+export interface SeoSettings extends SanityDocument {
+  _type: "seoSettings";
+
+  /**
+   * seo — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
+ * Site config
+ *
+ *
+ */
+export interface SiteConfig extends SanityDocument {
+  _type: "siteConfig";
+
+  /**
+   * Home Page — `reference`
+   *
+   *
+   */
+  indexPage?: SanityReference<Page>;
+
+  /**
+   * Main Navigation — `array`
+   *
+   *
+   */
+  mainNav?: Array<
+    SanityKeyed<NavigationItem> | SanityKeyed<NavigationDropdown>
+  >;
+
+  /**
+   * Extra Navigation — `array`
+   *
+   *
+   */
+  extraNav?: Array<
+    SanityKeyed<NavigationItem> | SanityKeyed<NavigationDropdown>
+  >;
+
+  /**
+   * Default / Seo — `seo`
+   *
+   *
+   */
+  seo?: Seo;
+}
+
+/**
  * Blog Post
  *
  *
@@ -108,9 +181,7 @@ export interface Post extends SanityDocument {
    *
    * Add, edit, and reorder sections
    */
-  content?: Array<
-    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
-  >;
+  content?: Array<SanityKeyed<Section> | SanityKeyed<Listing>>;
 
   /**
    * SEO / Share Settings — `seo`
@@ -137,91 +208,6 @@ export interface PostCategory extends SanityDocument {
 }
 
 /**
- * Setting navigation
- *
- *
- */
-export interface SettingNavigation extends SanityDocument {
-  _type: "settingNavigation";
-
-  /**
-   * name — `text`
-   *
-   *
-   */
-  name?: string;
-}
-
-/**
- * Navigation
- *
- *
- */
-export interface Navigation extends SanityDocument {
-  _type: "navigation";
-
-  /**
-   * Main Navigation — `array`
-   *
-   *
-   */
-  item?: Array<SanityKeyed<Link> | SanityKeyed<NavigationDropdown>>;
-}
-
-/**
- * Landing Page
- *
- *
- */
-export interface IndexPage extends SanityDocument {
-  _type: "indexPage";
-
-  /**
-   * Title — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Title en — `string`
-   *
-   *
-   */
-  title_en?: string;
-
-  /**
-   * Header — `pageHeader`
-   *
-   *
-   */
-  pageHeader?: PageHeader;
-
-  /**
-   * Page sections — `array`
-   *
-   * Add, edit, and reorder sections
-   */
-  content?: Array<
-    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
-  >;
-
-  /**
-   * SEO / Share Settings — `seo`
-   *
-   *
-   */
-  seo?: Seo;
-
-  /**
-   * Slug — `slug`
-   *
-   *
-   */
-  slug?: { _type: "slug"; current: string };
-}
-
-/**
  * Page
  *
  *
@@ -244,6 +230,13 @@ export interface Page extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
+   * pageType — `reference`
+   *
+   *
+   */
+  pageType?: SanityReference<PageType>;
+
+  /**
    * Header — `pageHeader`
    *
    *
@@ -262,9 +255,7 @@ export interface Page extends SanityDocument {
    *
    * Add, edit, and reorder sections
    */
-  content?: Array<
-    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
-  >;
+  content?: Array<SanityKeyed<Section> | SanityKeyed<Listing>>;
 
   /**
    * SEO / Share Settings — `seo`
@@ -275,121 +266,19 @@ export interface Page extends SanityDocument {
 }
 
 /**
- * Default SEO / Share
+ * Navigation
  *
  *
  */
-export interface SeoSettings extends SanityDocument {
-  _type: "seoSettings";
+export interface Navigation extends SanityDocument {
+  _type: "navigation";
 
   /**
-   * Meta Title — `string`
-   *
-   * Title used for search engines and browsers.
-   */
-  metaTitle?: string;
-
-  /**
-   * Meta Description — `text`
-   *
-   * Description for search engines.
-   */
-  metaDesc?: string;
-
-  /**
-   * Share Title — `string`
-   *
-   * TItle used for social sharing cards.
-   */
-  shareTitle?: string;
-
-  /**
-   * Share Description — `text`
-   *
-   * Description for social sharing cards.
-   */
-  shareDesc?: string;
-
-  /**
-   * Share Graphic — `image`
-   *
-   * Share graphics will be cropped to 1200x630
-   */
-  shareGraphic?: {
-    _type: "image";
-    asset: SanityReference<SanityImageAsset>;
-    crop?: SanityImageCrop;
-    hotspot?: SanityImageHotspot;
-  };
-}
-
-/**
- * Config
- *
- *
- */
-export interface ConfigSettings extends SanityDocument {
-  _type: "configSettings";
-
-  /**
-   * Site Url — `string`
+   * Main Navigation — `array`
    *
    *
    */
-  url?: string;
-
-  /**
-   * Kontakt Tel — `string`
-   *
-   *
-   */
-  kontaktTel?: string;
-
-  /**
-   * Kontakt Mail — `string`
-   *
-   *
-   */
-  kontaktMail?: string;
-
-  /**
-   * Kontakt Adress — `text`
-   *
-   *
-   */
-  kontaktAdress?: string;
-
-  /**
-   * CVR number — `string`
-   *
-   *
-   */
-  cvr?: string;
-}
-
-/**
- * Footer
- *
- *
- */
-export interface Footer extends SanityDocument {
-  _type: "footer";
-
-  /**
-   * Name — `string`
-   *
-   *
-   */
-  name?: string;
-
-  /**
-   * Page sections — `array`
-   *
-   * Add, edit, and reorder sections
-   */
-  content?: Array<
-    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
-  >;
+  item?: Array<SanityKeyed<Link> | SanityKeyed<NavigationDropdown>>;
 }
 
 /**
@@ -423,26 +312,49 @@ export interface Redirect extends SanityDocument {
 }
 
 /**
- * Category
+ * Footer
  *
  *
  */
-export interface Category extends SanityDocument {
-  _type: "category";
+export interface Footer extends SanityDocument {
+  _type: "footer";
 
   /**
-   * Title — `string`
+   * Name — `string`
    *
    *
    */
-  title?: string;
+  name?: string;
 
   /**
-   * Description — `text`
+   * Page sections — `array`
+   *
+   * Add, edit, and reorder sections
+   */
+  content?: Array<SanityKeyed<Section> | SanityKeyed<Listing>>;
+}
+
+/**
+ * Page type
+ *
+ *
+ */
+export interface PageType extends SanityDocument {
+  _type: "pageType";
+
+  /**
+   * name — `string`
    *
    *
    */
-  description?: string;
+  name?: string;
+
+  /**
+   * Slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
 }
 
 export type DefaultImage = {
@@ -459,21 +371,28 @@ export type DefaultImage = {
   alt?: string;
 };
 
-export type Listing = {
-  _type: "listing";
+export type Link = {
+  _type: "link";
   /**
-   * Name — `string`
+   * Internal link — `reference`
    *
-   *
+   * Use this to link between pages on the website bli
    */
-  name?: string;
+  internalLink?: SanityReference<Page>;
 
   /**
-   * contentType — `string`
+   * On Page Position — `string`
    *
    *
    */
-  contentType?: "post" | "project";
+  onPage?: string;
+
+  /**
+   * External link — `url`
+   *
+   *
+   */
+  externalLink?: string;
 };
 
 export type PageHeader = {
@@ -491,64 +410,6 @@ export type PageHeader = {
    *
    */
   withOutLogo?: boolean;
-};
-
-export type Spacer = {
-  _type: "spacer";
-  /**
-   * Space — `string`
-   *
-   *
-   */
-  space?: "s" | "m" | "l" | "xl" | "xxl";
-};
-
-export type NavigationItem = {
-  _type: "navigationItem";
-  /**
-   * Label — `string`
-   *
-   *
-   */
-  label?: string;
-
-  /**
-   * Internal link — `reference`
-   *
-   * Use this to link between pages on the website
-   */
-  internalLink?: SanityReference<IndexPage | Page>;
-
-  /**
-   * External link — `url`
-   *
-   *
-   */
-  link?: string;
-};
-
-export type NavigationDropdown = {
-  _type: "navigationDropdown";
-  /**
-   * Label — `string`
-   *
-   *
-   */
-  label?: string;
-
-  /**
-   * Label En — `string`
-   *
-   *
-   */
-  label_en?: string;
-
-  /**
-   * Main Navigation — `array`
-   *
-   *
-   */
-  item?: Array<SanityKeyed<NavigationItem>>;
 };
 
 export type Seo = {
@@ -594,15 +455,39 @@ export type Seo = {
   };
 };
 
-export type BlockContent = Array<
-  | SanityKeyed<SanityBlock>
-  | SanityKeyed<{
-      _type: "image";
-      asset: SanityReference<SanityImageAsset>;
-      crop?: SanityImageCrop;
-      hotspot?: SanityImageHotspot;
-    }>
->;
+export type NavigationDropdown = {
+  _type: "navigationDropdown";
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+
+  /**
+   * Main Navigation — `array`
+   *
+   *
+   */
+  item?: Array<SanityKeyed<NavigationItem>>;
+};
+
+export type NavigationItem = {
+  _type: "navigationItem";
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+
+  /**
+   * Link — `link`
+   *
+   *
+   */
+  link?: Link;
+};
 
 export type Section = {
   _type: "section";
@@ -632,7 +517,7 @@ export type Section = {
    *
    *
    */
-  bgColor?: "black" | "white" | "pink" | "red" | "grey";
+  bgColor?: "black" | "white" | "primary" | "red" | "grey";
 
   /**
    * Top Space — `string`
@@ -649,30 +534,33 @@ export type Section = {
   bottomSpace?: "s" | "m" | "l" | "xl" | "xxl";
 
   /**
-   * Background Image — `figure`
+   * Background Image — `defaultImage`
    *
    *
    */
-  bgImage?: Figure;
+  bgImage?: DefaultImage;
+};
+
+export type Listing = {
+  _type: "listing";
+  /**
+   * Name — `string`
+   *
+   *
+   */
+  name?: string;
+
+  /**
+   * contentType — `string`
+   *
+   *
+   */
+  contentType?: "post" | "project";
 };
 
 export type DefaultRichText = Array<
   SanityKeyed<SanityBlock> | SanityKeyed<Button> | SanityKeyed<Spacer>
 >;
-
-export type Figure = {
-  _type: "figure";
-  asset: SanityReference<SanityImageAsset>;
-  crop?: SanityImageCrop;
-  hotspot?: SanityImageHotspot;
-
-  /**
-   * Alternative text — `string`
-   *
-   * Important for SEO and accessiblity.
-   */
-  alt?: string;
-};
 
 export type Button = {
   _type: "button";
@@ -695,7 +583,7 @@ export type Button = {
    *
    * Use this to link between pages on the website
    */
-  internalLink?: SanityReference<IndexPage | Page>;
+  internalLink?: SanityReference<Page>;
 
   /**
    * External link — `url`
@@ -709,14 +597,14 @@ export type Button = {
    *
    *
    */
-  color?: "black" | "white" | "pink" | "red" | "grey";
+  color?: "black" | "white" | "primary" | "red" | "grey";
 
   /**
    * Background Color — `string`
    *
    *
    */
-  bgColor?: "black" | "white" | "pink" | "red" | "grey";
+  bgColor?: "black" | "white" | "primary" | "red" | "grey";
 
   /**
    * Position — `string`
@@ -726,101 +614,24 @@ export type Button = {
   position?: "inline" | "left" | "right" | "center";
 };
 
-export type Link = {
-  _type: "link";
+export type Spacer = {
+  _type: "spacer";
   /**
-   * Internal link — `reference`
-   *
-   * Use this to link between pages on the website
-   */
-  internalLink?: SanityReference<IndexPage | Page>;
-
-  /**
-   * External link — `url`
+   * Space — `string`
    *
    *
    */
-  link?: string;
-};
-
-export type Hero = {
-  _type: "hero";
-  /**
-   * Title — `string`
-   *
-   *
-   */
-  title?: string;
-
-  /**
-   * Text — `text`
-   *
-   *
-   */
-  text?: string;
-
-  /**
-   * Button text — `string`
-   *
-   *
-   */
-  btnText?: string;
-
-  /**
-   * Button link — `string`
-   *
-   *
-   */
-  btnLink?: string;
-
-  /**
-   * Image — `figure`
-   *
-   *
-   */
-  image?: Figure;
-
-  /**
-   * Size — `string`
-   *
-   *
-   */
-  size?: "full" | "1/2" | "1/3" | "2/3";
-
-  /**
-   * Filter intensity — `string`
-   *
-   *
-   */
-  filterIntensity?:
-    | "0"
-    | "10"
-    | "20"
-    | "30"
-    | "40"
-    | "50"
-    | "60"
-    | "70"
-    | "80"
-    | "90";
-
-  /**
-   * Filter Color — `string`
-   *
-   *
-   */
-  filterColor?: "white" | "black";
+  space?: "s" | "m" | "l" | "xl" | "xxl";
 };
 
 export type Documents =
+  | SettingNavigation
+  | SeoSettings
+  | SiteConfig
   | Post
   | PostCategory
-  | SettingNavigation
-  | Navigation
-  | IndexPage
   | Page
-  | SeoSettings
-  | ConfigSettings
-  | Footer
+  | Navigation
   | Redirect
-  | Category;
+  | Footer
+  | PageType;

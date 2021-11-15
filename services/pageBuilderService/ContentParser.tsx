@@ -2,9 +2,16 @@ import SectionBlock, {
   sectionBlockQuery,
   SectionResult,
 } from "./Blocks/SectionBlock";
-import BodyParser, { BodyParserProps } from "./lib/BodyParser";
+import BodyParser from "./lib/BodyParser";
 import { blockFactory } from "./lib/BlockFactory";
-import RichText, { richTextQuery } from "./RichText";
+
+import ListingBlock, {
+  listingBlockQuery,
+  ListingBlogResult,
+} from "./Blocks/ListingsBlock";
+
+export type PageBodyResult = (SectionResult | ListingBlogResult)[];
+export type PageQueryResult = { content: PageBodyResult };
 
 blockFactory.registerComponents([
   {
@@ -14,39 +21,20 @@ blockFactory.registerComponents([
     query: sectionBlockQuery,
   },
   {
-    name: "block",
-    component: RichText,
+    name: "listing",
+    component: ListingBlock,
     type: "root",
-    query: richTextQuery,
+    query: listingBlockQuery,
   },
 ]);
 
-export const body = `
-content[]{
-  ...,
-  ${blockFactory.getRootQuery()},
-},
-`;
-
-export { blockFactory };
-
-interface ContentParserProps
-  extends Omit<BodyParserProps, "blockFactory" | "lang"> {
-  content: SectionResult[];
+interface ContentParserProps {
+  content: PageBodyResult;
 }
+
 const ContentParser: React.FC<ContentParserProps> = (props) => {
   return <BodyParser blockFactory={blockFactory} {...props} />;
 };
-
+export const body = blockFactory.getRootQuery();
+export { blockFactory };
 export default ContentParser;
-
-export type PageBodyResult = SectionResult[];
-// | RichTextQueryResult
-// | EmbedPlugResult
-// | ButtonPlugResult
-// | ImagePlugResult
-// | SeoHeaderPlugResult
-// | ImageGalleryPlugResult
-// | SpacerPlugResult
-// | DownloadPlugResult
-// | ListingBlogResult

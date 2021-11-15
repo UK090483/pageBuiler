@@ -24,6 +24,7 @@ module.exports = {
   testPathIgnorePatterns: [
     "<rootDir>/node_modules/",
     "<rootDir>/.next/",
+    "<rootDir>/studio/",
     "testPrepare.ts",
   ],
   testEnvironment: "jsdom",

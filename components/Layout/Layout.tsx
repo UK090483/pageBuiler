@@ -1,30 +1,32 @@
+import { FetchStaticPropsResult } from "@services/SanityService/fetchStaticProps";
 import React from "react";
 import Footer from "./Footer";
 import Head from "./Head";
 import { Header } from "./Header";
 
-interface LayoutProps {}
+interface LayoutProps extends FetchStaticPropsResult {}
 
-const navItems = [
-  { href: "/loene", label: "Löhne" },
-  { href: "/arbeitsbedingungen", label: "Arbeitsbedingungen" },
-  { href: "/kinderrechte", label: "Kinderrechte" },
-];
+export const Layout: React.FC<LayoutProps> = ({ children, page }) => {
+  const mainNav = page?.siteSettings.mainNav.map((i) => ({
+    href: i.link.internalLink || i.link.externalLink || "/",
+    label: i.label || " ",
+    external: !!i.link.externalLink,
+  }));
 
-const footerNavItems = [
-  ...navItems,
-  { href: "/loene", label: "Was bedeutet nachhaltige Mode?" },
-  { href: "/arbeitsbedingungen", label: "Den Wandel anführen" },
-  { href: "/kinderrechte", label: "Aktuelles" },
-];
+  const extraNav = page?.siteSettings.extraNav.map((i) => ({
+    href: i.link.internalLink || i.link.externalLink || "/",
+    label: i.label || " ",
+    external: !!i.link.externalLink,
+  }));
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const footerNav = extraNav && mainNav && [...mainNav, ...extraNav];
+
   return (
     <>
-      <Header navItems={navItems} />
+      <Header navItems={mainNav || []} />
       <Head />
       <main className="min-h-screen pt-60">{children}</main>
-      <Footer navItems={footerNavItems} />
+      <Footer navItems={footerNav || []} />
     </>
   );
 };

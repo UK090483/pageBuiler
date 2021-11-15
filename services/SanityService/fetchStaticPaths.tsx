@@ -2,24 +2,30 @@ import type { SanityClient } from "@sanity/client/sanityClient";
 
 const getAllDocSlugs: (
   doc: string,
-  client: () => SanityClient
-) => Promise<null | { slug: string; pageType: null | string }[]> = async (
-  doc,
-  client
-) => {
-  return client().fetch(
-    `*[_type == "${doc}"]{ 'pageType': pageType->name , 'slug': slug.current }`
+  client: SanityClient
+) => Promise<
+  null | { slug: string; pageType: null | string; isHome: boolean }[]
+> = async (doc, client) => {
+  return client.fetch(
+    `*[_type == "${doc}"]{ 
+        'pageType': pageType->name , 
+        'slug': slug.current ,
+        'isHome':*[_id == 'siteConfig'][0].indexPage._ref == @._id }
+    `
   );
 };
 
+export type FetchStaticPathsParams = {
+  slug?: string[];
+};
 export type FetchStaticPathsResult = {
-  paths: string[];
+  paths: { params: FetchStaticPathsParams }[];
   fallback: boolean;
 };
 
 export const fetchStaticPaths = async (
   doc: string,
-  client: () => SanityClient
+  client: SanityClient
 ): Promise<FetchStaticPathsResult> => {
   const allPages = await getAllDocSlugs(doc, client);
 
@@ -33,11 +39,18 @@ export const fetchStaticPaths = async (
         if (!page.slug) return [...acc];
         const pageType = page.pageType && page.pageType.toLowerCase();
         const slug = page.slug.toLowerCase();
-        return [
-          ...acc,
-          // ...(index === 0 ? [{ params: { slug: [""] } }] : []),
-          { params: { slug: pageType ? [pageType, slug] : [slug] } },
-        ];
+
+        let pageParams = {
+          params: { slug: pageType ? [pageType, slug] : [slug] },
+        };
+
+        if (page.isHome) {
+          pageParams = {
+            params: { slug: [""] },
+          };
+        }
+
+        return [...acc, pageParams];
       }, [] as any[]) || [],
     fallback: false,
   };

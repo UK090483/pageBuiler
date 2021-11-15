@@ -1,27 +1,27 @@
-import { fetchStaticPaths } from "../fetchStaticPath";
-import { mockGetClient } from "./testPrepare";
+import { fetchStaticPaths } from "../fetchStaticPaths";
+import { mockClient } from "./testPrepare";
 describe("fetchStaticPath", () => {
   it("should trow error if fetch result is not [] ", async () => {
     await expect(
-      fetchStaticPaths("", mockGetClient({ fetchReturn: null }))
+      fetchStaticPaths("", mockClient({ fetchReturn: null })())
     ).rejects.toThrow();
     await expect(
-      fetchStaticPaths("", mockGetClient({ fetchReturn: "string" }))
+      fetchStaticPaths("", mockClient({ fetchReturn: "string" })())
     ).rejects.toThrow();
     await expect(
-      fetchStaticPaths("", mockGetClient({ fetchReturn: [] }))
+      fetchStaticPaths("", mockClient({ fetchReturn: [] })())
     ).resolves.toStrictEqual({ fallback: false, paths: [] });
   });
 
   it("should return right data ", async () => {
     await expect(
-      fetchStaticPaths("", mockGetClient({ fetchReturn: [] }))
+      fetchStaticPaths("", mockClient({ fetchReturn: [] })())
     ).resolves.toStrictEqual({ fallback: false, paths: [] });
 
     await expect(
       fetchStaticPaths(
         "",
-        mockGetClient({
+        mockClient({
           fetchReturn: [
             { slug: "test1" },
             { slug: "CAPITAL" },
@@ -29,7 +29,7 @@ describe("fetchStaticPath", () => {
             { slug: "test4", pageType: "CAPITAL" },
             { slug: "", pageType: "test5" },
           ],
-        })
+        })()
       )
     ).resolves.toStrictEqual({
       fallback: false,

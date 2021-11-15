@@ -38,7 +38,6 @@ const Typo: React.FC<TypographyProps> = ({
   spacer = false,
 }) => {
   const Component: ElementKeys = as ? as : variantsMapping[variant];
-
   const isBold = bold.includes(variant as string);
 
   if (spacer) {
@@ -47,10 +46,11 @@ const Typo: React.FC<TypographyProps> = ({
 
   return (
     <Component
+      style={{ paddingBottom: "20px" }}
       className={
         clsx({
           "text-sm": variant === "body2",
-          "text-base": variant === "body1",
+          "text-base ": variant === "body1",
           "text-lg": variant === "h6",
           "text-xl": variant === "h5",
           "text-2xl": variant === "h4",

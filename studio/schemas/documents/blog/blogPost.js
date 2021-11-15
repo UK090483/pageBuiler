@@ -65,20 +65,6 @@ export default {
       title: "Use default Header",
     },
     defaultBockContent,
-    // {
-    //   name: "excerpt",
-    //   type: "text",
-    //   title: "Excerpt",
-    //   description:
-    //     "This ends up on summary pages, on Google, when people share your post in social media.",
-    // },
-    // {
-    //   name: "excerpt_en",
-    //   type: "text",
-    //   title: "Excerpt En",
-    //   description:
-    //     "This ends up on summary pages, on Google, when people share your post in social media.",
-    // },
     {
       title: "SEO / Share Settings",
       name: "seo",

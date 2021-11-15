@@ -1,5 +1,5 @@
 import { mockClient } from "./testPrepare";
-import { fetchPage } from "../fetchPageApi";
+import { fetchPage } from "../fetchStaticProps";
 
 describe.only("fetchPage", () => {
   const OLD_ENV = process.env;

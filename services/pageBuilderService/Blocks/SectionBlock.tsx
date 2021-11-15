@@ -6,14 +6,16 @@ import {
   ImageMetaResult,
 } from "@services/pageBuilderService/queries/snippets";
 
-import { Section as SectionType } from "../../../types";
+import { Section as SectionType } from "types";
 
-import { richTextQuery } from "../RichText";
-import ContentParser from "../ContentParser";
+import RichText, { richTextQuery } from "../RichText/RichText";
+
 import { Section } from "@components/Section";
 
 export const sectionBlockQuery = `
 _type == "section" => {
+  _key,
+  _type,
   title,
   bgColor,
   type,
@@ -39,7 +41,7 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
   return (
     <Section
       {...(title && { id: title })}
-      className={clsx({
+      className={clsx("rt", {
         "pt-5 md:pt-10": topSpace === "s",
         "pt-9 md:pt-20": topSpace === "m",
         "pt-12 md:pt-32": topSpace === "l",
@@ -53,7 +55,7 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
         "pb-0.5": !bottomSpace,
       })}
     >
-      {content && <ContentParser content={content} />}
+      {content && <RichText content={content} />}
     </Section>
   );
 };

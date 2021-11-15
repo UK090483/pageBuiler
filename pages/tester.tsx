@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-
 import { getSanityClient } from "@services/SanityService/sanity.server";
 
 import ContentParser, {
   body,
 } from "@services/pageBuilderService/ContentParser";
+
+import type { NextPage } from "next";
 
 const Home: NextPage = (props) => {
   // @ts-ignore
@@ -16,9 +16,7 @@ const Home: NextPage = (props) => {
 export default Home;
 
 export async function getStaticProps() {
-  const client = getSanityClient();
-
-  const page = await client.fetch(
+  const page = await getSanityClient().fetch(
     `*[_type == 'page' && slug.current == 'test' ][0]{...,${body}}`
   );
 

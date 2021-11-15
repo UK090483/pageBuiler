@@ -1,17 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
-// @ts-nocheck
+
 import React from "react";
 
-import BlockContent from "@sanity/block-content-to-react";
+import BlockContent, {
+  BlockContentProps,
+  Serializers,
+} from "@sanity/block-content-to-react";
 
 import LinkMark, { linkMarkQuery } from "./marks/link";
 import ButtonPlug, { buttonPlugQuery } from "./Plugs/ButtonPlug";
-import { downloadPlugQuery } from "./Plugs/DownLoadPlug";
-import EmbedPlug, { embedPlugQuery } from "./Plugs/EmbedPlug";
-import { imageGalleryPlugQuery } from "./Plugs/ImageGaleriePlug";
-import { imagePlugQuery } from "./Plugs/ImagePlug";
+// import { downloadPlugQuery } from "./Plugs/DownLoadPlug";
+// import EmbedPlug, { embedPlugQuery } from "./Plugs/EmbedPlug";
+// import { imageGalleryPlugQuery } from "./Plugs/ImageGaleriePlug";
+// import { imagePlugQuery } from "./Plugs/ImagePlug";
 import Typo from "@components/Typography/Typography";
+import SpacerPlug, { spacerPlugQuery } from "./Plugs/Spacer";
 
 const marksQuery = `
 markDefs[]{
@@ -20,16 +24,24 @@ markDefs[]{
 }
 `;
 
+// export const richTextQuery = `
+// content[]{
+//   ...,
+//   ${marksQuery},
+//   ${buttonPlugQuery},
+//   ${embedPlugQuery},
+//   ${imagePlugQuery},
+//   ${imageGalleryPlugQuery},
+//   ${downloadPlugQuery},
+// }
+//`;
 export const richTextQuery = `
 content[]{
   ...,
   ${marksQuery},
   ${buttonPlugQuery},
-  ${embedPlugQuery},
-  ${imagePlugQuery},
-  ${imageGalleryPlugQuery},
+  ${spacerPlugQuery}
  
-  ${downloadPlugQuery},
 }
 `;
 
@@ -47,10 +59,12 @@ const tag = (props: any) => {
   return <Typo variant={props.mark.tag}>{props.children}</Typo>;
 };
 
-const list = (props: any) => {
+const List: React.FC = (props: any) => {
   return (
     <ul
-      className={`${"list-disc"} list-outside pl-8 text-base-fluid pb-3 leading-[1.1em]`}
+      className={`${
+        props?.type === "number" ? "list-decimal" : "list-disc"
+      } list-inside pb-4`}
     >
       {props.children}
     </ul>
@@ -68,6 +82,7 @@ const BlockRenderer = (props: any) => {
 
   if (Object.keys(styles).includes(style)) {
     return (
+      //@ts-ignore
       <Typo variant={styles[style]} as={"p"}>
         {props.children}
       </Typo>
@@ -77,21 +92,27 @@ const BlockRenderer = (props: any) => {
   if (style === "blockquote") {
     return <blockquote>- {props.children}</blockquote>;
   }
-
+  //@ts-ignore
   return BlockContent.defaultSerializers.types.block(props);
 };
+const Container: React.FC = ({ children }) => {
+  return <>{children}</>;
+};
 
-const serializer = {
-  list,
+const serializer: Serializers = {
+  list: List,
+  // hardBreak: () => <div className="border-2 border-red-600 "></div>,
   types: {
     button: ButtonPlug,
-    embed: EmbedPlug,
+    // embed: EmbedPlug,
     block: BlockRenderer,
+    spacer: SpacerPlug,
   },
   marks: {
     link,
     tag,
   },
+  container: Container,
 };
 
 const RichText: React.FC<any> = (props: any) => {

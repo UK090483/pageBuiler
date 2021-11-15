@@ -27,10 +27,11 @@ class BlockFactory {
     return C ? <C {...props} /> : null;
   }
 
-  public getRootQuery() {
-    return this.getRootElements()
+  public getRootQuery(rootName: string = "content") {
+    const elementQuery = this.getRootElements()
       .map((c) => c.query)
       .join(" , ");
+    return `${rootName}[]{${elementQuery}}`;
   }
 
   public getRootElements() {

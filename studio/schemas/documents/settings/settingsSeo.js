@@ -1,11 +1,16 @@
-import { seoSettings } from "../../snippets";
-
 export default {
   title: "Default SEO / Share",
   name: "seoSettings",
   type: "document",
-  __experimental_actions: ["update", "publish"], // disable for initial publish
-  fields: [...seoSettings()],
+
+  // __experimental_actions: ["update", "publish"], // disable for initial publish
+  fields: [
+    {
+      title: "",
+      name: "seo",
+      type: "seo",
+    },
+  ],
   preview: {
     prepare() {
       return {

@@ -1,47 +1,29 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
-import Feature from "@components/organisms/Feature";
-import List from "@components/organisms/Listings/List";
-import {
-  fetchStaticPaths,
-  FetchStaticPathsResult,
-} from "@services/SanityService/fetchStaticPath";
-import { fetchPage } from "@services/SanityService/fetchPageApi";
-import { Page } from "types";
-import { getSanityClient } from "@services/SanityService/sanity.server";
+import { fetchStaticPaths } from "@services/SanityService/fetchStaticPaths";
+import type { FetchStaticPathsParams } from "@services/SanityService/fetchStaticPaths";
+import { fetchStaticProps } from "@services/SanityService/fetchStaticProps";
+import type { FetchStaticPropsResult } from "@services/SanityService/fetchStaticProps";
+import { sanityClient } from "@services/SanityService/sanity.server";
+import ContentParser from "@services/pageBuilderService/ContentParser";
 
-const Home: NextPage = () => {
+const PageComponent: NextPage<FetchStaticPropsResult> = ({ page }) => {
   return (
-    <div>
-      <Feature variant={Math.random() > 0.5 ? "overlapping" : "sideBySide"} />
-      <List />
-    </div>
+    <>{page && page.content && <ContentParser content={page.content} />}</>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  return await fetchStaticPaths("page", getSanityClient);
+  return await fetchStaticPaths("page", sanityClient);
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const slug =
-    context.params?.slug &&
-    Array.isArray(context.params.slug) &&
-    context.params.slug[context.params.slug.length - 1];
+type GetStaticPropsPlus = GetStaticProps<
+  { [key: string]: any },
+  FetchStaticPathsParams
+>;
 
-  console.log(context);
-
-  // if (!slug) {
-  //   throw new Error("No slug found");
-  // }
-
-  // const page = await fetchPage<Page>(
-  //   `*[_type == "page" && slug.current == "test2" ][0]{...}`,
-  //   slug,
-  //   false
-  // );
-
-  return { props: { page: "bam" } };
+export const getStaticProps: GetStaticPropsPlus = async ({ params }) => {
+  return await fetchStaticProps({ params, sanityClient });
 };
 
-export default Home;
+export default PageComponent;
