@@ -33,6 +33,8 @@ module.exports = {
         black: "#000000",
         white: "#ffffff",
         salmon: "#f5e0d7",
+        yellow: "#F3BD06",
+        red: "#D22D30",
       },
       animation: {
         fadeIn: "fadeIn 1s ease-in forwards",

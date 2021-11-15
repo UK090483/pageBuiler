@@ -20,16 +20,13 @@ const Nav: React.FC<NavProps> = ({ items }) => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-20 bg-grey-light">
+        <div className="flex items-center justify-between px-4 text-white h-14 bg-red">
+          <div>kostenlose Beratung: 040 38 61 23 71</div>
+        </div>
         <div className="flex items-center justify-between w-full p-3 text-xl font-bold">
           <Link href="/">
             <Logo />
           </Link>
-          <span>Mode mit Verantwortung</span>
-          <button data-testid="menu-overlay-toggle" onClick={handleNavClick}>
-            <Svg className="w-[30px]" icon="hamburger" />
-          </button>
-        </div>
-        <div className="flex items-center justify-center w-full p-3 text-xl font-bold bg-grey">
           {items &&
             items.map((navItem, index) => (
               <NavItem
@@ -38,6 +35,9 @@ const Nav: React.FC<NavProps> = ({ items }) => {
                 divider={index !== items.length - 1}
               />
             ))}
+          <button data-testid="menu-overlay-toggle" onClick={handleNavClick}>
+            <Svg className="w-[30px]" icon="hamburger" />
+          </button>
         </div>
       </nav>
       <Dropdown>
