@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 
+import Button from "@components/Button/Button";
 import React from "react";
 
 import { AppColor } from "types";
@@ -32,21 +33,14 @@ export type ButtonPlugResult = {
 
 type ButtonPlugProps = ButtonPlugResult;
 const ButtonPlug: React.FC<ButtonPlugProps> = (props) => {
-  const { internalLink, link, color, bgColor, label, position } = props;
+  const { internalLink, link, color, bgColor, label, position } = props.node;
   const _link = internalLink ? internalLink : link || "/";
   const _type = internalLink ? "link" : link ? "externalLink" : "link";
 
-  return (
-    <div>Button</div>
-    // <Button
-    //   color={color || "black"}
-    //   backgroundColor={bgColor || "white"}
-    //   type={_type}
-    //   link={_link}
-    //   label={label || "label"}
-    //   position={position || "inline"}
-    // />
-  );
+  console.log(props);
+  // return <div>Button</div>;
+
+  return <Button onClick={() => {}}>{label}</Button>;
 };
 
 export default ButtonPlug;

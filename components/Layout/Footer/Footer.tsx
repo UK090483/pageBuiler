@@ -1,6 +1,9 @@
+import { Carousel } from "@components/organisms/Listings/Carousel";
 import React from "react";
 import { Logo } from "../Logo";
-import NavItem, { NavItemProps } from "@components/Layout/NavItem";
+import NavItem, { NavItemProps } from "../Navigation/NavItem/NavItem";
+import FooterContact from "./FooterContact";
+import Quote from "./Quotes/Quote";
 
 interface FooterProps {
   navItems: NavItemProps[];
@@ -10,27 +13,19 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
   return (
     <footer
       data-testid="footer"
-      className="flex flex-col items-center px-8 pt-20 bg-grey pb-36"
+      className="flex flex-col items-center bg-yellow "
     >
-      <Logo />
-
+      <Carousel />
+      <Quote />
+      <FooterContact />
       <div
         style={{ maxWidth: 1200 }}
         className="flex flex-col items-center justify-center w-full pb-12 border-b border-black border-opacity-20 "
-      >
-        <div className="max-w-xl py-8 text-center">
-          {navItems &&
-            navItems.map((navItem, index) => (
-              <NavItem
-                size="s"
-                key={navItem.label}
-                {...navItem}
-                divider={index !== navItems.length - 1}
-              />
-            ))}
-        </div>
+      ></div>
 
-        <div>
+      <div className="flex items-center justify-between w-full max-w-6xl px-8 ">
+        <NavItem size="s" href="/" label="Kreisel e.V." />
+        <div className="flex ">
           <NavItem size="s" href="/impressum" label="Impressum" />
           <NavItem
             size="s"

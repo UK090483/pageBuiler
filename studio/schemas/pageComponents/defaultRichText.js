@@ -21,6 +21,7 @@ export default {
       ],
       marks: {
         decorators: [
+          { title: "Hand", value: "hand" },
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
           {

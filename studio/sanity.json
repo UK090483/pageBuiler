@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "handm"
-  },
   "api": {
-    "projectId": "ls0p396g",
-    "dataset": "dev"
+    "projectId": "jgnu3d9f",
+    "dataset": "production"
+  },
+  "project": {
+    "name": "kreisel"
   },
   "plugins": [
     "@sanity/base",

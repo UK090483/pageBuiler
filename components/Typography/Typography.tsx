@@ -26,9 +26,12 @@ interface TypographyProps {
   as?: ElementKeys;
   className?: string;
   spacer?: boolean;
+  hand?: boolean;
+  bold?: boolean;
+  space?: boolean;
 }
 
-const bold = ["h1", "h2", "h3", "h4", "h5", "h6"];
+const boldMap = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
 const Typo: React.FC<TypographyProps> = ({
   variant = "body1",
@@ -36,9 +39,13 @@ const Typo: React.FC<TypographyProps> = ({
   className = "",
   as,
   spacer = false,
+  hand = false,
+  bold,
+  space,
 }) => {
   const Component: ElementKeys = as ? as : variantsMapping[variant];
-  const isBold = bold.includes(variant as string);
+  const isBold =
+    bold !== undefined ? bold : boldMap.includes(variant as string);
 
   if (spacer) {
     return <div className=" h-14" />;
@@ -46,9 +53,12 @@ const Typo: React.FC<TypographyProps> = ({
 
   return (
     <Component
-      style={{ paddingBottom: "20px" }}
+      style={{
+        paddingBottom: space === undefined ? "1em" : space ? "1em" : "0",
+      }}
       className={
         clsx({
+          "font-hand": hand,
           "text-sm": variant === "body2",
           "text-base ": variant === "body1",
           "text-lg": variant === "h6",

@@ -89,7 +89,9 @@ export interface SiteConfig extends SanityDocument {
    *
    */
   mainNav?: Array<
-    SanityKeyed<NavigationItem> | SanityKeyed<NavigationDropdown>
+    | SanityKeyed<NavigationItem>
+    | SanityKeyed<NavigationDropdown>
+    | SanityKeyed<NavigationMegaMenu>
   >;
 
   /**
@@ -469,7 +471,7 @@ export type NavigationDropdown = {
    *
    *
    */
-  item?: Array<SanityKeyed<NavigationItem>>;
+  items?: Array<SanityKeyed<NavigationItem>>;
 };
 
 export type NavigationItem = {
@@ -487,6 +489,40 @@ export type NavigationItem = {
    *
    */
   link?: Link;
+};
+
+export type NavigationMegaMenu = {
+  _type: "navigationMegaMenu";
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+
+  /**
+   * Main Navigation — `array`
+   *
+   *
+   */
+  items?: Array<SanityKeyed<NavigationMegaMenuItem>>;
+};
+
+export type NavigationMegaMenuItem = {
+  _type: "navigationMegaMenuItem";
+  /**
+   * Label — `string`
+   *
+   *
+   */
+  label?: string;
+
+  /**
+   * Main Navigation — `array`
+   *
+   *
+   */
+  items?: Array<SanityKeyed<NavigationItem>>;
 };
 
 export type Section = {

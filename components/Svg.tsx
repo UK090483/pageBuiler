@@ -3,6 +3,15 @@ import clsx from "clsx";
 
 const paths = {
   hamburger: <path stroke="black" d="M2 6h20M2 12h20M2 18h20" />,
+
+  chevronRight: (
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M9 5l7 7-7 7"
+    />
+  ),
   bell: (
     <path
       strokeLinecap="round"
@@ -76,9 +85,7 @@ const Svg: React.FC<SvgProps> = ({ icon, className }) => {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      className={`${
-        className ? className : "inline-block w-6 h-6 stroke-current"
-      }`}
+      className={`inline-block w-6 h-6 stroke-current ${className}`}
     >
       {paths[icon]}
     </svg>

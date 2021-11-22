@@ -14,7 +14,7 @@ function App({ Component, pageProps }: AppPropsWithStaticProps) {
   return (
     <StoreContextProvider>
       <Layout {...pageProps}>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </Layout>
     </StoreContextProvider>
   );

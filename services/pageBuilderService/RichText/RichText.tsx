@@ -55,6 +55,10 @@ const link = (props: any) => {
   return <LinkMark {...props.mark}>{props.children}</LinkMark>;
 };
 
+const hand = (props: any) => {
+  return <span className="font-hand">{props.children}</span>;
+};
+
 const tag = (props: any) => {
   return <Typo variant={props.mark.tag}>{props.children}</Typo>;
 };
@@ -75,6 +79,8 @@ const styles = { h1: "h1", h2: "h2", h3: "h3", h4: "h4", normal: "body1" };
 
 const BlockRenderer = (props: any) => {
   const { style = "normal" } = props.node;
+
+  console.log(props.node);
 
   if (!props.children[0]) {
     return <Typo spacer />;
@@ -111,6 +117,7 @@ const serializer: Serializers = {
   marks: {
     link,
     tag,
+    hand,
   },
   container: Container,
 };

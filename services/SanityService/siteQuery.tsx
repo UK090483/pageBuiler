@@ -1,22 +1,48 @@
-import { NavigationItem, Link } from "types";
+import { NavigationItem, Link, NavigationMegaMenu } from "types";
 
-const linkQuery = `
+export const linkQuery = `
   'internalLink': select( 
                  defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + internalLink->slug.current,
                  defined(internalLink) => '/'+ internalLink->slug.current  ),
   'externalLink': externalLink
-  
 `;
-interface LinkResult extends Omit<Link, "internalLink"> {
+
+export interface LinkResult extends Omit<Link, "internalLink"> {
   internalLink?: string | null;
 }
 
 const navItemQuery = `
-    label ,
+ _type == 'navigationItem' =>{
+      ...,
     'link':link{
       ${linkQuery}
     }
+  }
 `;
+
+export interface NavigationMegaMenuResult
+  extends Omit<NavigationMegaMenu, "items"> {
+  items: {
+    label?: string;
+    link?: LinkResult;
+  }[];
+}
+
+export const NavigationMegaMenuQuery = `
+ _type == 'navigationMegaMenu' =>{
+      ...,
+      'items':items[]{
+       ...,
+       'items':items[]{
+         ...,
+        'link':link{
+          ${linkQuery}
+        }
+      }  
+    }
+  }
+`;
+
 interface NavItemResult extends Omit<NavigationItem, "link"> {
   link: LinkResult;
 }
@@ -24,7 +50,9 @@ interface NavItemResult extends Omit<NavigationItem, "link"> {
 export const siteQuery = `
 'siteSettings': *[_id == 'siteConfig'][0]{
   'mainNav':mainNav[]{
-    ${navItemQuery}
+    ...,
+    ${navItemQuery},
+    ${NavigationMegaMenuQuery} 
   },
   'extraNav':extraNav[]{
     ${navItemQuery}
@@ -34,7 +62,7 @@ export const siteQuery = `
 
 export interface SiteSettingResult {
   siteSettings: {
-    mainNav: NavItemResult[];
+    mainNav: (NavItemResult | NavigationMegaMenuResult)[];
     extraNav: NavItemResult[];
   };
 }

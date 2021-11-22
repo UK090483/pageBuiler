@@ -6,7 +6,7 @@ export default {
     { name: "label", type: "string", title: "Label" },
 
     {
-      name: "item",
+      name: "items",
       type: "array",
       title: "Main Navigation",
       of: [{ type: "navigationItem" }],

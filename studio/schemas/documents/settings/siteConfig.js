@@ -14,7 +14,11 @@ export default {
       name: "mainNav",
       type: "array",
       title: "Main Navigation",
-      of: [{ type: "navigationItem" }, { type: "navigationDropdown" }],
+      of: [
+        { type: "navigationItem" },
+        { type: "navigationDropdown" },
+        { type: "navigationMegaMenu" },
+      ],
       validation: (Rule) => Rule.required(),
     },
     {

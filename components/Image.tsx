@@ -2,17 +2,21 @@ import React from "react";
 
 import NextImage from "next/image";
 
-interface ImageProps {}
+interface ImageProps {
+  src?: string;
+}
 
-export const Image: React.FC<ImageProps> = () => {
-  const ranNum = (min: number = 5, max: number = 8) => {
+export const Image: React.FC<ImageProps> = ({ src }) => {
+  const ranNum = (min: number = 4, max: number = 8) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
 
+  const ranImage = src || `${ranNum()}00/${ranNum()}00`;
+
   return (
     <NextImage
-      blurDataURL={`https://picsum.photos/${ranNum()}/${ranNum()}`}
-      src={`https://picsum.photos/${ranNum()}00/${ranNum()}00`}
+      blurDataURL={`https://picsum.photos/${ranImage}`}
+      src={`https://picsum.photos/${ranImage}`}
       alt={"bla"}
       layout="fill"
       objectFit="cover"

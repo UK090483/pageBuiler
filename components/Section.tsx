@@ -13,11 +13,7 @@ export const Section: React.FC<SectionProps> = ({
   id,
 }) => {
   return (
-    <section
-      id={id}
-      style={{ maxWidth: 1200 }}
-      className={`px-2 mx-auto  ${className}`}
-    >
+    <section id={id} className={` mx-auto  ${className}`}>
       {children}
     </section>
   );

@@ -5,7 +5,7 @@ interface UnderlineProps {}
 
 const Underline: React.FC<UnderlineProps> = ({ children }) => {
   return (
-    <span className="relative text-5xl text-green-600 ">
+    <span className="relative text-5xl ">
       {children}
       <img
         style={{ width: "100%" }}

@@ -11,16 +11,17 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["HMSans", "Helvetica", "sans-serif"],
+      hand: ["Caveat"],
     },
     fontSize: {
-      sm: ["16px", "20px"],
-      base: ["18px", "1.4em"],
-      lg: ["20px", "1.2em"],
-      xl: ["22px", "1.2em"],
-      "2xl": ["26px", "1.2em"],
-      "3xl": ["24px", "1.2em"],
-      "4xl": ["35px", "1.2em"],
-      "5xl": ["44px", "1.2em"],
+      sm: ["18px", "20px"],
+      base: ["16px", "1.4em"],
+      lg: ["18px", "1.2em"],
+      xl: ["20px", "1.2em"],
+      "2xl": ["22px", "1.2em"],
+      "3xl": ["30px", "1.2em"],
+      "4xl": ["40px", "1.2em"],
+      "5xl": ["50px", "1.2em"],
     },
 
     extend: {
@@ -38,11 +39,22 @@ module.exports = {
       },
       animation: {
         fadeIn: "fadeIn 1s ease-in forwards",
+        fadeInFast: "fadeIn 0.2s ease-in forwards",
+        slideDown: "slideDown 0.25s ease-in forwards",
+        slideInRight: "slideInRight 0.5s ease-in forwards",
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
+        },
+        slideDown: {
+          "0%": { transform: "translateY(-100%)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
+        },
+        slideInRight: {
+          "0%": { transform: "translateX(100%)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
         },
       },
     },
@@ -57,8 +69,7 @@ module.exports = {
         ".btn": {
           padding: `${theme("spacing.2")} ${theme("spacing.4")}`,
           fontWeight: theme("fontWeight.600"),
-          borderColor: theme("colors.black"),
-          borderWidth: theme("borderWidth.2"),
+
           color: theme("colors.black"),
           "&:hover": {
             backgroundColor: theme("colors.black"),

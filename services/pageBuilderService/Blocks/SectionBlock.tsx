@@ -11,6 +11,7 @@ import { Section as SectionType } from "types";
 import RichText, { richTextQuery } from "../RichText/RichText";
 
 import { Section } from "@components/Section";
+import { Container } from "@components/Container";
 
 export const sectionBlockQuery = `
 _type == "section" => {
@@ -55,7 +56,9 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
         "pb-0.5": !bottomSpace,
       })}
     >
-      {content && <RichText content={content} />}
+      <Container size="small">
+        {content && <RichText content={content} />}
+      </Container>
     </Section>
   );
 };
