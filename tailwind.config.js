@@ -6,17 +6,18 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./services/**/*.{js,ts,jsx,tsx}",
+    "./modules/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ["HMSans", "Helvetica", "sans-serif"],
+      sans: ["Montserrat", "Helvetica", "sans-serif"],
       hand: ["Caveat"],
     },
     fontSize: {
-      sm: ["18px", "20px"],
+      sm: ["12px", "1em"],
       base: ["16px", "1.4em"],
-      lg: ["18px", "1.2em"],
+      lg: ["20px", "1.2em"],
       xl: ["20px", "1.2em"],
       "2xl": ["22px", "1.2em"],
       "3xl": ["30px", "1.2em"],
@@ -39,11 +40,28 @@ module.exports = {
       },
       animation: {
         fadeIn: "fadeIn 1s ease-in forwards",
-        fadeInFast: "fadeIn 0.2s ease-in forwards",
+        fadeInFast: "menuFade 0.25s ease-in forwards",
         slideDown: "slideDown 0.25s ease-in forwards",
         slideInRight: "slideInRight 0.5s ease-in forwards",
       },
       keyframes: {
+        menuFade: {
+          "0%": {
+            opacity: 0,
+            transform: " translateX(-50%)   translateY(-100%)",
+            zIndex: -100,
+          },
+
+          "99%": {
+            zIndex: -100,
+          },
+
+          "100%": {
+            zIndex: 20,
+            opacity: 1,
+            transform: " translateX(-50%) ",
+          },
+        },
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
@@ -64,6 +82,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
+    require("tailwindcss-multi-column")(),
     plugin(function ({ addComponents, theme }) {
       const buttons = {
         ".btn": {

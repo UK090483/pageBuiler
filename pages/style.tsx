@@ -7,19 +7,53 @@ import React from "react";
 const Style = () => {
   return (
     <Section>
-      <div>
-        <Underline> Test sdds</Underline>
-        {/* <Button onClick={() => {}}> Test </Button>
-        <Typo className="animate-fadeIn" variant="h1">
-          H1
-        </Typo>
-        <Typo variant="h2">H2</Typo>
-        <Typo variant="h3">H3</Typo>
-        <Typo variant="h4">H4</Typo>
-        <Typo variant="h5">H5</Typo>
-
-        <Typo variant="body1">body</Typo>
-        <Typo variant="body2">body</Typo> */}
+      <div className="container flex mx-auto ">
+        <div className="container mx-auto ">
+          <Typo space={false} variant="h1">
+            H1
+          </Typo>
+          <Typo space={false} variant="h2">
+            H2
+          </Typo>
+          <Typo space={false} variant="h3">
+            H3
+          </Typo>
+          <Typo space={false} variant="h4">
+            H4
+          </Typo>
+          <Typo space={false} variant="h5">
+            H5
+          </Typo>
+          <Typo space={false} variant="body">
+            body
+          </Typo>
+          <Typo space={false} variant="body-l">
+            body
+          </Typo>
+        </div>
+        <div className="container mx-auto ">
+          <Typo space={false} hand variant="h1">
+            H1
+          </Typo>
+          <Typo space={false} hand variant="h2">
+            H2
+          </Typo>
+          <Typo space={false} hand variant="h3">
+            H3
+          </Typo>
+          <Typo space={false} hand variant="h4">
+            H4
+          </Typo>
+          <Typo space={false} hand variant="h5">
+            H5
+          </Typo>
+          <Typo space={false} hand variant="body">
+            body
+          </Typo>
+          <Typo space={false} hand variant="body-l">
+            body
+          </Typo>
+        </div>
       </div>
     </Section>
   );

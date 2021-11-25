@@ -5,6 +5,7 @@ import clsx from "clsx";
 
 export interface NavItemProps {
   _type?: string;
+
   href?: string;
   external?: boolean;
   internalLink?: string;
@@ -13,6 +14,7 @@ export interface NavItemProps {
   size?: "s" | "m" | "l";
   divider?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
 const NavItem: React.FC<NavItemProps> = (props) => {
@@ -25,6 +27,7 @@ const NavItem: React.FC<NavItemProps> = (props) => {
     internalLink,
     externalLink,
     className,
+    onClick,
   } = props;
 
   const { closeMenu } = useMenu();
@@ -34,6 +37,7 @@ const NavItem: React.FC<NavItemProps> = (props) => {
 
   return (
     <Link
+      onClick={onClick}
       href={link}
       external={isExternal}
       className="flex items-center justify-center"
@@ -43,9 +47,8 @@ const NavItem: React.FC<NavItemProps> = (props) => {
         className={
           clsx("inline-block", {
             " text-sm": size === "s",
-            "text-base": size === "m",
+            "text-base font-normal": size === "m",
             "text-4xl": size === "l",
-            "font-bold": size === "l",
           }) +
           " " +
           className

@@ -1,4 +1,16 @@
-import { groq } from 'next-sanity';
+import { groq } from "next-sanity";
+import { Link } from "types";
+
+export const linkQuery = `
+  'internalLink': select( 
+                 defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + internalLink->slug.current,
+                 defined(internalLink) => '/'+ internalLink->slug.current  ),
+  'externalLink': externalLink
+`;
+
+export interface LinkResult extends Omit<Link, "internalLink"> {
+  internalLink?: string | null;
+}
 
 export const imageMeta = groq`
     alt,
@@ -22,7 +34,7 @@ export type ImageMetaResult = {
   type: string;
   aspectRatio: number;
   lqip: string;
-  fill?: 'fill' | 'contain';
+  fill?: "fill" | "contain";
 };
 
 export type SeoResult = {

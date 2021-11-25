@@ -10,6 +10,8 @@ import MegaNavMobile from "../MegaNav/MegaNavMobile";
 import { Logo } from "@components/Layout/Logo";
 import NavItem, { NavItemProps } from "../NavItem/NavItem";
 import { Dropdown } from "../Dropdown/Dropdown";
+import Button from "@components/Button/Button";
+import { NavigationModul } from "@services/NavigationService/NavigationModul";
 
 interface NavProps {
   items: (Omit<NavItemProps, "divider"> | NavItemMegaNavProps)[];
@@ -24,28 +26,19 @@ const Nav: React.FC<NavProps> = ({ items }) => {
   return (
     <>
       <nav>
-        <div className="relative flex items-center justify-between w-full p-3 pl-24 text-xl font-bold">
+        <div className="flex items-center justify-between w-full py-2 pl-24 shadow-lg ">
           <Link href="/">
             <Logo />
           </Link>
+
           <div className="items-center justify-center hidden w-full lg:flex">
-            {items &&
-              items.map((navItem, index) => {
-                if (navItem._type === "navigationItem") {
-                  return (
-                    <NavItem
-                      key={navItem.label}
-                      {...navItem}
-                      divider={index !== items.length - 1}
-                    />
-                  );
-                }
-                if (navItem._type === "navigationMegaMenu") {
-                  //@ts-ignore
-                  return <MegaNav key={navItem.label} {...navItem} />;
-                }
-              })}
+            <NavigationModul items={items} />
           </div>
+
+          {/* <div className="hidden lg:block">
+            <Button> Kontakt aufnehmen</Button>
+          </div>
+          */}
           <button
             data-testid="menu-overlay-toggle"
             onClick={handleNavClick}

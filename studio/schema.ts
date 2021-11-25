@@ -183,7 +183,9 @@ export interface Post extends SanityDocument {
    *
    * Add, edit, and reorder sections
    */
-  content?: Array<SanityKeyed<Section> | SanityKeyed<Listing>>;
+  content?: Array<
+    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
+  >;
 
   /**
    * SEO / Share Settings — `seo`
@@ -257,7 +259,9 @@ export interface Page extends SanityDocument {
    *
    * Add, edit, and reorder sections
    */
-  content?: Array<SanityKeyed<Section> | SanityKeyed<Listing>>;
+  content?: Array<
+    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
+  >;
 
   /**
    * SEO / Share Settings — `seo`
@@ -333,7 +337,9 @@ export interface Footer extends SanityDocument {
    *
    * Add, edit, and reorder sections
    */
-  content?: Array<SanityKeyed<Section> | SanityKeyed<Listing>>;
+  content?: Array<
+    SanityKeyed<Section> | SanityKeyed<Hero> | SanityKeyed<Listing>
+  >;
 }
 
 /**
@@ -598,6 +604,75 @@ export type DefaultRichText = Array<
   SanityKeyed<SanityBlock> | SanityKeyed<Button> | SanityKeyed<Spacer>
 >;
 
+export type Hero = {
+  _type: "hero";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Text — `text`
+   *
+   *
+   */
+  text?: string;
+
+  /**
+   * Button text — `string`
+   *
+   *
+   */
+  btnText?: string;
+
+  /**
+   * Button link — `string`
+   *
+   *
+   */
+  btnLink?: string;
+
+  /**
+   * Image — `defaultImage`
+   *
+   *
+   */
+  image?: DefaultImage;
+
+  /**
+   * Size — `string`
+   *
+   *
+   */
+  size?: "full" | "1/2" | "1/3" | "2/3";
+
+  /**
+   * Filter intensity — `string`
+   *
+   *
+   */
+  filterIntensity?:
+    | "0"
+    | "10"
+    | "20"
+    | "30"
+    | "40"
+    | "50"
+    | "60"
+    | "70"
+    | "80"
+    | "90";
+
+  /**
+   * Filter Color — `string`
+   *
+   *
+   */
+  filterColor?: "white" | "black";
+};
+
 export type Button = {
   _type: "button";
   /**
@@ -608,39 +683,11 @@ export type Button = {
   label?: string;
 
   /**
-   * Label En — `string`
+   * Link — `link`
    *
    *
    */
-  label_en?: string;
-
-  /**
-   * Internal link — `reference`
-   *
-   * Use this to link between pages on the website
-   */
-  internalLink?: SanityReference<Page>;
-
-  /**
-   * External link — `url`
-   *
-   *
-   */
-  link?: string;
-
-  /**
-   * Color — `string`
-   *
-   *
-   */
-  color?: "black" | "white" | "primary" | "red" | "grey";
-
-  /**
-   * Background Color — `string`
-   *
-   *
-   */
-  bgColor?: "black" | "white" | "primary" | "red" | "grey";
+  link?: Link;
 
   /**
    * Position — `string`

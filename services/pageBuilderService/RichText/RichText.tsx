@@ -80,8 +80,6 @@ const styles = { h1: "h1", h2: "h2", h3: "h3", h4: "h4", normal: "body1" };
 const BlockRenderer = (props: any) => {
   const { style = "normal" } = props.node;
 
-  console.log(props.node);
-
   if (!props.children[0]) {
     return <Typo spacer />;
   }

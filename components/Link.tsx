@@ -5,6 +5,7 @@ interface LinkProps {
   href: string;
   className?: string;
   external?: boolean;
+  onClick?: () => void;
 }
 
 export const Link: React.FC<LinkProps> = ({
@@ -12,6 +13,7 @@ export const Link: React.FC<LinkProps> = ({
   children,
   className,
   external,
+  onClick,
 }) => {
   if (external) {
     return (
@@ -23,7 +25,9 @@ export const Link: React.FC<LinkProps> = ({
 
   return (
     <NextLink href={href} passHref>
-      <a className={className}>{children}</a>
+      <a onClick={onClick} className={className}>
+        {children}
+      </a>
     </NextLink>
   );
 };

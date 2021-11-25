@@ -41,8 +41,9 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
 
   return (
     <Section
+      width="s"
       {...(title && { id: title })}
-      className={clsx("rt", {
+      className={clsx({
         "pt-5 md:pt-10": topSpace === "s",
         "pt-9 md:pt-20": topSpace === "m",
         "pt-12 md:pt-32": topSpace === "l",
@@ -56,9 +57,7 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
         "pb-0.5": !bottomSpace,
       })}
     >
-      <Container size="small">
-        {content && <RichText content={content} />}
-      </Container>
+      {content && <RichText content={content} />}
     </Section>
   );
 };

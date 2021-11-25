@@ -7,12 +7,10 @@ interface Props {}
 
 export const Carousel = (props: Props) => {
   return (
-    <Section className="w-full bg-gray-300">
-      <Container className="flex justify-between px-8 py-64 ">
-        <Card />
-        <Card />
-        <Card />
-      </Container>
+    <Section bg="gray" width="l" className="flex justify-between py-64">
+      <Card />
+      <Card />
+      <Card />
     </Section>
   );
 };

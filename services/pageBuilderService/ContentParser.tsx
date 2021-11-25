@@ -9,11 +9,18 @@ import ListingBlock, {
   listingBlockQuery,
   ListingBlogResult,
 } from "./Blocks/ListingsBlock";
+import HeroBlock, { heroBlockQuery } from "./Blocks/HeroBlock";
 
 export type PageBodyResult = (SectionResult | ListingBlogResult)[];
 export type PageQueryResult = { content: PageBodyResult };
 
 blockFactory.registerComponents([
+  {
+    name: "hero",
+    component: HeroBlock,
+    type: "root",
+    query: heroBlockQuery,
+  },
   {
     name: "section",
     component: SectionBlock,
@@ -29,10 +36,13 @@ blockFactory.registerComponents([
 ]);
 
 interface ContentParserProps {
-  content: PageBodyResult;
+  content?: PageBodyResult | null | undefined;
 }
 
 const ContentParser: React.FC<ContentParserProps> = (props) => {
+  if (!props.content) return null;
+
+  //@ts-ignore
   return <BodyParser blockFactory={blockFactory} {...props} />;
 };
 export const body = blockFactory.getRootQuery();

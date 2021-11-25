@@ -6,36 +6,11 @@ export default {
   type: "object",
   fields: [
     { name: "label", type: "string", title: "Label" },
-    { name: "label_en", type: "string", title: "Label En" },
+
     {
-      title: "Internal link",
-      description: "Use this to link between pages on the website",
-      name: "internalLink",
-      type: "reference",
-      to: [{ type: "page" }],
-    },
-    {
-      title: "External link",
+      title: "Link",
       name: "link",
-      type: "url",
-    },
-    {
-      title: "Color",
-      name: "color",
-      type: "string",
-      options: {
-        list: [...colorList()],
-      },
-      initialValue: "black",
-    },
-    {
-      title: "Background Color",
-      name: "bgColor",
-      type: "string",
-      options: {
-        list: [...colorList()],
-      },
-      initialValue: "white",
+      type: "link",
     },
     {
       title: "Position",

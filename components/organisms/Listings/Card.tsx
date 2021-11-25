@@ -16,7 +16,7 @@ export const Card: React.FC<CardProps> = ({ children }) => {
         <Image />
       </div>
       <div className="p-8 ">
-        <Typo className="pb-2" variant="body1">
+        <Typo className="pb-2" variant="body">
           13.07.2021
         </Typo>
         <Typo className="pb-3 " bold={false} variant="h4">

@@ -1,46 +1,42 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-underscore-dangle */
-
 import Button from "@components/Button/Button";
-import React from "react";
+import { Button as ButtonType } from "types";
 
-import { AppColor } from "types";
+import {
+  LinkResult,
+  linkQuery,
+} from "@services/pageBuilderService/queries/snippets";
+import React from "react";
 
 export const buttonPlugQuery = `
 _type == "button" => {
   _type,
   _key,
     label,
-    bgColor,
-    color,
     inline,
-    link,
-    'internalLink' :internalLink->{"type":_type,'slug':slug.current}
+    'link':link{
+      ${linkQuery}
+    }
+    
 }
 `;
 
-export type ButtonPlugResult = {
-  _key: string;
-  _type: "button";
-  label: string | null;
-  label_en: string | null;
-  internalLink: { slug: string; type: string } | null;
-  link: string | null;
-  color: AppColor | null;
-  bgColor: AppColor | null;
-  position?: "inline" | "left" | "right" | "center";
-};
+export interface ButtonPlugResult extends Omit<ButtonType, "link"> {
+  link: LinkResult;
+}
 
 type ButtonPlugProps = ButtonPlugResult;
-const ButtonPlug: React.FC<ButtonPlugProps> = (props) => {
-  const { internalLink, link, color, bgColor, label, position } = props.node;
-  const _link = internalLink ? internalLink : link || "/";
-  const _type = internalLink ? "link" : link ? "externalLink" : "link";
+const ButtonPlug: React.FC<{ node: ButtonPlugProps }> = (props) => {
+  const { link, label, position } = props.node;
 
-  console.log(props);
-  // return <div>Button</div>;
-
-  return <Button onClick={() => {}}>{label}</Button>;
+  return (
+    <Button
+      internalLink={link.internalLink}
+      externalLink={link.externalLink}
+      onClick={() => {}}
+    >
+      {label}
+    </Button>
+  );
 };
 
 export default ButtonPlug;

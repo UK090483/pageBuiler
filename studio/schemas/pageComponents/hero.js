@@ -26,7 +26,7 @@ export default {
     {
       title: "Image",
       name: "image",
-      type: "figure",
+      type: "defaultImage",
     },
     {
       title: "Size",
@@ -47,7 +47,7 @@ export default {
       name: "filterIntensity",
       type: "string",
       options: {
-        list: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90'],
+        list: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90"],
       },
       initialValue: "0",
     },
@@ -56,7 +56,7 @@ export default {
       name: "filterColor",
       type: "string",
       options: {
-        list: ['white', 'black'],
+        list: ["white", "black"],
       },
       initialValue: "white",
     },

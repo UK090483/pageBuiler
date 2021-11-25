@@ -17,12 +17,23 @@ const variantsMapping: mappingObject = {
   h6: "h6",
   subheading1: "h6",
   subheading2: "h6",
-  body1: "p",
-  body2: "p",
+  body: "p",
+  "body-l": "p",
 };
 
 interface TypographyProps {
-  variant?: keyof typeof variantsMapping;
+  variant?:
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "body"
+    | "body-l"
+    | "body-s"
+    | "subheading1"
+    | "subheading2";
   as?: ElementKeys;
   className?: string;
   spacer?: boolean;
@@ -34,7 +45,7 @@ interface TypographyProps {
 const boldMap = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
 const Typo: React.FC<TypographyProps> = ({
-  variant = "body1",
+  variant = "body",
   children,
   className = "",
   as,
@@ -43,7 +54,7 @@ const Typo: React.FC<TypographyProps> = ({
   bold,
   space,
 }) => {
-  const Component: ElementKeys = as ? as : variantsMapping[variant];
+  const Component: ElementKeys = as ? as : variantsMapping[variant] || "p";
   const isBold =
     bold !== undefined ? bold : boldMap.includes(variant as string);
 
@@ -58,10 +69,10 @@ const Typo: React.FC<TypographyProps> = ({
       }}
       className={
         clsx({
-          "font-hand": hand,
-          "text-sm": variant === "body2",
-          "text-base ": variant === "body1",
-          "text-lg": variant === "h6",
+          "font-hand ": hand,
+          "text-sm ": variant === "body-s",
+          "text-base ": variant === "body",
+          "text-lg": ["body-l", "h6"].includes(variant as string),
           "text-xl": variant === "h5",
           "text-2xl": variant === "h4",
           "text-3xl": variant === "h3",

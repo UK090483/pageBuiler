@@ -9,7 +9,9 @@ import ContentParser from "@services/pageBuilderService/ContentParser";
 
 const PageComponent: NextPage<FetchStaticPropsResult> = ({ page }) => {
   return (
-    <>{page && page.content && <ContentParser content={page.content} />}</>
+    <>
+      <ContentParser content={page?.content} />
+    </>
   );
 };
 

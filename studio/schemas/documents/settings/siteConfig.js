@@ -22,13 +22,6 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "extraNav",
-      type: "array",
-      title: "Extra Navigation",
-      of: [{ type: "navigationItem" }, { type: "navigationDropdown" }],
-      validation: (Rule) => Rule.required(),
-    },
-    {
       title: "Default / Seo",
       name: "seo",
       type: "seo",

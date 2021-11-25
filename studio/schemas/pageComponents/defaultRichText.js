@@ -1,4 +1,5 @@
 import React from "react";
+import { TiPencil } from "react-icons/ti";
 
 const Button = (props) => {
   return <span>{props.label}</span>;
@@ -21,7 +22,13 @@ export default {
       ],
       marks: {
         decorators: [
-          { title: "Hand", value: "hand" },
+          {
+            title: "Hand",
+            value: "hand",
+            blockEditor: {
+              icon: TiPencil,
+            },
+          },
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
           {
@@ -84,6 +91,24 @@ export default {
           },
         ],
       },
+    },
+    {
+      type: "image",
+      fields: [
+        {
+          type: "text",
+          name: "alt",
+          title: "Alternative text",
+          description: `Some of your visitors cannot see images, 
+            be they blind, color-blind, low-sighted; 
+            alternative text is of great help for those 
+            people that can rely on it to have a good idea of 
+            what\'s on your page.`,
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
     { type: "button", blockEditor: { render: Button } },
     { type: "spacer" },

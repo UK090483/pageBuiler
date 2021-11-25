@@ -1,15 +1,8 @@
-import { NavigationItem, Link, NavigationMegaMenu } from "types";
-
-export const linkQuery = `
-  'internalLink': select( 
-                 defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + internalLink->slug.current,
-                 defined(internalLink) => '/'+ internalLink->slug.current  ),
-  'externalLink': externalLink
-`;
-
-export interface LinkResult extends Omit<Link, "internalLink"> {
-  internalLink?: string | null;
-}
+import {
+  linkQuery,
+  LinkResult,
+} from "@services/pageBuilderService/queries/snippets";
+import { NavigationItem, NavigationMegaMenu } from "types";
 
 const navItemQuery = `
  _type == 'navigationItem' =>{
@@ -30,9 +23,12 @@ export interface NavigationMegaMenuResult
 
 export const NavigationMegaMenuQuery = `
  _type == 'navigationMegaMenu' =>{
-      ...,
       'items':items[]{
        ...,
+       
+       'link':link{
+        ${linkQuery}
+      },
        'items':items[]{
          ...,
         'link':link{
@@ -54,9 +50,6 @@ export const siteQuery = `
     ${navItemQuery},
     ${NavigationMegaMenuQuery} 
   },
-  'extraNav':extraNav[]{
-    ${navItemQuery}
-  }
 }
 `;
 

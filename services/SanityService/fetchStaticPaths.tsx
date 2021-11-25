@@ -8,7 +8,7 @@ const getAllDocSlugs: (
 > = async (doc, client) => {
   return client.fetch(
     `*[_type == "${doc}"]{ 
-        'pageType': pageType->name , 
+        'pageType': pageType->slug.current , 
         'slug': slug.current ,
         'isHome':*[_id == 'siteConfig'][0].indexPage._ref == @._id }
     `

@@ -13,7 +13,7 @@ export default {
       name: "items",
       type: "array",
       title: "Main Navigation",
-      of: [{ type: "navigationMegaMenuItem" }],
+      of: [{ type: "navigationMegaMenuItem" }, { type: "navigationItem" }],
       validation: (Rule) => Rule.required(),
     },
   ],

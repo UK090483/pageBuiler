@@ -2,7 +2,7 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "tailwindCSS.experimental.classRegex": ["clsx([^]*)"],
+  // "tailwindCSS.experimental.classRegex": ["clsx([^]*)"],
 
   "files.exclude": {
     "**/.git": false,
@@ -37,7 +37,8 @@
     "tests": false,
     "jest.config.js": false,
     "setupTests.js": false,
-    "tailwind.config.js": false
+    "tailwind.config.js": false,
+    "styles": false
   },
   "explorerExclude.backup": {
     "**/.git": true,

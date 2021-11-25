@@ -14,29 +14,16 @@ export default () =>
             .id("settings")
             .title("Settings")
             .items([
-              // S.listItem()
-              //   .id("ss")
-              //   .title("Navigation")
-              //   .child(S.documentTypeList("navigation").title("Navigation")),
-
               S.documentListItem()
                 .schemaType("siteConfig")
                 .title("Configuration")
                 .id("siteConfig"),
+              S.documentListItem()
+                .schemaType("pageType")
+                .title("Page Types")
+                .child(S.documentTypeList("pageType")),
             ])
         ),
-
-      // .child(
-      //   S.documentTypeList("seoSettings")
-      //     .title("Settings")
-      //     .filter('_type == "seoSettings"')
-      // ),
-      // S.listItem().title("Check").child(
-      //   S.documentList()
-
-      //     .title("Pages")
-      //     .filter("_type == 'page' || _type == 'pageType' ")
-      // ),
 
       S.listItem()
         .title("Pages")
@@ -47,6 +34,7 @@ export default () =>
               `_type ==  "pageType" || (_type == "page" && !defined(pageType)) `
             )
             .title("Pages")
+
             .child(async (pageTypeId, d) => {
               const isPage = await client.fetch(
                 `*[_type == "page" && _id  == '${pageTypeId}'][0]`
