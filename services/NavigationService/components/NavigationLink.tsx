@@ -1,4 +1,6 @@
 import { Link } from "@components/Link";
+import Underline from "@components/Underline";
+import React from "react";
 import { NavigationModulItemBase } from "./NavigationItemBase";
 
 export const NavigationModulLink: React.FC<{
@@ -9,10 +11,12 @@ export const NavigationModulLink: React.FC<{
   return (
     <Link
       onClick={onClick}
-      className="flex items-center font-normal leading-none "
+      className="flex items-center leading-none text-center "
       href={internalLink || externalLink || "/"}
     >
-      <NavigationModulItemBase>{children}</NavigationModulItemBase>
+      <Underline>
+        <NavigationModulItemBase>{children}</NavigationModulItemBase>
+      </Underline>
     </Link>
   );
 };

@@ -11,7 +11,7 @@ const Quote: React.FC<QuoteProps> = ({ children }) => {
     <Section
       noPadding
       width="l"
-      bg="yellow"
+      bg="primary"
       className="grid w-full grid-cols-1 md:grid-cols-2"
     >
       <div className="p-16">

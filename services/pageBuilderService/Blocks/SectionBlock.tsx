@@ -12,6 +12,7 @@ import RichText, { richTextQuery } from "../RichText/RichText";
 
 import { Section } from "@components/Section";
 import { Container } from "@components/Container";
+import { Image } from "@components/Image";
 
 export const sectionBlockQuery = `
 _type == "section" => {
@@ -23,25 +24,30 @@ _type == "section" => {
   topSpace,
   bottomSpace,
   ${richTextQuery},
-  bgImage{${imageMeta}}
+  bgImage{${imageMeta}},
+  image{${imageMeta}}
 }
 `;
 
 export interface SectionResult
-  extends Omit<SectionType, "bgImage" | "content"> {
+  extends Omit<SectionType, "bgImage" | "content" | "image"> {
   content: null | any;
   bgImage: ImageMetaResult;
+  image: ImageMetaResult;
   _key: string;
 }
 
 interface SectionBlockProps extends SectionResult {}
 
 const SectionBlock: React.FC<SectionBlockProps> = (props) => {
-  const { content, bottomSpace, topSpace, title } = props;
+  const { content, bottomSpace, topSpace, title, image, bgColor } = props;
+
+  const hasImage = image && image.asset;
 
   return (
     <Section
-      width="s"
+      bg={bgColor}
+      width={hasImage ? "l" : "s"}
       {...(title && { id: title })}
       className={clsx({
         "pt-5 md:pt-10": topSpace === "s",
@@ -55,10 +61,42 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
         "pb-12 md:pb-44": bottomSpace === "xl",
         "pb-24 md:pb-60": bottomSpace === "xxl",
         "pb-0.5": !bottomSpace,
+        "grid  grid-cols-1  lg:grid-cols-2 ": hasImage,
       })}
     >
-      {content && <RichText content={content} />}
+      {hasImage ? (
+        <WithImage place="right" image={image}>
+          {content && <RichText content={content} />}
+        </WithImage>
+      ) : (
+        <>{content && <RichText content={content} />} </>
+      )}
     </Section>
+  );
+};
+
+const WithImage: React.FC<{
+  place: "left" | "right";
+  image: ImageMetaResult | null;
+}> = ({ children, place = "left" }) => {
+  const content = (
+    <div
+      className={clsx({
+        "pr-0  lg:pr-12": place === "right",
+        "pl-0  lg:pl-12": place === "left",
+      })}
+    >
+      {children}{" "}
+    </div>
+  );
+  return (
+    <>
+      {place === "right" && content}
+      <div className="relative aspect-w-16 aspect-h-9">
+        <Image />
+      </div>
+      {place === "left" && content}
+    </>
   );
 };
 

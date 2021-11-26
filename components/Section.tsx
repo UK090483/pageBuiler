@@ -3,7 +3,7 @@ import React from "react";
 
 interface SectionProps {
   width?: "full" | "m" | "l" | "s";
-  bg?: "white" | "gray" | "yellow";
+  bg?: "white" | "grey" | "black" | "primary" | "secondary";
   className?: string;
   id?: string;
   noPadding?: boolean;
@@ -24,8 +24,9 @@ export const Section: React.FC<SectionProps> = ({
       id={id}
       className={clsx(`w-full`, {
         "bg-white": bg === "white",
-        "bg-yellow": bg === "yellow",
-        "bg-gray-300": bg === "gray",
+        "bg-primary": bg === "primary",
+        "bg-secondary": bg === "secondary",
+        "bg-gray-300": bg === "grey",
       })}
     >
       <div

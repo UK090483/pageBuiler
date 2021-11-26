@@ -95,15 +95,6 @@ export interface SiteConfig extends SanityDocument {
   >;
 
   /**
-   * Extra Navigation — `array`
-   *
-   *
-   */
-  extraNav?: Array<
-    SanityKeyed<NavigationItem> | SanityKeyed<NavigationDropdown>
-  >;
-
-  /**
    * Default / Seo — `seo`
    *
    *
@@ -511,7 +502,9 @@ export type NavigationMegaMenu = {
    *
    *
    */
-  items?: Array<SanityKeyed<NavigationMegaMenuItem>>;
+  items?: Array<
+    SanityKeyed<NavigationMegaMenuItem> | SanityKeyed<NavigationItem>
+  >;
 };
 
 export type NavigationMegaMenuItem = {
@@ -559,7 +552,7 @@ export type Section = {
    *
    *
    */
-  bgColor?: "black" | "white" | "primary" | "red" | "grey";
+  bgColor?: "black" | "white" | "primary" | "secondary" | "grey";
 
   /**
    * Top Space — `string`
@@ -576,11 +569,11 @@ export type Section = {
   bottomSpace?: "s" | "m" | "l" | "xl" | "xxl";
 
   /**
-   * Background Image — `defaultImage`
+   * Image — `defaultImage`
    *
    *
    */
-  bgImage?: DefaultImage;
+  image?: DefaultImage;
 };
 
 export type Listing = {
@@ -601,7 +594,26 @@ export type Listing = {
 };
 
 export type DefaultRichText = Array<
-  SanityKeyed<SanityBlock> | SanityKeyed<Button> | SanityKeyed<Spacer>
+  | SanityKeyed<SanityBlock>
+  | SanityKeyed<{
+      _type: "image";
+      asset: SanityReference<SanityImageAsset>;
+      crop?: SanityImageCrop;
+      hotspot?: SanityImageHotspot;
+
+      /**
+       * Alternative text — `text`
+       *
+       * Some of your visitors cannot see images, 
+            be they blind, color-blind, low-sighted; 
+            alternative text is of great help for those 
+            people that can rely on it to have a good idea of 
+            what's on your page.
+       */
+      alt?: string;
+    }>
+  | SanityKeyed<Button>
+  | SanityKeyed<Spacer>
 >;
 
 export type Hero = {

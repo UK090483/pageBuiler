@@ -3,6 +3,7 @@
 import { Image } from "@components/Image";
 import { Section } from "@components/Section";
 import Typo from "@components/Typography/Typography";
+import Underline from "@components/Underline";
 import { NavigationMobile } from "@services/NavigationService/NavigationMobile";
 import { NavigationModul } from "@services/NavigationService/NavigationModul";
 import { NavOverview } from "@services/NavigationService/NavOverview";
@@ -11,6 +12,23 @@ import { nav } from "@services/NavigationService/t";
 const Home = () => {
   return (
     <>
+      <div className="pt-[200px] ">
+        <Underline>
+          <Typo variant="h1"> Tetser</Typo>
+        </Underline>
+        {/* <svg
+          // style={{ width: isHovered ? "100%" : 0, transition: "width 0.3s " }}
+          preserveAspectRatio="none"
+          className="absolute bottom-0 w-full fill-current stroke-current text-primary -right-1 -left-1 "
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 488 25"
+        >
+          <path
+            // style={{ strokeDasharray: 0.01 }}
+            d="M3 18.9998C24.3674 17.6849 45.6112 12.5894 67 10.6665C130.052 4.9979 193.492 1.36044 256.778 4.72203C333.009 8.77124 408.671 19.0641 485 21.9998"
+          />
+        </svg> */}
+      </div>
       {/* <NavigationMobile items={nav} />
       <div className="flex flex-col items-center justify-center w-full h-screen ">
         <div>
@@ -21,7 +39,7 @@ const Home = () => {
           <NavOverview items={nav} />
         </div>
       </div> */}
-
+      {/* 
       <Section className="col-gap-20 pt-40 lg:col-count-2">
         <div className="relative w-full h-32">
           <Image />
@@ -70,7 +88,7 @@ const Home = () => {
           tellus aliquam nulla adipiscing. Urna massa facilisis nec, nulla eget
           eu egestas habitasse massa. Posuere nisi id cras adipiscing rutrum dui
         </Typo>
-      </Section>
+      </Section> */}
     </>
   );
 };

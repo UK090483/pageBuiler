@@ -15,15 +15,17 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
   return (
     <footer
       data-testid="footer"
-      className="flex flex-col items-center bg-yellow "
+      className="flex flex-col items-center bg-primary "
     >
       <Carousel />
       <Quote />
-
-      <Section bg="yellow" width="l">
-        <NavOverview items={navItems} className="w-full py-24" />
-      </Section>
       <FooterContact />
+      <Section bg="primary" width="l" className="pt-12">
+        <NavOverview
+          items={navItems}
+          className="w-full py-24 border-t-2 border-b-2"
+        />
+      </Section>
 
       <div className="flex items-center justify-between w-full max-w-6xl px-8 ">
         <NavItem size="s" href="/" label="Kreisel e.V." />

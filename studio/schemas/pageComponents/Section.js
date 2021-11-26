@@ -12,8 +12,8 @@ export default {
       options: { collapsible: true, collapsed: true, columns: 2 },
     },
     {
-      name: "bgImage",
-      title: "Background Image",
+      name: "Image",
+      title: "Image",
       options: { collapsible: true, collapsed: true },
     },
   ],
@@ -31,21 +31,22 @@ export default {
       title: "Content",
     },
 
-    {
-      title: "Type",
-      name: "type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Normal", value: "normal" },
-          { title: "Medium Wide", value: "medium-wide" },
-          { title: "Narrow", value: "text" },
-          { title: "Hero", value: "hero" },
-          { title: "Full Width", value: "full-width" },
-        ],
-      },
-      initialValue: "normal",
-    },
+    // {
+    //   title: "Type",
+    //   name: "type",
+    //   type: "string",
+    //   options: {
+    //     list: [
+    //       { title: "Normal", value: "normal" },
+    //       { title: "Medium Wide", value: "medium-wide" },
+    //       { title: "Narrow", value: "text" },
+    //       { title: "Hero", value: "hero" },
+    //       { title: "Full Width", value: "full-width" },
+    //     ],
+    //   },
+    //   initialValue: "normal",
+    // },
+
     {
       title: "Background Color",
       name: "bgColor",
@@ -73,19 +74,20 @@ export default {
       },
     },
     {
-      title: "Background Image",
-      name: "bgImage",
+      title: "Image",
+      name: "image",
       type: "defaultImage",
-      fieldset: "bgImage",
+      fieldset: "Image",
     },
   ],
   preview: {
     select: {
       title: "title",
       content: "content",
+      image: "image",
     },
     prepare(selection) {
-      const { title, content } = selection;
+      const { title, content, image } = selection;
       const block = (content || []).find((block) => block._type === "block");
 
       return {
@@ -97,7 +99,7 @@ export default {
               .map((span) => span.text)
               .join("")
           : "No title",
-        media: null,
+        media: image,
       };
     },
   },

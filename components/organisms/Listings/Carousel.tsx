@@ -7,7 +7,7 @@ interface Props {}
 
 export const Carousel = (props: Props) => {
   return (
-    <Section bg="gray" width="l" className="flex justify-between py-64">
+    <Section bg="grey" width="l" className="flex justify-between py-64">
       <Card />
       <Card />
       <Card />

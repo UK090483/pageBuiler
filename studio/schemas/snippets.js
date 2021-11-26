@@ -23,7 +23,7 @@ export function colorList(skip) {
     { title: "Black", value: "black" },
     { title: "White", value: "white" },
     { title: "Primary", value: "primary" },
-    { title: "Secondary", value: "red" },
+    { title: "Secondary", value: "secondary" },
     { title: "Grey", value: "grey" },
   ];
   if (!Array.isArray(skip)) return list;

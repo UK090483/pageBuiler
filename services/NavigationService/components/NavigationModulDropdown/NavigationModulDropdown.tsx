@@ -46,7 +46,7 @@ export const NavigationModulDropdown: React.FC<NavigationModulDropdownProps> =
     if (!hasItems) return null;
 
     return (
-      <div className="relative ">
+      <>
         <button
           className="leading-none "
           type="button"
@@ -68,6 +68,6 @@ export const NavigationModulDropdown: React.FC<NavigationModulDropdownProps> =
           targetX={target.x}
           targetY={target.y}
         />
-      </div>
+      </>
     );
   };

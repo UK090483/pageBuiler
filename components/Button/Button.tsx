@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = (props) => {
   if (internalLink) {
     return (
       <Link
-        className="inline-block px-12 py-2 text-base rounded-full bg-yellow whitespace-nowrap"
+        className="inline-block px-12 py-2 text-base rounded-full bg-primary whitespace-nowrap"
         href={internalLink}
       >
         {children}
@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button
       onClick={onClick}
-      className="px-12 py-2 text-base rounded-full bg-yellow whitespace-nowrap"
+      className="px-12 py-2 text-base rounded-full bg-primary whitespace-nowrap"
       type="button"
     >
       {children}
