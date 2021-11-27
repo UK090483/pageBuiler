@@ -14,7 +14,7 @@ export const NavigationModulLink: React.FC<{
       className="flex items-center leading-none text-center "
       href={internalLink || externalLink || "/"}
     >
-      <Underline>
+      <Underline on="hover">
         <NavigationModulItemBase>{children}</NavigationModulItemBase>
       </Underline>
     </Link>

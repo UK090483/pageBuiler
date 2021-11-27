@@ -35,6 +35,10 @@ export default {
             title: "Underline",
             value: "underline",
           },
+          {
+            title: "Hand Underline",
+            value: "handUnderline",
+          },
         ],
         annotations: [
           {

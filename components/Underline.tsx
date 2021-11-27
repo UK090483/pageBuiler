@@ -1,20 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
+import useHover from "@hooks/useHover";
 import clsx from "clsx";
 import React from "react";
 
 interface UnderlineProps {
   color?: "white" | "black" | "primary" | "secondary";
+
+  on?: "hover" | "init" | "scroll";
 }
 
-const Underline: React.FC<UnderlineProps> = ({ children, color }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+const Underline: React.FC<UnderlineProps> = ({
+  children,
+  color,
+  on = "init",
+}) => {
+  const [isHovered, hoverProps] = useHover();
+
+  const show = on === "init" || (on === "hover" && isHovered);
 
   return (
-    <span
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative inline-block "
-    >
+    <span {...hoverProps} className="relative inline-block ">
       {children}
 
       <svg
@@ -27,7 +32,7 @@ const Underline: React.FC<UnderlineProps> = ({ children, color }) => {
         <path
           style={{
             strokeDasharray: 488,
-            strokeDashoffset: isHovered ? 0 : 488,
+            strokeDashoffset: show ? 0 : 488,
             transition: "stroke-dashoffset 0.3s",
           }}
           className={clsx("stroke-current", {

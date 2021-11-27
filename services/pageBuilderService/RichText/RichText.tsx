@@ -18,6 +18,7 @@ import ImageGalleryPlug, {
 // import { imagePlugQuery } from "./Plugs/ImagePlug";
 import Typo from "@components/Typography/Typography";
 import SpacerPlug, { spacerPlugQuery } from "./Plugs/Spacer";
+import Underline from "@components/Underline";
 
 const marksQuery = `
 markDefs[]{
@@ -60,6 +61,14 @@ const link = (props: any) => {
 
 const hand = (props: any) => {
   return <span className="font-hand">{props.children}</span>;
+};
+
+const handUnderline = (props: any) => {
+  return (
+    <Underline>
+      <span className="font-hand">{props.children}</span>
+    </Underline>
+  );
 };
 
 const tag = (props: any) => {
@@ -120,6 +129,7 @@ const serializer: Serializers = {
     link,
     tag,
     hand,
+    handUnderline,
   },
   container: Container,
 };
