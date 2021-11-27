@@ -31,22 +31,19 @@ export default {
       title: "Content",
     },
 
-    // {
-    //   title: "Type",
-    //   name: "type",
-    //   type: "string",
-    //   options: {
-    //     list: [
-    //       { title: "Normal", value: "normal" },
-    //       { title: "Medium Wide", value: "medium-wide" },
-    //       { title: "Narrow", value: "text" },
-    //       { title: "Hero", value: "hero" },
-    //       { title: "Full Width", value: "full-width" },
-    //     ],
-    //   },
-    //   initialValue: "normal",
-    // },
-
+    {
+      title: "Type",
+      name: "type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Medium", value: "m" },
+          { title: "Wide", value: "l" },
+          { title: "Narrow", value: "s" },
+        ],
+      },
+      initialValue: "normal",
+    },
     {
       title: "Background Color",
       name: "bgColor",

@@ -1,4 +1,3 @@
-import { groq } from "next-sanity";
 import { Link } from "types";
 
 export const linkQuery = `
@@ -12,7 +11,7 @@ export interface LinkResult extends Omit<Link, "internalLink"> {
   internalLink?: string | null;
 }
 
-export const imageMeta = groq`
+export const imageMeta = `
     alt,
     asset,
     crop,

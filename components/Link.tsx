@@ -31,3 +31,14 @@ export const Link: React.FC<LinkProps> = ({
     </NextLink>
   );
 };
+
+export const ConditionalLink: React.FC<LinkProps & { condition: boolean }> = ({
+  condition,
+  ...rest
+}) => {
+  if (condition) {
+    return <Link {...rest} />;
+  }
+
+  return <div className={rest.className}>{rest.children}</div>;
+};

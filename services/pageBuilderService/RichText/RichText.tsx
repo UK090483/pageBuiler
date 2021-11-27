@@ -12,7 +12,9 @@ import LinkMark, { linkMarkQuery } from "./marks/link";
 import ButtonPlug, { buttonPlugQuery } from "./Plugs/ButtonPlug";
 // import { downloadPlugQuery } from "./Plugs/DownLoadPlug";
 // import EmbedPlug, { embedPlugQuery } from "./Plugs/EmbedPlug";
-// import { imageGalleryPlugQuery } from "./Plugs/ImageGaleriePlug";
+import ImageGalleryPlug, {
+  imageGalleryPlugQuery,
+} from "./Plugs/ImageGaleriePlug";
 // import { imagePlugQuery } from "./Plugs/ImagePlug";
 import Typo from "@components/Typography/Typography";
 import SpacerPlug, { spacerPlugQuery } from "./Plugs/Spacer";
@@ -40,7 +42,8 @@ content[]{
   ...,
   ${marksQuery},
   ${buttonPlugQuery},
-  ${spacerPlugQuery}
+  ${spacerPlugQuery},
+  ${imageGalleryPlugQuery},
  
 }
 `;
@@ -107,6 +110,7 @@ const serializer: Serializers = {
   list: List,
   // hardBreak: () => <div className="border-2 border-red-600 "></div>,
   types: {
+    imageGalleryPlug: ImageGalleryPlug,
     button: ButtonPlug,
     // embed: EmbedPlug,
     block: BlockRenderer,

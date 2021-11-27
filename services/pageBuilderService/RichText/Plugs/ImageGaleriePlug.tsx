@@ -1,94 +1,116 @@
-// /* eslint-disable @typescript-eslint/naming-convention */
-// import React from 'react';
+import React from "react";
 
-// import classNames from 'classnames';
+import clsx from "clsx";
+import { ImageGalleryPlug, ImageGalleryItem } from "types";
 
 // import Photo from '@components/Photo';
-// import {
-//   imageMeta,
-//   ImageMetaResult,
-// } from '@src/services/pageBuilder/queries/snippets';
+import {
+  imageMeta,
+  ImageMetaResult,
+  linkQuery,
+  LinkResult,
+} from "@services/pageBuilderService/queries/snippets";
+import { Image } from "@components/Image";
+import Typo from "@components/Typography/Typography";
+import { ConditionalLink } from "@components/Link";
 
-// export const imageGalleryPlugQuery = `
-// _type == "imageGalleryPlug" => {
-//   ...,
-//   _type,
-//   _key,
-//   'items':items[]{${imageMeta},fill},
-//   rows,
-//   rows_mobile,
-//   ratio,
-// }
-// `;
+export const imageGalleryPlugQuery = `
+_type == "imageGalleryPlug" => {
+  ...,
+  _type,
+  _key,
+  'items':items[]{..., 'image': image{${imageMeta}} ,'link':link{
+    ${linkQuery}
+  }  },
+  rows,
+  rows_mobile,
+  ratio,
+}
+`;
 
-// export interface ImageGalleryPlugResult {
-//   _type: 'imageGalleryPlug';
-//   _key: string;
-//   items: ImageMetaResult[];
-//   rows?: number;
-//   rows_mobile?: number;
+interface ImageGalleryPlugItem
+  extends Omit<ImageGalleryItem, "image" | "link"> {
+  image?: ImageMetaResult;
+  link?: LinkResult;
+  _key: string;
+}
+export interface ImageGalleryPlugResult
+  extends Omit<ImageGalleryPlug, "items"> {
+  items: ImageGalleryPlugItem[];
+}
 
-//   ratio: '1:1' | '16:9' | '2:3' | '3:2';
-// }
+const ImageGalleryPlug: React.FC<{ node: ImageGalleryPlugResult }> = (
+  props
+) => {
+  const { items, rows = 4, rows_mobile = 2, ratio = "1:1" } = props.node;
 
-// const ImageGalleryPlug: React.FC<ImageGalleryPlugResult> = (props) => {
-//   const { items, rows = 4, rows_mobile = 2, ratio = '1:1' } = props;
+  if (!items || items.length < 1) return <div>No Images</div>;
+  return (
+    <div
+      className={clsx("grid grid-flow-row gap-2 pb-2", {
+        "grid-cols-1": rows_mobile === 1,
+        "grid-cols-2": rows_mobile === 2,
+        "grid-cols-3": rows_mobile === 3,
+        "grid-cols-4": rows_mobile === 4,
+        "grid-cols-5": rows_mobile === 5,
+        "grid-cols-6": rows_mobile === 6,
+        "grid-cols-7": rows_mobile === 7,
+        "grid-cols-8": rows_mobile === 8,
+        "md:grid-cols-1": rows === 1,
+        "md:grid-cols-2": rows === 2,
+        "md:grid-cols-3": rows === 3,
+        "md:grid-cols-4": rows === 4,
+        "md:grid-cols-5": rows === 5,
+        "md:grid-cols-6": rows === 6,
+        "md:grid-cols-7": rows === 7,
+        "md:grid-cols-8": rows === 8,
+      })}
+    >
+      {items.map((item) => {
+        const { image, title, _key, link, size = "m" } = item;
 
-//   if (!items || items.length < 1) return <div>No Images</div>;
-//   return (
-//     <div
-//       className={classNames(
-//         'grid grid-flow-row gap-2',
-//         { 'grid-cols-1': rows_mobile === 1 },
-//         { 'grid-cols-2': rows_mobile === 2 },
-//         { 'grid-cols-3': rows_mobile === 3 },
-//         { 'grid-cols-4': rows_mobile === 4 },
-//         { 'grid-cols-5': rows_mobile === 5 },
-//         { 'grid-cols-6': rows_mobile === 6 },
-//         { 'grid-cols-7': rows_mobile === 7 },
-//         { 'grid-cols-8': rows_mobile === 8 },
-//         { 'md:grid-cols-1': rows === 1 },
-//         { 'md:grid-cols-2': rows === 2 },
-//         { 'md:grid-cols-3': rows === 3 },
-//         { 'md:grid-cols-4': rows === 4 },
-//         { 'md:grid-cols-5': rows === 5 },
-//         { 'md:grid-cols-6': rows === 6 },
-//         { 'md:grid-cols-7': rows === 7 },
-//         { 'md:grid-cols-8': rows === 8 }
-//       )}
-//     >
-//       {items.map((photo) => {
-//         return (
-//           <div
-//             key={photo.id}
-//             className={classNames(
-//               'w-full',
-//               {
-//                 'aspect-w-10 aspect-h-10': ratio === '1:1',
-//               },
-//               {
-//                 'aspect-w-16 aspect-h-9': ratio === '16:9',
-//               },
-//               {
-//                 'aspect-w-3 aspect-h-2': ratio === '3:2',
-//               },
-//               {
-//                 'aspect-w-2 aspect-h-3': ratio === '2:3',
-//               }
-//             )}
-//           >
-//             <Photo
-//               srcSizes={[300]}
-//               photo={photo}
-//               layout={photo.fill || 'contain'}
-//             />
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// };
+        return (
+          <ConditionalLink
+            href={link?.internalLink || link?.externalLink || ""}
+            external={!!link?.externalLink}
+            condition={!!link}
+            key={_key}
+            className={clsx(
+              "w-full relative rounded-2xl overflow-hidden shadow-2xl ",
+              {
+                "aspect-w-10 aspect-h-10 ": ratio === "1:1",
+                "aspect-w-16 aspect-h-9": ratio === "16:9",
+                "aspect-w-3 aspect-h-2": ratio === "3:2",
+                "aspect-w-2 aspect-h-3": ratio === "2:3",
+                "col-span-2 row-span-2  ": size === "l",
+              }
+            )}
+          >
+            {image && <Image />}
 
-// export default ImageGalleryPlug;
+            {title && (
+              <div className="absolute bottom-0 flex items-end left-4 ">
+                <div className="pb-6 ">
+                  {title.split("\n").map((string, index) => (
+                    <div key={index}>
+                      <Typo
+                        space={false}
+                        className="inline-block py-0.5 px-4  m-0 bg-white "
+                      >
+                        {string}
+                      </Typo>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </ConditionalLink>
+        );
+      })}
+    </div>
+  );
+};
+
+export default ImageGalleryPlug;
 
 export {};

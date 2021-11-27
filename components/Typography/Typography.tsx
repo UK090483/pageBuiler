@@ -65,7 +65,7 @@ const Typo: React.FC<TypographyProps> = ({
   return (
     <Component
       style={{
-        paddingBottom: space === undefined ? "1em" : space ? "1em" : "0",
+        paddingBottom: space === undefined ? "1em" : space ? "1em" : undefined,
       }}
       className={
         clsx({

@@ -545,7 +545,7 @@ export type Section = {
    *
    *
    */
-  type?: "normal" | "medium-wide" | "text" | "hero" | "full-width";
+  type?: "m" | "l" | "s";
 
   /**
    * Background Color — `string`
@@ -614,6 +614,7 @@ export type DefaultRichText = Array<
     }>
   | SanityKeyed<Button>
   | SanityKeyed<Spacer>
+  | SanityKeyed<ImageGalleryPlug>
 >;
 
 export type Hero = {
@@ -717,6 +718,75 @@ export type Spacer = {
    *
    */
   space?: "s" | "m" | "l" | "xl" | "xxl";
+};
+
+export type ImageGalleryPlug = {
+  _type: "imageGalleryPlug";
+  /**
+   * title — `string`
+   *
+   *
+   */
+  name?: string;
+
+  /**
+   * Images — `array`
+   *
+   *
+   */
+  items?: Array<SanityKeyed<ImageGalleryItem>>;
+
+  /**
+   * Rows — `number`
+   *
+   *
+   */
+  rows?: number;
+
+  /**
+   * Rows Mobile — `number`
+   *
+   *
+   */
+  rows_mobile?: number;
+
+  /**
+   * Ratio — `string`
+   *
+   *
+   */
+  ratio?: "1:1" | "16:9" | "2:3" | "3:2";
+};
+
+export type ImageGalleryItem = {
+  _type: "imageGalleryItem";
+  /**
+   * title — `text`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Image — `defaultImage`
+   *
+   *
+   */
+  image?: DefaultImage;
+
+  /**
+   * Link — `link`
+   *
+   *
+   */
+  link?: Link;
+
+  /**
+   * Size — `string`
+   *
+   *
+   */
+  size?: "m" | "l";
 };
 
 export type Documents =
