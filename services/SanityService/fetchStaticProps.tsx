@@ -44,8 +44,13 @@ type fetchStaticPropsProps = {
   sanityClient: SanityClient;
 };
 
+export interface PageResult
+  extends Omit<Page, "content">,
+    PageQueryResult,
+    SiteSettingResult {}
+
 export type FetchStaticPropsResult = {
-  page: (PageQueryResult & SiteSettingResult) | null;
+  page: PageResult | null;
 };
 
 export const fetchStaticProps = async (
@@ -65,8 +70,9 @@ export const fetchStaticProps = async (
     ? `_type == "page" && slug.current == "${slug}"`
     : `_id == *[_id == 'siteConfig'][0].indexPage._ref`;
 
-  const page = await fetchPage<PageQueryResult & SiteSettingResult>({
+  const page = await fetchPage<PageResult>({
     query: `*[${filter}][0]{
+      ...,
       ${body},  
       ${siteQuery}
     }`,

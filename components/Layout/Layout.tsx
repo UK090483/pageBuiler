@@ -12,7 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, page }) => {
       <Header>
         <Nav items={page?.siteSettings.mainNav || []} />
       </Header>
-      <Head />
+      <Head name={page?.title} />
       <main className="min-h-screen">{children}</main>
       <Footer navItems={page?.siteSettings.mainNav || []} />
     </>
