@@ -22,14 +22,6 @@
       "types/*": ["types/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "studio/schemas/appConfig.js",
-    "components/atoms/Stack.tsx_",
-    "services/SanityService/tests/fetchStaticPath.test.js",
-    "services/SanityService/fetchStaticPath.test.ts"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "studio/**"]
 }
