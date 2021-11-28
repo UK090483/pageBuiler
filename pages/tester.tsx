@@ -12,10 +12,7 @@ import { nav } from "@services/NavigationService/t";
 const Home = () => {
   return (
     <>
-      <div className="pt-[200px] ">
-        <Underline>
-          <Typo variant="h1"> Tetser</Typo>
-        </Underline>
+      <div className="pt-[200px] pl-80 ">
         {/* <svg
           // style={{ width: isHovered ? "100%" : 0, transition: "width 0.3s " }}
           preserveAspectRatio="none"

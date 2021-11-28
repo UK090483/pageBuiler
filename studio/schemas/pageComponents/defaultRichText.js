@@ -1,6 +1,7 @@
 import React from "react";
 import { TiPencil } from "react-icons/ti";
 
+import { colorList } from "../snippets";
 const Button = (props) => {
   return <span>{props.label}</span>;
 };
@@ -35,12 +36,34 @@ export default {
             title: "Underline",
             value: "underline",
           },
-          {
-            title: "Hand Underline",
-            value: "handUnderline",
-          },
+          // {
+          //   title: "Hand Underline",
+          //   value: "handUnderline",
+          // },
         ],
         annotations: [
+          {
+            name: "handUnderline",
+            type: "object",
+            title: "Hand Underline",
+            fields: [
+              {
+                title: "Underline Color",
+                name: "color",
+                type: "string",
+                options: {
+                  list: [...colorList()],
+                },
+                initialValue: "black",
+              },
+            ],
+            blockEditor: {
+              icon: () => "Hand Underline",
+              render: (props) => {
+                return <span>{props.children}</span>;
+              },
+            },
+          },
           {
             name: "tag",
             type: "object",

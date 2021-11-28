@@ -65,8 +65,8 @@ const hand = (props: any) => {
 
 const handUnderline = (props: any) => {
   return (
-    <Underline>
-      <span className="font-hand">{props.children}</span>
+    <Underline color={props?.mark?.color} on="init">
+      {props.children}
     </Underline>
   );
 };

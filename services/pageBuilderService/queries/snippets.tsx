@@ -1,7 +1,7 @@
 import { Link } from "types";
 
 export const linkQuery = `
-  'internalLink': select( 
+  'internalLink': select(
                  defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + internalLink->slug.current,
                  defined(internalLink) => '/'+ internalLink->slug.current  ),
   'externalLink': externalLink
