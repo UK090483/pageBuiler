@@ -13,18 +13,25 @@ const Home = () => {
   return (
     <>
       <div className="pt-[200px] pl-80 ">
-        {/* <svg
-          // style={{ width: isHovered ? "100%" : 0, transition: "width 0.3s " }}
-          preserveAspectRatio="none"
-          className="absolute bottom-0 w-full fill-current stroke-current text-primary -right-1 -left-1 "
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 488 25"
-        >
-          <path
-            // style={{ strokeDasharray: 0.01 }}
-            d="M3 18.9998C24.3674 17.6849 45.6112 12.5894 67 10.6665C130.052 4.9979 193.492 1.36044 256.778 4.72203C333.009 8.77124 408.671 19.0641 485 21.9998"
-          />
-        </svg> */}
+        <Typo variant="h1">
+          <Underline>Test</Underline>
+        </Typo>
+
+        <Typo variant="h2">
+          <Underline>Test</Underline>
+        </Typo>
+        <Typo variant="h3">
+          <Underline>Test</Underline>
+        </Typo>
+        <Typo variant="h4">
+          <Underline>Test</Underline>
+        </Typo>
+        <Typo variant="h5">
+          <Underline>Test</Underline>
+        </Typo>
+        <Typo variant="h6">
+          <Underline>Test</Underline>
+        </Typo>
       </div>
       {/* <NavigationMobile items={nav} />
       <div className="flex flex-col items-center justify-center w-full h-screen ">

@@ -51,7 +51,7 @@ const Underline: React.FC<UnderlineProps> = ({
           <svg
             style={{ fill: "transparent", height: "20px" }}
             preserveAspectRatio="none"
-            className="absolute w-full fill-current stroke-current -bottom-2 "
+            className="absolute  w-full transform scale-x-[1.1]  fill-current stroke-current -bottom-2 "
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 20"
           >

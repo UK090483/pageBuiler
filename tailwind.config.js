@@ -16,13 +16,13 @@ module.exports = {
     },
     fontSize: {
       sm: ["12px", "1em"],
-      base: ["16px", "1.4em"],
-      lg: ["20px", "1.2em"],
-      xl: ["20px", "1.2em"],
-      "2xl": ["22px", "1.2em"],
-      "3xl": ["30px", "1.2em"],
-      "4xl": ["40px", "1.2em"],
-      "5xl": ["50px", "1.2em"],
+      base: ["16px", "1.5em"],
+      lg: ["20px", "1.5em"],
+      xl: ["20px", "1.5em"],
+      "2xl": ["22px", "1.5em"],
+      "3xl": ["30px", "1.5em"],
+      "4xl": ["40px", "1.5em"],
+      "5xl": ["50px", "1.5em"],
     },
 
     extend: {

@@ -6,6 +6,15 @@ module.exports = {
   images: {
     domains: ["picsum.photos"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
   webpack(config, options) {
     const { dev, isServer } = options;
 
