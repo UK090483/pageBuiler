@@ -15,7 +15,7 @@ export const Image: React.FC<ImageProps> = ({ src }) => {
 
   return (
     <NextImage
-      blurDataURL={`https://picsum.photos/${ranImage}`}
+      blurDataURL={`https://picsum.photos/50/50?blur=2`}
       src={`https://picsum.photos/${ranImage}`}
       alt={"bla"}
       layout="fill"
