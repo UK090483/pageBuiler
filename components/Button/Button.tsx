@@ -5,16 +5,19 @@ type ButtonProps = {
   onClick?: () => void;
   internalLink?: string | null;
   externalLink?: string;
+  href?: string | null;
+  external?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { children, onClick = () => {}, internalLink } = props;
+  const { children, onClick = () => {}, internalLink, href, external } = props;
 
-  if (internalLink) {
+  if (href) {
     return (
       <Link
         className="inline-block px-12 py-2 text-base rounded-full bg-primary whitespace-nowrap"
-        href={internalLink}
+        href={href}
+        external={external}
       >
         {children}
       </Link>

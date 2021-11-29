@@ -16,7 +16,6 @@ _type == "button" => {
     'link':link{
       ${linkQuery}
     }
-    
 }
 `;
 
@@ -29,11 +28,7 @@ const ButtonPlug: React.FC<{ node: ButtonPlugProps }> = (props) => {
   const { link, label, position } = props.node;
 
   return (
-    <Button
-      internalLink={link.internalLink}
-      externalLink={link.externalLink}
-      onClick={() => {}}
-    >
+    <Button href={link.href} external={link.external} onClick={() => {}}>
       {label}
     </Button>
   );

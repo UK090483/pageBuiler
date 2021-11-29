@@ -1,6 +1,9 @@
 export interface NavItem {
   label?: string;
   items?: NavItem[];
-  link?: { internalLink?: string; externalLink?: string } | null;
+  link?: {
+    href?: string | null;
+    external?: boolean;
+  } | null;
   [key: string]: any;
 }
