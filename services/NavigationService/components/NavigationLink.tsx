@@ -16,9 +16,9 @@ export const NavigationModulLink: React.FC<NavigationLinkProps> = (props) => {
       href={href || "/"}
       external={external}
     >
-      <Underline on="hover">
-        <NavigationModulItemBase>{children}</NavigationModulItemBase>
-      </Underline>
+      {/* <Underline on="hover"> */}
+      <NavigationModulItemBase>{children}</NavigationModulItemBase>
+      {/* </Underline> */}
     </Link>
   );
 };

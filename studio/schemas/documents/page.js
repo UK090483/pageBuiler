@@ -1,6 +1,7 @@
 import { defaultBockContent } from "../snippets";
+import { widthLocalization } from "../Localizer";
 
-export default {
+export default widthLocalization({
   type: "document",
   name: "page",
   title: "Page",
@@ -11,31 +12,26 @@ export default {
       type: "string",
       title: "Title",
       validation: (Rule) => Rule.required(),
+      localize: true,
     },
-
     {
       name: "slug",
       type: "slug",
       title: "Slug",
       validation: (Rule) => Rule.required(),
+      localize: true,
     },
-    {
-      name: "pageType",
-      type: "reference",
-      to: [{ type: "pageType" }],
-    },
-    {
-      name: "pageHeader",
-      type: "pageHeader",
-      title: "Header",
-    },
-    {
-      name: "footer",
-      description: "if empty it will use the default Footer",
-      type: "reference",
-      title: "Footer",
-      to: [{ type: "footer" }],
-    },
+    // {
+    //   name: "pageType",
+    //   type: "reference",
+    //   to: [{ type: "pageType" }],
+    // },
+    // {
+    //   name: "pageHeader",
+    //   type: "pageHeader",
+    //   title: "Header",
+    // },
+
     defaultBockContent,
 
     {
@@ -53,4 +49,4 @@ export default {
       subtitle: "title",
     },
   },
-};
+});

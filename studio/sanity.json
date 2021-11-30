@@ -1,11 +1,11 @@
 {
   "root": true,
-  "api": {
-    "projectId": "jgnu3d9f",
-    "dataset": "production"
-  },
   "project": {
-    "name": "kreisel"
+    "name": "perspectivRegion"
+  },
+  "api": {
+    "projectId": "d85o021b",
+    "dataset": "production"
   },
   "plugins": [
     "@sanity/base",

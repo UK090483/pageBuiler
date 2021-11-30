@@ -8,12 +8,12 @@ interface HeadProps {
 const Head: React.FunctionComponent<HeadProps> = ({ name }) => {
   return (
     <NextHead>
-      <title>Kreisel e.V. {name ? `/ ${name}` : ""}</title>
+      <title>Perspektiv Regionen {name ? `/ ${name}` : ""}</title>
       <meta
         name="description"
         content="Generated width love by create next app"
       />
-      <link rel="icon" href="/favicon-32x32.png" />
+      <link rel="icon" href="/logo.png" />
       <link
         rel="preload"
         href="/fonts/HMSans-Regular.woff"

@@ -32,7 +32,7 @@ module.exports = {
           DEFAULT: "#ebebeb",
           dark: "#009eeb",
         },
-        black: "#595959",
+        black: "#000000",
         white: "#ffffff",
         primary: "#F3BD06",
         secondary: "#D22D30",

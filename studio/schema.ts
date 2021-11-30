@@ -225,27 +225,6 @@ export interface Page extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
-   * pageType — `reference`
-   *
-   *
-   */
-  pageType?: SanityReference<PageType>;
-
-  /**
-   * Header — `pageHeader`
-   *
-   *
-   */
-  pageHeader?: PageHeader;
-
-  /**
-   * Footer — `reference`
-   *
-   * if empty it will use the default Footer
-   */
-  footer?: SanityReference<Footer>;
-
-  /**
    * Page sections — `array`
    *
    * Add, edit, and reorder sections
@@ -524,6 +503,30 @@ export type NavigationMegaMenuItem = {
   items?: Array<SanityKeyed<NavigationItem>>;
 };
 
+export type LocaleString = {
+  _type: "localeString";
+  /**
+   * Deutsch — `string`
+   *
+   *
+   */
+  de?: string;
+
+  /**
+   * Dansk — `string`
+   *
+   *
+   */
+  dk?: string;
+
+  /**
+   * English — `string`
+   *
+   *
+   */
+  en?: string;
+};
+
 export type Section = {
   _type: "section";
   /**
@@ -574,6 +577,13 @@ export type Section = {
    *
    */
   image?: DefaultImage;
+
+  /**
+   * Image Position — `string`
+   *
+   *
+   */
+  imagePosition?: "l" | "r";
 };
 
 export type Listing = {

@@ -13,6 +13,7 @@ import { Dropdown } from "../Dropdown/Dropdown";
 import Button from "@components/Button/Button";
 import { NavigationModul } from "@services/NavigationService/NavigationModul";
 import NavigationMobile from "@services/NavigationService/NavigationMobile";
+import { LangSwitch } from "../LangSwitch/LangSwitch";
 
 interface NavProps {
   items: (Omit<NavItemProps, "divider"> | NavItemMegaNavProps)[];
@@ -27,7 +28,7 @@ const Nav: React.FC<NavProps> = ({ items }) => {
   return (
     <>
       <nav>
-        <div className="flex items-center justify-between w-full py-2 pl-24 shadow-lg ">
+        <div className="flex items-center justify-between w-full px-2 py-2 border-b-2 border-black ">
           <Link href="/">
             <Logo />
           </Link>
@@ -36,10 +37,8 @@ const Nav: React.FC<NavProps> = ({ items }) => {
             <NavigationModul items={items} />
           </div>
 
-          {/* <div className="hidden lg:block">
-            <Button> Kontakt aufnehmen</Button>
-          </div>
-          */}
+          <LangSwitch className="hidden lg:flex" />
+
           <button
             data-testid="menu-overlay-toggle"
             onClick={handleNavClick}

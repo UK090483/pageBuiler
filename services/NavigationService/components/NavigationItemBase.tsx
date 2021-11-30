@@ -14,7 +14,7 @@ export const NavigationModulItemBase: React.FC<NavItemBaseProps> = ({
 }) => {
   return (
     <span
-      className={`block px-5 py-3 leading-none  text-base  ${
+      className={`block px-5 py-3 leading-none  text-base hover:underline  ${
         bold ? " font-bold " : ""
       } `}
     >

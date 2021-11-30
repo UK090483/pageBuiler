@@ -4,9 +4,10 @@ import NextImage from "next/image";
 
 interface ImageProps {
   src?: string;
+  objectFit?: "cover" | "contain";
 }
 
-export const Image: React.FC<ImageProps> = ({ src }) => {
+export const Image: React.FC<ImageProps> = ({ src, objectFit = "cover" }) => {
   const ranNum = (min: number = 4, max: number = 8) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
@@ -19,7 +20,7 @@ export const Image: React.FC<ImageProps> = ({ src }) => {
       src={`https://picsum.photos/${ranImage}`}
       alt={"bla"}
       layout="fill"
-      objectFit="cover"
+      objectFit={objectFit}
     />
   );
 };

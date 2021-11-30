@@ -23,6 +23,7 @@ _type == "section" => {
   type,
   topSpace,
   bottomSpace,
+  imagePosition,
   ${richTextQuery},
   bgImage{${imageMeta}},
   image{${imageMeta}}
@@ -40,7 +41,16 @@ export interface SectionResult
 interface SectionBlockProps extends SectionResult {}
 
 const SectionBlock: React.FC<SectionBlockProps> = (props) => {
-  const { content, bottomSpace, topSpace, title, image, bgColor, type } = props;
+  const {
+    content,
+    bottomSpace,
+    topSpace,
+    title,
+    image,
+    bgColor,
+    type,
+    imagePosition = "l",
+  } = props;
   const hasImage = image && image.asset;
   const autoType = hasImage ? "l" : "s";
 
@@ -63,11 +73,11 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
           "pb-12 md:pb-44": bottomSpace === "xl",
           "pb-24 md:pb-60": bottomSpace === "xxl",
           "pb-0.5": !bottomSpace,
-          "grid  grid-cols-1  lg:grid-cols-2 ": hasImage,
+          "grid  grid-cols-1  lg:grid-cols-3 ": hasImage,
         })}
       >
         {hasImage ? (
-          <WithImage place="right" image={image}>
+          <WithImage place={imagePosition} image={image}>
             {content && <RichText content={content} />}
           </WithImage>
         ) : (
@@ -81,14 +91,14 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
 };
 
 const WithImage: React.FC<{
-  place: "left" | "right";
+  place: "l" | "r";
   image: ImageMetaResult | null;
-}> = ({ children, place = "left" }) => {
+}> = ({ children, place = "l" }) => {
   const content = (
     <div
       className={clsx({
-        "pr-0  lg:pr-12": place === "right",
-        "pl-0  lg:pl-12": place === "left",
+        "pr-0  lg:pr-12 col-span-2": place === "r",
+        "pl-0  lg:pl-12 col-span-2": place === "l",
       })}
     >
       {children}{" "}
@@ -96,11 +106,11 @@ const WithImage: React.FC<{
   );
   return (
     <>
-      {place === "right" && content}
-      <div className="relative overflow-hidden aspect-w-16 aspect-h-9 rounded-2xl">
-        <Image />
+      {place === "r" && content}
+      <div className="relative overflow-hidden aspect-w-1 aspect-h-1 ">
+        <Image objectFit="contain" />
       </div>
-      {place === "left" && content}
+      {place === "l" && content}
     </>
   );
 };

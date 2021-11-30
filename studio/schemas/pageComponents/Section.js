@@ -1,7 +1,8 @@
 import React from "react";
 import { AiOutlineBorderOuter } from "react-icons/ai";
+import { widthLocalization } from "../Localizer";
 import { colorList, sizesList } from "../snippets";
-export default {
+export default widthLocalization({
   type: "object",
   name: "section",
   title: "Section",
@@ -29,6 +30,7 @@ export default {
       name: "content",
       type: "defaultRichText",
       title: "Content",
+      localize: true,
     },
 
     {
@@ -76,6 +78,18 @@ export default {
       type: "defaultImage",
       fieldset: "Image",
     },
+    {
+      title: "Image Position",
+      name: "imagePosition",
+      type: "string",
+      options: {
+        list: [
+          { title: "Left", value: "l" },
+          { title: "Right", value: "r" },
+        ],
+      },
+      fieldset: "Image",
+    },
   ],
   preview: {
     select: {
@@ -100,4 +114,4 @@ export default {
       };
     },
   },
-};
+});
