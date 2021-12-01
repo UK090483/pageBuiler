@@ -11,66 +11,28 @@ export default {
     {
       title: "Text",
       name: "text",
-      type: "text",
-    },
-    {
-      title: "Button text",
-      name: "btnText",
-      type: "string",
-    },
-    {
-      title: "Button link",
-      name: "btnLink",
-      type: "string",
-    },
-    {
-      title: "Image",
-      name: "image",
-      type: "defaultImage",
-    },
-    {
-      title: "Size",
-      name: "size",
-      type: "string",
-      options: {
-        list: [
-          { title: "full", value: "full" },
-          { title: "1/2", value: "1/2" },
-          { title: "1/3", value: "1/3" },
-          { title: "2/3", value: "2/3" },
-        ],
-      },
-      initialValue: "1/3",
-    },
-    {
-      title: "Filter intensity",
-      name: "filterIntensity",
-      type: "string",
-      options: {
-        list: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90"],
-      },
-      initialValue: "0",
-    },
-    {
-      title: "Filter Color",
-      name: "filterColor",
-      type: "string",
-      options: {
-        list: ["white", "black"],
-      },
-      initialValue: "white",
+      type: "array",
+      of: [
+        {
+          type: "block",
+          title: "Block",
+          styles: [{ title: "Normal", value: "normal" }],
+          lists: [],
+          marks: {
+            decorators: [],
+            annotations: [{ name: "image", type: "image", title: "Image" }],
+          },
+        },
+      ],
     },
   ],
   preview: {
     select: {
-      image: "image",
-      content: "content",
-      bgColor: "bgColor",
+      title: "title",
     },
-    prepare({ image }) {
+    prepare({ title }) {
       return {
-        title: "hero",
-        media: image,
+        title: title,
       };
     },
   },

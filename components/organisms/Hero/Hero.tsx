@@ -1,14 +1,13 @@
-import { Image } from "@components/Image";
+/* eslint-disable @next/next/no-img-element */
+
 import { Section } from "@components/Section";
-import Typo from "@components/Typography";
-import Underline from "@components/Underline";
 import useBreakpoints from "@hooks/useBreakingPoints";
+import { HeroBlockProps } from "@services/pageBuilderService/Blocks/HeroBlock";
+import BlockContent, { Serializers } from "@sanity/block-content-to-react";
 
 import React from "react";
 
-interface HeroProps {
-  variant?: "overlapping" | "sideBySide";
-}
+interface HeroProps extends HeroBlockProps {}
 
 const fontSizes: { [key: string]: number } = {
   sm: 300,
@@ -18,7 +17,27 @@ const fontSizes: { [key: string]: number } = {
   "2xl": 1536,
 };
 
-const Hero: React.FC<HeroProps> = ({ variant = "overlapping" }) => {
+const InlineImage = () => {
+  return (
+    <span className="relative inline-block">
+      <img
+        style={{ height: "0.705em" }}
+        height="0.8em"
+        src="https://picsum.photos/id/222/600/400"
+        alt="image"
+      />
+    </span>
+  );
+};
+
+const serializer: Serializers = {
+  marks: {
+    image: InlineImage,
+  },
+};
+
+const Hero: React.FC<HeroProps> = (props) => {
+  const { text, title } = props;
   const b = useBreakpoints();
   const [rendert, setRendered] = React.useState(false);
 
@@ -32,35 +51,19 @@ const Hero: React.FC<HeroProps> = ({ variant = "overlapping" }) => {
   return (
     <>
       <Section
-        width="full"
-        className="relative flex items-center justify-center h-screen  min-h-[600px] px-4"
+        width="responsive"
+        className=" h-screen  min-h-[600px]  flex flex-col justify-center  pt-28"
       >
         {rendert && (
-          <div
-            className="container pt-12 mx-auto overflow-hidden font-bold"
-            style={{ fontSize, lineHeight: "1em" }}
-          >
-            <div className="flex items-center pb-8 ">
-              <div className="pb-8 ">DISCOVER</div>{" "}
-              <div
-                style={{ fontSize: fontSizeSmall, lineHeight: "1.3em" }}
-                className="pl-10 font-medium "
-              >
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-              </div>
-            </div>
-            <div className="flex items-center pb-8 ">
-              <div
-                style={{ height: "1em", width: "2em" }}
-                className="relative inline-block mr-12"
-              >
-                <Image src="id/40/200/200" />
-              </div>
-              <div className="inline-block ">NEW</div>
-            </div>
-
-            <div>PERSPECTIVES.</div>
-          </div>
+          <>
+            {title && <div className="font-bold ">{title}</div>}
+            <h1
+              className="font-bold whitespace-pre-wrap "
+              style={{ fontSize, lineHeight: "1.1em", marginLeft: "-0.05em" }}
+            >
+              {text && <BlockContent blocks={text} serializers={serializer} />}
+            </h1>
+          </>
         )}
       </Section>
     </>

@@ -4,7 +4,15 @@ import navigation from "./navigation";
 import redirect from "./redirect";
 import footer from "./footer";
 import pageType from "./pageType";
-
-const Documents = [...Blog, page, navigation, redirect, footer, pageType];
+import person from "./person";
+const Documents = [
+  ...Blog,
+  page,
+  navigation,
+  redirect,
+  footer,
+  pageType,
+  person,
+];
 
 export default Documents;

@@ -335,6 +335,29 @@ export interface PageType extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 }
 
+/**
+ * Person
+ *
+ *
+ */
+export interface Person extends SanityDocument {
+  _type: "person";
+
+  /**
+   * name — `string`
+   *
+   *
+   */
+  name?: string;
+
+  /**
+   * Description — `text`
+   *
+   *
+   */
+  description?: string;
+}
+
 export type DefaultImage = {
   _type: "defaultImage";
   asset: SanityReference<SanityImageAsset>;
@@ -637,63 +660,11 @@ export type Hero = {
   title?: string;
 
   /**
-   * Text — `text`
+   * Text — `array`
    *
    *
    */
-  text?: string;
-
-  /**
-   * Button text — `string`
-   *
-   *
-   */
-  btnText?: string;
-
-  /**
-   * Button link — `string`
-   *
-   *
-   */
-  btnLink?: string;
-
-  /**
-   * Image — `defaultImage`
-   *
-   *
-   */
-  image?: DefaultImage;
-
-  /**
-   * Size — `string`
-   *
-   *
-   */
-  size?: "full" | "1/2" | "1/3" | "2/3";
-
-  /**
-   * Filter intensity — `string`
-   *
-   *
-   */
-  filterIntensity?:
-    | "0"
-    | "10"
-    | "20"
-    | "30"
-    | "40"
-    | "50"
-    | "60"
-    | "70"
-    | "80"
-    | "90";
-
-  /**
-   * Filter Color — `string`
-   *
-   *
-   */
-  filterColor?: "white" | "black";
+  text?: Array<SanityKeyed<SanityBlock>>;
 };
 
 export type Button = {
@@ -809,4 +780,5 @@ export type Documents =
   | Navigation
   | Redirect
   | Footer
-  | PageType;
+  | PageType
+  | Person;

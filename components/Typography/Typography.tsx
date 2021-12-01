@@ -62,6 +62,8 @@ const Typo: React.FC<TypographyProps> = ({
     return <div className=" h-14" />;
   }
 
+  console.log(variant);
+
   return (
     <Component
       style={{
@@ -69,8 +71,8 @@ const Typo: React.FC<TypographyProps> = ({
       }}
       className={
         clsx({
-          "font-hand ": hand,
-          "text-sm ": variant === "body-s",
+          "font-hand": hand,
+          "text-sm": variant === "body-s",
           "text-base ": variant === "body",
           "text-lg": ["body-l", "h6"].includes(variant as string),
           "text-xl": variant === "h5",
@@ -78,7 +80,7 @@ const Typo: React.FC<TypographyProps> = ({
           "text-3xl": variant === "h3",
           "text-4xl": variant === "h2",
           "text-5xl": variant === "h1",
-          "font-bold": isBold,
+          "font-black": isBold,
         }) + ` ${className}`
       }
     >

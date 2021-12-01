@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 
 interface SectionProps {
-  width?: "full" | "m" | "l" | "s";
+  width?: "full" | "m" | "l" | "s" | "responsive";
   bg?: "white" | "grey" | "black" | "primary" | "secondary";
   className?: string;
   id?: string;
@@ -34,6 +34,7 @@ export const Section: React.FC<SectionProps> = ({
           "max-w-screen-md ": width === "s",
           "max-w-screen-lg ": width === "m",
           "max-w-screen-xl ": width === "l",
+          container: width === "responsive",
           "px-4": width !== "full" && !noPadding,
         })}
       >

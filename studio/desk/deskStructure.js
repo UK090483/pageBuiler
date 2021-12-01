@@ -1,6 +1,6 @@
 import S from "@sanity/desk-tool/structure-builder";
 import client from "part:@sanity/base/client";
-import { CgWebsite } from "react-icons/cg";
+import { CgWebsite, CgProfile } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 export default () =>
   S.list()
@@ -50,4 +50,9 @@ export default () =>
                 .params({ pageTypeId });
             })
         ),
+
+      S.listItem()
+        .title("Persons")
+        .icon(CgProfile)
+        .child(S.documentTypeList("person")),
     ]);

@@ -1,3 +1,4 @@
+import { Avatar, AvatarList } from "@components/organisms/Avaters/Avatar";
 import { Carousel } from "@components/organisms/Listings/Carousel";
 import { Section } from "@components/Section";
 import { NavOverview } from "@services/NavigationService/NavOverview";
@@ -17,6 +18,8 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
       {/* <Carousel />
       <Quote />
       <FooterContact /> */}
+
+      <AvatarList />
       <Section width="l" className="pt-12">
         <NavOverview
           items={navItems}
