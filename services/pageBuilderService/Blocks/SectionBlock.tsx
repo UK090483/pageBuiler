@@ -6,15 +6,15 @@ import {
   ImageMetaResult,
 } from "@services/pageBuilderService/queries/snippets";
 
-import { Section as SectionType } from "types";
+import { AppColor, Section as SectionType } from "types";
 
-import RichText, { richTextQuery } from "../RichText/RichText";
+import RichText, { richTextProjection } from "../RichText/RichText";
 
-import { Section } from "@components/Section";
-import { Container } from "@components/Container";
+import { Section } from "@components/Section/Section";
+
 import { Image } from "@components/Image";
 
-export const sectionBlockQuery = `
+export const sectionBlockQuery = (locale: string) => `
 _type == "section" => {
   _key,
   _type,
@@ -24,7 +24,10 @@ _type == "section" => {
   topSpace,
   bottomSpace,
   imagePosition,
-  ${richTextQuery},
+  'content':coalesce(
+      content_${locale}[]{${richTextProjection(locale)}},
+      content[]{${richTextProjection(locale)}}
+      ),
   bgImage{${imageMeta}},
   image{${imageMeta}}
 }
@@ -108,7 +111,7 @@ const WithImage: React.FC<{
     <>
       {place === "r" && content}
       <div className="relative overflow-hidden aspect-w-1 aspect-h-1 ">
-        <Image objectFit="contain" />
+        <Image objectFit="contain" alt="bla" />
       </div>
       {place === "l" && content}
     </>
@@ -118,7 +121,7 @@ const WithImage: React.FC<{
 export default SectionBlock;
 
 type TransitionProps = {
-  color?: "black" | "white" | "primary" | "secondary" | "grey";
+  color?: AppColor;
   pos: "top" | "bottom";
 };
 

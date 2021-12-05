@@ -1,7 +1,7 @@
 import { mockClient } from "./testPrepare";
 import { fetchPage } from "../fetchStaticProps";
 
-describe.only("fetchPage", () => {
+describe("fetchPage", () => {
   const OLD_ENV = process.env;
   beforeEach(() => {
     jest.resetModules();

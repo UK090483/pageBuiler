@@ -1,17 +1,25 @@
 import { ComponentType } from "react";
 
 type Component =
-  | { name: string; component: ComponentType<any>; type: "root"; query: string }
+  | {
+      name: string;
+      component: ComponentType<any>;
+      type: "root";
+      query: string | ((locale: string) => string);
+    }
   | {
       name: string;
       component: ComponentType<any>;
       type: "normal" | "plug";
-      query?: string;
+      query?: string | ((locale: string) => string);
     };
 
+type getRootQueryProps = {
+  rootName?: string;
+  locale?: string;
+};
 class BlockFactory {
   private static instance: BlockFactory;
-
   components: { [k: string]: Component } = {};
 
   public registerComponent(name: string, props: Component) {
@@ -27,9 +35,11 @@ class BlockFactory {
     return C ? <C {...props} /> : null;
   }
 
-  public getRootQuery(rootName: string = "content") {
+  public getRootQuery({ rootName = "content", locale }: getRootQueryProps) {
     const elementQuery = this.getRootElements()
-      .map((c) => c.query)
+      .map((c) =>
+        typeof c.query === "function" ? c.query(locale || "") : c.query
+      )
       .join(" , ");
     return `${rootName}[]{${elementQuery}}`;
   }
@@ -42,7 +52,6 @@ class BlockFactory {
     if (!BlockFactory.instance) {
       BlockFactory.instance = new BlockFactory();
     }
-
     return BlockFactory.instance;
   }
 }

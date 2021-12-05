@@ -1,6 +1,6 @@
 import { Avatar, AvatarList } from "@components/organisms/Avaters/Avatar";
 import { Carousel } from "@components/organisms/Listings/Carousel";
-import { Section } from "@components/Section";
+import { Section } from "@components/Section/Section";
 import { NavOverview } from "@services/NavigationService/NavOverview";
 import React from "react";
 import { Logo } from "../Logo";

@@ -1,6 +1,6 @@
 import { Container } from "@components/Container";
 import { Image } from "@components/Image";
-import { Section } from "@components/Section";
+import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import React from "react";
 
@@ -11,7 +11,7 @@ const FooterContact: React.FC<FooterContactProps> = ({ children }) => {
     <Section width="l" className="grid grid-cols-1 py-24 md:grid-cols-2">
       <div className="flex flex-col items-center justify-center ">
         <div className="relative w-48 h-48 mb-12 overflow-hidden rounded-full">
-          <Image src="id/1025/400/400" />
+          <Image src="id/1025/400/400" alt="bla" />
         </div>
         <Typo variant="body-l" className="text-center ">
           Marieke Klein <br /> Leitung KREISEL e. V.

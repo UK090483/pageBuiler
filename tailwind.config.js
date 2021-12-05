@@ -82,6 +82,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require("tailwindcss-debug-screens"),
     require("@tailwindcss/aspect-ratio"),
     require("tailwindcss-multi-column")(),
     plugin(function ({ addComponents, theme }) {

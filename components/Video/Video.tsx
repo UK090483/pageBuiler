@@ -6,7 +6,7 @@ interface Props {}
 export const Video = (props: Props) => {
   return (
     <>
-      <Image />
+      <Image alt="bla" />
 
       <div className="absolute inset-0 opacity-0">
         <iframe

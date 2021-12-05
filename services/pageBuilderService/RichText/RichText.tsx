@@ -8,7 +8,7 @@ import BlockContent, {
   Serializers,
 } from "@sanity/block-content-to-react";
 
-import LinkMark, { linkMarkQuery } from "./marks/link";
+import LinkMark, { linkMarkQuery, LinkMarkQueryResult } from "./marks/link";
 import ButtonPlug, { buttonPlugQuery } from "./Plugs/ButtonPlug";
 // import { downloadPlugQuery } from "./Plugs/DownLoadPlug";
 // import EmbedPlug, { embedPlugQuery } from "./Plugs/EmbedPlug";
@@ -19,34 +19,34 @@ import ImageGalleryPlug, {
 import Typo from "@components/Typography/Typography";
 import SpacerPlug, { spacerPlugQuery } from "./Plugs/Spacer";
 import Underline from "@components/Underline";
+import { MarkProps, SanityBlock } from "../lib/SanityBlock";
 
-const marksQuery = `
+const marksQuery = (locale: string = "") => `
 markDefs[]{
   ...,
-  ${linkMarkQuery},
+  ${linkMarkQuery(locale)},
+  
+  
 }
 `;
 
-// export const richTextQuery = `
-// content[]{
-//   ...,
-//   ${marksQuery},
-//   ${buttonPlugQuery},
-//   ${embedPlugQuery},
-//   ${imagePlugQuery},
-//   ${imageGalleryPlugQuery},
-//   ${downloadPlugQuery},
-// }
-//`;
-export const richTextQuery = `
-content[]{
+export const richTextProjection = (locale: string = "") => `
   ...,
-  ${marksQuery},
-  ${buttonPlugQuery},
   ${spacerPlugQuery},
-  ${imageGalleryPlugQuery},
+  ${imageGalleryPlugQuery(locale)},
+  ${marksQuery(locale)},
+  ${buttonPlugQuery(locale)},
  
-}
+ 
+`;
+
+export const richTextProjectionhjh = (locale: string = "") => `
+  ...,
+  ${marksQuery(locale)},
+  ${buttonPlugQuery(locale)},
+  ${spacerPlugQuery},
+  ${imageGalleryPlugQuery(locale)},
+
 `;
 
 export interface RichTextQueryResult {
@@ -55,11 +55,8 @@ export interface RichTextQueryResult {
   content: any[];
 }
 
-const link = (props: any) => {
-  return <LinkMark {...props.mark}>{props.children}</LinkMark>;
-};
-
 const hand = (props: any) => {
+  // console.log(props);
   return <span className="font-hand">{props.children}</span>;
 };
 
@@ -111,9 +108,6 @@ const BlockRenderer = (props: any) => {
   //@ts-ignore
   return BlockContent.defaultSerializers.types.block(props);
 };
-const Container: React.FC = ({ children }) => {
-  return <>{children}</>;
-};
 
 const serializer: Serializers = {
   list: List,
@@ -126,24 +120,31 @@ const serializer: Serializers = {
     spacer: SpacerPlug,
   },
   marks: {
-    link,
+    link: LinkMark,
     tag,
     hand,
     handUnderline,
   },
-  container: Container,
+};
+
+const RichText2: React.FC<any> = (props: any) => {
+  return <BlockContent blocks={props.content} serializers={serializer} />;
 };
 
 const RichText: React.FC<any> = (props: any) => {
-  // eslint-disable-next-line no-underscore-dangle
-  const isBlock = props._type === "block";
-
   return (
-    <BlockContent
-      blocks={isBlock ? props : props.content}
-      serializers={serializer}
+    <SanityBlock
+      types={{
+        imageGalleryPlug: ImageGalleryPlug,
+        button: ButtonPlug,
+        block: BlockRenderer,
+        spacer: SpacerPlug,
+      }}
+      marks={{ link: LinkMark, tag, hand, handUnderline }}
+      list={List}
+      content={props.content}
     />
   );
 };
 
-export default RichText;
+export default React.memo(RichText);

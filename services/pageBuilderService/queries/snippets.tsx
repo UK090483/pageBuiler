@@ -1,18 +1,15 @@
+import { groq } from "next-sanity";
 import { Link } from "types";
 
-export const linkQuery = `
-   ...,
-  'internalLink': select(
-                 defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + internalLink->slug.current,
-                 defined(internalLink) => '/'+ internalLink->slug.current  
-                 ),
- 'href': select(
-            defined(externalLink) && !!defined(internalLink) => externalLink,
-            defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + internalLink->slug.current,
-            defined(internalLink) => '/'+ internalLink->slug.current  
-          ),
+export const linkQuery = (locale: string = "") => {
+  return groq`
+   'href': select( defined(externalLink) => externalLink,
+                  defined(internalLink) && defined(internalLink->pageType)  => '/'+ internalLink->pageType->slug.current + '/' + coalesce(internalLink->slug_${locale}.current ,internalLink->slug.current),
+                  defined(internalLink) => '/'+  coalesce(internalLink->slug_${locale}.current ,internalLink->slug.current)
+                ),
   'external': select(defined(externalLink)=>true,defined(internalLink)=>false) 
 `;
+};
 
 export interface LinkResult extends Omit<Link, "internalLink"> {
   internalLink?: string | null;
@@ -55,3 +52,5 @@ export type SeoResult = {
   url: string;
   shareGraphicSrc: string;
 };
+
+export type DateString = string;

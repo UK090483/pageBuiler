@@ -62,8 +62,6 @@ const Typo: React.FC<TypographyProps> = ({
     return <div className=" h-14" />;
   }
 
-  console.log(variant);
-
   return (
     <Component
       style={{

@@ -16,7 +16,9 @@
     "clsx": "^1.1.1",
     "identity-obj-proxy": "^3.0.0",
     "next": "12.0.2",
+    "next-page-transitions": "^1.0.0-beta.2",
     "next-sanity": "^0.4.0",
+    "next-sanity-image": "^3.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-test-renderer": "^17.0.2",
@@ -35,6 +37,7 @@
     "postcss": "^8.3.11",
     "sanity-codegen": "^0.9.6",
     "tailwindcss": "^2.2.19",
+    "tailwindcss-debug-screens": "^2.2.0",
     "tailwindcss-multi-column": "^1.0.2",
     "typescript": "4.4.4"
   }

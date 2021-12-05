@@ -7,14 +7,14 @@ import {
 } from "@services/pageBuilderService/queries/snippets";
 import React from "react";
 
-export const buttonPlugQuery = `
+export const buttonPlugQuery = (locale: string) => `
 _type == "button" => {
   _type,
   _key,
     label,
     inline,
     'link':link{
-      ${linkQuery}
+      ${linkQuery(locale)}
     }
 }
 `;

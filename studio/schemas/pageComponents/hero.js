@@ -1,4 +1,6 @@
-export default {
+import { withLocalization } from "../Localizer";
+
+export default withLocalization({
   name: "hero",
   type: "object",
   title: "Hero",
@@ -7,11 +9,13 @@ export default {
       title: "Title",
       name: "title",
       type: "string",
+      localize: true,
     },
     {
       title: "Text",
       name: "text",
       type: "array",
+      localize: true,
       of: [
         {
           type: "block",
@@ -36,4 +40,4 @@ export default {
       };
     },
   },
-};
+});

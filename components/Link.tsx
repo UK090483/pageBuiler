@@ -7,6 +7,7 @@ interface LinkProps {
   external?: boolean;
   onClick?: () => void;
   locale?: string;
+  scroll?: boolean;
 }
 
 export const Link: React.FC<LinkProps> = ({
@@ -16,6 +17,7 @@ export const Link: React.FC<LinkProps> = ({
   external,
   locale,
   onClick,
+  scroll,
 }) => {
   if (external) {
     return (
@@ -26,7 +28,7 @@ export const Link: React.FC<LinkProps> = ({
   }
 
   return (
-    <NextLink href={href} passHref locale={locale}>
+    <NextLink href={href} passHref locale={locale} scroll={scroll}>
       <a onClick={onClick} className={className}>
         {children}
       </a>

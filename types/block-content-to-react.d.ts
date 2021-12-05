@@ -26,7 +26,7 @@ declare module "@sanity/block-content-to-react" {
     blocks: any[] | any;
     /**
      * When more than one block is given, a container node has to be created. Passing a className will pass it on to the container.
-     * @note see `renderContainerOnSingleChild`
+     * @note see `SanityBlock`
      */
     className?: string;
     /**

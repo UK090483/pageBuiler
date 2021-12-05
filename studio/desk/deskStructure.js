@@ -2,6 +2,7 @@ import S from "@sanity/desk-tool/structure-builder";
 import client from "part:@sanity/base/client";
 import { CgWebsite, CgProfile } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
+
 export default () =>
   S.list()
     .title("Base")

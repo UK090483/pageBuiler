@@ -1,8 +1,8 @@
 import React from "react";
 import { AiOutlineBorderOuter } from "react-icons/ai";
-import { widthLocalization } from "../Localizer";
+import { withLocalization } from "../Localizer";
 import { colorList, sizesList } from "../snippets";
-export default widthLocalization({
+export default withLocalization({
   type: "object",
   name: "section",
   title: "Section",

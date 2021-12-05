@@ -1,5 +1,6 @@
 import { Link } from "@components/Link";
-import { NavigationMegaMenuResult } from "@services/SanityService/siteQuery";
+import { NavigationMegaMenuResult } from "@services/pageBuilderService/queries/siteQuery";
+
 import React from "react";
 
 export interface NavItemMegaNavProps extends NavigationMegaMenuResult {

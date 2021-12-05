@@ -1,6 +1,6 @@
 import Button from "@components/Button/Button";
 import { Image } from "@components/Image";
-import { Section } from "@components/Section";
+import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography";
 
 import React from "react";
@@ -44,7 +44,7 @@ const Feature: React.FC<FeatureProps> = ({ variant = "overlapping" }) => {
         </div>
 
         <div className="w-full h-[100vw] md:h-[600px] md:w-[600px] relative col-start-7">
-          <Image />
+          {/* <Image alt="bla" /> */}
 
           {/* <Video /> */}
         </div>

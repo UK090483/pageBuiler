@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { Section } from "@components/Section";
+import { Section } from "@components/Section/Section";
 import useBreakpoints from "@hooks/useBreakingPoints";
 import { HeroBlockProps } from "@services/pageBuilderService/Blocks/HeroBlock";
 import BlockContent, { Serializers } from "@sanity/block-content-to-react";
@@ -52,7 +52,7 @@ const Hero: React.FC<HeroProps> = (props) => {
     <>
       <Section
         width="responsive"
-        className=" h-screen  min-h-[600px]  flex flex-col justify-center  pt-28"
+        className=" h-screen  min-h-[600px]   flex flex-col justify-center  pt-28"
       >
         {rendert && (
           <>

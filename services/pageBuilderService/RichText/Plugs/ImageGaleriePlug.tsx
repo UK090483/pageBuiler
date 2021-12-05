@@ -1,9 +1,9 @@
 import React from "react";
-
 import clsx from "clsx";
-import { ImageGalleryPlug, ImageGalleryItem } from "types";
-
-// import Photo from '@components/Photo';
+import {
+  ImageGalleryPlug as ImageGalleryPlugType,
+  ImageGalleryItem,
+} from "types";
 import {
   imageMeta,
   ImageMetaResult,
@@ -13,15 +13,19 @@ import {
 import { Image } from "@components/Image";
 import Typo from "@components/Typography/Typography";
 import { ConditionalLink } from "@components/Link";
+import { useSection } from "@components/Section/SectionContext";
 
-export const imageGalleryPlugQuery = `
+export const imageGalleryPlugQuery = (locale: string = "") => `
 _type == "imageGalleryPlug" => {
   ...,
   _type,
   _key,
-  'items':items[]{..., 'image': image{${imageMeta}} ,'link':link{
-    ${linkQuery}
-  }  },
+  'items':items[]{
+    ...,
+    'image': image{${imageMeta}},
+    'link':link{${linkQuery(locale)}},
+     'test':'test'
+    },
   rows,
   rows_mobile,
   ratio,
@@ -35,7 +39,7 @@ interface ImageGalleryPlugItem
   _key: string;
 }
 export interface ImageGalleryPlugResult
-  extends Omit<ImageGalleryPlug, "items"> {
+  extends Omit<ImageGalleryPlugType, "items"> {
   items: ImageGalleryPlugItem[];
 }
 
@@ -43,6 +47,8 @@ const ImageGalleryPlug: React.FC<{ node: ImageGalleryPlugResult }> = (
   props
 ) => {
   const { items, rows = 4, rows_mobile = 2, ratio = "1:1" } = props.node;
+
+  const { width } = useSection();
 
   if (!items || items.length < 1) return <div>No Images</div>;
   return (
@@ -71,22 +77,21 @@ const ImageGalleryPlug: React.FC<{ node: ImageGalleryPlugResult }> = (
 
         return (
           <ConditionalLink
-            href={link?.internalLink || link?.externalLink || ""}
+            href={link?.href || "/"}
             external={!!link?.externalLink}
             condition={!!link}
             key={_key}
-            className={clsx(
-              "w-full relative rounded-2xl overflow-hidden shadow-2xl ",
-              {
-                "aspect-w-10 aspect-h-10 ": ratio === "1:1",
-                "aspect-w-16 aspect-h-9": ratio === "16:9",
-                "aspect-w-3 aspect-h-2": ratio === "3:2",
-                "aspect-w-2 aspect-h-3": ratio === "2:3",
-                "col-span-2 row-span-2  ": size === "l",
-              }
-            )}
+            className={clsx("w-full relative overflow-hidden shadow-2xl ", {
+              "aspect-w-10 aspect-h-10 ": ratio === "1:1",
+              "aspect-w-16 aspect-h-9": ratio === "16:9",
+              "aspect-w-3 aspect-h-2": ratio === "3:2",
+              "aspect-w-2 aspect-h-3": ratio === "2:3",
+              "col-span-2 row-span-2  ": size === "l",
+            })}
           >
-            {image && <Image />}
+            {image && (
+              <Image image={image} alt={image.alt || "image Galerie Item"} />
+            )}
 
             {title && (
               <div className="absolute bottom-0 flex items-end left-4 ">

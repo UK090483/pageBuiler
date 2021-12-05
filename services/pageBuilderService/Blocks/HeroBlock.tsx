@@ -1,20 +1,21 @@
 import Hero from "@components/organisms/Hero/Hero";
 import React from "react";
 
-import { AppLocations, Hero as HeroType } from "types";
-import { imageMeta, ImageMetaResult } from "../queries/snippets";
+import { AppLocales, Hero as HeroType } from "types";
 
-export const heroBlockQuery = `
+export const heroBlockQuery = (locale: string) => `
 _type == "hero" => {
-  ...
+  _type,
+  _key,
+  'title': coalesce(title_${locale}, title),
+  'text': coalesce(text_${locale}, text)
 }
 `;
-
-export interface HeroBlogResult extends HeroType {}
-
-export interface HeroBlockProps extends HeroBlogResult {
-  lang: AppLocations;
+export interface HeroBlogResult extends HeroType {
+  _key: string;
 }
+
+export interface HeroBlockProps extends HeroBlogResult {}
 
 const HeroBlock: React.FC<HeroBlockProps> = (props) => {
   return <Hero {...props} />;

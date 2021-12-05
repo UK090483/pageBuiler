@@ -1,5 +1,5 @@
 import { Image } from "@components/Image";
-import { Section } from "@components/Section";
+import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import React from "react";
 
@@ -11,7 +11,7 @@ export const Avatar: React.FC<AvatarProps> = ({ name }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full py-8 ">
       <div className="relative w-48 h-48 overflow-hidden rounded-full">
-        <Image />
+        <Image alt="bla" />
       </div>
 
       <Typo className="pt-8 text-lg "> {name}</Typo>

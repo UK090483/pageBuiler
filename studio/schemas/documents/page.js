@@ -1,7 +1,7 @@
 import { defaultBockContent } from "../snippets";
-import { widthLocalization } from "../Localizer";
+import { withLocalization } from "../Localizer";
 
-export default widthLocalization({
+export default withLocalization({
   type: "document",
   name: "page",
   title: "Page",
@@ -15,22 +15,27 @@ export default widthLocalization({
       localize: true,
     },
     {
+      name: "description",
+      type: "text",
+      title: "Description",
+      localize: true,
+    },
+    {
       name: "slug",
       type: "slug",
       title: "Slug",
       validation: (Rule) => Rule.required(),
       localize: true,
     },
-    // {
-    //   name: "pageType",
-    //   type: "reference",
-    //   to: [{ type: "pageType" }],
-    // },
-    // {
-    //   name: "pageHeader",
-    //   type: "pageHeader",
-    //   title: "Header",
-    // },
+    {
+      name: "pageType",
+      type: "reference",
+      to: [{ type: "pageType" }],
+    },
+    {
+      name: "featuredImage",
+      type: "defaultImage",
+    },
 
     defaultBockContent,
 

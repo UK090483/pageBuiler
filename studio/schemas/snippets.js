@@ -1,4 +1,4 @@
-import { widthLocalization } from "./Localizer";
+import { withLocalization } from "./Localizer";
 
 export const defaultBockContent = {
   name: "content",

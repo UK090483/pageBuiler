@@ -1,6 +1,6 @@
 import { Container } from "@components/Container";
 import { Image } from "@components/Image";
-import { Section } from "@components/Section";
+import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import React from "react";
 
@@ -31,7 +31,7 @@ const Quote: React.FC<QuoteProps> = ({ children }) => {
       </div>
 
       <div className="relative ">
-        <Image src="id/1062/1200/1200" />
+        <Image src="id/1062/1200/1200" alt="bla" />
       </div>
     </Section>
   );

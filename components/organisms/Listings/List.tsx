@@ -1,20 +1,21 @@
+import { Section } from "@components/Section/Section";
+import Typo from "@components/Typography/Typography";
 import React from "react";
-import { Card } from "./Card";
 
-import { Grid } from "./Grid";
+interface ListProps {
+  title?: string;
+}
 
-interface ListProps {}
-
-const List: React.FC<ListProps> = () => {
+const List: React.FC<ListProps> = ({ children, title }) => {
   return (
-    <Grid>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-    </Grid>
+    <>
+      <Section width="l">
+        <Typo variant="h2" space={false} className="py-16 ">
+          {title}
+        </Typo>
+        <ul className="grid grid-cols-1 gap-32 pb-32">{children}</ul>
+      </Section>
+    </>
   );
 };
 

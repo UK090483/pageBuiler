@@ -1,9 +1,11 @@
 import React from "react";
 
-import Link from "next/link";
-
-// import Icon from "@components/Icon";
-// import { buildInternalLink } from "@src/services/pageBuilder/buildInternalLink";
+import { Link } from "@components/Link";
+import {
+  linkQuery,
+  LinkResult,
+} from "@services/pageBuilderService/queries/snippets";
+import { MarkProps } from "@services/pageBuilderService/lib/SanityBlock";
 
 const InlineIcon = () => {
   return (
@@ -13,46 +15,27 @@ const InlineIcon = () => {
   );
 };
 
-type LinkMarkPros = {
-  internalLink?: { type: string; slug: string };
-  link?: string;
+export interface LinkMarkQueryResult {
   asButton?: boolean;
-};
+  link?: LinkResult;
+}
 
-export const linkMarkQuery = `
-_type == "link" => {
+export const linkMarkQuery = (locale: string = "") => `_type == "link" => {
+  ..., 'link': link{${linkQuery(locale)}} ,
+}`;
 
-    'internalLink': link.internalLink->{'type':_type, 'slug':slug.current},
-    'link':link.link,
-    asButton,
-  }`;
-
-const LinkMark: React.FC<LinkMarkPros> = (props) => {
-  const { link, internalLink, asButton } = props;
-
-  //   const _internalLink = internalLink && buildInternalLink(internalLink);
-
-  const _internalLink = "blaaa";
-
-  if (_internalLink) {
-    return (
-      <Link href={_internalLink} passHref>
-        <a className="underline text-frida-red">
-          {asButton ? <InlineIcon /> : props.children}
-        </a>
-      </Link>
-    );
-  }
+const LinkMark: React.FC<MarkProps<LinkMarkQueryResult>> = (props) => {
+  const { mark } = props;
+  const { link, asButton } = mark;
 
   return (
-    <a
-      target="_blank"
-      rel="noreferrer"
-      href={link || "/"}
-      className="underline text-frida-red"
+    <Link
+      href={link?.href || "/"}
+      external={link?.external}
+      className="underline text-red"
     >
       {asButton ? <InlineIcon /> : props.children}
-    </a>
+    </Link>
   );
 };
 

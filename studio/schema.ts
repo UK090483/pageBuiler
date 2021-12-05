@@ -218,11 +218,74 @@ export interface Page extends SanityDocument {
   title?: string;
 
   /**
+   * Title Dansk — `string`
+   *
+   *
+   */
+  title_da?: string;
+
+  /**
+   * Title English — `string`
+   *
+   *
+   */
+  title_en?: string;
+
+  /**
+   * Description — `text`
+   *
+   *
+   */
+  description?: string;
+
+  /**
+   * Description Dansk — `text`
+   *
+   *
+   */
+  description_da?: string;
+
+  /**
+   * Description English — `text`
+   *
+   *
+   */
+  description_en?: string;
+
+  /**
    * Slug — `slug`
    *
    *
    */
   slug?: { _type: "slug"; current: string };
+
+  /**
+   * Slug Dansk — `slug`
+   *
+   *
+   */
+  slug_da?: { _type: "slug_da"; current: string };
+
+  /**
+   * Slug English — `slug`
+   *
+   *
+   */
+  slug_en?: { _type: "slug_en"; current: string };
+
+  /**
+   * pageType — `reference`
+   *
+   *
+   */
+  pageType?: SanityReference<PageType>;
+
+  /**
+   * featuredImage — `defaultImage`
+   *
+   *
+   */
+  featuredImage?: DefaultImage;
 
   /**
    * Page sections — `array`
@@ -328,11 +391,39 @@ export interface PageType extends SanityDocument {
   name?: string;
 
   /**
+   * name Dansk — `string`
+   *
+   *
+   */
+  name_da?: string;
+
+  /**
+   * name English — `string`
+   *
+   *
+   */
+  name_en?: string;
+
+  /**
    * Slug — `slug`
    *
    *
    */
   slug?: { _type: "slug"; current: string };
+
+  /**
+   * Slug Dansk — `slug`
+   *
+   *
+   */
+  slug_da?: { _type: "slug_da"; current: string };
+
+  /**
+   * Slug English — `slug`
+   *
+   *
+   */
+  slug_en?: { _type: "slug_en"; current: string };
 }
 
 /**
@@ -483,6 +574,20 @@ export type NavigationItem = {
   label?: string;
 
   /**
+   * Label Dansk — `string`
+   *
+   *
+   */
+  label_da?: string;
+
+  /**
+   * Label English — `string`
+   *
+   *
+   */
+  label_en?: string;
+
+  /**
    * Link — `link`
    *
    *
@@ -567,6 +672,20 @@ export type Section = {
   content?: DefaultRichText;
 
   /**
+   * Content Dansk — `defaultRichText`
+   *
+   *
+   */
+  content_da?: DefaultRichText;
+
+  /**
+   * Content English — `defaultRichText`
+   *
+   *
+   */
+  content_en?: DefaultRichText;
+
+  /**
    * Type — `string`
    *
    *
@@ -619,11 +738,46 @@ export type Listing = {
   name?: string;
 
   /**
+   * Name Dansk — `string`
+   *
+   *
+   */
+  name_da?: string;
+
+  /**
+   * Name English — `string`
+   *
+   *
+   */
+  name_en?: string;
+
+  /**
+   * Variant — `string`
+   *
+   *
+   */
+  variant?: "grid" | "list" | "carousel";
+
+  /**
+   * Type — `string`
+   *
+   *
+   */
+  type?: "contentType" | "custom";
+
+  /**
    * contentType — `string`
    *
    *
    */
-  contentType?: "post" | "project";
+  contentType?: "page" | "post" | "project";
+
+  /**
+   * customItems — `array`
+   *
+   *
+   */
+  customItems?: Array<SanityKeyedReference<Page>>;
 };
 
 export type DefaultRichText = Array<
@@ -660,11 +814,39 @@ export type Hero = {
   title?: string;
 
   /**
+   * Title Dansk — `string`
+   *
+   *
+   */
+  title_da?: string;
+
+  /**
+   * Title English — `string`
+   *
+   *
+   */
+  title_en?: string;
+
+  /**
    * Text — `array`
    *
    *
    */
   text?: Array<SanityKeyed<SanityBlock>>;
+
+  /**
+   * Text Dansk — `array`
+   *
+   *
+   */
+  text_da?: Array<SanityKeyed<SanityBlock>>;
+
+  /**
+   * Text English — `array`
+   *
+   *
+   */
+  text_en?: Array<SanityKeyed<SanityBlock>>;
 };
 
 export type Button = {

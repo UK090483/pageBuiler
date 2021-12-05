@@ -9,17 +9,19 @@ import MegaNav, { NavItemMegaNavProps } from "../MegaNav/MegaNav";
 import MegaNavMobile from "../MegaNav/MegaNavMobile";
 import { Logo } from "@components/Layout/Logo";
 import NavItem, { NavItemProps } from "../NavItem/NavItem";
-import { Dropdown } from "../Dropdown/Dropdown";
-import Button from "@components/Button/Button";
+
 import { NavigationModul } from "@services/NavigationService/NavigationModul";
 import NavigationMobile from "@services/NavigationService/NavigationMobile";
 import { LangSwitch } from "../LangSwitch/LangSwitch";
 
 interface NavProps {
   items: (Omit<NavItemProps, "divider"> | NavItemMegaNavProps)[];
+
+  slugs: { [k: string]: any };
 }
 
-const Nav: React.FC<NavProps> = ({ items }) => {
+const Nav: React.FC<NavProps> = (props) => {
+  const { items, slugs } = props;
   const { toggleMenu, menuOpen, closeMenu } = useMenu();
 
   const handleNavClick = () => {
@@ -37,7 +39,7 @@ const Nav: React.FC<NavProps> = ({ items }) => {
             <NavigationModul items={items} />
           </div>
 
-          <LangSwitch className="hidden lg:flex" />
+          <LangSwitch className="hidden lg:flex" slugs={slugs} />
 
           <button
             data-testid="menu-overlay-toggle"
