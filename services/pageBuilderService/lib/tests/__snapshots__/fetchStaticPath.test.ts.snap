@@ -103,6 +103,30 @@ Object {
         ],
       },
     },
+    Object {
+      "locale": "de",
+      "params": Object {
+        "slug": Array [
+          "notransslug",
+        ],
+      },
+    },
+    Object {
+      "locale": "en",
+      "params": Object {
+        "slug": Array [
+          "notransslug",
+        ],
+      },
+    },
+    Object {
+      "locale": "da",
+      "params": Object {
+        "slug": Array [
+          "notransslug",
+        ],
+      },
+    },
   ],
 }
 `;
@@ -137,6 +161,13 @@ Object {
       "params": Object {
         "slug": Array [
           "capital-testpage3",
+        ],
+      },
+    },
+    Object {
+      "params": Object {
+        "slug": Array [
+          "notransslug",
         ],
       },
     },

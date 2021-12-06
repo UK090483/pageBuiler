@@ -19,6 +19,18 @@ const database = [
     })
   ),
 
+  {
+    _id: "noSlug",
+    _type: "page",
+    slug_en: { current: "noSlugEn" },
+    slug_da: { current: "noSlugEn" },
+  },
+  {
+    _id: "noTransSlug",
+    _type: "page",
+    slug: { current: "noTransSlug" },
+  },
+
   { _id: "testPageType", _type: "pageType", slug: { current: "testPageType" } },
   { _id: "siteConfig", indexPage: { _ref: "testPageHome" } },
 ];

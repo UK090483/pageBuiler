@@ -5,7 +5,9 @@ import type { FetchStaticPathsParams } from "@services/pageBuilderService/lib/fe
 
 import { sanityClient } from "@services/SanityService/sanity.server";
 import { usePreviewSubscription } from "@services/SanityService/sanity";
-import ContentParser from "@services/pageBuilderService/ContentParser";
+import ContentParser, {
+  blockFactory,
+} from "@services/pageBuilderService/ContentParser";
 import {
   FetchStaticPropsResult,
   fetchStaticProps,
@@ -43,7 +45,14 @@ type GetStaticPropsPlus = GetStaticProps<
 export const getStaticProps: GetStaticPropsPlus = async (props) => {
   const { params, locale, preview } = props;
 
-  return await fetchStaticProps({ params, sanityClient, locale, preview });
+  return await fetchStaticProps({
+    params,
+    sanityClient,
+    locale,
+    preview,
+    body: blockFactory.getRootQuery({ locale }),
+    locales: config.locales,
+  });
 };
 
 export default PageComponent;

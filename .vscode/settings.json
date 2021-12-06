@@ -3,7 +3,8 @@
     "strings": true
   },
   // "tailwindCSS.experimental.classRegex": ["clsx([^]*)"],
-
+  "jest.autoRun": { "watch": true },
+  "jest.showCoverageOnLoad": true,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

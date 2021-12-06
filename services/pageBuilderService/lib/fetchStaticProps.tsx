@@ -1,14 +1,9 @@
 import type { SanityClient } from "@sanity/client/sanityClient";
-import {
-  blockFactory,
-  PageQueryResult,
-} from "@services/pageBuilderService/ContentParser";
+import { PageQueryResult } from "@services/pageBuilderService/ContentParser";
 import { siteQuery } from "../queries/siteQuery";
-import { Page } from "types";
+import { LocationConfig, Page } from "types";
 import type { FetchStaticPathsParams } from "./fetchStaticPaths";
 import { SiteSettingResult } from "../queries/siteQuery";
-
-import appConfig from "../../../app.config.json";
 
 type FetchPageProps = {
   query: string;
@@ -45,6 +40,7 @@ type fetchStaticPropsProps = {
   params?: FetchStaticPathsParams;
   preview?: boolean;
   sanityClient: SanityClient;
+  locales: LocationConfig;
   body: string;
 };
 
@@ -57,17 +53,13 @@ export type FetchStaticPropsResult = {
   page: PageResult | null;
   preview?: boolean;
   query: string;
-  queryParams: Record<string, unknown>;
   [k: string]: any;
 };
 
 export const fetchStaticProps = async (
   props: fetchStaticPropsProps
 ): Promise<{ props: FetchStaticPropsResult }> => {
-  const { params, sanityClient, locale, preview, body } = props;
-  if (!props) {
-    throw new Error("No props in fetchStaticProps.js");
-  }
+  const { params, sanityClient, locale, preview, body, locales } = props;
   if (!params) {
     throw new Error("No params in getStaticProps");
   }
@@ -75,9 +67,9 @@ export const fetchStaticProps = async (
   const slug = params && params.slug && params.slug[params.slug.length - 1];
 
   const localizedQuery = (slug: string) =>
-    Object.keys(appConfig.locales).reduce((acc, item) => {
+    Object.keys(locales).reduce((acc, item) => {
       //@ts-ignore
-      if (!appConfig.locales[item].isDefault) {
+      if (!locales[item].isDefault) {
         return `${acc} || slug_${item}.current == "${slug}"`;
       }
       return acc;
@@ -87,27 +79,16 @@ export const fetchStaticProps = async (
     ? `_type == "page" && ${localizedQuery(slug)}`
     : `_id == *[_id == 'siteConfig'][0].indexPage._ref`;
 
-  // const body = blockFactory.getRootQuery({ locale });
-
   const query = `*[${filter}][0]{
     ...,
-    ${body},
+    ${body ? body + "," : ""}
     ${siteQuery(locale)}
   }`;
 
-  const query2 = `*[${filter}][0]{
-    ${body},
-  }`;
-  const queryParams = { slug: slug || "" };
-
-  const page = await fetchPage<PageResult>({
-    query,
-    slug: slug || "",
-    sanityClient,
-  });
+  const page = await sanityClient.fetch(query);
 
   return {
-    props: { page, queryParams, preview: preview || false, query: query2 },
+    props: { page, preview: preview || false, query },
   };
 };
 
