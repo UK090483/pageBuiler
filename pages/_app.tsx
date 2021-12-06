@@ -9,6 +9,7 @@ import Cookie from "@services/CookieService/Cookie";
 // import { PageTransition } from "next-page-transitions";
 import { FetchStaticPropsResult } from "@services/pageBuilderService/lib/fetchStaticProps";
 import PreviewIndicator from "@services/pageBuilderService/lib/PreviewIndicator";
+import Seo from "@services/SeoService/Seo";
 
 interface AppPropsWithStaticProps {
   pageProps: FetchStaticPropsResult;
@@ -16,6 +17,8 @@ interface AppPropsWithStaticProps {
 }
 
 function App({ Component, pageProps }: AppPropsWithStaticProps) {
+  const { page } = pageProps;
+
   return (
     <StoreContextProvider>
       <Layout {...pageProps}>
@@ -23,6 +26,13 @@ function App({ Component, pageProps }: AppPropsWithStaticProps) {
       </Layout>
       {pageProps.preview && <PreviewIndicator />}
       <Cookie />
+      {page?.seo && (
+        <Seo
+          pageUrl={"https://www.test.com"}
+          canonical={page?.canonical}
+          {...page.seo}
+        />
+      )}
     </StoreContextProvider>
   );
 }
