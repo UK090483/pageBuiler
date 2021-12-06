@@ -1,6 +1,6 @@
 import { NavItem } from "../types";
 import { NavigationModulItemBase } from "./NavigationItemBase";
-import { NavigationModulLink } from "./NavigationLink";
+import NavigationModulLink from "./NavigationLink";
 import { NavigationModulDropdown } from "./NavigationModulDropdown/NavigationModulDropdown";
 
 const NavigationItem: React.FC<NavItem> = (props) => {

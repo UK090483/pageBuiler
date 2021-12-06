@@ -79,9 +79,10 @@ export interface SvgProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
 }
 
-const Svg: React.FC<SvgProps> = ({ icon, className }) => {
+const Svg: React.FC<SvgProps> = ({ icon, className, ...rest }) => {
   return (
     <svg
+      {...rest}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

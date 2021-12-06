@@ -16,6 +16,9 @@
 # production
 /build
 
+#cash
+/public/cash.json
+
 # misc
 .DS_Store
 *.pem

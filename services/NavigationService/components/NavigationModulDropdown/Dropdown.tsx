@@ -1,7 +1,7 @@
 import { NavItem } from "../../types";
 import React from "react";
 import { NavigationModulItemBase } from "../NavigationItemBase";
-import { NavigationModulLink } from "../NavigationLink";
+import NavigationModulLink from "../NavigationLink";
 
 interface DropdownProps {
   list?: NavItem[];

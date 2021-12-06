@@ -21,6 +21,7 @@ export const NavigationModulItemBase: React.FC<NavItemBaseProps> = ({
       {children}
       {icon && (
         <Svg
+          data-testid="navIcon"
           className={` transition-transform  ${
             hover ? "transform rotate-90 translate-x-1 scale-100" : "scale-75"
           }`}

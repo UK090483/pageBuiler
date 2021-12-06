@@ -13,10 +13,10 @@ export const NavigationModul = (props: Props) => {
   if (!hasItems) return <div>Missing NavItems</div>;
 
   return (
-    <div className="flex">
+    <ul className="flex" role={"menu"}>
       {items.map((i, index) => (
         <NavigationItem key={index} {...i} />
       ))}
-    </div>
+    </ul>
   );
 };

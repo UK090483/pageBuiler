@@ -6,6 +6,7 @@ import { HeroBlockProps } from "@services/pageBuilderService/Blocks/HeroBlock";
 import BlockContent, { Serializers } from "@sanity/block-content-to-react";
 
 import React from "react";
+import Typo from "@components/Typography/Typography";
 
 interface HeroProps extends HeroBlockProps {}
 
@@ -56,7 +57,7 @@ const Hero: React.FC<HeroProps> = (props) => {
       >
         {rendert && (
           <>
-            {title && <div className="font-bold ">{title}</div>}
+            {title && <Typo variant="h4">{title}</Typo>}
             <h1
               className="font-bold whitespace-pre-wrap "
               style={{ fontSize, lineHeight: "1.1em", marginLeft: "-0.05em" }}

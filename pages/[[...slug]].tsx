@@ -14,6 +14,7 @@ import {
 
 import config from "../app.config.json";
 import { PageResult } from "@services/pageBuilderService/lib/fetchStaticProps";
+import { sanityClientCashed } from "@services/SanityService/chashedClient";
 
 const PageComponent: NextPage<FetchStaticPropsResult> = (props) => {
   const { page, query, preview } = props;
@@ -44,7 +45,7 @@ export const getStaticProps: GetStaticPropsPlus = async (props) => {
 
   return await fetchStaticProps({
     params,
-    sanityClient,
+    sanityClient: sanityClientCashed,
     locale,
     preview,
     body: blockFactory.getRootQuery({ locale }),

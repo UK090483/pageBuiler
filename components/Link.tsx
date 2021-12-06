@@ -8,6 +8,7 @@ interface LinkProps {
   onClick?: () => void;
   locale?: string;
   scroll?: boolean;
+  role?: string;
 }
 
 export const Link: React.FC<LinkProps> = ({
@@ -18,10 +19,11 @@ export const Link: React.FC<LinkProps> = ({
   locale,
   onClick,
   scroll,
+  role,
 }) => {
   if (external) {
     return (
-      <a href={href} className={className}>
+      <a href={href} role={role} className={className}>
         {children}
       </a>
     );
@@ -29,7 +31,7 @@ export const Link: React.FC<LinkProps> = ({
 
   return (
     <NextLink href={href} passHref locale={locale} scroll={scroll}>
-      <a onClick={onClick} className={className}>
+      <a onClick={onClick} role={role} className={className}>
         {children}
       </a>
     </NextLink>
@@ -38,6 +40,7 @@ export const Link: React.FC<LinkProps> = ({
 
 export const ConditionalLink: React.FC<LinkProps & { condition: boolean }> = ({
   condition,
+
   ...rest
 }) => {
   if (condition) {
