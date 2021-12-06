@@ -1,7 +1,7 @@
 import Hero from "@components/organisms/Hero/Hero";
 import React from "react";
 
-import { AppLocales, Hero as HeroType } from "types";
+import { Hero as HeroType } from "types";
 
 export const heroBlockQuery = (locale: string) => `
 _type == "hero" => {

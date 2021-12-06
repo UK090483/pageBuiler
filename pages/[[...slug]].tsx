@@ -1,30 +1,27 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-
-import { fetchStaticPaths } from "@services/pageBuilderService/lib/fetchStaticPaths";
-import type { FetchStaticPathsParams } from "@services/pageBuilderService/lib/fetchStaticPaths";
-
 import { sanityClient } from "@services/SanityService/sanity.server";
 import { usePreviewSubscription } from "@services/SanityService/sanity";
-import ContentParser, {
-  blockFactory,
-} from "@services/pageBuilderService/ContentParser";
 import {
-  FetchStaticPropsResult,
   fetchStaticProps,
-  PageResult,
-} from "@services/pageBuilderService/lib/fetchStaticProps";
+  FetchStaticPropsResult,
+  fetchStaticPaths,
+  FetchStaticPathsParams,
+} from "@services/pageBuilderService/server";
+import {
+  blockFactory,
+  ContentParser,
+} from "@services/pageBuilderService/client";
+
 import config from "../app.config.json";
+import { PageResult } from "@services/pageBuilderService/lib/fetchStaticProps";
 
 const PageComponent: NextPage<FetchStaticPropsResult> = (props) => {
-  const { page, query, preview, queryParams } = props;
+  const { page, query, preview } = props;
 
-  const { data, error } = usePreviewSubscription<PageResult | null>(query, {
+  const { data } = usePreviewSubscription<PageResult | null>(query, {
     initialData: page,
     enabled: preview,
   });
-
-  // console.log(error);
-  // console.log(query);
 
   return (
     <>

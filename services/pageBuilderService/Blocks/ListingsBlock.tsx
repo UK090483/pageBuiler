@@ -1,6 +1,6 @@
 import Listing from "@components/organisms/Listings/Listing";
 import React from "react";
-import { AppLocales, Listing as ListingType } from "types";
+import { Listing as ListingType } from "types";
 import { DateString, imageMeta, ImageMetaResult } from "../queries/snippets";
 
 export const listItemQuery = (locale: string) => `

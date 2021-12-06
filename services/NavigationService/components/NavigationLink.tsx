@@ -1,5 +1,4 @@
 import { Link } from "@components/Link";
-import Underline from "@components/Underline";
 import React from "react";
 import { NavItem } from "../types";
 import { NavigationModulItemBase } from "./NavigationItemBase";
@@ -16,9 +15,7 @@ export const NavigationModulLink: React.FC<NavigationLinkProps> = (props) => {
       href={href || "/"}
       external={external}
     >
-      {/* <Underline on="hover"> */}
       <NavigationModulItemBase>{children}</NavigationModulItemBase>
-      {/* </Underline> */}
     </Link>
   );
 };

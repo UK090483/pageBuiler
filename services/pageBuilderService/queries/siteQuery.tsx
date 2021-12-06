@@ -2,7 +2,7 @@ import {
   linkQuery,
   LinkResult,
 } from "@services/pageBuilderService/queries/snippets";
-import { NavigationItem, NavigationMegaMenu } from "types";
+import { NavigationItem, NavigationMegaMenu, Seo } from "types";
 
 const navItemQuery = (locale: string = "") => `
  _type == 'navigationItem' =>{
@@ -43,6 +43,16 @@ interface NavItemResult extends Omit<NavigationItem, "link"> {
   link: LinkResult;
 }
 
+interface seoResult extends Omit<Seo, ""> {
+  link: LinkResult;
+}
+
+export const seoQuery = (locale: string = "") => `
+'seo':{
+  'shareGraphic':coalesce(featuredImage,*[_id == 'siteConfig'][0].seo.shareGraphic),
+},
+`;
+
 export const siteQuery = (locale: string = "") => `
 'siteSettings': *[_id == 'siteConfig'][0]{
   'mainNav':mainNav[]{
@@ -50,7 +60,8 @@ export const siteQuery = (locale: string = "") => `
     ${navItemQuery(locale)},
     ${NavigationMegaMenuQuery(locale)} 
   },
-}
+},
+${seoQuery(locale)}
 `;
 
 export interface SiteSettingResult {
