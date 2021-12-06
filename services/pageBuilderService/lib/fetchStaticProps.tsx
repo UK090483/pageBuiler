@@ -9,7 +9,6 @@ import type { FetchStaticPathsParams } from "./fetchStaticPaths";
 import { SiteSettingResult } from "../queries/siteQuery";
 
 import appConfig from "../../../app.config.json";
-import { testQuery } from "./testQuery";
 
 type FetchPageProps = {
   query: string;
@@ -46,6 +45,7 @@ type fetchStaticPropsProps = {
   params?: FetchStaticPathsParams;
   preview?: boolean;
   sanityClient: SanityClient;
+  body: string;
 };
 
 export interface PageResult
@@ -64,7 +64,7 @@ export type FetchStaticPropsResult = {
 export const fetchStaticProps = async (
   props: fetchStaticPropsProps
 ): Promise<{ props: FetchStaticPropsResult }> => {
-  const { params, sanityClient, locale, preview } = props;
+  const { params, sanityClient, locale, preview, body } = props;
   if (!props) {
     throw new Error("No props in fetchStaticProps.js");
   }
@@ -87,7 +87,7 @@ export const fetchStaticProps = async (
     ? `_type == "page" && ${localizedQuery(slug)}`
     : `_id == *[_id == 'siteConfig'][0].indexPage._ref`;
 
-  const body = blockFactory.getRootQuery({ locale });
+  // const body = blockFactory.getRootQuery({ locale });
 
   const query = `*[${filter}][0]{
     ...,
