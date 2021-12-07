@@ -43,7 +43,7 @@ describe.only("fetchStaticProps", () => {
 
   it("should get the page", async () => {
     const res = await fetchStaticProps<{ _id: string }>({
-      query: "title",
+      query: "...",
       params: { slug: ["testSlug"] },
       sanityClient: mockClient({ database })(),
       locales,
@@ -53,7 +53,7 @@ describe.only("fetchStaticProps", () => {
 
   it("should get the IndexPage", async () => {
     const res = await fetchStaticProps<{ _id: string }>({
-      query: "title",
+      query: "...",
       params: { slug: [""] },
       sanityClient: mockClient({ database })(),
       locales,
@@ -63,7 +63,7 @@ describe.only("fetchStaticProps", () => {
 
   it("should get translated Pages", async () => {
     const res = await fetchStaticProps<{ _id: string }>({
-      query: "title",
+      query: "...",
       params: { slug: ["testSlugEn"] },
       sanityClient: mockClient({ database })(),
       locales,
