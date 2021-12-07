@@ -34,7 +34,7 @@ describe.only("fetchStaticProps", () => {
     await expect(fetchStaticProps()).rejects.toThrowError();
     await expect(
       fetchStaticProps({
-        body: "any",
+        query: "any",
         sanityClient: mockClient({ fetchReturn: { test: "test" } })(),
         locales,
       })
@@ -42,8 +42,8 @@ describe.only("fetchStaticProps", () => {
   });
 
   it("should get the page", async () => {
-    const res = await fetchStaticProps({
-      body: "title",
+    const res = await fetchStaticProps<{ _id: string }>({
+      query: "title",
       params: { slug: ["testSlug"] },
       sanityClient: mockClient({ database })(),
       locales,
@@ -52,8 +52,8 @@ describe.only("fetchStaticProps", () => {
   });
 
   it("should get the IndexPage", async () => {
-    const res = await fetchStaticProps({
-      body: "",
+    const res = await fetchStaticProps<{ _id: string }>({
+      query: "title",
       params: { slug: [""] },
       sanityClient: mockClient({ database })(),
       locales,
@@ -62,8 +62,8 @@ describe.only("fetchStaticProps", () => {
   });
 
   it("should get translated Pages", async () => {
-    const res = await fetchStaticProps({
-      body: "",
+    const res = await fetchStaticProps<{ _id: string }>({
+      query: "title",
       params: { slug: ["testSlugEn"] },
       sanityClient: mockClient({ database })(),
       locales,

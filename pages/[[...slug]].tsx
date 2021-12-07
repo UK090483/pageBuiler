@@ -10,16 +10,20 @@ import {
 import {
   blockFactory,
   ContentParser,
+  PageBuilderResult,
 } from "@services/pageBuilderService/client";
 
 import config from "../app.config.json";
-import { PageResult } from "@services/pageBuilderService/lib/fetchStaticProps";
-// import { sanityClientCashed } from "@services/SanityService/chashedClient";
 
-const PageComponent: NextPage<FetchStaticPropsResult> = (props) => {
+import {
+  siteQuery,
+  SiteSettingResult,
+} from "@services/pageBuilderService/queries/siteQuery";
+
+type PageResult = PageBuilderResult & SiteSettingResult;
+
+const PageComponent: NextPage<FetchStaticPropsResult<PageResult>> = (props) => {
   const { page, query, preview } = props;
-
-  console.log(props);
 
   const { data } = usePreviewSubscription<PageResult | null>(query, {
     initialData: page,
@@ -45,12 +49,12 @@ type GetStaticPropsPlus = GetStaticProps<
 export const getStaticProps: GetStaticPropsPlus = async (props) => {
   const { params, locale, preview } = props;
 
-  return await fetchStaticProps({
+  return await fetchStaticProps<PageBuilderResult>({
     params,
     sanityClient,
     locale,
     preview,
-    body: blockFactory.getRootQuery({ locale }),
+    query: `${blockFactory.getRootQuery({ locale })}, ${siteQuery(locale)}`,
     locales: config.locales,
   });
 };

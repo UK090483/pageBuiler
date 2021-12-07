@@ -1,39 +1,6 @@
 import type { SanityClient } from "@sanity/client/sanityClient";
-import { PageQueryResult } from "@services/pageBuilderService/ContentParser";
-import { siteQuery } from "../queries/siteQuery";
-import { LocationConfig, Page } from "types";
 import type { FetchStaticPathsParams } from "./fetchStaticPaths";
-import { SiteSettingResult } from "../queries/siteQuery";
-
-type FetchPageProps = {
-  query: string;
-  slug: string;
-  preview?: boolean;
-  sanityClient: SanityClient;
-};
-
-export async function fetchPage<P>({
-  query,
-  slug,
-  preview,
-  sanityClient,
-}: FetchPageProps) {
-  let pageData: P | null = null;
-
-  if (process.env.NODE_ENV === "development" && !preview) {
-    pageData = await sanityClient.fetch<P>(query, {
-      slug,
-    });
-  }
-
-  if (process.env.NODE_ENV === "production") {
-    pageData = await sanityClient.fetch<P>(query, {
-      slug,
-    });
-  }
-
-  return pageData;
-}
+import { LocationConfig } from "types";
 
 type fetchStaticPropsProps = {
   locale?: string;
@@ -41,25 +8,20 @@ type fetchStaticPropsProps = {
   preview?: boolean;
   sanityClient: SanityClient;
   locales: LocationConfig;
-  body: string;
+  query: string;
 };
 
-export interface PageResult
-  extends Omit<Page, "content">,
-    PageQueryResult,
-    SiteSettingResult {}
-
-export type FetchStaticPropsResult = {
-  page: PageResult | null;
+export type FetchStaticPropsResult<P = any> = {
+  page: P | null;
   preview?: boolean;
   query: string;
   [k: string]: any;
 };
 
-export const fetchStaticProps = async (
+export async function fetchStaticProps<P>(
   props: fetchStaticPropsProps
-): Promise<{ props: FetchStaticPropsResult }> => {
-  const { params, sanityClient, locale, preview, body, locales } = props;
+): Promise<{ props: FetchStaticPropsResult<P> }> {
+  const { params, sanityClient, locale, preview, query, locales } = props;
   if (!params) {
     throw new Error("No params in getStaticProps");
   }
@@ -79,17 +41,14 @@ export const fetchStaticProps = async (
     ? `_type == "page" && ${localizedQuery(slug)}`
     : `_id == *[_id == 'siteConfig'][0].indexPage._ref`;
 
-  const query = `*[${filter}][0]{
+  const fetch = `*[${filter}][0]{
     ...,
-    ${body ? body + "," : ""}
-    ${siteQuery(locale)}
+   ${query}
   }`;
 
-  const page = await sanityClient.fetch(query);
+  const page = await sanityClient.fetch(fetch);
 
   return {
     props: { page, preview: preview || false, query },
   };
-};
-
-export {};
+}

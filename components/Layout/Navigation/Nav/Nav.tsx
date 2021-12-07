@@ -1,22 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import Svg from "@components/Svg";
 import React from "react";
-
 import { Link } from "@components/Link";
-
 import useMenu from "@services/StoreService/hooks/useMenu";
-import MegaNav, { NavItemMegaNavProps } from "../MegaNav/MegaNav";
-import MegaNavMobile from "../MegaNav/MegaNavMobile";
 import { Logo } from "@components/Layout/Logo";
-import NavItem, { NavItemProps } from "../NavItem/NavItem";
-
+import type { NavItem } from "@services/NavigationService/types";
 import { NavigationModul } from "@services/NavigationService/NavigationModul";
 import NavigationMobile from "@services/NavigationService/NavigationMobile";
 import { LangSwitch } from "../LangSwitch/LangSwitch";
 
 interface NavProps {
-  items: (Omit<NavItemProps, "divider"> | NavItemMegaNavProps)[];
-
+  items: NavItem[];
   slugs: { [k: string]: any };
 }
 

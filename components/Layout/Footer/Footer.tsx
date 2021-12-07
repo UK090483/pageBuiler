@@ -2,14 +2,15 @@ import { Avatar, AvatarList } from "@components/organisms/Avaters/Avatar";
 import { Carousel } from "@components/organisms/Listings/Carousel";
 import { Section } from "@components/Section/Section";
 import { NavOverview } from "@services/NavigationService/NavOverview";
+import { NavItem as NavItemType } from "@services/NavigationService/types";
 import React from "react";
 import { Logo } from "../Logo";
-import NavItem, { NavItemProps } from "../Navigation/NavItem/NavItem";
+
 import FooterContact from "./FooterContact";
 import Quote from "./Quotes/Quote";
 
 interface FooterProps {
-  navItems: NavItemProps[];
+  navItems: NavItemType[];
 }
 
 const Footer: React.FC<FooterProps> = ({ navItems }) => {
@@ -28,7 +29,7 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
       </Section>
 
       <div className="flex items-center justify-between w-full max-w-6xl px-8 ">
-        <NavItem size="s" href="/" label=" Perspektiv Region" />
+        {/* <Nav size="s" href="/" label=" Perspektiv Region" />
         <div className="flex ">
           <NavItem size="s" href="/impressum" label="Impressum" />
           <NavItem
@@ -37,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
             label="Datenschutz"
             divider={false}
           />
-        </div>
+        </div> */}
       </div>
     </footer>
   );

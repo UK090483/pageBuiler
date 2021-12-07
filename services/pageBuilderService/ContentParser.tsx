@@ -39,11 +39,11 @@ blockFactory.registerComponents([
   },
 ]);
 
-interface ContentParserProps {
+export interface PageBuilderResult {
   content?: PageBodyResult | null | undefined;
 }
 
-const ContentParser: React.FC<ContentParserProps> = (props) => {
+const ContentParser: React.FC<PageBuilderResult> = (props) => {
   if (!props.content) return null;
 
   //@ts-ignore
