@@ -13,14 +13,11 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <>
       <Header>
-        <Nav
-          items={page?.siteSettings?.mainNav || []}
-          slugs={page?.langSwitchData}
-        />
+        <Nav items={page?.navigation || []} slugs={page?.langSwitchData} />
       </Header>
       <Head name={page?.title} />
       <main className="min-h-screen">{children}</main>
-      <Footer navItems={page?.siteSettings?.mainNav || []} />
+      <Footer navItems={page?.navigation || []} />
     </>
   );
 };

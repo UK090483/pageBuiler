@@ -16,18 +16,20 @@ import {
 import config from "../app.config.json";
 
 import {
-  siteQuery,
-  SiteSettingResult,
-} from "@services/pageBuilderService/queries/siteQuery";
-import {
   LangSwitcherQuery,
   LangSwitcherResult,
 } from "@services/LangSwitcherService/LangSwitcherQuery";
 import { Page } from "studio/schema";
+import {
+  NavigationQuery,
+  NavigationResult,
+} from "@services/NavigationService/NavigationQuery";
+import { seoQuery, SeoResult } from "@services/SeoService/SeoQuerys";
 
 export type PageResult = PageBuilderResult &
-  SiteSettingResult &
   LangSwitcherResult &
+  NavigationResult &
+  SeoResult &
   Page;
 
 const PageComponent: NextPage<FetchStaticPropsResult<PageResult>> = (props) => {
@@ -62,9 +64,9 @@ export const getStaticProps: GetStaticPropsPlus = async (props) => {
     sanityClient,
     locale,
     preview,
-    query: `..., ${blockFactory.getRootQuery({ locale })}, ${siteQuery(
+    query: `..., ${blockFactory.getRootQuery({ locale })}, ${seoQuery(
       locale
-    )} ${LangSwitcherQuery(config.locales)}`,
+    )}, ${LangSwitcherQuery(config.locales)}, ${NavigationQuery(locale)}`,
     locales: config.locales,
   });
 };

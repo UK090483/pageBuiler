@@ -27,13 +27,7 @@ function App({ Component, pageProps }: AppPropsWithStaticProps) {
       </Layout>
       {pageProps.preview && <PreviewIndicator />}
       <Cookie />
-      {page?.seo && (
-        <Seo
-          pageUrl={"https://www.test.com"}
-          canonical={page?.canonical}
-          {...page.seo}
-        />
-      )}
+      {page?.seo && <Seo pageUrl={"https://www.test.com"} {...page.seo} />}
     </StoreContextProvider>
   );
 }

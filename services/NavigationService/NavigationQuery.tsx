@@ -40,6 +40,32 @@ export const NavigationMegaMenuQuery = (locale: string = "") => `
   }
 `;
 
+export const navItemQuery2 = (locale: string = "") => `
+    'label': coalesce(label_${locale}, label),
+    'link':link{
+      ${linkQuery(locale)}
+    } 
+`;
+
+export const NavigationQuery = (locale: string = "") => `
+ 'navigation':*[_id == 'siteConfig'][0].mainNav[]{
+  ${navItemQuery2(locale)},
+  'items':items[]{
+    ${navItemQuery2(locale)},
+    'items':items[]{${navItemQuery2(locale)}}
+  }
+ }
+`;
+
+interface NavigationItemResult {
+  label?: string;
+  link?: LinkResult;
+  items?: NavigationItemResult[];
+}
+export interface NavigationResult {
+  navigation: NavigationItemResult[];
+}
+
 export interface NavItemResult extends Omit<NavigationItem, "link"> {
   link: LinkResult;
 }

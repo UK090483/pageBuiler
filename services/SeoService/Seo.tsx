@@ -1,9 +1,8 @@
 import { NextSeo } from "next-seo";
-import { SeoResult } from "./SeoQuerys";
+import { SeoType } from "./SeoQuerys";
 import React from "react";
 
-interface SeoProps extends SeoResult {
-  canonical?: string | null;
+interface SeoProps extends SeoType {
   pageUrl?: string;
 }
 
