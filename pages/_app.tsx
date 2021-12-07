@@ -11,6 +11,7 @@ import { FetchStaticPropsResult } from "@services/pageBuilderService/lib/fetchSt
 import PreviewIndicator from "@services/pageBuilderService/lib/PreviewIndicator";
 import Seo from "@services/SeoService/Seo";
 import { PageResult } from "./[[...slug]]";
+import { SessionProvider } from "next-auth/react";
 
 interface AppPropsWithStaticProps {
   pageProps: FetchStaticPropsResult<PageResult>;
@@ -18,17 +19,18 @@ interface AppPropsWithStaticProps {
 }
 
 function App({ Component, pageProps }: AppPropsWithStaticProps) {
-  const { page } = pageProps;
-
+  const { page, session } = pageProps;
   return (
-    <StoreContextProvider>
-      <Layout {...pageProps}>
-        <Component {...pageProps} />
-      </Layout>
-      {pageProps.preview && <PreviewIndicator />}
-      <Cookie />
-      {page?.seo && <Seo pageUrl={"https://www.test.com"} {...page.seo} />}
-    </StoreContextProvider>
+    <SessionProvider session={session}>
+      <StoreContextProvider>
+        <Layout {...pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+        {pageProps.preview && <PreviewIndicator />}
+        <Cookie />
+        {page?.seo && <Seo pageUrl={"https://www.test.com"} {...page.seo} />}
+      </StoreContextProvider>
+    </SessionProvider>
   );
 }
 
