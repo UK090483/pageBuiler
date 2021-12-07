@@ -19,8 +19,16 @@ import {
   siteQuery,
   SiteSettingResult,
 } from "@services/pageBuilderService/queries/siteQuery";
+import {
+  LangSwitcherQuery,
+  LangSwitcherResult,
+} from "@services/LangSwitcherService/LangSwitcherQuery";
+import { Page } from "studio/schema";
 
-type PageResult = PageBuilderResult & SiteSettingResult;
+export type PageResult = PageBuilderResult &
+  SiteSettingResult &
+  LangSwitcherResult &
+  Page;
 
 const PageComponent: NextPage<FetchStaticPropsResult<PageResult>> = (props) => {
   const { page, query, preview } = props;
@@ -54,7 +62,9 @@ export const getStaticProps: GetStaticPropsPlus = async (props) => {
     sanityClient,
     locale,
     preview,
-    query: `${blockFactory.getRootQuery({ locale })}, ${siteQuery(locale)}`,
+    query: `..., ${blockFactory.getRootQuery({ locale })}, ${siteQuery(
+      locale
+    )} ${LangSwitcherQuery(config.locales)}`,
     locales: config.locales,
   });
 };

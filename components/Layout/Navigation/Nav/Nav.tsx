@@ -7,15 +7,20 @@ import { Logo } from "@components/Layout/Logo";
 import type { NavItem } from "@services/NavigationService/types";
 import { NavigationModul } from "@services/NavigationService/NavigationModul";
 import NavigationMobile from "@services/NavigationService/NavigationMobile";
-import { LangSwitch } from "../LangSwitch/LangSwitch";
+import {
+  LangSwitch,
+  LangSwitchProps,
+} from "@services/LangSwitcherService/LangSwitch";
+import { LangSwitcherResult } from "@services/LangSwitcherService/LangSwitcherQuery";
 
 interface NavProps {
   items: NavItem[];
-  slugs: { [k: string]: any };
+  slugs?: LangSwitcherResult["langSwitchData"];
 }
 
 const Nav: React.FC<NavProps> = (props) => {
   const { items, slugs } = props;
+
   const { toggleMenu, menuOpen, closeMenu } = useMenu();
 
   const handleNavClick = () => {

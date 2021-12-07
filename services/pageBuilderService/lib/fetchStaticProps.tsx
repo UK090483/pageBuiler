@@ -42,7 +42,6 @@ export async function fetchStaticProps<P>(
     : `_id == *[_id == 'siteConfig'][0].indexPage._ref`;
 
   const fetch = `*[${filter}][0]{
-    ...,
    ${query}
   }`;
 

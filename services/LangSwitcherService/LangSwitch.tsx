@@ -1,10 +1,10 @@
 import { Link } from "@components/Link";
-import { NextRouter, useRouter } from "next/router";
 import React from "react";
+import { LangSwitcherResult } from "./LangSwitcherQuery";
 
-interface LangSwitchProps {
+export interface LangSwitchProps {
   className?: string;
-  slugs: { [k: string]: any };
+  slugs?: LangSwitcherResult["langSwitchData"];
 }
 
 const defaultItems = [
@@ -16,8 +16,6 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
   const { className, slugs } = props;
   const items = defaultItems;
 
-  const router = useRouter();
-
   return (
     <div className={`flex ${className}`}>
       {items.map((item) => {
@@ -25,7 +23,7 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
           <Link
             scroll={false}
             key={item.locale}
-            href={getHref(router, slugs, item.locale)}
+            href={(slugs && slugs[`href_${item.locale}`]) || "/"}
             locale={item.locale}
             className="px-1 leading-none hover:underline"
           >
@@ -35,26 +33,4 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
       })}
     </div>
   );
-};
-
-const getHref = (
-  router: NextRouter,
-  slugs: { [k: string]: any },
-  requestLocale: string
-): string => {
-  const { asPath, defaultLocale, locale } = router;
-  let slug = null;
-
-  if (asPath === "/") return "/";
-
-  if (defaultLocale === requestLocale) {
-    slug = slugs[`slug`];
-  } else {
-    slug = slugs[`slug_${requestLocale}`];
-  }
-
-  if (slug && slug.current && typeof slug.current === "string")
-    return slug.current;
-
-  return "/";
 };

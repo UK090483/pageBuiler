@@ -10,9 +10,10 @@ import Cookie from "@services/CookieService/Cookie";
 import { FetchStaticPropsResult } from "@services/pageBuilderService/lib/fetchStaticProps";
 import PreviewIndicator from "@services/pageBuilderService/lib/PreviewIndicator";
 import Seo from "@services/SeoService/Seo";
+import { PageResult } from "./[[...slug]]";
 
 interface AppPropsWithStaticProps {
-  pageProps: FetchStaticPropsResult;
+  pageProps: FetchStaticPropsResult<PageResult>;
   Component: NextComponentType<NextPageContext, any, FetchStaticPropsResult>;
 }
 
