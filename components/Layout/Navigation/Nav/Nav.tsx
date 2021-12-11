@@ -12,6 +12,7 @@ import {
   LangSwitchProps,
 } from "@services/LangSwitcherService/LangSwitch";
 import { LangSwitcherResult } from "@services/LangSwitcherService/LangSwitcherQuery";
+import UserWidget from "@services/AuthService/AuthWidged";
 
 interface NavProps {
   items: NavItem[];
@@ -37,6 +38,8 @@ const Nav: React.FC<NavProps> = (props) => {
           <div className="items-center justify-center hidden w-full lg:flex">
             <NavigationModul items={items} />
           </div>
+
+          <UserWidget />
 
           <LangSwitch className="hidden lg:flex" slugs={slugs} />
 
