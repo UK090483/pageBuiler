@@ -68,6 +68,8 @@ type sanityAdapterProps = {
 
 const handleIds = () => {};
 
+
+
 const sanityAdapter = ({ client }: sanityAdapterProps) => {
   const adapter: Adapter = {
     createUser: (user) => {
@@ -78,6 +80,7 @@ const sanityAdapter = ({ client }: sanityAdapterProps) => {
             _type: "user",
           })
           .then((newUser) => {
+
             const _user = { ...user, id: newUser._id } as AdapterUser;
             resolve(_user);
           });
@@ -97,12 +100,13 @@ const sanityAdapter = ({ client }: sanityAdapterProps) => {
         provider,
       });
     },
-    updateUser: (_user) => {
-      console.log("updateUse ----");
-      console.log(_user);
-      console.log("updateUse ----");
-      if (!_user?.id) return _user;
-      return client.patch(_user.id).set(_user).commit();
+    updateUser: async (_user) => {
+      return new Promise((resolve,reject)=>{
+        if (!_user?.id) return _user;
+        client.patch(_user.id).set(_user).commit<AdapterUser>().then((res)=>{
+          resolve(res)
+        })
+      })
     },
 
     deleteSession: (sessionToken) => {
@@ -120,6 +124,10 @@ const sanityAdapter = ({ client }: sanityAdapterProps) => {
     createVerificationToken: (verificationToken) => {
       globToken = { ...verificationToken };
       return globToken;
+    },
+
+    getSessionAndUser:(sessinToken)=>{
+       return null
     },
 
     createSession: (_session) => {

@@ -3,7 +3,7 @@ import { parse, evaluate } from "groq-js";
 
 type MockSanityClient = {
   fetchReturn?: any;
-  database?: any;
+  database?: any[];
 };
 
 export const mockGetClient = ({ fetchReturn, database }: MockSanityClient) => {
@@ -45,7 +45,11 @@ export const mockClient = ({ fetchReturn, database }: MockSanityClient) => {
     patch: (doc: string) => {
       return {
         set: (newData: any) => {
-          return { commit: () => {} };
+          return { commit: () => {
+              database = database?.map((item)=> item._id === doc ? {...item,...newData}:{...item})
+
+              return 
+          } };
         },
       };
     },

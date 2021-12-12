@@ -6,22 +6,10 @@ type MockSanityClient = {
   database?: any[];
 };
 
-export const mockGetClient = ({ fetchReturn, database }: MockSanityClient) => {
-  return () =>
-    ({
-      fetch: (query: string) => {
-        if (database) {
-          return fetchMock(database, query);
-        }
-        return Promise.resolve(fetchReturn);
-      },
-    } as unknown as SanityClient);
-};
+
 
 export const mockClient = ({ fetchReturn, database=[] }: MockSanityClient) => {
   const created: { [k: string]: number } = {};
-
-  
 
   const getId = (type: string) => {
     if (created[type]) {
@@ -37,14 +25,13 @@ export const mockClient = ({ fetchReturn, database=[] }: MockSanityClient) => {
       if (database) {
         return fetchMock(database, query, params);
       }
-
       return Promise.resolve(fetchReturn);
     },
 
     create: (doc: any) => {
-        const newItem = { ...doc, _id:  getId(doc._type) }
+        const newItem = { ...doc, _id: doc._id ||  getId(doc._type) }
         database =  [...database,newItem]
-      return Promise.resolve({ ...doc, _id:  getId(doc._type) });
+      return Promise.resolve(newItem);
     },
     patch: (doc: string) => {
       return {

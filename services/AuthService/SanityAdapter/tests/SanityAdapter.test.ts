@@ -1,5 +1,5 @@
 import Adapter from "../SanityAdapter";
-import { mockClient } from "./testPrepare";
+import { mockClient } from "../../../SanityService/test/testClient";
 
 const testUser1 = {
   _type: "user",
@@ -18,8 +18,8 @@ const testAccount = {
 
 const database: any[] = [testUser1, testAccount];
 
-const testAdapter = () => {
-  return Adapter({ client: mockClient({ database }) });
+const testAdapter = (db?:any[]) => {
+  return Adapter({ client: mockClient({ database:db ||database }) });
 };
 
 describe("Sanity Adapter", () => {
@@ -27,7 +27,7 @@ describe("Sanity Adapter", () => {
     const user = await testAdapter().createUser({
       ...testUser1,
     });
-    expect(user).toStrictEqual({ ...testUser1, id: "user_1" });
+    expect(user).toStrictEqual({ ...testUser1 });
   });
 
   //getUser ------------------------------------------------
@@ -61,16 +61,17 @@ describe("Sanity Adapter", () => {
     expect(user).toStrictEqual(testUser1);
   });
 
+
   // updateUser ------------------------------------------------
 
   it("getUserByEmail should return user if exist", async () => {
+
+    const db= [...database]
     const updated = { ...testUser1, name: "updatedName" };
-    const updatedUser = await testAdapter().updateUser(updated);
+    const updatedUser = await testAdapter(db).updateUser(updated);
     expect(updatedUser).toStrictEqual(updated);
 
-    console.log(database);
-    const updatedUser2 = await testAdapter().getUserByEmail(testUser1.email);
-    expect(updatedUser2).toStrictEqual(updated);
+   
   });
 });
 
