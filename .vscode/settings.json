@@ -2,6 +2,7 @@
   "editor.quickSuggestions": {
     "strings": true
   },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // "tailwindCSS.experimental.classRegex": ["clsx([^]*)"],
   "jest.autoRun": { "watch": true },
   "jest.showCoverageOnLoad": true,

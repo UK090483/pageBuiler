@@ -1,14 +1,19 @@
 import type { SanityClient } from "@sanity/client/sanityClient";
 import { parse, evaluate } from "groq-js";
 
-type MockSanityClient = {
+type MockSanityClientProps = {
   fetchReturn?: any;
   database?: any[];
 };
 
+interface SanityMockClient extends SanityClient {
+  getDb: () => any[];
+}
 
-
-export const mockClient = ({ fetchReturn, database=[] }: MockSanityClient) => {
+export const mockClient = ({
+  fetchReturn,
+  database = [],
+}: MockSanityClientProps) => {
   const created: { [k: string]: number } = {};
 
   const getId = (type: string) => {
@@ -21,6 +26,7 @@ export const mockClient = ({ fetchReturn, database=[] }: MockSanityClient) => {
   };
 
   return {
+    getDb: () => database,
     fetch: (query: string, params?: Record<string, unknown>) => {
       if (database) {
         return fetchMock(database, query, params);
@@ -29,22 +35,27 @@ export const mockClient = ({ fetchReturn, database=[] }: MockSanityClient) => {
     },
 
     create: (doc: any) => {
-        const newItem = { ...doc, _id: doc._id ||  getId(doc._type) }
-        database =  [...database,newItem]
+      const newItem = { ...doc, _id: doc._id || getId(doc._type) };
+      database = [...database, newItem];
       return Promise.resolve(newItem);
     },
     patch: (doc: string) => {
       return {
         set: (newData: any) => {
-          return { commit: () => {
-              database = database?.map((item)=> item._id === doc ? {...item,...newData}:{...item})
+          return {
+            commit: () => {
+              const updateItem = database.find((i) => i._id === doc);
+              database = database?.map((item) =>
+                item._id === doc ? { ...item, ...newData } : { ...item }
+              );
 
-              return 
-          } };
+              return Promise.resolve({ ...updateItem, ...newData });
+            },
+          };
         },
       };
     },
-  } as unknown as SanityClient;
+  } as unknown as SanityMockClient;
 };
 
 const fetchMock = async (

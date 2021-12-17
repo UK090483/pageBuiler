@@ -1,6 +1,7 @@
-import { Profile, Session } from "next-auth";
-
 import type { SanityClient } from "@sanity/client";
+import {omit } from 'lodash'
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   Adapter,
   AdapterUser,
@@ -13,6 +14,7 @@ import {
   getUserByProviderAccountIdQuery,
 } from "./queries";
 
+
 let globToken: VerificationToken | null = null;
 let session: AdapterSession | null = null;
 
@@ -21,6 +23,119 @@ const user: AdapterUser = {
   id: "user1",
   email: "web@konradullrich.com",
 };
+
+const defaultLogger = ({type,message}:{type:'error'|'info',message:string})=>{
+
+}
+
+interface SanityAdapterUser extends AdapterUser {_id:string}
+
+type sanityAdapterProps = {
+  client: SanityClient;
+  devMode?:false;
+  logger?:typeof defaultLogger
+};
+
+const toSanityUser= (user: AdapterUser)=>{
+
+return  {...omit(user,'id'), _id:user.id } as SanityAdapterUser
+}
+
+const toAdapterUser= (user: SanityAdapterUser):AdapterUser=>{
+return {...omit(user,'_id'), id:user._id } as AdapterUser
+}
+
+const sanityAdapter = ({ client,logger,devMode }: sanityAdapterProps) => {
+
+   const _logger = logger ? logger : devMode ?  defaultLogger : ()=>{}
+
+  const adapter: Adapter = {
+    createUser: (user) => {
+      _logger({type:'info', message:`createUser`})
+      return client
+      .create({
+        ...user,
+        _id: `user.${uuidv4()}`,
+        _type: "user",
+      })
+      .then((newUser) => {
+        return { ...user, id: newUser._id } as AdapterUser;
+      });
+    },
+
+    getUser: (id) => {
+      _logger({type:'info', message:`getUser`})
+      return client.fetch<SanityAdapterUser>(getUserByIdQuery, {  id }).then(i=> i? toAdapterUser(i):null);
+    },
+    getUserByEmail: (email) => {
+      _logger({type:'info', message:`getUserByEmail`})
+      return client.fetch<SanityAdapterUser>(getUserByEmailQuery, { email }).then(i=> i? toAdapterUser(i):null);
+    },
+
+    getUserByAccount: ({ providerAccountId, provider }) => {
+      _logger({type:'info', message:`getUserByAccount`})
+      return client.fetch<SanityAdapterUser>(getUserByProviderAccountIdQuery, {
+        providerAccountId,
+        provider,
+      }).then(i=> i? toAdapterUser(i):null);
+    },
+    updateUser: async (_user) => {
+      _logger({type:'info', message:`updateUser`})
+      return new Promise((resolve,reject)=>{
+        if (!_user?.id) return reject('id: missing in updateUser');
+        client.patch(_user.id).set({...omit(_user,'id')}).commit<AdapterUser>().then((res)=>{
+          resolve(toAdapterUser(res))
+        })
+      })
+    },
+    deleteUser: () => {
+      return null;
+    },
+
+    createSession: (_session) => {
+      console.log("createSession ----");
+      console.log(_session);
+      console.log("createSession ----");
+
+      const sess: AdapterSession = {
+        ..._session,
+        id: "what ever",
+      };
+      session = sess;
+      return sess;
+    },
+
+    deleteSession: (sessionToken) => {
+      return null;
+    },
+    updateSession: (session) => {
+      return null;
+    },
+  
+    unlinkAccount: () => {
+      return undefined;
+    },
+    createVerificationToken: (verificationToken) => {
+      globToken = { ...verificationToken };
+      return globToken;
+    },
+
+    getSessionAndUser:(sessinToken)=>{
+       return null
+    },
+
+    
+
+    linkAccount: (account) => {
+      console.info("linkAccount");
+      return null;
+    },
+  };
+
+  return adapter;
+};
+
+export default sanityAdapter;
 
 // const createVerificationToken: Adapter["createVerificationToken"] = async (
 //   verificationToken
@@ -62,94 +177,3 @@ const user: AdapterUser = {
 //   });
 // };
 
-type sanityAdapterProps = {
-  client: SanityClient;
-};
-
-const handleIds = () => {};
-
-
-
-const sanityAdapter = ({ client }: sanityAdapterProps) => {
-  const adapter: Adapter = {
-    createUser: (user) => {
-      return new Promise<AdapterUser>((resolve, reject) => {
-        client
-          .create({
-            ...user,
-            _type: "user",
-          })
-          .then((newUser) => {
-
-            const _user = { ...user, id: newUser._id } as AdapterUser;
-            resolve(_user);
-          });
-      });
-    },
-
-    getUser: (id) => {
-      return client.fetch<AdapterUser>(getUserByIdQuery, { id });
-    },
-    getUserByEmail: (email) => {
-      return client.fetch<AdapterUser>(getUserByEmailQuery, { email });
-    },
-
-    getUserByAccount: ({ providerAccountId, provider }) => {
-      return client.fetch<AdapterUser>(getUserByProviderAccountIdQuery, {
-        providerAccountId,
-        provider,
-      });
-    },
-    updateUser: async (_user) => {
-      return new Promise((resolve,reject)=>{
-        if (!_user?.id) return _user;
-        client.patch(_user.id).set(_user).commit<AdapterUser>().then((res)=>{
-          resolve(res)
-        })
-      })
-    },
-
-    deleteSession: (sessionToken) => {
-      return null;
-    },
-    updateSession: (session) => {
-      return null;
-    },
-    deleteUser: () => {
-      return null;
-    },
-    unlinkAccount: () => {
-      return undefined;
-    },
-    createVerificationToken: (verificationToken) => {
-      globToken = { ...verificationToken };
-      return globToken;
-    },
-
-    getSessionAndUser:(sessinToken)=>{
-       return null
-    },
-
-    createSession: (_session) => {
-      console.log("createSession ----");
-      console.log(_session);
-      console.log("createSession ----");
-
-      const sess: AdapterSession = {
-        ..._session,
-        id: "what ever",
-      };
-      session = sess;
-      return sess;
-    },
-
-    linkAccount: (account) => {
-      console.info("linkAccount");
-      return null;
-    },
-  };
-
-  return adapter;
-};
-
-export default sanityAdapter;
