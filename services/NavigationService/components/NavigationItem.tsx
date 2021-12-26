@@ -1,7 +1,7 @@
 import { NavItem } from "../types";
-import { NavigationModulItemBase } from "./NavigationItemBase";
-import NavigationModulLink from "./NavigationLink";
-import { NavigationModulDropdown } from "./NavigationModulDropdown/NavigationModulDropdown";
+import NavigationItemBase from "./NavigationItemBase";
+import NavigationLink from "./NavigationLink";
+import NavigationDropdown from "./NavigationModulDropdown/NavigationDropdown";
 
 const NavigationItem: React.FC<NavItem> = (props) => {
   const { label, items, link } = props;
@@ -10,15 +10,13 @@ const NavigationItem: React.FC<NavItem> = (props) => {
   const hasLink = !!link && !!link.href;
 
   if (!hasItems && hasLink) {
-    return <NavigationModulLink {...link}>{label}</NavigationModulLink>;
+    return <NavigationLink {...link}>{label}</NavigationLink>;
   }
 
   if (hasItems) {
-    return (
-      <NavigationModulDropdown items={items}>{label}</NavigationModulDropdown>
-    );
+    return <NavigationDropdown items={items}>{label}</NavigationDropdown>;
   }
-  return <NavigationModulItemBase>{label}</NavigationModulItemBase>;
+  return <NavigationItemBase>{label}</NavigationItemBase>;
 };
 
 export default NavigationItem;

@@ -3,28 +3,28 @@
  */
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import { NavigationModulItemBase } from "./NavigationItemBase";
+import NavigationItemBase from "./NavigationItemBase";
 
 const label = "testLabel";
 
 describe("NavigationLink", () => {
   it(" should render ", () => {
-    render(<NavigationModulItemBase> {label}</NavigationModulItemBase>);
+    render(<NavigationItemBase> {label}</NavigationItemBase>);
     expect(screen.getByText("testLabel"));
   });
   it(" should render bold ", () => {
-    render(<NavigationModulItemBase bold> {label}</NavigationModulItemBase>);
+    render(<NavigationItemBase bold> {label}</NavigationItemBase>);
     expect(screen.getByText("testLabel")).toHaveClass("font-bold");
   });
   it(" should render icon ", () => {
-    render(<NavigationModulItemBase icon> {label}</NavigationModulItemBase>);
+    render(<NavigationItemBase icon> {label}</NavigationItemBase>);
     expect(screen.getByTestId("navIcon")).toBeInTheDocument();
   });
   it(" should render icon ", () => {
     render(
-      <NavigationModulItemBase icon hover>
+      <NavigationItemBase icon hover>
         {label}
-      </NavigationModulItemBase>
+      </NavigationItemBase>
     );
 
     expect(screen.getByTestId("navIcon")).toHaveClass("rotate-90");

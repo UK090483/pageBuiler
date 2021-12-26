@@ -2,7 +2,7 @@ import Dropdown from "./Dropdown";
 import prepareNavItems from "../../helper/prepareNavItems";
 import { NavItem } from "../../types";
 
-export const NavigationModulDropdownContainer: React.FC<{
+const NavigationDropdownContainer: React.FC<{
   items: NavItem[];
   show: boolean;
   targetX: number;
@@ -48,3 +48,5 @@ export const NavigationModulDropdownContainer: React.FC<{
     </>
   );
 };
+
+export default NavigationDropdownContainer;

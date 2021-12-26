@@ -6,7 +6,7 @@ type NavItemBaseProps = {
   bold?: boolean;
 };
 
-export const NavigationModulItemBase: React.FC<NavItemBaseProps> = ({
+const NavigationItemBase: React.FC<NavItemBaseProps> = ({
   children,
   icon,
   hover,
@@ -32,12 +32,14 @@ export const NavigationModulItemBase: React.FC<NavItemBaseProps> = ({
   );
 };
 
-interface NavigationModulButton {
+interface NavigationButton {
   variant: "listHeader" | "Link" | "Button";
 }
 
-export const NavigationModulListHeader: React.FC<NavigationModulButton> = ({
+export const NavigationListHeader: React.FC<NavigationButton> = ({
   children,
 }) => {
-  return <NavigationModulItemBase>{children}</NavigationModulItemBase>;
+  return <NavigationItemBase>{children}</NavigationItemBase>;
 };
+
+export default NavigationItemBase;

@@ -1,7 +1,7 @@
 import { Link } from "@components/Link";
 import React from "react";
 import { NavItem } from "../types";
-import { NavigationModulItemBase } from "./NavigationItemBase";
+import NavigationItemBase from "./NavigationItemBase";
 
 type NavigationLinkProps = NavItem["link"] & { onClick?: () => void };
 
@@ -17,7 +17,7 @@ const NavigationLink: React.FC<NavigationLinkProps> = (props) => {
         href={href || "/"}
         external={external}
       >
-        <NavigationModulItemBase>{children}</NavigationModulItemBase>
+        <NavigationItemBase>{children}</NavigationItemBase>
       </Link>
     </li>
   );
