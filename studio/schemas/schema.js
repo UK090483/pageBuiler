@@ -7,10 +7,15 @@ import objects from "./objects";
 import plugs from "./pageComponents/plugs";
 import pageComponents from "./pageComponents";
 
+import Events from "./Events/index";
+import tag from "./documents/tag";
+
 export default createSchema({
   name: "default",
 
   types: schemaTypes.concat([
+    tag,
+    ...Events,
     ...settings,
     ...objects,
     ...documents,

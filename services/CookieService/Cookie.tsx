@@ -6,7 +6,7 @@ import useCookie from "./useCookie";
 import CookieIcon from "./CookieIcon";
 
 // import Icon from "./Icon";
-// import useCookie from "@lib/context/useCookie";
+// import useCookie from "lib/context/useCookie";
 // import useHasMounted from "@hooks/useHasMounted";
 // import Button from "@components/Button/Button";
 

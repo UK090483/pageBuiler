@@ -31,6 +31,7 @@ export default withLocalization({
       name: "pageType",
       type: "reference",
       to: [{ type: "pageType" }],
+      hidden: true,
     },
     {
       name: "featuredImage",

@@ -39,8 +39,6 @@ const Nav: React.FC<NavProps> = (props) => {
             <NavigationModul items={items} />
           </div>
 
-          <UserWidget />
-
           <LangSwitch className="hidden lg:flex" slugs={slugs} />
 
           <button

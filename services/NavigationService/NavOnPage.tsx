@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationModulItemBase } from "./components/NavigationItemBase";
+import NavigationModulItemBase from "./components/NavigationItemBase";
 import Dropdown, { List } from "./components/NavigationModulDropdown/Dropdown";
 import prepareNavItems from "./helper/prepareNavItems";
 import { NavItem } from "./types";

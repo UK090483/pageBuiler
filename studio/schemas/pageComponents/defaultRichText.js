@@ -23,47 +23,14 @@ export default {
       ],
       marks: {
         decorators: [
-          {
-            title: "Hand",
-            value: "hand",
-            blockEditor: {
-              icon: TiPencil,
-            },
-          },
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
           {
             title: "Underline",
             value: "underline",
           },
-          // {
-          //   title: "Hand Underline",
-          //   value: "handUnderline",
-          // },
         ],
         annotations: [
-          {
-            name: "handUnderline",
-            type: "object",
-            title: "Hand Underline",
-            fields: [
-              {
-                title: "Underline Color",
-                name: "color",
-                type: "string",
-                options: {
-                  list: [...colorList()],
-                },
-                initialValue: "black",
-              },
-            ],
-            blockEditor: {
-              icon: () => "Hand Underline",
-              render: (props) => {
-                return <span>{props.children}</span>;
-              },
-            },
-          },
           {
             name: "tag",
             type: "object",
@@ -143,8 +110,6 @@ export default {
     // { type: 'embed' },
     // { type: 'imagePlug' },
     // { type: 'seoHeader' },
-
-    // { type: 'innerSection' },
 
     // { type: 'download' }
   ],

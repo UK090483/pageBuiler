@@ -34,12 +34,11 @@ export const Section: React.FC<SectionProps> = ({
         })}
       >
         <InnerComponent
-          className={clsx("mx-auto ", className, {
-            "max-w-screen-md ": width === "s",
-            "max-w-screen-lg ": width === "m",
-            "max-w-screen-xl ": width === "l",
-            container: width === "responsive",
-            "px-4": width !== "full" && !noPadding,
+          className={clsx("mx-auto", "container", className, {
+            "md:max-w-screen-md ": width === "s",
+            "lg:max-w-screen-lg ": width === "m",
+            "xl:max-w-screen-xl ": width === "l",
+            "px-3": width !== "full" && !noPadding,
           })}
         >
           {children}

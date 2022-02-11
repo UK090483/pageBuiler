@@ -10,7 +10,6 @@ export const navItemQuery = (locale: string = "") => `
     'link':link{
       ${linkQuery(locale)}
     }
-    
   }
 `;
 
@@ -26,7 +25,6 @@ export const NavigationMegaMenuQuery = (locale: string = "") => `
  _type == 'navigationMegaMenu' =>{
       'items':items[]{
        ...,
-       
        'link':link{
         ${linkQuery(locale)}
       },

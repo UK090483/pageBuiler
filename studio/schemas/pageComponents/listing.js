@@ -35,9 +35,8 @@ export default withLocalization({
       type: "string",
       options: {
         list: [
-          { title: "Page", value: "page" },
-          { title: "Post", value: "post" },
-          { title: "Projects", value: "project" },
+          { title: "Events", value: "event" },
+          { title: "Documentations", value: "documentations" },
         ],
         layout: "radio",
       },

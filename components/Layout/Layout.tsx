@@ -8,14 +8,13 @@ import Nav from "./Navigation/Nav/Nav";
 interface LayoutProps extends FetchStaticPropsResult<PageResult> {}
 
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { children, page } = props;
-
+  const { children, page, data } = props;
   return (
     <>
       <Header>
-        <Nav items={page?.navigation || []} slugs={page?.langSwitchData} />
+        <Nav items={data?.navigation || []} slugs={data?.langSwitchData} />
       </Header>
-      <Head name={page?.title} />
+      <Head name={data?.title} />
       <main className="min-h-screen">{children}</main>
       <Footer navItems={page?.navigation || []} />
     </>

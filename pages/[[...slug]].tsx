@@ -1,12 +1,5 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { sanityClient } from "@services/SanityService/sanity.server";
-import { usePreviewSubscription } from "@services/SanityService/sanity";
-import {
-  fetchStaticProps,
-  FetchStaticPropsResult,
-  fetchStaticPaths,
-  FetchStaticPathsParams,
-} from "@services/pageBuilderService/server";
+import { sanityClient as client } from "@services/SanityService/sanity.server";
+
 import {
   blockFactory,
   ContentParser,
@@ -25,6 +18,16 @@ import {
   NavigationResult,
 } from "@services/NavigationService/NavigationQuery";
 import { seoQuery, SeoResult } from "@services/SeoService/SeoQuerys";
+import HeroBlock, {
+  heroBlockQuery,
+} from "@components/Blocks/HeroBlock/HeroBlock";
+import ListingBlock, {
+  listingBlockQuery,
+} from "@components/Blocks/ListingBlock/ListingsBlock";
+import SectionBlock, {
+  sectionBlockQuery,
+} from "@components/Blocks/SectionBlock/SectionBlock";
+import SPB from "lib/SanityPageBuilder/SPB";
 
 export type PageResult = PageBuilderResult &
   LangSwitcherResult &
@@ -32,43 +35,42 @@ export type PageResult = PageBuilderResult &
   SeoResult &
   Page;
 
-const PageComponent: NextPage<FetchStaticPropsResult<PageResult>> = (props) => {
-  const { page, query, preview } = props;
+// export interface PageData extends NavigationResult, FooterQueryResult {
+//   content: (SectionBlockResult | ListingBlockProps | HeroBlogResult)[];
+//   title?: string;
+// }
 
-  const { data } = usePreviewSubscription<PageResult | null>(query, {
-    initialData: page,
-    enabled: preview,
-  });
+const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
+  revalidate: 1,
+  client,
+  locales: config.locales,
 
-  return (
-    <>
-      <ContentParser content={data?.content} />
-    </>
-  );
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return await fetchStaticPaths("page", sanityClient, config.locales);
-};
-
-type GetStaticPropsPlus = GetStaticProps<
-  { [key: string]: any },
-  FetchStaticPathsParams
->;
-
-export const getStaticProps: GetStaticPropsPlus = async (props) => {
-  const { params, locale, preview } = props;
-
-  return await fetchStaticProps<PageBuilderResult>({
-    params,
-    sanityClient,
-    locale,
-    preview,
-    query: `..., ${blockFactory.getRootQuery({ locale })}, ${seoQuery(
+  getQuery: (props) => {
+    const { locale } = props;
+    const res = `..., ${blockFactory.getRootQuery({ locale })}, ${seoQuery(
       locale
-    )}, ${LangSwitcherQuery(config.locales)}, ${NavigationQuery(locale)}`,
-    locales: config.locales,
-  });
-};
+    )}, ${LangSwitcherQuery(config.locales)}, ${NavigationQuery(locale)}`;
+    return res;
+  },
+  components: [
+    {
+      name: "hero",
+      component: HeroBlock,
+      query: heroBlockQuery(""),
+    },
+    {
+      name: "section",
+      component: SectionBlock,
+      query: sectionBlockQuery(""),
+    },
+    {
+      name: "listing",
+      component: ListingBlock,
+      query: listingBlockQuery(""),
+    },
+  ],
+});
+
+export { getStaticPaths, getStaticProps };
 
 export default PageComponent;

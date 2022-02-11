@@ -2,7 +2,7 @@ import Portal from "@components/Portal";
 import Svg from "@components/Svg";
 import useAnimationDelay from "@hooks/useAnimationDelay";
 import React from "react";
-import { NavigationModulItemBase } from "./components/NavigationItemBase";
+import NavigationModulItemBase from "./components/NavigationItemBase";
 import NavigationModulLink from "./components/NavigationLink";
 import { NavItem } from "./types";
 

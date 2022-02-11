@@ -1,15 +1,18 @@
 import SectionBlock, {
   sectionBlockQuery,
   SectionResult,
-} from "./Blocks/SectionBlock";
+} from "../../components/Blocks/SectionBlock/SectionBlock";
 import BodyParser from "./lib/BodyParser";
 import { blockFactory } from "./lib/BlockFactory";
 
 import ListingBlock, {
   listingBlockQuery,
   ListingBlogResult,
-} from "./Blocks/ListingsBlock";
-import HeroBlock, { heroBlockQuery, HeroBlogResult } from "./Blocks/HeroBlock";
+} from "../../components/Blocks/ListingBlock/ListingsBlock";
+import HeroBlock, {
+  heroBlockQuery,
+  HeroBlogResult,
+} from "../../components/Blocks/HeroBlock/HeroBlock";
 
 export type PageBodyResult = (
   | SectionResult
