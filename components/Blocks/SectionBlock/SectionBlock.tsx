@@ -57,8 +57,6 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
   const hasImage = image && image.asset;
   const autoType = hasImage ? "l" : "s";
 
-  console.log(content);
-
   return (
     <>
       {bgColor === "primary" && <Transition pos="top" />}

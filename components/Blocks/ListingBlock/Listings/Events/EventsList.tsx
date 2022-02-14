@@ -1,6 +1,6 @@
-import { Section } from "@components/Section/Section";
 import * as React from "react";
-import Filter from "../Filter";
+import Filter from "../Default/Filter";
+
 import EventsListItem from "./EventsListItem";
 
 interface IEventsListProps {

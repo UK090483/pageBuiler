@@ -44,8 +44,13 @@ module.exports = {
         fadeInMenuItemFast: "menuFade 0.25s ease-in forwards",
         slideDown: "slideDown 0.25s ease-in forwards",
         slideInRight: "slideInRight 0.5s ease-in forwards",
+        marquee: "marquee 25s linear infinite",
       },
       keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
         menuFade: {
           "0%": {
             opacity: 0,

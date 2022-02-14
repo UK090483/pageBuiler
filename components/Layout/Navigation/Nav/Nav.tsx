@@ -46,7 +46,7 @@ const Nav: React.FC<NavProps> = (props) => {
             onClick={handleNavClick}
             className="lg:hidden"
           >
-            <Svg className="w-[30px]" icon="hamburger" />
+            <Svg className="w-[30px] h-[30px]" icon="hamburger" />
           </button>
         </div>
       </nav>

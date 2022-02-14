@@ -9,12 +9,18 @@ import pageComponents from "./pageComponents";
 
 import Events from "./Events/index";
 import tag from "./documents/tag";
+import Persons from "./Persons";
+import Page from "./Page";
+import Testimonial from "./Testimonials";
 
 export default createSchema({
   name: "default",
 
   types: schemaTypes.concat([
     tag,
+    ...Page,
+    ...Persons,
+    ...Testimonial,
     ...Events,
     ...settings,
     ...objects,

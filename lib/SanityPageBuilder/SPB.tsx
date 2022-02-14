@@ -30,6 +30,7 @@ function SPB<P extends { [k: string]: any } = {}>({
       const { params, preview, locale } = props;
 
       return await fetchStaticProps<P>({
+        locale,
         revalidate,
         params,
         client,

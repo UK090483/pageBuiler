@@ -1,4 +1,3 @@
-import { type } from "os";
 import { LocationConfig } from "types";
 
 export const LangSwitcherQuery = (locales: LocationConfig) => {

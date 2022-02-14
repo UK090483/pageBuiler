@@ -1,0 +1,31 @@
+import { Section } from "@components/Section/Section";
+import Typo from "@components/Typography/Typography";
+import * as React from "react";
+
+import PersonListItem from "./PersonListItem";
+
+interface IPersonListProps {
+  items?: any[] | null;
+  title?: string | null;
+}
+
+const PersonList: React.FunctionComponent<IPersonListProps> = (props) => {
+  const { items, title } = props;
+
+  return (
+    <Section width="l" className=" py-24 ">
+      {title && (
+        <Typo variant="h4" className="text-center uppercase ">
+          {title}
+        </Typo>
+      )}
+      <ul className="w-full flex flex-wrap items-center justify-center">
+        {items?.map((i, index) => (
+          <PersonListItem key={index} {...i} />
+        ))}
+      </ul>
+    </Section>
+  );
+};
+
+export default PersonList;

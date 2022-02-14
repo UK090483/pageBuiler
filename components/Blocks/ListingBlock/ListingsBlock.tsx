@@ -1,18 +1,43 @@
 import EventsList from "@components/Blocks/ListingBlock/Listings/Events/EventsList";
-import Listing from "@components/Blocks/ListingBlock/Listings/Listing";
+import Listing from "@components/Blocks/ListingBlock/Listings/Default/Listing";
 import { ImageMetaResult, imageMeta } from "lib/SanityImage/query";
 import React from "react";
 import { DateString } from "../../../services/pageBuilderService/queries/snippets";
+import PersonList from "./Listings/Persons/PersonList";
+import TestimonialList from "./Listings/Testimonials/TestimonialList";
+import { testimonialQuery } from "./Listings/Testimonials/testimaonialQuery";
+import { TestimonialItemResult } from "./Listings/Testimonials/testimonialTypes";
 
-export const listItemQuery = (locale: string) => `
+export const listItemQuery = (locale: string) => {
+  return `
 ...,
 _id,
-'updatedAt':_updatedAt,
 'title':coalesce(title_${locale},title),
 'description':coalesce(description_${locale},description),
-'slug':coalesce(slug_${locale}.current,slug.current),
+'slug':select(
+  defined(pageType) && defined(pageType->slug_${locale}.current)  => pageType->slug_${locale}.current + '/' + coalesce(slug_${locale}.current,slug.current),
+  defined(pageType) => pageType->slug.current + '/' +  coalesce(slug_${locale}.current,slug.current),
+  slug.current
+  ),
 'featuredImage':featuredImage{${imageMeta}}
 `;
+};
+
+const personItemQuery = (locale: string) => `
+...,
+_id,
+'avatar':avatar{${imageMeta}},
+'description':coalesce(description_${locale},description),
+ name,
+'position':coalesce(position_${locale},position),
+`;
+export interface PersonItemResult {
+  name?: null | string;
+  position?: null | string;
+  description?: null | string;
+  avatar?: null | ImageMetaResult;
+  _id: string;
+}
 
 export interface ListItemResult {
   title?: null | string;
@@ -20,15 +45,18 @@ export interface ListItemResult {
   slug?: null | string;
   featuredImage?: null | ImageMetaResult;
   _id: string;
-  updatedAt?: DateString;
+  _updatedAt?: DateString;
 }
 
 export const listingBlockQuery = (locale: string) => `
 _type == "listing" => {
-
+  ...,
+  'personItems': personItems[]->{${personItemQuery(locale)}},
+  ${testimonialQuery(locale)},
   _type,
   _key,
   contentType,
+  showTitle,
   variant,
   'filterItems':*[_type == "tag"]{'label':coalesce(name_${locale},name),'value':_id},
   'title':coalesce(title_${locale},title),
@@ -37,6 +65,7 @@ _type == "listing" => {
       contentType in ['event']=> *[_type == ^.contentType][]{${listItemQuery(
         locale
       )}},
+      
       contentType in ['documentations']=> *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" ][]{${listItemQuery(
         locale
       )}},
@@ -52,16 +81,38 @@ export interface ListingBlogResult {
   _type: "listing";
   _key: string;
   items?: ListItemResult[];
-  contentType?: "event" | "documentations";
+  contentType?: "event" | "documentations" | "persons" | "testimonials";
   variant?: "grid" | "list" | "carousel";
-  name?: string;
+  title?: string;
   filterItems?: { label: string; value: string }[];
+  personItems?: PersonItemResult[] | null;
+  testimonialItems?: TestimonialItemResult[] | null;
+  showTitle?: boolean;
 }
 
 export interface ListingBlockProps extends ListingBlogResult {}
 
 const ListingBlock: React.FC<ListingBlockProps> = (props) => {
-  const { items, variant, name, contentType, filterItems } = props;
+  const {
+    items,
+    variant,
+    title,
+    contentType,
+    filterItems,
+    personItems,
+    testimonialItems,
+    showTitle,
+  } = props;
+
+  if (contentType === "testimonials") {
+    return <TestimonialList items={testimonialItems || []} />;
+  }
+
+  if (contentType === "persons") {
+    return (
+      <PersonList title={showTitle ? title : null} items={personItems || []} />
+    );
+  }
 
   if (contentType === "event") {
     return <EventsList filterItems={filterItems} items={items || []} />;
@@ -70,7 +121,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   return (
     <Listing
       filterItems={contentType === "documentations" ? filterItems : undefined}
-      title={name}
+      title={title}
       variant={variant || "list"}
       items={items || []}
     />

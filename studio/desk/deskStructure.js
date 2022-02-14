@@ -95,4 +95,8 @@ export default () =>
         .title("PageType")
         .icon(CgTag)
         .child(S.documentTypeList("pageType")),
+      S.listItem()
+        .title("Testimonial")
+        .icon(CgTag)
+        .child(S.documentTypeList("testimonial")),
     ]);

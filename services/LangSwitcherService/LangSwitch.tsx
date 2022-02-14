@@ -1,4 +1,5 @@
 import { Link } from "@components/Link";
+import { useRouter } from "next/router";
 import React from "react";
 import { LangSwitcherResult } from "./LangSwitcherQuery";
 
@@ -15,6 +16,7 @@ const defaultItems = [
 export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
   const { className, slugs } = props;
   const items = defaultItems;
+  const { locale } = useRouter();
 
   return (
     <div className={`flex ${className}`}>
@@ -23,9 +25,13 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
           <Link
             scroll={false}
             key={item.locale}
-            href={(slugs && slugs[`href_${item.locale}`]) || "/"}
+            href={
+              (slugs && (slugs[`href_${item.locale}`] || slugs[`href`])) || "/"
+            }
             locale={item.locale}
-            className="px-1 leading-none hover:underline"
+            className={`px-1 w-10 h-10 flex items-center justify-center rounded-full  border-black  leading-none hover:underline ${
+              item.locale === locale ? "border-2" : ""
+            } `}
           >
             {item.label}
           </Link>

@@ -14,10 +14,10 @@ export const Card: React.FC<CardProps> = ({
   slug,
   title,
   description,
-  updatedAt,
+  _updatedAt,
   className,
 }) => {
-  const date = useDateString(updatedAt);
+  const date = useDateString(_updatedAt);
   return (
     <li>
       <Link

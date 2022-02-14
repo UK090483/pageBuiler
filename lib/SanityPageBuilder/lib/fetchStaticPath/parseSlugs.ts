@@ -26,7 +26,7 @@ const parseSlugs = (props: ParseSlugsProps): FetchStaticPathsResult2 => {
     throw new Error("parseSlugs did not get useful data on  getSlugResult");
   }
   const hasI18n = Object.keys(locales).length > 1;
-  return {
+  const res = {
     paths:
       getSlugResult.slugs.reduce((acc, page) => {
         if (!page.slug) return [...acc];
@@ -47,6 +47,8 @@ const parseSlugs = (props: ParseSlugsProps): FetchStaticPathsResult2 => {
       }, [] as any[]) || [],
     fallback,
   };
+
+  return res;
 };
 
 export default parseSlugs;

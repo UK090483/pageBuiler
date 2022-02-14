@@ -107,6 +107,7 @@ export default {
     { type: "button", blockEditor: { render: Button } },
     { type: "spacer" },
     { type: "imageGalleryPlug" },
+    { type: "personPlug" },
     // { type: 'embed' },
     // { type: 'imagePlug' },
     // { type: 'seoHeader' },
