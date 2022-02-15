@@ -13,10 +13,11 @@ import {
   LangSwitcherResult,
 } from "@services/LangSwitcherService/LangSwitcherQuery";
 import { Page } from "studio/schema";
-import {
-  NavigationQuery,
-  NavigationResult,
-} from "@services/NavigationService/NavigationQuery";
+// import {
+//   NavigationQuery,
+//   NavigationResult,
+// } from "@services/NavigationService/NavigationQuery";
+
 import { seoQuery, SeoResult } from "@services/SeoService/SeoQuerys";
 import HeroBlock, {
   heroBlockQuery,
@@ -28,6 +29,7 @@ import SectionBlock, {
   sectionBlockQuery,
 } from "@components/Blocks/SectionBlock/SectionBlock";
 import SPB from "lib/SanityPageBuilder/SPB";
+import { NavigationQuery, NavigationResult } from "lib/Navigation/query";
 
 export type PageResult = PageBuilderResult &
   LangSwitcherResult &

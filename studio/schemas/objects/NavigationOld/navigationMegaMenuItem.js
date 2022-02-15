@@ -1,6 +1,5 @@
-import { RiFileListFill } from "react-icons/ri";
 export default {
-  title: "List",
+  title: "Mega Menu Item",
   name: "navigationMegaMenuItem",
   type: "object",
   fields: [
@@ -18,17 +17,4 @@ export default {
       validation: (Rule) => Rule.required(),
     },
   ],
-  preview: {
-    select: {
-      label: "label",
-    },
-    prepare(selection) {
-      const { label } = selection;
-      return {
-        title: label,
-        subtitle: "List",
-        media: RiFileListFill,
-      };
-    },
-  },
 };

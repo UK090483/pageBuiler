@@ -65,7 +65,7 @@ export const List: React.FC<{
                 <DefaultNavigationItemBase
                   active={isActive(props)}
                   props={props}
-                  place="link"
+                  place="dropdown/link"
                 >
                   {label}
                 </DefaultNavigationItemBase>

@@ -22,64 +22,44 @@ export default () =>
             ])
         ),
 
-      // S.listItem({
-      //   id: "pages",
-      //   title: "Pages",
-      //   schemaType: "page",
-      //   child: async () => {
-      //     const pageTypes = await client.fetch(
-      //       '*[_type == "pageType"]{_id ,name}'
-      //     );
+      S.listItem({
+        id: "pages",
+        title: "Pages",
+        schemaType: "page",
+        child: async () => {
+          const pageTypes = await client.fetch(
+            '*[_type == "pageType"]{_id ,name}'
+          );
 
-      //     const root = S.listItem()
-      //       .id("page")
-      //       .title("Root")
-      //       .child(
-      //         S.documentTypeList("page")
-      //           .title(`Pages`)
-      //           .filter(`_type == "page" && !defined(pageType) `)
-      //       );
+          const root = S.listItem()
+            .id("page")
+            .title("Root")
+            .child(
+              S.documentTypeList("page")
+                .title(`Pages`)
+                .filter(`_type == "page" && !defined(pageType) `)
+            );
 
-      //     const items = pageTypes.map(({ _id: pageTypeId, name }) =>
-      //       S.listItem()
-      //         .id(pageTypeId)
-      //         .title(name)
-      //         .child(
-      //           S.documentTypeList("page")
-      //             .title(`${name}`)
-      //             .filter("_type == $type && pageType._ref == $pageTypeId")
-      //             .params({ pageTypeId, type: "page" })
-      //             .initialValueTemplates([
-      //               S.initialValueTemplateItem("page-by-pageType", {
-      //                 pageTypeId,
-      //               }),
-      //             ])
-      //         )
-      //     );
-      //     return S.list({ id: "li", items: [root, ...items] });
-      //   },
-      // }),
+          const items = pageTypes.map(({ _id: pageTypeId, name }) =>
+            S.listItem()
+              .id(pageTypeId)
+              .title(name)
+              .child(
+                S.documentTypeList("page")
+                  .title(`${name}`)
+                  .filter("_type == $type && pageType._ref == $pageTypeId")
+                  .params({ pageTypeId, type: "page" })
+                  .initialValueTemplates([
+                    S.initialValueTemplateItem("page-by-pageType", {
+                      pageTypeId,
+                    }),
+                  ])
+              )
+          );
+          return S.list({ id: "li", items: [root, ...items] });
+        },
+      }),
 
-      S.listItem()
-        .title("Pages")
-        .icon(CgWebsite)
-        .child(
-          S.documentTypeList("page").filter(
-            "_type == 'page' && !defined(pageType)"
-          )
-        ),
-      S.listItem()
-        .title("Documentations")
-        .icon(CgWebsite)
-        .child(
-          S.documentTypeList("page")
-            .filter("_type == 'page' && defined(pageType)")
-            .initialValueTemplates([
-              S.initialValueTemplateItem("page-by-pageType", {
-                pageTypeId: "88e611ea-581e-48c4-b63c-13e1084acf4f",
-              }),
-            ])
-        ),
       S.listItem()
         .title("Events")
         .icon(CgCalendar)

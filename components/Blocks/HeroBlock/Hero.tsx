@@ -13,11 +13,11 @@ interface HeroProps extends HeroBlockProps {}
 const maxFontsize = 180;
 
 const fontSizes: { [key: string]: number } = {
-  _: 250,
-  sm: 300,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
+  _: 500,
+  sm: 600,
+  md: 700,
+  lg: 900,
+  xl: 1180,
   "2xl": 1536,
 };
 
@@ -43,6 +43,9 @@ const InlineImage = (props) => {
 const serializer: Serializers = {
   marks: {
     image: InlineImage,
+    brake: ({ children }) => {
+      return <>&shy;{children}</>;
+    },
   },
 };
 
@@ -58,26 +61,23 @@ const Hero: React.FC<HeroProps> = (props) => {
     setRendered(true);
   }, []);
 
-  let fontSize = fontSizes[b] * (1.49 / letterCount);
+  let fontSize = fontSizes[b] * (1.1 / letterCount);
 
   fontSize = Math.min(fontSize, maxFontsize);
 
   return (
     <>
       <Section
+        style={{ hyphens: "manual" }}
         width="responsive"
-        className=" h-screen min-h-[600px] flex flex-col justify-center animate-fadeIn  pt-28 "
+        className="antialiased w-full h-screen min-h-[600px] flex flex-col justify-center animate-fadeIn  pt-28  overflow-hidden font-bold font-header"
       >
-        {rendered && (
-          <>
-            <h1
-              className="font-bold whitespace-pre-wrap "
-              style={{ fontSize, lineHeight: "1.1em", marginLeft: "-0.05em" }}
-            >
-              {text && <BlockContent blocks={text} serializers={serializer} />}
-            </h1>
-          </>
-        )}
+        <div
+          className="font-bold whitespace-pre-wrap  break-words"
+          style={{ fontSize, lineHeight: "1.1em", marginLeft: "-0.05em" }}
+        >
+          {text && <BlockContent blocks={text} serializers={serializer} />}
+        </div>
       </Section>
     </>
   );

@@ -23,7 +23,7 @@ export const linkMarkQuery = `
 _type == "link" => {
   ...,
 
-  'link': link{${linkQuery}},
+  'link': link{${linkQuery()}},
   'test':'test',
     'internalLink': link.internalLink->{'type':_type, 'slug':slug.current},
     

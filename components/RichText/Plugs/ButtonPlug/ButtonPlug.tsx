@@ -10,7 +10,7 @@ _type == "button" => {
     label,
     inline,
     'link':link{
-      ${linkQuery}
+      ${linkQuery()}
     }
 }
 `;

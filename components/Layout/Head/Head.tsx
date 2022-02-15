@@ -16,13 +16,7 @@ const Head: React.FunctionComponent<HeadProps> = ({ name }) => {
       <link rel="icon" href="/logo.png" />
       <link
         rel="preload"
-        href="/fonts/HMSans-Regular.woff"
-        as="font"
-        crossOrigin=""
-      />
-      <link
-        rel="preload"
-        href="/fonts/HMSans-SemiBold.woff"
+        href="/fonts/RightGrotesk-CompactBlack.woff"
         as="font"
         crossOrigin=""
       />

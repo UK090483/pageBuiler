@@ -20,6 +20,7 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
 
   return (
     <li className="flex flex-col items-center justify-center min-w-[200px] w-1/3 py-8 ">
+      <div className="tooltip hidden" />
       <div className="relative w-32 h-32  overflow-hidden rounded-full">
         <SanityImage image={avatar} objectFit="cover" />
       </div>
@@ -31,7 +32,13 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
       <button className=" underline  " data-tip data-for={_id}>
         mehr Erfahren
       </button>
-      <ReactTooltip id={_id} place="bottom" effect="float" className="tooltip">
+      <ReactTooltip
+        id={_id}
+        place="bottom"
+        effect="float"
+        multiline={true}
+        className="tooltip"
+      >
         {description}
       </ReactTooltip>
     </li>

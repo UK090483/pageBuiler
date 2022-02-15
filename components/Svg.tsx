@@ -91,7 +91,8 @@ const Svg: React.FC<SvgProps> = ({ icon, className, ...rest }) => {
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className={`inline-block w-24 h-24 stroke-current fill-current ${className}`}
+      className={`inline-block w-12 h-12 stroke-current fill-none  ${className}`}
+      fill="none"
     >
       {paths[icon]}
     </svg>

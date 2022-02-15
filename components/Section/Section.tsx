@@ -10,6 +10,7 @@ interface SectionProps {
   noPadding?: boolean;
   as?: "section" | "div" | "ul";
   asInner?: "div" | "ul";
+  style?: React.CSSProperties;
 }
 
 export const Section: React.FC<SectionProps> = ({
@@ -21,6 +22,7 @@ export const Section: React.FC<SectionProps> = ({
   noPadding = false,
   as: Component = "section",
   asInner: InnerComponent = "div",
+  style,
 }) => {
   return (
     <SectionContextProvider bgColor={bg} width={width}>
@@ -34,6 +36,7 @@ export const Section: React.FC<SectionProps> = ({
         })}
       >
         <InnerComponent
+          style={style}
           className={clsx("mx-auto", "container", className, {
             "md:max-w-screen-md ": width === "s",
             "lg:max-w-screen-lg ": width === "m",

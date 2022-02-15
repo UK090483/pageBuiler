@@ -17,7 +17,7 @@ _type == "imageGalleryPlug" => {
   _type,
   _key,
   'items':items[]{..., 'image': image{${imageMeta}} ,'link':link{
-    ${linkQuery}
+    ${linkQuery()}
   }  },
   rows,
   rows_mobile,

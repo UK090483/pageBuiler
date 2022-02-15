@@ -1,28 +1,31 @@
+import { AiOutlineLink } from "react-icons/ai";
 import { withLocalization } from "../../Localizer";
 
 export default withLocalization({
-  title: "Navigation Item",
+  title: "Link",
   name: "navigationItem",
   type: "object",
   fields: [
     { name: "label", type: "string", title: "Label", localize: true },
-    { name: "list", type: "boolean", title: " as List ?" },
     {
       name: "link",
       title: "Link",
       type: "link",
-      hidden: (p) => {
-        return p?.parent?.list;
-      },
-    },
-    {
-      name: "items",
-      type: "array",
-      title: "List",
-      of: [{ type: "navigationItem" }],
-      hidden: (p) => {
-        return !p?.parent?.list;
-      },
     },
   ],
+
+  preview: {
+    select: {
+      label: "label",
+    },
+    prepare(selection) {
+      const { label } = selection;
+
+      return {
+        title: label,
+
+        media: AiOutlineLink,
+      };
+    },
+  },
 });

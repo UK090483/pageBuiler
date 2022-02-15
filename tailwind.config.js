@@ -1,18 +1,17 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./services/**/*.{js,ts,jsx,tsx}",
-    "./modules/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     fontFamily: {
       sans: ["Montserrat", "Helvetica", "sans-serif"],
-      hand: ["Caveat"],
+      header: ["grotesk"],
     },
     fontSize: {
       sm: ["12px", "1.4em"],
@@ -54,7 +53,7 @@ module.exports = {
         menuFade: {
           "0%": {
             opacity: 0,
-            transform: " translateX(-50%)   translateY(-100%)",
+            transform: " translateX(-50%) translateY(-100%)",
             zIndex: -100,
           },
 
@@ -65,7 +64,7 @@ module.exports = {
           "100%": {
             zIndex: 20,
             opacity: 1,
-            transform: " translateX(-50%) ",
+            transform: "translateX(-50%) ",
           },
         },
         fadeIn: {
