@@ -6,6 +6,8 @@ import SanityImage from "lib/SanityImage";
 import Marque from "./Marque";
 import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
 import { Link } from "@components/Link";
+import Image from "next/image";
+import Sozial from "./SozialIcons";
 
 interface FooterProps {
   navItems: NavItemType[];
@@ -15,29 +17,42 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
   return (
     <footer data-testid="footer" className="flex flex-col items-center ">
       <Marque />
-      <Section width="l">
+      <Section width="full" className=" px-5 ">
         <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
-          <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div className="relative  min-h-[200px]">
-              <SanityImage objectFit="contain" />
+              <div className=" text-sm pb-4 ">
+                Dieses Projekt wird gefördert durch Interreg Deutschland-
+                Danmark mit Mitteln des Europäischen Fonds für regionale
+                Entwicklung. Erfahren Sie mehr über Interreg Deutschland-
+                Danmark unter www.interreg5a.eu
+              </div>
+              <Image
+                src={`/images/logo_interreg_logo.png`}
+                alt="me"
+                width={500}
+                height={86}
+              />
             </div>
             <div className="relative  min-h-[200px]">
-              <SanityImage objectFit="contain" />
+              <div className=" text-sm pb-7 ">Weitere Förderer </div>
+              <Image
+                src={`/images/kiel_marke_logo.png`}
+                alt="me"
+                width={301}
+                height={108}
+              />
             </div>
           </div>
           <div>
             <Typo variant="h1" as="p">
               Follow Us
             </Typo>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-12  place-content-center">
-              <BsFacebook size={82} className=" mx-auto " />
-              <BsInstagram size={82} className=" mx-auto " />
-              <BsTwitter size={82} className=" mx-auto " />
-              <BsYoutube size={82} className=" mx-auto " />
-            </div>
+
+            <Sozial />
           </div>
         </div>
-        <div className="flex gap-6 items-center justify-center mt-16 mb-12">
+        <div className="flex flex-col md:flex-row  gap-6 items-center justify-center mt-16 mb-12">
           <span>© 2021</span>
           <Link href="/">Impressum</Link>
           <Link href="/">Datenschutz</Link>

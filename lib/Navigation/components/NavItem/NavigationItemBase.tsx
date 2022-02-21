@@ -16,8 +16,8 @@ export const NavigationItemBase: React.FC<NavItemBaseProps> = ({
 }) => {
   return (
     <span
-      className={`block w-full px-5 py-4 leading-none   font-bold text-base ${
-        place === "dropdown/link" ? "hover:bg-black hover:text-white " : ""
+      className={`block w-full px-5 py-4 leading-none  transition-colors duration-500 font-bold text-base ${
+        place === "dropdown/link" ? "hover:bg-black  hover:text-white " : ""
       }  ${bold ? " font-bold " : ""} `}
     >
       {children}
@@ -26,7 +26,7 @@ export const NavigationItemBase: React.FC<NavItemBaseProps> = ({
           style={{ width: "1.5em", height: "1.5em" }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          className={`inline-block stroke-current transition-transform  ${
+          className={`inline-block stroke-current transition-transform ${
             hover ? "rotate-90" : ""
           }`}
           fill="none"

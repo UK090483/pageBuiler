@@ -10,8 +10,11 @@
   font-display: swap;
 }
 
-@layer components {
-  .tooltip {
-    @apply !bg-white !bg-opacity-100 w-80  border-black border-2 !p-10;
-  }
+.tooltip {
+  background-color: white !important;
+  opacity: 1 !important;
+  border: black solid 2px !important;
+  padding: 2rem !important;
+  width: 300px !important;
+  color: black !important;
 }
