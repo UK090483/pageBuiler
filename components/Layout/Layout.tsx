@@ -1,4 +1,5 @@
 import { FetchStaticPropsResult } from "@services/pageBuilderService/lib/fetchStaticProps";
+import SkipToContent from "lib/SkipToContent/SkipComponent";
 import { PageResult } from "pages/[[...slug]]";
 import React from "react";
 import Footer from "./Footer";
@@ -11,11 +12,14 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   const { children, page, data } = props;
   return (
     <>
+      <SkipToContent containerId="main-content" />
       <Header>
         <Nav items={data?.navigation || []} slugs={data?.langSwitchData} />
       </Header>
       <Head name={data?.title} />
-      <main className="min-h-screen">{children}</main>
+      <main id="main-content" className="min-h-screen mt-[57px]">
+        {children}
+      </main>
       <Footer navItems={page?.navigation || []} />
     </>
   );

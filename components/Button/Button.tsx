@@ -7,10 +7,18 @@ type ButtonProps = {
   externalLink?: string;
   href?: string | null;
   external?: boolean;
+  tabIndex?: -1 | 0;
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { children, onClick = () => {}, internalLink, href, external } = props;
+  const {
+    children,
+    onClick = () => {},
+    internalLink,
+    href,
+    external,
+    tabIndex = 0,
+  } = props;
 
   if (href) {
     return (
@@ -26,6 +34,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
+      tabIndex={tabIndex}
       onClick={onClick}
       className="px-12 py-2 text-base border-2 border-black whitespace-nowrap rounded-full"
       type="button"

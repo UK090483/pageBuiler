@@ -10,19 +10,26 @@ interface IPersonListItemProps {
   position?: null | string;
   description?: null | string;
   avatar?: null | ImageMetaResult;
+  variant?: string | null;
   _id: string;
 }
 
 const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
   props
 ) => {
-  const { name, description, position, avatar, _id } = props;
+  const { name, description, position, avatar, _id, variant } = props;
+
+  const isImage = variant === "image";
 
   return (
-    <li className="flex flex-col items-center justify-center min-w-[200px] w-1/3 py-8 ">
+    <li className="flex flex-col items-center justify-center min-w-[200px] w-1/3 py-8 self-start">
       <div className="tooltip hidden" />
-      <div className="relative w-32 h-32  overflow-hidden rounded-full">
-        <SanityImage image={avatar} objectFit="cover" />
+      <div
+        className={`relative  h-32  overflow-hidden ${
+          isImage ? "w-full" : "rounded-full w-32"
+        } `}
+      >
+        <SanityImage image={avatar} objectFit={isImage ? "contain" : "cover"} />
       </div>
 
       <Typo bold variant="body-l" className=" uppercase mt-10 text-center">
@@ -32,6 +39,7 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
       <button className=" underline  " data-tip data-for={_id}>
         mehr Erfahren
       </button>
+
       <ReactTooltip
         id={_id}
         place="bottom"

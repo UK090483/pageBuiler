@@ -66,7 +66,7 @@ export default () =>
         .child(S.documentTypeList("event")),
 
       S.listItem()
-        .title("Persons")
+        .title("Persons/Institutions")
         .icon(CgProfile)
         .child(S.documentTypeList("person")),
 

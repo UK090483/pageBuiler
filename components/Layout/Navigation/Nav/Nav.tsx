@@ -10,9 +10,9 @@ import NavigationMobile from "@services/NavigationService/NavigationMobile";
 import {
   LangSwitch,
   LangSwitchProps,
-} from "@services/LangSwitcherService/LangSwitch";
-import { LangSwitcherResult } from "@services/LangSwitcherService/LangSwitcherQuery";
-import UserWidget from "@services/AuthService/AuthWidged";
+} from "lib/LangSwitcherService/LangSwitch";
+import { LangSwitcherResult } from "lib/LangSwitcherService/LangSwitcherQuery";
+
 import { HeaderNavigation } from "lib/Navigation";
 
 interface NavProps {
@@ -36,9 +36,10 @@ const Nav: React.FC<NavProps> = (props) => {
             <Logo />
           </Link>
 
-          <div className="items-center justify-center hidden w-full lg:flex">
-            <HeaderNavigation items={items} />
-          </div>
+          <HeaderNavigation
+            items={items}
+            className="items-center justify-center hidden lg:flex"
+          />
 
           <LangSwitch className="hidden lg:flex" slugs={slugs} />
 

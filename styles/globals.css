@@ -4,7 +4,8 @@
 
 @font-face {
   font-family: "grotesk";
-  src: url("/fonts/RightGrotesk-CompactBlack.woff") format("woff");
+  src: url("/fonts/PPRightGrotesk-CompactBlack.woff2") format("woff2"),
+    url("/fonts/PPRightGrotesk-CompactBlack.woff") format("woff");
   font-style: normal;
   font-weight: 400;
   font-display: swap;

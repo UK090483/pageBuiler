@@ -16,7 +16,7 @@ const Head: React.FunctionComponent<HeadProps> = ({ name }) => {
       <link rel="icon" href="/logo.png" />
       <link
         rel="preload"
-        href="/fonts/RightGrotesk-CompactBlack.woff"
+        href="/fonts/PPRightGrotesk-CompactBlack.woff2"
         as="font"
         crossOrigin=""
       />

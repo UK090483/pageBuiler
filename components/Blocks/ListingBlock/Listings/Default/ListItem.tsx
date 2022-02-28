@@ -55,7 +55,7 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
           <Typo className="w-full overflow-hidden whitespace-pre-line ">
             {description}
           </Typo>
-          <Button>Mehr erfahren</Button>
+          <Button tabIndex={-1}>Mehr erfahren</Button>
         </div>
       </Link>
     </li>

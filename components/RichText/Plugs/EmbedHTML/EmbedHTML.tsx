@@ -1,5 +1,5 @@
-import { PlugProps } from "lib/SanityPageBuilder/lib/RichText";
-import * as React from "react";
+import type { PlugProps } from "lib/SanityPageBuilder/lib/RichText";
+import React from "react";
 
 interface IEmbedHTMLProps {
   html?: string | null;
@@ -7,12 +7,7 @@ interface IEmbedHTMLProps {
 
 const EmbedHTML: React.FC<PlugProps<IEmbedHTMLProps>> = (props) => {
   const { html } = props.node;
-
-  console.log(props);
-
-  if (!html) {
-    return null;
-  }
+  if (!html) return null;
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };
 

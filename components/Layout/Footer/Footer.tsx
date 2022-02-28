@@ -1,13 +1,13 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { NavItem as NavItemType } from "@services/NavigationService/types";
-import SanityImage from "lib/SanityImage";
-import Marque from "./Marque";
-import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
 import { Link } from "@components/Link";
 import Image from "next/image";
 import Sozial from "./SozialIcons";
+
+const Marque = dynamic(() => import("./Marque"));
 
 interface FooterProps {
   navItems: NavItemType[];
@@ -54,8 +54,8 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
         </div>
         <div className="flex flex-col md:flex-row  gap-6 items-center justify-center mt-16 mb-12">
           <span>© 2021</span>
-          <Link href="/">Impressum</Link>
-          <Link href="/">Datenschutz</Link>
+          <Link href="/impressum">Impressum</Link>
+          <Link href="/datenschutz">Datenschutz</Link>
         </div>
       </Section>
     </footer>

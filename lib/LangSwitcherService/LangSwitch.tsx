@@ -10,7 +10,7 @@ export interface LangSwitchProps {
 
 const defaultItems = [
   { label: "DE", locale: "de" },
-  { label: "EN", locale: "en" },
+  // { label: "EN", locale: "en" },
   { label: "DK", locale: "da" },
 ];
 export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
@@ -19,7 +19,7 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
   const { locale } = useRouter();
 
   return (
-    <div className={`flex ${className}`}>
+    <div className={`flex ${className} pr-2`}>
       {items.map((item) => {
         return (
           <Link
@@ -29,7 +29,7 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
               (slugs && (slugs[`href_${item.locale}`] || slugs[`href`])) || "/"
             }
             locale={item.locale}
-            className={`px-1 w-10 h-10 flex items-center justify-center rounded-full  border-black  leading-none hover:underline ${
+            className={`px-1 w-9 h-9 flex items-center justify-center rounded-full font-bold  border-black  leading-none hover:underline ${
               item.locale === locale ? "border-2" : ""
             } `}
           >

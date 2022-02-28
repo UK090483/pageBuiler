@@ -46,7 +46,7 @@ const handleFixed = (
     imageProps.src = `${imageProps.src}${crop.query}`;
   }
 
-  return imageProps;
+  return { ...options, ...imageProps };
 };
 
 export default handleFixed;

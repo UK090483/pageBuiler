@@ -45,16 +45,17 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
 
         <div className=" w-full flex justify-between items-center">
           <Button>jetzt Anmelden</Button>
-          <svg
-            onClick={() => setOpen((i) => !i)}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className={`inline-block  stroke-current fill-current  border-2 rounded-full w-11 h-11 p-1 border-black ${
-              open ? "rotate-90 " : "-rotate-90"
-            }`}
-          >
-            <path fill="none" strokeWidth="2" d="M9 5l7 7-7 7" />
-          </svg>
+          <button onClick={() => setOpen((i) => !i)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className={`inline-block  stroke-current fill-current  border-2 rounded-full w-11 h-11 p-1 border-black ${
+                open ? "rotate-90 " : "-rotate-90"
+              }`}
+            >
+              <path fill="none" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </li>

@@ -11,12 +11,8 @@ import config from "../app.config.json";
 import {
   LangSwitcherQuery,
   LangSwitcherResult,
-} from "@services/LangSwitcherService/LangSwitcherQuery";
+} from "lib/LangSwitcherService/LangSwitcherQuery";
 import { Page } from "studio/schema";
-// import {
-//   NavigationQuery,
-//   NavigationResult,
-// } from "@services/NavigationService/NavigationQuery";
 
 import { seoQuery, SeoResult } from "@services/SeoService/SeoQuerys";
 import HeroBlock, {
@@ -36,11 +32,6 @@ export type PageResult = PageBuilderResult &
   NavigationResult &
   SeoResult &
   Page;
-
-// export interface PageData extends NavigationResult, FooterQueryResult {
-//   content: (SectionBlockResult | ListingBlockProps | HeroBlogResult)[];
-//   title?: string;
-// }
 
 const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
   revalidate: 1,

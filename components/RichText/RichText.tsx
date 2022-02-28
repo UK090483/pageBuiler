@@ -9,9 +9,12 @@ import Typo from "@components/Typography/Typography";
 import SpacerPlug, { spacerPlugQuery } from "./Plugs/Spacer";
 import SanityRichText from "lib/SanityPageBuilder/lib/RichText";
 import List from "./list/List";
-import ImagePlug, { ImagePlugQuery } from "./Plugs/ImagePlug";
-import EventPlug, { EventPlugQuery } from "./Plugs/EventPlug/EventPlug";
+import ImagePlug from "./Plugs/ImagePlug/ImagePlug";
 import EmbedHTML from "./Plugs/EmbedHTML/EmbedHTML";
+import EventPlug from "./Plugs/EventPlug/EventPlug";
+import eventPlugQuery from "./Plugs/EventPlug/EventPlugQuery";
+import { ImagePlugQuery } from "./Plugs/ImagePlug/imagePlugQuery";
+import PlayerPlug from "./Plugs/PlayerPlug/PlayerPlug";
 
 const marksQuery = `
 markDefs[]{
@@ -20,14 +23,13 @@ markDefs[]{
 }
 `;
 export const richTextQuery = (locale: string = "") => `
-
   ...,
   ${marksQuery},
   ${buttonPlugQuery},
   ${spacerPlugQuery},
   ${imageGalleryPlugQuery},
   ${ImagePlugQuery},
-  ${EventPlugQuery},
+  ${eventPlugQuery},
 
 `;
 
@@ -46,6 +48,7 @@ const RichText: React.FC<any> = (props: any) => {
         imagePlug: ImagePlug,
         eventPlug: EventPlug,
         embedHTML: EmbedHTML,
+        playerPlug: PlayerPlug,
       }}
       marks={{
         link,
