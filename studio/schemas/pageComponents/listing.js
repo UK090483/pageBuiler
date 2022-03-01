@@ -72,7 +72,7 @@ export default withLocalization({
       name: "showTitle",
       type: "boolean",
       hidden: ({ parent }) =>
-        !(parent?.type === "contentType" && parent?.contentType === "persons"),
+        !(parent?.type === "custom" || parent?.contentType === "persons"),
     },
   ],
 });

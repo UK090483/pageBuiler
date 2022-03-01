@@ -4,6 +4,7 @@ export default withLocalization({
   name: "pageType",
   title: "Page type",
   type: "document",
+
   fields: [
     {
       name: "name",

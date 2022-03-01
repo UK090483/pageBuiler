@@ -9,7 +9,7 @@ import { ListItem } from "./ListItem";
 import Filter from "./Filter";
 
 interface ListingProps {
-  title?: string;
+  title?: string | null;
   items: ListItemResult[];
   variant: "grid" | "list" | "carousel";
   filterItems?: { label: string; value: string }[];

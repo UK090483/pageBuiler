@@ -1,18 +1,10 @@
 import React from "react";
 import clsx from "clsx";
-
-import {
-  imageMeta,
-  ImageMetaResult,
-} from "@services/pageBuilderService/queries/snippets";
-
 import { AppColor, Section as SectionType } from "types";
-
 import RichText, { richTextQuery } from "@components/RichText/RichText";
-
 import { Section } from "@components/Section/Section";
-
-import { Image } from "@components/Image";
+import SanityImage from "lib/SanityImage";
+import { imageMeta, ImageMetaResult } from "lib/SanityImage/query";
 
 export const sectionBlockQuery = (locale: string) => `
 _type == "section" => {
@@ -54,7 +46,7 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
     type,
     imagePosition = "l",
   } = props;
-  const hasImage = image && image.asset;
+  const hasImage = image && image.url;
   const autoType = hasImage ? "l" : "s";
 
   return (
@@ -89,14 +81,15 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
       </Section>
 
       {bgColor === "primary" && <Transition pos="bottom" />}
+      <div className="clear-both "></div>
     </>
   );
 };
 
 const WithImage: React.FC<{
   place: "l" | "r";
-  image: ImageMetaResult | null;
-}> = ({ children, place = "l" }) => {
+  image: ImageMetaResult;
+}> = ({ children, place = "l", image }) => {
   const content = (
     <div
       className={clsx({
@@ -104,14 +97,14 @@ const WithImage: React.FC<{
         "pl-0  lg:pl-12 col-span-2": place === "l",
       })}
     >
-      {children}{" "}
+      {children}
     </div>
   );
   return (
     <>
       {place === "r" && content}
       <div className="relative overflow-hidden aspect-w-1 aspect-h-1 ">
-        <Image objectFit="contain" alt="bla" />
+        <SanityImage image={image} objectFit="contain" alt="bla" />
       </div>
       {place === "l" && content}
     </>

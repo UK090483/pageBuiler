@@ -15,9 +15,20 @@ export default withLocalization({
       localize: true,
     },
     {
+      name: "subTitle",
+      type: "string",
+      title: "SubTitle",
+      localize: true,
+    },
+    {
       name: "description",
       type: "text",
       title: "Description",
+      description: "should be between 50 and 160 characters",
+      validation: (Rule) => [
+        Rule.max(160).warning("should not be more than 160 characters"),
+        Rule.min(50).warning("should be at least 50 characters"),
+      ],
       localize: true,
     },
     {
@@ -31,6 +42,9 @@ export default withLocalization({
       name: "pageType",
       type: "reference",
       to: [{ type: "pageType" }],
+      options: {
+        disableNew: true,
+      },
     },
     {
       name: "featuredImage",

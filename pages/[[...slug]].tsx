@@ -34,10 +34,9 @@ export type PageResult = PageBuilderResult &
   Page;
 
 const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
-  revalidate: 1,
+  // revalidate: 1,
   client,
   locales: config.locales,
-
   getQuery: (props) => {
     const { locale } = props;
     const res = `..., ${blockFactory.getRootQuery({ locale })}, ${seoQuery(

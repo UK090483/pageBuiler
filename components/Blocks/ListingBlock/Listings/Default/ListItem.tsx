@@ -23,6 +23,7 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
     className,
     position = "left",
     featuredImage,
+    subTitle,
   } = props;
 
   return (
@@ -42,7 +43,7 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
         )}
         <div className={`px-3 w-full`}>
           <Typo bold className="pb-2 leading-none " variant="body">
-            {slug?.toUpperCase()}
+            {subTitle ? subTitle.toUpperCase() : slug?.toUpperCase()}
           </Typo>
           <Typo
             as={"h2"}

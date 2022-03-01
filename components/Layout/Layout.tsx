@@ -17,7 +17,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         <Nav items={data?.navigation || []} slugs={data?.langSwitchData} />
       </Header>
       <Head name={data?.title} />
-      <main id="main-content" className="min-h-screen mt-[57px]">
+      <main id="main-content" className="min-h-screen mt-[57px] select-none">
         {children}
       </main>
       <Footer navItems={page?.navigation || []} />

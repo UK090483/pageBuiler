@@ -1,18 +1,7 @@
 import React from "react";
-
-import Link from "next/link";
+import { Link } from "@components/Link";
 import { LinkResult, linkQuery } from "lib/Navigation/query";
-
-// import Icon from "@components/Icon";
-// import { buildInternalLink } from "@src/services/pageBuilder/buildInternalLink";
-
-const InlineIcon = () => {
-  return (
-    <span className="inline-block   h-[1em] transform translate-y-[-0.2em] ">
-      {/* <Icon icon="arrowRight" bgColor="grey" /> */} <span>LinkIcon</span>
-    </span>
-  );
-};
+import Button from "@components/Button/Button";
 
 type LinkMarkPros = {
   link?: LinkResult;
@@ -21,37 +10,31 @@ type LinkMarkPros = {
 
 export const linkMarkQuery = `
 _type == "link" => {
-  ...,
-
   'link': link{${linkQuery()}},
-  'test':'test',
-    'internalLink': link.internalLink->{'type':_type, 'slug':slug.current},
-    
     asButton,
   }`;
 
 const LinkMark: React.FC<LinkMarkPros> = (props) => {
   const { link, asButton } = props;
-
-  if (!link?.external && link?.internalLink) {
+  if (asButton) {
     return (
-      <Link href={link?.internalLink} passHref>
-        <a className="underline text-frida-red">
-          {asButton ? <InlineIcon /> : props.children}
-        </a>
-      </Link>
+      <Button href={link?.href} external={link?.external}>
+        {props.children}
+      </Button>
     );
   }
-
   return (
-    <a
-      target="_blank"
-      rel="noreferrer"
-      href={link?.href || "/"}
-      className="underline text-frida-red"
-    >
-      {asButton ? <InlineIcon /> : props.children}
-    </a>
+    <>
+      {link?.href && (
+        <Link
+          href={link?.href}
+          external={link?.external}
+          className="underline font-bold"
+        >
+          {props.children}
+        </Link>
+      )}
+    </>
   );
 };
 
@@ -60,4 +43,3 @@ const link = (props: any) => {
 };
 
 export default link;
-export {};
