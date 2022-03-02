@@ -1,5 +1,9 @@
 import { SPBComponent } from "../types";
 
+type getRootQueryProps = {
+  rootName?: string;
+  locale?: string;
+};
 export class BlockFactory {
   private static instance: BlockFactory;
 
@@ -18,9 +22,11 @@ export class BlockFactory {
     return C ? <C {...props} /> : null;
   }
 
-  public getRootQuery(rootName: string = "content") {
+  public getRootQuery({ rootName = "content", locale }: getRootQueryProps) {
     const elementQuery = this.getRootElements()
-      .map((c) => c.query)
+      .map((c) =>
+        typeof c.query === "function" ? c.query(locale || "") : c.query
+      )
       .join(" , ");
     return `${rootName}[]{${elementQuery}}`;
   }
@@ -33,7 +39,6 @@ export class BlockFactory {
     if (!BlockFactory.instance) {
       BlockFactory.instance = new BlockFactory();
     }
-
     return BlockFactory.instance;
   }
 }

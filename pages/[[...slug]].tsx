@@ -1,20 +1,10 @@
-import { sanityClient as client } from "@services/SanityService/sanity.server";
-
-import {
-  blockFactory,
-  ContentParser,
-  PageBuilderResult,
-} from "@services/pageBuilderService/client";
-
+import { sanityClient as client } from "lib/SanityService/sanity.server";
 import config from "../app.config.json";
-
 import {
   LangSwitcherQuery,
   LangSwitcherResult,
 } from "lib/LangSwitcherService/LangSwitcherQuery";
-import { Page } from "studio/schema";
-
-import { seoQuery, SeoResult } from "@services/SeoService/SeoQuerys";
+import { seoQuery, SeoResult } from "lib/SeoService/SeoQuerys";
 import HeroBlock, {
   heroBlockQuery,
 } from "@components/Blocks/HeroBlock/HeroBlock";
@@ -26,12 +16,11 @@ import SectionBlock, {
 } from "@components/Blocks/SectionBlock/SectionBlock";
 import SPB from "lib/SanityPageBuilder/SPB";
 import { NavigationQuery, NavigationResult } from "lib/Navigation/query";
+import blockFactory from "lib/SanityPageBuilder/lib/BlockFactory";
 
-export type PageResult = PageBuilderResult &
-  LangSwitcherResult &
+export type PageResult = { title?: string } & LangSwitcherResult &
   NavigationResult &
-  SeoResult &
-  Page;
+  SeoResult;
 
 const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
   revalidate: 1,

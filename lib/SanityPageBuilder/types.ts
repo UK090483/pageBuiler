@@ -14,7 +14,7 @@ import { ParsedUrlQuery } from "querystring";
 export type SPBComponent = {
   name: string;
   component: ComponentType<any>;
-  query: string;
+  query: string | ((locale: string) => string);
 };
 
 type Revalidate = number | boolean;

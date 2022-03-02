@@ -4,7 +4,6 @@ import Typo from "@components/Typography";
 import { Image } from "@components/Image";
 import { Link } from "@components/Link";
 import { ListItemResult } from "@components/Blocks/ListingBlock/ListingsBlock";
-import { DateString } from "@services/pageBuilderService/queries/snippets";
 
 import SanityImage from "lib/SanityImage";
 import Button from "@components/Button/Button";

@@ -2,7 +2,6 @@ import EventsList from "@components/Blocks/ListingBlock/Listings/Events/EventsLi
 import Listing from "@components/Blocks/ListingBlock/Listings/Default/Listing";
 import { ImageMetaResult, imageMeta } from "lib/SanityImage/query";
 import React from "react";
-import { DateString } from "../../../services/pageBuilderService/queries/snippets";
 import PersonList from "./Listings/Persons/PersonList";
 import TestimonialList from "./Listings/Testimonials/TestimonialList";
 import { testimonialQuery } from "./Listings/Testimonials/testimaonialQuery";
@@ -47,7 +46,7 @@ export interface ListItemResult {
   slug?: null | string;
   featuredImage?: null | ImageMetaResult;
   _id: string;
-  _updatedAt?: DateString;
+  _updatedAt?: string;
 }
 
 export const listingBlockQuery = (locale: string) => `

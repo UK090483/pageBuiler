@@ -2,11 +2,9 @@
 import Svg from "@components/Svg";
 import React from "react";
 import { Link } from "@components/Link";
-import useMenu from "@services/StoreService/hooks/useMenu";
+
 import { Logo } from "@components/Layout/Logo";
-import type { NavItem } from "@services/NavigationService/types";
-import { NavigationModul } from "@services/NavigationService/NavigationModul";
-import NavigationMobile from "@services/NavigationService/NavigationMobile";
+
 import {
   LangSwitch,
   LangSwitchProps,
@@ -14,6 +12,8 @@ import {
 import { LangSwitcherResult } from "lib/LangSwitcherService/LangSwitcherQuery";
 
 import { HeaderNavigation } from "lib/Navigation";
+import NavigationMobile from "lib/Navigation/NavigationMobile";
+import { NavItem } from "lib/Navigation/types";
 
 interface NavProps {
   items: NavItem[];
@@ -23,11 +23,6 @@ interface NavProps {
 const Nav: React.FC<NavProps> = (props) => {
   const { items, slugs } = props;
 
-  const { toggleMenu, menuOpen, closeMenu } = useMenu();
-
-  const handleNavClick = () => {
-    toggleMenu();
-  };
   return (
     <>
       <nav>
@@ -45,14 +40,14 @@ const Nav: React.FC<NavProps> = (props) => {
 
           <button
             data-testid="menu-overlay-toggle"
-            onClick={handleNavClick}
+            onClick={() => {}}
             className="lg:hidden"
           >
             <Svg className="w-[30px] h-[30px]" icon="hamburger" />
           </button>
         </div>
       </nav>
-      <NavigationMobile items={items} open={menuOpen} closeMenu={closeMenu} />
+      <NavigationMobile items={items} open={false} closeMenu={() => {}} />
     </>
   );
 };

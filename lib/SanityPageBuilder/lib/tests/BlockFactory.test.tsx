@@ -47,7 +47,7 @@ describe("ComponentFactory", () => {
 
   it("getRootQuery  should create RootQuery", () => {
     const factory = PackedFactory();
-    expect(factory.getRootQuery()).toEqual("content[]{root , root2 , }");
+    expect(factory.getRootQuery({})).toEqual("content[]{root , root2 , }");
   });
 
   // it("getRootElements should return RootElements ", () => {

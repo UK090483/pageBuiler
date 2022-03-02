@@ -1,6 +1,4 @@
-import { DateString } from "@services/pageBuilderService/queries/snippets";
-
-const useDateString = (date?: DateString | null) => {
+const useDateString = (date?: string | null) => {
   let result;
   if (date) {
     try {

@@ -2,15 +2,15 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
-import { NavItem as NavItemType } from "@services/NavigationService/types";
 import { Link } from "@components/Link";
 import Image from "next/image";
 import Sozial from "./SozialIcons";
+import { NavItem } from "lib/Navigation/types";
 
 const Marque = dynamic(() => import("./Marque"));
 
 interface FooterProps {
-  navItems: NavItemType[];
+  navItems: NavItem[];
 }
 
 const Footer: React.FC<FooterProps> = ({ navItems }) => {
