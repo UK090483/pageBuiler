@@ -23,7 +23,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items }) => {
         clearInterval(interval.current);
       }
     };
-  }, []);
+  }, [items.length]);
 
   return (
     <Section bg="grey" width="full" className="overflow-hidden">

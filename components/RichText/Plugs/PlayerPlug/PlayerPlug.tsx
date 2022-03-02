@@ -10,9 +10,7 @@ interface IPlayerPlugProps {
 
 const PlayerPlug: React.FC<PlugProps<IPlayerPlugProps>> = (props) => {
   const { url, customWidth = "2/3" } = props.node;
-  React.useEffect(() => {
-    if (!url) return;
-  }, []);
+
   if (!url) return null;
 
   return (

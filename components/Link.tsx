@@ -1,6 +1,6 @@
 import React from "react";
-
 import NextLink from "next/link";
+
 interface LinkProps {
   href: string;
   className?: string;

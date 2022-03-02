@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import useIsReducedMotion from "@hooks/useIsReducedMotion";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

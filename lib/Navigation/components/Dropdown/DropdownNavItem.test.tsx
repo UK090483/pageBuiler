@@ -1,4 +1,4 @@
-import { NavigationContextProvider } from "@lib/Navigation/NavigationContext";
+import { NavigationContextProvider } from "../../NavigationContext";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import DropdownNavItem from "./DropdownNavItem";
@@ -20,8 +20,7 @@ const customRender = (items?: boolean) => {
 
 describe("DropdownNavItem", () => {
   it(" should render not if no items  ", () => {
-    customRender();
-
+    // customRender();
     expect(screen.queryByTestId("DropdownNavItem")).toBeFalsy();
   });
 

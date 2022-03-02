@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { Section } from "@components/Section/Section";
-import useBreakpoints from "@hooks/useBreakingPoints";
 import { HeroBlockProps } from "@components/Blocks/HeroBlock/HeroBlock";
 import BlockContent, { Serializers } from "@sanity/block-content-to-react";
 import { Textfit } from "react-textfit";
@@ -26,7 +24,6 @@ const fontSizes: { [key: string]: number } = {
 const InlineImage = (props) => {
   //@ts-ignore
   const { src } = useSanityImage(props.mark);
-
   return (
     <span style={{ height: "0.705em" }} className="relative inline-block ">
       {src && (

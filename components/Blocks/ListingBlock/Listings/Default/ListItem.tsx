@@ -1,7 +1,7 @@
 import React from "react";
 
 import Typo from "@components/Typography";
-import { Image } from "@components/Image";
+
 import { Link } from "@components/Link";
 import { ListItemResult } from "@components/Blocks/ListingBlock/ListingsBlock";
 
