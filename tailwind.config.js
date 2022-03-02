@@ -1,18 +1,17 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./services/**/*.{js,ts,jsx,tsx}",
-    "./modules/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     fontFamily: {
       sans: ["Montserrat", "Helvetica", "sans-serif"],
-      hand: ["Caveat"],
+      header: ["grotesk"],
     },
     fontSize: {
       sm: ["12px", "1.4em"],
@@ -44,12 +43,17 @@ module.exports = {
         fadeInMenuItemFast: "menuFade 0.25s ease-in forwards",
         slideDown: "slideDown 0.25s ease-in forwards",
         slideInRight: "slideInRight 0.5s ease-in forwards",
+        marquee: "marquee 25s linear infinite",
       },
       keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
         menuFade: {
           "0%": {
             opacity: 0,
-            transform: " translateX(-50%)   translateY(-100%)",
+            transform: " translateX(-50%) translateY(-100%)",
             zIndex: -100,
           },
 
@@ -60,7 +64,7 @@ module.exports = {
           "100%": {
             zIndex: 20,
             opacity: 1,
-            transform: " translateX(-50%) ",
+            transform: "translateX(-50%) ",
           },
         },
         fadeIn: {

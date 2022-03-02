@@ -1,45 +1,63 @@
-import { Avatar, AvatarList } from "@components/organisms/Avaters/Avatar";
-import { Carousel } from "@components/organisms/Listings/Carousel";
-import { Section } from "@components/Section/Section";
-import { NavOverview } from "@services/NavigationService/NavOverview";
-import { NavItem as NavItemType } from "@services/NavigationService/types";
 import React from "react";
-import { Logo } from "../Logo";
+import dynamic from "next/dynamic";
+import { Section } from "@components/Section/Section";
+import Typo from "@components/Typography/Typography";
+import { Link } from "@components/Link";
+import Image from "next/image";
+import Sozial from "./SozialIcons";
+import { NavItem } from "lib/Navigation/types";
 
-import FooterContact from "./FooterContact";
-import Quote from "./Quotes/Quote";
+const Marque = dynamic(() => import("./Marque"));
 
 interface FooterProps {
-  navItems: NavItemType[];
+  navItems: NavItem[];
 }
 
 const Footer: React.FC<FooterProps> = ({ navItems }) => {
   return (
     <footer data-testid="footer" className="flex flex-col items-center ">
-      {/* <Carousel />
-      <Quote />
-      <FooterContact /> */}
+      <Marque />
+      <Section width="full" className=" px-5 ">
+        <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div className="relative  min-h-[200px]">
+              <div className=" text-sm pb-4 ">
+                Dieses Projekt wird gefördert durch Interreg Deutschland-
+                Danmark mit Mitteln des Europäischen Fonds für regionale
+                Entwicklung. Erfahren Sie mehr über Interreg Deutschland-
+                Danmark unter www.interreg5a.eu
+              </div>
+              <Image
+                src={`/images/logo_interreg_logo.png`}
+                alt="me"
+                width={500}
+                height={86}
+              />
+            </div>
+            <div className="relative  min-h-[200px]">
+              <div className=" text-sm pb-7 ">Weitere Förderer </div>
+              <Image
+                src={`/images/kiel_marke_logo.png`}
+                alt="me"
+                width={301}
+                height={108}
+              />
+            </div>
+          </div>
+          <div>
+            <Typo variant="h1" as="p">
+              Follow Us
+            </Typo>
 
-      <AvatarList />
-      <Section width="l" className="pt-12">
-        <NavOverview
-          items={navItems}
-          className="w-full py-24 border-t-2 border-b-2"
-        />
+            <Sozial />
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row  gap-6 items-center justify-center mt-16 mb-12">
+          <span>© 2021</span>
+          <Link href="/impressum">Impressum</Link>
+          <Link href="/datenschutz">Datenschutz</Link>
+        </div>
       </Section>
-
-      <div className="flex items-center justify-between w-full max-w-6xl px-8 ">
-        {/* <Nav size="s" href="/" label=" Perspektiv Region" />
-        <div className="flex ">
-          <NavItem size="s" href="/impressum" label="Impressum" />
-          <NavItem
-            size="s"
-            href="/datenschutz"
-            label="Datenschutz"
-            divider={false}
-          />
-        </div> */}
-      </div>
     </footer>
   );
 };

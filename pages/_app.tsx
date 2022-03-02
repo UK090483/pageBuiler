@@ -1,36 +1,30 @@
 import "../styles/globals.css";
 
 import { Layout } from "@components/Layout/Layout";
-import StoreContextProvider from "@services/StoreService/StoreProvider";
-
 import { NextComponentType, NextPageContext } from "next";
-import Cookie from "@services/CookieService/Cookie";
-//@ts-ignore
-// import { PageTransition } from "next-page-transitions";
-import { FetchStaticPropsResult } from "@services/pageBuilderService/lib/fetchStaticProps";
-import PreviewIndicator from "@services/pageBuilderService/lib/PreviewIndicator";
-import Seo from "@services/SeoService/Seo";
+import Cookie from "lib/Cookie/Cookie";
+import PreviewIndicator from "lib/SanityPageBuilder/lib/preview/PreviewIndicator";
+import Seo from "lib/SeoService/Seo";
 import { PageResult } from "./[[...slug]]";
-import { SessionProvider } from "next-auth/react";
+import { FetchStaticPropsResult, PageProps } from "lib/SanityPageBuilder/types";
 
 interface AppPropsWithStaticProps {
-  pageProps: FetchStaticPropsResult<PageResult>;
-  Component: NextComponentType<NextPageContext, any, FetchStaticPropsResult>;
+  pageProps: PageProps<PageResult>;
+  Component: NextComponentType<NextPageContext, any, PageProps<PageResult>>;
 }
 
 function App({ Component, pageProps }: AppPropsWithStaticProps) {
-  const { page, session } = pageProps;
+  const { page } = pageProps;
+
   return (
-    <SessionProvider session={session}>
-      <StoreContextProvider>
-        <Layout {...pageProps}>
-          <Component {...pageProps} />
-        </Layout>
-        {pageProps.preview && <PreviewIndicator />}
-        <Cookie />
-        {page?.seo && <Seo pageUrl={"https://www.test.com"} {...page.seo} />}
-      </StoreContextProvider>
-    </SessionProvider>
+    <>
+      <Layout {...pageProps}>
+        <Component {...pageProps} />
+      </Layout>
+      {/* {pageProps?.preview && <PreviewIndicator />} */}
+      <Cookie />
+      {/* {pageProps?page?.seo && <Seo pageUrl={"https://www.test.com"} {...page.seo} /> */}
+    </>
   );
 }
 

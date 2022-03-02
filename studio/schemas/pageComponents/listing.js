@@ -35,9 +35,10 @@ export default withLocalization({
       type: "string",
       options: {
         list: [
-          { title: "Page", value: "page" },
-          { title: "Post", value: "post" },
-          { title: "Projects", value: "project" },
+          { title: "Events", value: "event" },
+          { title: "Documentations", value: "documentations" },
+          { title: "Persons", value: "persons" },
+          { title: "Testimonials", value: "testimonials" },
         ],
         layout: "radio",
       },
@@ -48,6 +49,30 @@ export default withLocalization({
       type: "array",
       of: [{ type: "reference", to: [{ type: "page" }] }],
       hidden: ({ parent }) => parent?.type !== "custom",
+    },
+    {
+      name: "personItems",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "person" }] }],
+      hidden: ({ parent }) =>
+        !(parent?.type === "contentType" && parent?.contentType === "persons"),
+    },
+    {
+      name: "testimonialItems",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "testimonial" }] }],
+      hidden: ({ parent }) =>
+        !(
+          parent?.type === "contentType" &&
+          parent?.contentType === "testimonials"
+        ),
+    },
+    {
+      title: "Show Title",
+      name: "showTitle",
+      type: "boolean",
+      hidden: ({ parent }) =>
+        !(parent?.type === "custom" || parent?.contentType === "persons"),
     },
   ],
 });

@@ -1,19 +1,40 @@
 import React from "react";
-import { createBreakpoint, useUpdateEffect } from "react-use";
-
-// import resolveConfig from "tailwindcss/resolveConfig";
-// import tailwindConfig from "../tailwind.config";
-
-// const fullConfig = resolveConfig(tailwindConfig);
+const isBrowser = typeof window !== "undefined";
 
 export const BreakingPoints = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  "2xl": 1536,
+  _: 640,
+  sm: 768,
+  md: 1024,
+  lg: 1280,
+  xl: 1536,
+  "2xl": 1000000,
 };
 
-const useBreakingPoints = createBreakpoint(BreakingPoints);
+const useBreakingPoints = () => {
+  const [state, setState] = React.useState<[string, number]>(["_", 0]);
+
+  React.useEffect(() => {
+    if (!isBrowser) return;
+    const handler = () => {
+      const vw = Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      );
+
+      const p = Object.entries(BreakingPoints).find(([_, val]) => vw < val);
+
+      if (p && state[0] !== p[0]) {
+        setState(p);
+      }
+    };
+    handler();
+    window.addEventListener("resize", handler);
+    return () => {
+      window.removeEventListener("resize", handler);
+    };
+  }, [state, setState]);
+
+  return state;
+};
 
 export default useBreakingPoints;

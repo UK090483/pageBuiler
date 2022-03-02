@@ -3,49 +3,19 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "HMSans";
-  src: url("/fonts/HMSans-Regular.woff");
+  font-family: "grotesk";
+  src: url("/fonts/PPRightGrotesk-CompactBlack.woff2") format("woff2"),
+    url("/fonts/PPRightGrotesk-CompactBlack.woff") format("woff");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
-@font-face {
-  font-family: "HMSans";
-  src: url("/fonts/HMSans-SemiBold.woff");
-  font-style: medium;
-  font-weight: 500;
-  font-display: swap;
-}
 
-.svg-underline {
-  position: relative;
-}
-
-.svg-underline::after {
-  content: "";
-  position: absolute;
-  bottom: -20%;
-  left: -1rem;
-  right: -1rem;
-  top: 0;
-  z-index: -1;
-  border: red solid 1px;
-  background-image: url("/underline/underline.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.page-transition-enter {
-  opacity: 0;
-}
-.page-transition-enter-active {
-  opacity: 1;
-  transition: opacity 300ms;
-}
-.page-transition-exit {
-  opacity: 1;
-}
-.page-transition-exit-active {
-  opacity: 0;
-  transition: opacity 300ms;
+.tooltip {
+  background-color: white !important;
+  opacity: 1 !important;
+  border: black solid 2px !important;
+  padding: 2rem !important;
+  width: 300px !important;
+  color: black !important;
 }

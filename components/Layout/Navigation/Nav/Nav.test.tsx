@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import StoreContextProvider from "@services/StoreService/StoreProvider";
+
 import { render, screen, fireEvent } from "@testing-library/react";
 
 import Nav from "./Nav";

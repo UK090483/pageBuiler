@@ -1,3 +1,4 @@
+import React from "react";
 import { withLocalization } from "../Localizer";
 
 export default withLocalization({
@@ -23,7 +24,18 @@ export default withLocalization({
           styles: [{ title: "Normal", value: "normal" }],
           lists: [],
           marks: {
-            decorators: [],
+            decorators: [
+              {
+                title: "Brake word",
+                value: "brake",
+                blockEditor: {
+                  icon: () => <div>----</div>,
+                  render: ({ children }) => (
+                    <span style={{ backgroundColor: "grey" }}>-{children}</span>
+                  ),
+                },
+              },
+            ],
             annotations: [{ name: "image", type: "image", title: "Image" }],
           },
         },

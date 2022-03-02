@@ -2,7 +2,7 @@ import defaultImage from "./defaultImage";
 import link from "./link";
 import pageHeader from "./pageHeader";
 import Seo from "./Seo";
-import Navigation from "./Navigation";
+import Navigation from "./navigation";
 import localeString from "./localeString";
 
 const Objects = [
