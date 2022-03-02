@@ -1,5 +1,5 @@
 import Hero from "@components/Blocks/HeroBlock/Hero";
-import { imageMeta } from "lib/SanityImage/query";
+import { imageMeta } from "@lib/SanityImage/query";
 import React from "react";
 
 import { Hero as HeroType } from "types";

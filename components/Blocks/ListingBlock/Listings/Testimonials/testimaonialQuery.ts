@@ -1,4 +1,4 @@
-import { imageMeta } from "lib/SanityImage/query";
+import { imageMeta } from "@lib/SanityImage/query";
 
 const testimonialItemQuery = (locale: string) => `
 ...,

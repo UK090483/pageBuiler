@@ -5,7 +5,7 @@ import { Image } from "@components/Image";
 import { Link } from "@components/Link";
 import { ListItemResult } from "@components/Blocks/ListingBlock/ListingsBlock";
 
-import SanityImage from "lib/SanityImage";
+import SanityImage from "@lib/SanityImage";
 import Button from "@components/Button/Button";
 
 interface ListItemProps extends ListItemResult {

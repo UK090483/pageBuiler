@@ -4,7 +4,7 @@ import link from "./marks/link";
 import ImageGalleryPlug from "./Plugs/ImageGalleryPlug/ImageGalleryPlug";
 import Typo from "@components/Typography/Typography";
 import SpacerPlug from "./Plugs/Spacer";
-import SanityRichText from "lib/SanityPageBuilder/lib/RichText";
+import SanityRichText from "@lib/SanityPageBuilder/lib/RichText";
 import List from "./list/List";
 import ImagePlug from "./Plugs/ImagePlug/ImagePlug";
 import EmbedHTML from "./Plugs/EmbedHTML/EmbedHTML";

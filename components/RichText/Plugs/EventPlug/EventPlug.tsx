@@ -1,4 +1,4 @@
-import { PlugProps } from "lib/SanityPageBuilder/lib/RichText";
+import { PlugProps } from "@lib/SanityPageBuilder/lib/RichText";
 import React from "react";
 import EventItem, { IEventItem } from "./EventItem";
 

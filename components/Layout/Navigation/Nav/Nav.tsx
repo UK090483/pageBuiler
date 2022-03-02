@@ -8,12 +8,12 @@ import { Logo } from "@components/Layout/Logo";
 import {
   LangSwitch,
   LangSwitchProps,
-} from "lib/LangSwitcherService/LangSwitch";
-import { LangSwitcherResult } from "lib/LangSwitcherService/LangSwitcherQuery";
+} from "@lib/LangSwitcherService/LangSwitch";
+import { LangSwitcherResult } from "@lib/LangSwitcherService/LangSwitcherQuery";
 
-import { HeaderNavigation } from "lib/Navigation";
-import NavigationMobile from "lib/Navigation/NavigationMobile";
-import { NavItem } from "lib/Navigation/types";
+import { HeaderNavigation } from "@lib/Navigation";
+import NavigationMobile from "@lib/Navigation/NavigationMobile";
+import { NavItem } from "@lib/Navigation/types";
 
 interface NavProps {
   items: NavItem[];

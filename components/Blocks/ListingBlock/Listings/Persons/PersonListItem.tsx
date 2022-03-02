@@ -1,6 +1,6 @@
 import Typo from "@components/Typography/Typography";
-import SanityImage from "lib/SanityImage";
-import { ImageMetaResult } from "lib/SanityImage/query";
+import SanityImage from "@lib/SanityImage";
+import { ImageMetaResult } from "@lib/SanityImage/query";
 import ReactTooltip from "react-tooltip";
 
 import * as React from "react";

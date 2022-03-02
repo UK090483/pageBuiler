@@ -5,7 +5,7 @@ import Typo from "@components/Typography/Typography";
 import { Link } from "@components/Link";
 import Image from "next/image";
 import Sozial from "./SozialIcons";
-import { NavItem } from "lib/Navigation/types";
+import { NavItem } from "@lib/Navigation/types";
 
 const Marque = dynamic(() => import("./Marque"));
 

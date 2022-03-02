@@ -7,7 +7,7 @@ import BlockContent, { Serializers } from "@sanity/block-content-to-react";
 import { Textfit } from "react-textfit";
 
 import React from "react";
-import useSanityImage from "lib/SanityImage/useSanityImage";
+import useSanityImage from "@lib/SanityImage/useSanityImage";
 
 interface HeroProps extends HeroBlockProps {}
 

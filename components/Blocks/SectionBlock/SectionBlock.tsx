@@ -3,8 +3,8 @@ import clsx from "clsx";
 import { AppColor, Section as SectionType } from "types";
 import RichText from "@components/RichText/RichText";
 import { Section } from "@components/Section/Section";
-import SanityImage from "lib/SanityImage";
-import { imageMeta, ImageMetaResult } from "lib/SanityImage/query";
+import SanityImage from "@lib/SanityImage";
+import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
 import { richTextQuery } from "@components/RichText/richtTextQuery";
 
 export const sectionBlockQuery = (locale: string) => `

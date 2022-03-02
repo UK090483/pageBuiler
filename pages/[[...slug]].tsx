@@ -1,10 +1,10 @@
-import { sanityClient as client } from "lib/SanityService/sanity.server";
+import { sanityClient as client } from "@lib/SanityService/sanity.server";
 import config from "../app.config.json";
 import {
   LangSwitcherQuery,
   LangSwitcherResult,
-} from "lib/LangSwitcherService/LangSwitcherQuery";
-import { seoQuery, SeoResult } from "lib/SeoService/SeoQuerys";
+} from "@lib/LangSwitcherService/LangSwitcherQuery";
+import { seoQuery, SeoResult } from "@lib/SeoService/SeoQuerys";
 import HeroBlock, {
   heroBlockQuery,
 } from "@components/Blocks/HeroBlock/HeroBlock";
@@ -14,9 +14,9 @@ import ListingBlock, {
 import SectionBlock, {
   sectionBlockQuery,
 } from "@components/Blocks/SectionBlock/SectionBlock";
-import SPB from "lib/SanityPageBuilder/SPB";
-import { NavigationQuery, NavigationResult } from "lib/Navigation/query";
-import blockFactory from "lib/SanityPageBuilder/lib/BlockFactory";
+import SPB from "@lib/SanityPageBuilder/SPB";
+import { NavigationQuery, NavigationResult } from "@lib/Navigation/query";
+import blockFactory from "@lib/SanityPageBuilder/lib/BlockFactory";
 
 export type PageResult = { title?: string } & LangSwitcherResult &
   NavigationResult &
