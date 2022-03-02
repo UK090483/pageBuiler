@@ -19,3 +19,7 @@
   width: 300px !important;
   color: black !important;
 }
+
+.hero {
+  height: calc(100vh - 60px);
+}

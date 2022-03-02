@@ -37,17 +37,17 @@ const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
     {
       name: "hero",
       component: HeroBlock,
-      query: heroBlockQuery(""),
+      query: heroBlockQuery,
     },
     {
       name: "section",
       component: SectionBlock,
-      query: sectionBlockQuery(""),
+      query: sectionBlockQuery,
     },
     {
       name: "listing",
       component: ListingBlock,
-      query: listingBlockQuery(""),
+      query: listingBlockQuery,
     },
   ],
 });

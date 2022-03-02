@@ -34,7 +34,7 @@ function SPB<P extends { [k: string]: any } = {}>({
         revalidate,
         params,
         client,
-        query: `${bf.getRootQuery({})}, ${
+        query: `${bf.getRootQuery({ locale })}, ${
           getQuery ? getQuery(props) : query || ""
         }`,
         locales,

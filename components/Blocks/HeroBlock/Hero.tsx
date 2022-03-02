@@ -53,14 +53,21 @@ const serializer: Serializers = {
 
 const Hero: React.FC<HeroProps> = (props) => {
   const { text, title } = props;
+  const [ready, setReady] = React.useState(false);
 
   return (
     <>
       {text && (
         <Textfit
-          max={180}
-          className="w-full min-h-screen px-5 container mx-auto font-header  flex items-center leading-[1.2em] "
+          max={200}
+          className={`w-full hero  px-5 container mx-auto font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
+            ready ? "opacity-100" : "opacity-0"
+          }`}
           mode="multi"
+          onReady={() => {
+            !ready && setReady(true);
+            console.log("onReady");
+          }}
         >
           <BlockContent
             renderContainerOnSingleChild={false}
