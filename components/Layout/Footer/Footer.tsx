@@ -6,14 +6,15 @@ import { Link } from "@components/Link";
 import Image from "next/image";
 import Sozial from "./SozialIcons";
 import { NavItem } from "@lib/Navigation/types";
+import { PageResult } from "pages/[[...slug]]";
 
 const Marque = dynamic(() => import("./Marque"));
 
-interface FooterProps {
-  navItems: NavItem[];
-}
+interface FooterProps extends PageResult {}
 
-const Footer: React.FC<FooterProps> = ({ navItems }) => {
+const Footer: React.FC<FooterProps> = (props) => {
+  const { footer } = props;
+
   return (
     <footer data-testid="footer" className="flex flex-col items-center ">
       <Marque />
@@ -54,7 +55,11 @@ const Footer: React.FC<FooterProps> = ({ navItems }) => {
         </div>
         <div className="flex flex-col md:flex-row  gap-6 items-center justify-center mt-16 mb-12">
           <span>© 2021</span>
-          <Link href="/impressum">Impressum</Link>
+          {footer.imprintPage?.href && footer.imprintPage.label && (
+            <Link href={footer.imprintPage.href}>
+              {footer.imprintPage.label}
+            </Link>
+          )}
           <Link href="/datenschutz">Datenschutz</Link>
         </div>
       </Section>

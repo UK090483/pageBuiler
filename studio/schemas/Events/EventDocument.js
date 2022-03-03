@@ -1,4 +1,3 @@
-import { defaultBockContent } from "../snippets";
 import { withLocalization } from "../Localizer";
 export default withLocalization({
   name: "event",
@@ -34,6 +33,12 @@ export default withLocalization({
       name: "Text",
       title: "Text",
       type: "defaultRichText",
+      localize: true,
+    },
+    {
+      name: "content",
+      title: "Content",
+      type: "eventRichText",
       localize: true,
     },
   ],

@@ -3,6 +3,8 @@ import BlockFactory from "./lib/BlockFactory";
 import { SPBOptions, SPBResult } from "./types";
 import { fetchStaticProps } from "./lib/fetchStaticProps";
 import fetchStaticPaths from "./lib/fetchStaticPath/fetchStaticPath";
+import { getSanityClient } from "@lib/SanityService/sanity.server";
+import { env } from "process";
 
 function SPB<P extends { [k: string]: any } = {}>({
   revalidate,
@@ -33,7 +35,10 @@ function SPB<P extends { [k: string]: any } = {}>({
         locale,
         revalidate,
         params,
-        client,
+        client: getSanityClient({
+          active: !!preview,
+          token: process.env.SANITY_API_TOKEN,
+        }),
         query: `${bf.getRootQuery({ locale })}, ${
           getQuery ? getQuery(props) : query || ""
         }`,

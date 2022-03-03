@@ -1,7 +1,7 @@
 import React from "react";
 
 export default {
-  name: "defaultRichText",
+  name: "eventRichText",
   type: "array",
   title: "Text",
   of: [
@@ -80,11 +80,5 @@ export default {
         ],
       },
     },
-    { type: "spacer" },
-    { type: "imageGalleryPlug" },
-    { type: "autoGalleryPlug" },
-    { type: "playerPlug" },
-    { type: "imagePlug" },
-    { type: "eventPlug" },
   ],
 };

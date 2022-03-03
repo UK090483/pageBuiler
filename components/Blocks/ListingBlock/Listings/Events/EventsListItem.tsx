@@ -4,13 +4,9 @@ import Svg from "@components/Svg";
 import Typo from "@components/Typography/Typography";
 
 import * as React from "react";
+import { EventsListItemResult } from "./EventsListQuery";
 
-interface IEventsListItemProps {
-  name?: string | null;
-  description?: string | null;
-  content: any;
-  Text: any;
-}
+interface IEventsListItemProps extends EventsListItemResult {}
 
 const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
   props

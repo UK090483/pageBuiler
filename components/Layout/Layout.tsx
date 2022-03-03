@@ -10,6 +10,7 @@ interface LayoutProps extends PageProps<PageResult> {}
 
 export const Layout: React.FC<LayoutProps> = (props) => {
   const { children, page, data } = props;
+
   return (
     <>
       <SkipToContent containerId="main-content" />
@@ -20,7 +21,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       <main id="main-content" className="min-h-screen mt-[57px] select-none">
         {children}
       </main>
-      <Footer navItems={page?.navigation || []} />
+      {data && <Footer {...data} />}
     </>
   );
 };

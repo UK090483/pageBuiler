@@ -66,7 +66,6 @@ const Hero: React.FC<HeroProps> = (props) => {
           mode="multi"
           onReady={() => {
             !ready && setReady(true);
-            console.log("onReady");
           }}
         >
           <BlockContent

@@ -1,18 +1,13 @@
+import EventsList from "@components/Blocks/ListingBlock/Listings/Events/EventsList";
 import { PlugProps } from "@lib/SanityPageBuilder/lib/RichText";
 import React from "react";
-import EventItem, { IEventItem } from "./EventItem";
+import { EventPlugQueryResult } from "./EventPlugQuery";
 
-interface IEventPlugProps {
-  items?: IEventItem[];
-}
+interface IEventPlugProps extends EventPlugQueryResult {}
 
 const EventPlug: React.FC<PlugProps<IEventPlugProps>> = (props) => {
   const { items } = props.node;
-  return (
-    <div>
-      {items && items.map((i, index) => <EventItem key={index} {...i} />)}
-    </div>
-  );
+  return <EventsList items={items} />;
 };
 
 export default EventPlug;

@@ -46,7 +46,7 @@ const Listing: React.FC<ListingProps> = (props) => {
         {items.map((i, index) => (
           <ListItem
             key={i._id}
-            position={index % 2 === 0 ? "left" : "right"}
+            position={index % 2 === 0 ? "right" : "left"}
             {...i}
           />
         ))}

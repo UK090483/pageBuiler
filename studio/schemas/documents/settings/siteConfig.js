@@ -10,6 +10,21 @@ export default {
       to: [{ type: "page" }],
       validation: (Rule) => Rule.required(),
     },
+
+    {
+      name: "imprintPage",
+      title: "Imprint Page",
+      type: "reference",
+      to: [{ type: "page" }],
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "privacyPolicyPage",
+      title: "Privacy Policy Page",
+      type: "reference",
+      to: [{ type: "page" }],
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "mainNav",
       type: "array",

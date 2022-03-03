@@ -6,6 +6,11 @@ import PersonList from "./Listings/Persons/PersonList";
 import TestimonialList from "./Listings/Testimonials/TestimonialList";
 import { testimonialQuery } from "./Listings/Testimonials/testimaonialQuery";
 import { TestimonialItemResult } from "./Listings/Testimonials/testimonialTypes";
+import { EventsListItemQuery } from "./Listings/Events/EventsListQuery";
+import {
+  personItemQuery,
+  PersonItemResult,
+} from "./Listings/Persons/PersonListQuery";
 
 export const listItemQuery = (locale: string) => {
   return `
@@ -22,22 +27,6 @@ _id,
 'featuredImage':featuredImage{${imageMeta}}
 `;
 };
-
-const personItemQuery = (locale: string) => `
-...,
-_id,
-'avatar':avatar{${imageMeta}},
-'description':coalesce(description_${locale},description),
- name,
-'position':coalesce(position_${locale},position),
-`;
-export interface PersonItemResult {
-  name?: null | string;
-  position?: null | string;
-  description?: null | string;
-  avatar?: null | ImageMetaResult;
-  _id: string;
-}
 
 export interface ListItemResult {
   title?: null | string;
@@ -64,7 +53,7 @@ _type == "listing" => {
   'items': 
     select(
       type == 'custom' => customItems[]->{${listItemQuery(locale)}},
-      contentType in ['event']=> *[_type == ^.contentType][]{${listItemQuery(
+      contentType in ['event']=> *[_type == ^.contentType][]{${EventsListItemQuery(
         locale
       )}},
       contentType in ['documentations']=> *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" ][]{${listItemQuery(

@@ -17,8 +17,10 @@ import SectionBlock, {
 import SPB from "@lib/SanityPageBuilder/SPB";
 import { NavigationQuery, NavigationResult } from "@lib/Navigation/query";
 import blockFactory from "@lib/SanityPageBuilder/lib/BlockFactory";
+import { layoutQuery, layoutQueryResult } from "@components/Layout/LayoutQuery";
 
-export type PageResult = { title?: string } & LangSwitcherResult &
+export type PageResult = { title?: string } & layoutQueryResult &
+  LangSwitcherResult &
   NavigationResult &
   SeoResult;
 
@@ -28,9 +30,11 @@ const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
   locales: config.locales,
   getQuery: (props) => {
     const { locale } = props;
-    const res = `..., ${blockFactory.getRootQuery({ locale })}, ${seoQuery(
-      locale
-    )}, ${LangSwitcherQuery(config.locales)}, ${NavigationQuery(locale)}`;
+    const res = `${layoutQuery(locale)} ${blockFactory.getRootQuery({
+      locale,
+    })}, ${seoQuery(locale)}, ${LangSwitcherQuery(
+      config.locales
+    )}, ${NavigationQuery(locale)}`;
     return res;
   },
   components: [
