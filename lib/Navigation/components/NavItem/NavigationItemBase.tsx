@@ -18,7 +18,7 @@ export const NavigationItemBase: React.FC<NavItemBaseProps> = ({
     <span
       className={`block w-full px-5 py-4 leading-none whitespace-nowrap transition-colors duration-500 font-bold text-base ${
         place === "dropdown/link" ? "hover:bg-black  hover:text-white " : ""
-      }  ${bold ? " font-bold " : ""} `}
+      }  ${bold ? " font-bold " : ""}  `}
     >
       {children}
       {icon && (

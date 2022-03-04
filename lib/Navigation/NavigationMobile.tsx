@@ -1,6 +1,7 @@
 import Portal from "@components/Portal";
 import Svg from "@components/Svg";
 import useAnimationDelay from "@hooks/useAnimationDelay";
+import { LangSwitch } from "@lib/LangSwitcherService/LangSwitch";
 import React from "react";
 import { useLockBodyScroll } from "react-use";
 import DefaultNavigationItemBase from "./components/NavItem/NavigationItemBase";
@@ -27,6 +28,7 @@ const NavigationMobile: React.FC<NavigationMobileProps> = ({
   closeMenu,
   NavigationLink,
   NavigationItemBase,
+  children,
 }) => {
   const NavigationLinkComponent = NavigationLink
     ? NavigationLink
@@ -66,7 +68,7 @@ const NavigationMobile: React.FC<NavigationMobileProps> = ({
       {render && (
         <Portal>
           <div
-            className={`flex flex-col items-center justify-center h-screen bg-primary  fixed inset-0  z-10  transition-all transform duration-300 ${
+            className={`flex flex-col items-center justify-center h-screen bg-white  fixed inset-0  z-10  transition-all transform duration-300 ${
               animation
                 ? " translate-y-0 opacity-100 "
                 : "-translate-y-96  opacity-0"
@@ -90,7 +92,7 @@ const NavigationMobile: React.FC<NavigationMobileProps> = ({
                 return (
                   <div
                     key={item.label}
-                    className="absolute top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-primary animate-fadeInFast"
+                    className="absolute top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-white animate-fadeInFast"
                   >
                     <button
                       className="absolute transform rotate-180 top-32 right-6 "
@@ -114,6 +116,7 @@ const NavigationMobile: React.FC<NavigationMobileProps> = ({
                   </div>
                 );
               })}
+            {children}
           </div>
         </Portal>
       )}
@@ -147,7 +150,9 @@ const ConditionalButton: React.FC<
     </button>
   ) : (
     <NavigationLinkComponent onClick={() => onClick("link")} {...props.link}>
-      {label}
+      <NavigationItemBaseComponent active={false} props={props}>
+        {label}
+      </NavigationItemBaseComponent>
     </NavigationLinkComponent>
   );
 };

@@ -23,6 +23,8 @@ interface NavProps {
 const Nav: React.FC<NavProps> = (props) => {
   const { items, slugs } = props;
 
+  const [open, setOpen] = React.useState(false);
+
   return (
     <>
       <nav>
@@ -39,15 +41,23 @@ const Nav: React.FC<NavProps> = (props) => {
           <LangSwitch className="hidden lg:flex" slugs={slugs} />
 
           <button
-            data-testid="menu-overlay-toggle"
-            onClick={() => {}}
-            className="lg:hidden"
+            data-testid="menu-overlay-toggle "
+            onClick={() => setOpen((s) => !s)}
+            className="lg:hidden mr-2"
           >
             <Svg className="w-[30px] h-[30px]" icon="hamburger" />
           </button>
         </div>
       </nav>
-      <NavigationMobile items={items} open={false} closeMenu={() => {}} />
+      <NavigationMobile
+        items={items}
+        open={open}
+        closeMenu={() => {
+          setOpen(false);
+        }}
+      >
+        <LangSwitch slugs={slugs} />
+      </NavigationMobile>
     </>
   );
 };

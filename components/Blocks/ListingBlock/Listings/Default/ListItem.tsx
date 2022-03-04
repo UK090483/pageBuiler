@@ -41,13 +41,13 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
           </div>
         )}
         <div className={`px-3 w-full`}>
-          <Typo bold className="pb-2 leading-none " variant="body">
+          <Typo bold space={false} className=" pb-3 " variant="body-l">
             {subTitle ? subTitle.toUpperCase() : slug?.toUpperCase()}
           </Typo>
           <Typo as={"h2"} variant="h2">
             {title}
           </Typo>
-          <Typo className="w-full overflow-hidden whitespace-pre-line ">
+          <Typo className="w-full overflow-hidden whitespace-pre-line mb-4 ">
             {description}
           </Typo>
           <Button tabIndex={-1}>Mehr erfahren</Button>
@@ -56,52 +56,3 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
     </li>
   );
 };
-
-// export const ListItem: React.FC<ListItemProps> = (props) => {
-//   const {
-//     slug,
-//     title,
-//     description,
-
-//     className,
-//     position = "left",
-//     featuredImage,
-//   } = props;
-
-//   return (
-//     <li className="list-none ">
-//       <Link
-//         className={` grid grid-cols-3 bg-white mx-auto w-full  ${className}`}
-//         href={`/${slug}` || "/"}
-//       >
-//         {featuredImage && position === "left" && (
-//           <div className="relative w-full aspect-w-16 aspect-h-10 ">
-//             <SanityImage image={featuredImage} objectFit="contain" />
-//             {/* <Image image={featuredImage} alt="bla" /> */}
-//           </div>
-//         )}
-//         <div className={`px-3 ${featuredImage ? "col-span-2" : "col-span-3"}`}>
-//           {/* <Typo space={false} className="pb-2 leading-none " variant="body">
-//             {date}
-//           </Typo> */}
-//           <Typo
-//             as={"h2"}
-//             space={false}
-//             className="pb-3 leading-none"
-//             variant="h2"
-//           >
-//             {title}
-//           </Typo>
-//           <Typo className="w-full overflow-hidden whitespace-pre-line ">
-//             {description}
-//           </Typo>
-//         </div>
-//         {featuredImage && position === "right" && (
-//           <div className="relative w-full aspect-w-16 aspect-h-10 ">
-//             <SanityImage image={featuredImage} objectFit="contain" />
-//           </div>
-//         )}
-//       </Link>
-//     </li>
-//   );
-// };

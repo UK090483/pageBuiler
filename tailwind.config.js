@@ -15,16 +15,24 @@ module.exports = {
     },
     fontSize: {
       sm: ["12px", "1.4em"],
-      base: ["16px", "1.5625em"],
+      base: ["18px", "1.5625em"],
+      "base-mobile": ["16px", "1.5625em"],
       lg: ["20px", "1.4em"],
       xl: ["20px", "1.4em"],
-      "2xl": ["22px", "1.4em"],
-      "3xl": ["30px", "1.4em"],
-      "4xl": ["40px", "1.4em"],
-      "5xl": ["50px", "1.4em"],
+      "2xl": ["22px", "1.1em"],
+      "2xl-mobile": ["16px", "1.1em"],
+      "3xl": ["30px", "1.1em"],
+      "3xl-mobile": ["22px", "1.1em"],
+      "4xl": ["55px", "1.1em"],
+      "4xl-mobile": ["35px", "1.1em"],
+      "5xl": ["65px", "1.1em"],
+      "5xl-mobile": ["55px", "1.1em"],
     },
 
     extend: {
+      height: {
+        hero: "calc(100vh - 60px)",
+      },
       colors: {
         grey: {
           light: "#f4f4f1",
