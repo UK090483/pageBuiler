@@ -17,11 +17,13 @@ const PersonList: React.FunctionComponent<IPersonListProps> = (props) => {
     setIsMounted(true);
   }, []);
 
-  //16return null;
   return (
-    <Section width="l" className=" py-24 overflow-hidden ">
+    <Section width="l" className=" overflow-hidden pb-12 ">
       {title && (
-        <Typo variant="h4" className="text-center uppercase ">
+        <Typo
+          variant="h3"
+          className="text-center uppercase pb-12 md:pb-24 pt-6 md:pt-12 "
+        >
           {title}
         </Typo>
       )}

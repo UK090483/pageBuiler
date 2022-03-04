@@ -7,6 +7,7 @@ import { LangSwitcherResult } from "./LangSwitcherQuery";
 export interface LangSwitchProps {
   className?: string;
   slugs?: LangSwitcherResult["langSwitchData"];
+  onClick?: () => void;
 }
 
 const defaultItems = [
@@ -15,7 +16,7 @@ const defaultItems = [
   { label: "DK", locale: "da" },
 ];
 export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
-  const { className, slugs } = props;
+  const { className, slugs, onClick = () => {} } = props;
   const items = defaultItems;
   const { locale } = useRouter();
 
@@ -24,6 +25,7 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
       {items.map((item) => {
         return (
           <Link
+            onClick={onClick}
             scroll={false}
             key={item.locale}
             href={

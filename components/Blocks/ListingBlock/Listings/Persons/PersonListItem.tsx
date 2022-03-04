@@ -52,8 +52,24 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
       </button>
 
       <ReactTooltip
+        overridePosition={(position) => {
+          const wWidth = window.innerWidth;
+          const needFitLeft = position.left < 0;
+          const needFitRight = position.left + 280 > wWidth;
+          const needFitTop = position.top < 0;
+          let p = { ...position };
+          if (needFitLeft) {
+            p = { ...p, left: 20 };
+          }
+          if (needFitRight) {
+            p = { ...p, left: wWidth - 300 };
+          }
+          if (needFitTop) {
+            p = { ...p, top: 20 };
+          }
+          return p;
+        }}
         id={_id}
-        place="bottom"
         effect="float"
         multiline={true}
         className="tooltip"

@@ -6,10 +6,21 @@ interface SeoProps extends SeoType {
   pageUrl?: string;
 }
 
+const metaImageParams = "?w=1200&h=630&bg=fff&fit=fillmax";
+
 const Seo: React.FC<SeoProps> = (props) => {
-  const { metaTitle, metaDesc, shareTitle, shareDesc, canonical, pageUrl } =
-    props;
-  const canUrl = `${pageUrl}/${canonical}`;
+  const {
+    metaTitle,
+    metaDesc,
+    shareTitle,
+    shareDesc,
+    canonical,
+    shareGraphic,
+    pageUrl = typeof window !== "undefined"
+      ? window.location.origin
+      : "https://www.example.ie/",
+  } = props;
+  const canUrl = `${pageUrl}${canonical}`;
 
   return (
     <NextSeo
@@ -23,23 +34,15 @@ const Seo: React.FC<SeoProps> = (props) => {
         title: shareTitle,
         description: shareDesc,
         type: "page",
+
         images: [
           {
-            url: "https://www.example.ie/og-image-01.jpg",
+            url: shareGraphic + metaImageParams || "",
             width: 800,
             height: 600,
             alt: "Og Image Alt",
             type: "image/jpeg",
           },
-          {
-            url: "https://www.example.ie/og-image-02.jpg",
-            width: 900,
-            height: 800,
-            alt: "Og Image Alt Second",
-            type: "image/jpeg",
-          },
-          { url: "https://www.example.ie/og-image-03.jpg" },
-          { url: "https://www.example.ie/og-image-04.jpg" },
         ],
         site_name: "SiteName",
       }}

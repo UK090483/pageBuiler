@@ -14,6 +14,7 @@ import { LangSwitcherResult } from "@lib/LangSwitcherService/LangSwitcherQuery";
 import { HeaderNavigation } from "@lib/Navigation";
 import NavigationMobile from "@lib/Navigation/NavigationMobile";
 import { NavItem } from "@lib/Navigation/types";
+import Burger from "./Burger";
 
 interface NavProps {
   items: NavItem[];
@@ -56,7 +57,12 @@ const Nav: React.FC<NavProps> = (props) => {
           setOpen(false);
         }}
       >
-        <LangSwitch slugs={slugs} />
+        <LangSwitch
+          slugs={slugs}
+          onClick={() => {
+            setOpen(false);
+          }}
+        />
       </NavigationMobile>
     </>
   );

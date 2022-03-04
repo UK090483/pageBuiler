@@ -17,7 +17,7 @@ const Footer: React.FC<FooterProps> = (props) => {
 
   return (
     <footer data-testid="footer" className="flex flex-col items-center ">
-      <Marque />
+      {/* <Marque /> */}
       <Section width="full" className=" px-5 ">
         <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">

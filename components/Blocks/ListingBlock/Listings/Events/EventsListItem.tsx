@@ -87,5 +87,5 @@ const parseDate = (date: string | null | undefined) => {
   if (!date) return "";
   const d = new Date(date);
 
-  return d.toLocaleDateString();
+  return d.toLocaleDateString("de");
 };

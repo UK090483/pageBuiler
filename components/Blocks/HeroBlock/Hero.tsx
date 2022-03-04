@@ -34,14 +34,19 @@ const InlineImage = (props) => {
           style={{ height: "0.705em" }}
           height="0.8em"
           src={src + "&w=150"}
-          alt="image"
+          alt=""
         />
       )}
     </span>
   );
 };
+//@ts-ignore
+const BlockRenderer = (props) => {
+  return React.createElement("span", {}, props.children);
+};
 
 const serializer: Serializers = {
+  types: { block: BlockRenderer },
   marks: {
     image: InlineImage,
     brake: ({ children }) => {
@@ -50,7 +55,7 @@ const serializer: Serializers = {
   },
   //@ts-ignore
   container: ({ children }) => {
-    return <>{children}</>;
+    return <h1>{children}</h1>;
   },
 };
 
@@ -59,8 +64,6 @@ const Hero: React.FC<HeroProps> = (props) => {
   const [ready, setReady] = React.useState(false);
 
   const { asPath } = useRouter();
-
-  console.log(asPath);
 
   const withLogo = ["/"].includes(asPath);
 

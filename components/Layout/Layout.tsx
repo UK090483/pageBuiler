@@ -10,7 +10,7 @@ import Nav from "./Navigation/Nav/Nav";
 interface LayoutProps extends PageProps<PageResult> {}
 
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { children, page, data } = props;
+  const { children, data } = props;
 
   return (
     <>

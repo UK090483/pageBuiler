@@ -31,7 +31,7 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
       </Layout>
       {preview && <PreviewIndicator />}
       <Cookie />
-      {data?.seo && <Seo pageUrl={"https://www.test.com"} {...data.seo} />}
+      {data?.seo && <Seo {...data.seo} />}
     </>
   );
 }
