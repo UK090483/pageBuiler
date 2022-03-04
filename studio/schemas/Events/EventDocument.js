@@ -28,13 +28,28 @@ export default withLocalization({
       title: "Datum",
       type: "date",
     },
+    {
+      name: "endDate",
+      title: "End Datum",
+      type: "date",
+    },
 
     {
-      name: "Text",
-      title: "Text",
-      type: "defaultRichText",
-      localize: true,
+      name: "link",
+      title: "Link ",
+      type: "url",
+      validation: (Rule) =>
+        Rule.uri({
+          scheme: ["http", "https", "mailto", "tel"],
+        }),
     },
+
+    // {
+    //   name: "Text",
+    //   title: "Text",
+    //   type: "defaultRichText",
+    //   localize: true,
+    // },
     {
       name: "content",
       title: "Content",

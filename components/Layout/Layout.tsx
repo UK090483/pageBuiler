@@ -5,6 +5,7 @@ import React from "react";
 import Footer from "./Footer";
 import Head from "./Head";
 import { Header } from "./Header";
+import { LayoutContextProvider } from "./LayoutContext";
 import Nav from "./Navigation/Nav/Nav";
 interface LayoutProps extends PageProps<PageResult> {}
 
@@ -13,15 +14,17 @@ export const Layout: React.FC<LayoutProps> = (props) => {
 
   return (
     <>
-      <SkipToContent containerId="main-content" />
-      <Header>
-        <Nav items={data?.navigation || []} slugs={data?.langSwitchData} />
-      </Header>
-      <Head name={data?.title} />
-      <main id="main-content" className="min-h-screen mt-[57px] select-none">
-        {children}
-      </main>
-      {data && <Footer {...data} />}
+      <LayoutContextProvider homeRoute={data?.homeRoute}>
+        <SkipToContent containerId="main-content" />
+        <Header>
+          <Nav items={data?.navigation || []} slugs={data?.langSwitchData} />
+        </Header>
+        <Head name={data?.title} />
+        <main id="main-content" className="min-h-screen mt-[57px] select-none">
+          {children}
+        </main>
+        {data && <Footer {...data} />}
+      </LayoutContextProvider>
     </>
   );
 };

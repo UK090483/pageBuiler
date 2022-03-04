@@ -6,10 +6,11 @@ import EventsListItem from "./EventsListItem";
 interface IEventsListProps {
   items?: any[] | null;
   filterItems?: { label: string; value: string }[];
+  accordion?: boolean;
 }
 
 const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
-  const { items, filterItems } = props;
+  const { items, filterItems, accordion } = props;
 
   const [filter, setFilter] = React.useState("all");
 
@@ -29,7 +30,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
       <ul className="w-full">
         <div>
           {items?.map((i) => (
-            <EventsListItem key={i._id} {...i} />
+            <EventsListItem key={i._id} {...i} accordion={accordion} />
           ))}
         </div>
       </ul>

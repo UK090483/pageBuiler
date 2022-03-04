@@ -3,22 +3,13 @@ import React from "react";
 
 type ButtonProps = {
   onClick?: () => void;
-  internalLink?: string | null;
-  externalLink?: string;
   href?: string | null;
   external?: boolean;
   tabIndex?: -1 | 0;
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const {
-    children,
-    onClick = () => {},
-    internalLink,
-    href,
-    external,
-    tabIndex = 0,
-  } = props;
+  const { children, onClick = () => {}, href, external, tabIndex = 0 } = props;
 
   if (href) {
     return (

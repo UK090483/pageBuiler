@@ -7,7 +7,7 @@ interface IEventPlugProps extends EventPlugQueryResult {}
 
 const EventPlug: React.FC<PlugProps<IEventPlugProps>> = (props) => {
   const { items } = props.node;
-  return <EventsList items={items} />;
+  return <EventsList items={items} accordion={false} />;
 };
 
 export default EventPlug;

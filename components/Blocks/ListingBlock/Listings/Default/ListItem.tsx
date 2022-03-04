@@ -44,12 +44,7 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
           <Typo bold className="pb-2 leading-none " variant="body">
             {subTitle ? subTitle.toUpperCase() : slug?.toUpperCase()}
           </Typo>
-          <Typo
-            as={"h2"}
-            space={false}
-            className="pb-3 leading-none"
-            variant="h2"
-          >
+          <Typo as={"h2"} variant="h2">
             {title}
           </Typo>
           <Typo className="w-full overflow-hidden whitespace-pre-line ">

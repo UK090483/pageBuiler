@@ -108,7 +108,13 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   }
 
   if (type !== "custom" && contentType === "event") {
-    return <EventsList filterItems={filterItems} items={items || []} />;
+    return (
+      <EventsList
+        filterItems={filterItems}
+        items={items || []}
+        accordion={true}
+      />
+    );
   }
 
   return (

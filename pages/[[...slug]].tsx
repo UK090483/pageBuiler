@@ -5,9 +5,8 @@ import {
   LangSwitcherResult,
 } from "@lib/LangSwitcherService/LangSwitcherQuery";
 import { seoQuery, SeoResult } from "@lib/SeoService/SeoQuerys";
-import HeroBlock, {
-  heroBlockQuery,
-} from "@components/Blocks/HeroBlock/HeroBlock";
+import HeroBlock from "@components/Blocks/HeroBlock/HeroBlock";
+import { heroBlockQuery } from "@components/Blocks/HeroBlock/HeroBlockQuery";
 import ListingBlock, {
   listingBlockQuery,
 } from "@components/Blocks/ListingBlock/ListingsBlock";
