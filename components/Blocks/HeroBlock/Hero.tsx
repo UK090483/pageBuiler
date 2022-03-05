@@ -72,9 +72,7 @@ const Hero: React.FC<HeroProps> = (props) => {
       {text && (
         <Textfit
           max={200}
-          className={`w-full   ${
-            withLogo ? " h-hero" : "h-hero"
-          } px-5 container mx-auto font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
+          className={`w-full  h-hero-mobile  sm:h-hero   px-5 container mx-auto font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
             ready ? "opacity-100" : "opacity-0"
           }`}
           mode="multi"

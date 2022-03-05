@@ -12,10 +12,6 @@ export interface SeoResult {
   seo: SeoType;
 }
 
-const localeValue = (val: string, locale: string) => {
-  return locale ? `${val}_${locale}, ${val}` : val;
-};
-
 export const seoQuery = (locale: string = "") => `
 'seo':{
   'canonical': select( 
@@ -23,24 +19,9 @@ export const seoQuery = (locale: string = "") => `
     coalesce('/${locale}/'+slug_${locale}.current , slug.current)
     ),
   'shareGraphic':coalesce(featuredImage.asset->url, *[_id == 'siteConfig'][0].seo.shareGraphic.asset->url),
-  'metaTitle':coalesce(${localeValue(
-    "title",
-    locale
-  )},*[_id == 'siteConfig'][0].seo.metaTitle),
-
-  'metaDesc':coalesce(${localeValue(
-    "description",
-    locale
-  )},*[_id == 'siteConfig'][0].seo.metaDesc),
-  
-  'shareTitle': coalesce(${localeValue(
-    "title",
-    locale
-  )},*[_id == 'siteConfig'][0].seo.metaTitle),
-
-  'shareDesc':coalesce(${localeValue(
-    "description",
-    locale
-  )},*[_id == 'siteConfig'][0].seo.shareDesc),
+  'metaTitle':coalesce( title_${locale} , title , *[_id == 'siteConfig'][0].seo.metaTitle),
+  'metaDesc':coalesce(description_${locale},*[_id == 'siteConfig'][0].seo.metaDesc),
+  'shareTitle': coalesce( title_${locale} , title , *[_id == 'siteConfig'][0].seo.metaTitle),
+  'shareDesc':coalesce(description_${locale},*[_id == 'siteConfig'][0].seo.metaDesc),
 }
 `;

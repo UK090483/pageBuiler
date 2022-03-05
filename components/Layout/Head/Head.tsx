@@ -13,7 +13,7 @@ const Head: React.FunctionComponent<HeadProps> = ({ name }) => {
         name="description"
         content="Generated width love by create next app"
       />
-      <link rel="icon" href="/logo.png" />
+      <link rel="icon" href="/appIcons/ios/100.png" />
       <link
         rel="preload"
         href="/fonts/PPRightGrotesk-CompactBlack.woff2"

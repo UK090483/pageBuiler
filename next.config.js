@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const appConfig = require("./app.config.json");
+const withPWA = require("next-pwa");
 
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-module.exports = {
+
+const config = {
   i18n: {
     locales: Object.keys(appConfig.locales),
     defaultLocale: Object.entries(appConfig.locales).reduce(
@@ -40,3 +42,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = config;

@@ -32,6 +32,7 @@ module.exports = {
     extend: {
       height: {
         hero: "calc(100vh - 60px)",
+        "hero-mobile": "calc(100vh - 120px)",
       },
       colors: {
         grey: {
