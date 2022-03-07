@@ -8,6 +8,7 @@ import { Grid } from "./Grid";
 import { ListItem } from "./ListItem";
 import Filter from "./Filter";
 import { ListItemResult } from "../../listingBlockQuery";
+import useFilter from "../useFilter";
 
 interface ListingProps {
   title?: string | null;
@@ -19,7 +20,11 @@ interface ListingProps {
 const Listing: React.FC<ListingProps> = (props) => {
   const { items, variant = "list", title, filterItems } = props;
 
-  const [filter, setFilter] = React.useState("all");
+  const { filter, setFilter, filteredItems } = useFilter({
+    items,
+    filterFn: (item, currentFilter) => item?.tags === currentFilter,
+  });
+
   const handleFilterChange = (i: { label: string; value: string }) => {
     setFilter(i.value);
   };
@@ -44,7 +49,7 @@ const Listing: React.FC<ListingProps> = (props) => {
             items={filterItems}
           />
         )}
-        {items.map((i, index) => (
+        {filteredItems.map((i, index) => (
           <ListItem
             key={i._id}
             position={index % 2 === 0 ? "right" : "left"}

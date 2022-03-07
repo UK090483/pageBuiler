@@ -19,7 +19,7 @@ export default withLocalization({
 
     {
       name: "tags",
-      title: "Description",
+      title: "Tag",
       type: "reference",
       to: [{ type: "tag" }],
     },

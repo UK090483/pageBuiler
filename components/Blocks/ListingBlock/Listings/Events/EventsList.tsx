@@ -2,6 +2,7 @@ import { Section } from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import * as React from "react";
 import Filter from "../Default/Filter";
+import useFilter from "../useFilter";
 
 import EventsListItem from "./EventsListItem";
 
@@ -15,7 +16,10 @@ interface IEventsListProps {
 const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
   const { items, filterItems, accordion, title } = props;
 
-  const [filter, setFilter] = React.useState("all");
+  const { filter, setFilter, filteredItems } = useFilter({
+    items,
+    filterFn: (item, currentFilter) => item?.tags === currentFilter,
+  });
 
   const handleFilterChange = (i: { label: string; value: string }) => {
     setFilter(i.value);
@@ -30,16 +34,18 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
           </Typo>
         </Section>
       )}
-      {/* {filterItems && (
-        <Filter
-          active={filter}
-          onChange={handleFilterChange}
-          items={filterItems}
-        />
-      )} */}
+      {filterItems && accordion && (
+        <Section width="m">
+          <Filter
+            active={filter}
+            onChange={handleFilterChange}
+            items={filterItems}
+          />
+        </Section>
+      )}
       <ul className="w-full">
         <div>
-          {items?.map((i) => (
+          {filteredItems?.map((i) => (
             <EventsListItem key={i._id} {...i} accordion={accordion} />
           ))}
         </div>

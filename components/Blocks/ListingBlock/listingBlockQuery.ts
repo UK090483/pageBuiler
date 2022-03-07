@@ -13,6 +13,7 @@ export const listItemQuery = (locale: string) => {
   return `
   ...,
   _id,
+  'tags': tags._ref,
   'title':coalesce(title_${locale},title),
   'subTitle':coalesce(subTitle_${locale},subTitle),
   'description':coalesce(description_${locale},description),

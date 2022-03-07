@@ -39,6 +39,17 @@ export default withLocalization({
       localize: true,
     },
     {
+      name: "tags",
+      title: "Tag",
+      type: "reference",
+      to: [{ type: "tag" }],
+      hidden: ({ parent }) => {
+        return !(
+          parent?.pageType?._ref === "88e611ea-581e-48c4-b63c-13e1084acf4f"
+        );
+      },
+    },
+    {
       name: "pageType",
       type: "reference",
       to: [{ type: "pageType" }],
