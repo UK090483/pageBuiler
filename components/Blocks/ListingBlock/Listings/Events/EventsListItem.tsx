@@ -38,7 +38,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
 
   return (
     <li className="mb-20 border-black border-t-2">
-      <div className="container  lg:max-w-screen-lg mx-auto my-12">
+      <div className="container  lg:max-w-screen-lg mx-auto px-5 my-12">
         <Typo variant="body-l" bold={false} space={false}>
           {date && parseDate(date)} {endDate && " - " + parseDate(endDate)}
         </Typo>
@@ -67,7 +67,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                className={`inline-block  stroke-current fill-current  border-2 rounded-full w-11 h-11 p-1 border-black ${
+                className={`inline-block  stroke-current fill-current  border-2 rounded-full w-9 h-9 md:w-11 md:h-11 p-1.5 border-black ${
                   open ? "rotate-90 " : "-rotate-90"
                 }`}
               >
