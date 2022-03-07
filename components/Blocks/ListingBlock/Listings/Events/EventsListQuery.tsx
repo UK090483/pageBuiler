@@ -10,7 +10,9 @@ export const EventsListItemQuery: EventsListItemQueryFunction = (locale) => {
   return `
   _type,
   _id,
-  'content':content[]{${richTextQueryShort(locale)}},
+  'content':coalesce(content_${locale}[]{${richTextQueryShort(
+    locale
+  )}},content[]{${richTextQueryShort(locale)}}),
   'name':coalesce(name_${locale},name),
   'description':coalesce(description_${locale},name),
   link,

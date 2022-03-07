@@ -21,8 +21,6 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
     eventVariant,
   } = props;
 
-  console.log(props);
-
   if (type !== "custom" && contentType === "testimonials") {
     return <TestimonialList items={testimonialItems || []} />;
   }
