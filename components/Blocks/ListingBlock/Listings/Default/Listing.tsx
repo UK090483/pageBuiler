@@ -16,7 +16,7 @@ interface ListingProps {
   variant: "grid" | "list" | "carousel";
   filterItems?: { label: string; value: string }[];
 }
-
+//t
 const Listing: React.FC<ListingProps> = (props) => {
   const { items, variant = "list", title, filterItems } = props;
 
