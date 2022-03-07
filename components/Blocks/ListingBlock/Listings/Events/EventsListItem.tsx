@@ -38,7 +38,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
 
   return (
     <li className="mb-20 border-black border-t-2">
-      <div className="container  xl:max-w-screen-xl mx-auto my-12">
+      <div className="container  lg:max-w-screen-lg mx-auto my-12">
         <Typo variant="body-l" bold={false} space={false}>
           {date && parseDate(date)} {endDate && " - " + parseDate(endDate)}
         </Typo>
