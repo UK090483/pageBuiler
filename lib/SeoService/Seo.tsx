@@ -34,7 +34,6 @@ const Seo: React.FC<SeoProps> = (props) => {
         title: shareTitle,
         description: shareDesc,
         type: "page",
-
         images: [
           {
             url: shareGraphic + metaImageParams || "",

@@ -7,7 +7,6 @@ import React from "react";
 import useSanityImage from "@lib/SanityImage/useSanityImage";
 import { HeroBlogResult } from "./HeroBlockQuery";
 import Image from "next/image";
-import { userInfo } from "os";
 import { useRouter } from "next/router";
 
 interface HeroProps extends HeroBlogResult {}
@@ -42,7 +41,7 @@ const InlineImage = (props) => {
 };
 //@ts-ignore
 const BlockRenderer = (props) => {
-  return React.createElement("span", {}, props.children);
+  return React.createElement("h1", { className: "" }, props.children);
 };
 
 const serializer: Serializers = {
@@ -52,11 +51,14 @@ const serializer: Serializers = {
     brake: ({ children }) => {
       return <>&shy;{children}</>;
     },
+    unbreakable: ({ children }) => {
+      return <span className="whitespace-nowrap">{children}</span>;
+    },
   },
   //@ts-ignore
-  container: ({ children }) => {
-    return <h1>{children}</h1>;
-  },
+  // container: ({ children }) => {
+  //   return <h1>{children}</h1>;
+  // },
 };
 
 const Hero: React.FC<HeroProps> = (props) => {
@@ -68,7 +70,7 @@ const Hero: React.FC<HeroProps> = (props) => {
   const withLogo = ["/"].includes(asPath);
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row ">
       {text && (
         <Textfit
           max={200}
@@ -81,7 +83,7 @@ const Hero: React.FC<HeroProps> = (props) => {
           }}
         >
           <BlockContent
-            renderContainerOnSingleChild={false}
+            renderContainerOnSingleChild={true}
             blocks={text}
             serializers={serializer}
           />
@@ -108,3 +110,88 @@ const Hero: React.FC<HeroProps> = (props) => {
 };
 
 export default Hero;
+
+// type parseBlocksProps = ({ props?: { node?: { mark?: any } } } | string)[];
+
+// const parseBlocks = (children: parseBlocksProps) => {
+//   const res = [];
+//   let span = new Span();
+//   for (const item of children) {
+//     span.add(item);
+//   }
+//   span.finish();
+//   console.log(span);
+
+//   return span.items;
+// };
+
+// type blockItem = any;
+
+// class Span {
+//   active: boolean;
+//   items: blockItem[];
+//   span: any[];
+//   constructor() {
+//     this.active = false;
+//     this.items = [];
+//     this.span = [];
+//   }
+//   add = (item: blockItem) => {
+//     if (this.active) {
+//       return this.pushOrEnd(item);
+//     }
+//     this.pushOrStart(item);
+//   };
+
+//   pushOrStart = (item: blockItem) => {
+//     if (this.isStartString(item)) {
+//       this.active = true;
+//       this.span.push(item);
+//       return;
+//     }
+//     this.items.push(item);
+//   };
+
+//   pushOrEnd = (item: blockItem) => {
+//     if (this.isImage(item)) {
+//       return this.span.push(item);
+//     }
+//     if (this.isEndString(item)) {
+//       return this.endSpan(item);
+//     }
+//     this.span.push(item);
+//   };
+
+//   endSpan = (item: blockItem) => {
+//     this.active = false;
+//     this.items.push(this.getSpan());
+//   };
+
+//   finish = () => {
+//     if (this.active) {
+//       this.getSpan();
+//     }
+//   };
+
+//   isString = (item: blockItem) => typeof item === "string";
+//   isEndString = (item: blockItem) =>
+//     typeof item === "string" && item.includes(" ");
+//   isStartString = (item: blockItem) =>
+//     typeof item === "string" && !item.endsWith(" ");
+//   isImage = (item: blockItem) => {
+//     return (
+//       typeof item !== "string" && item.props?.node?.mark?._type === "image"
+//     );
+//   };
+//   reset = () => {
+//     this.active = false;
+//     this.items = [];
+//   };
+//   getSpan = () => {
+//     return React.createElement(
+//       "span",
+//       { "data-m": "bla", className: " border-2 " },
+//       this.span
+//     );
+//   };
+// }

@@ -1,7 +1,7 @@
 import { Section } from "@components/Section/Section";
-import { ListItemResult } from "@components/Blocks/ListingBlock/ListingsBlock";
 
 import React from "react";
+import { ListItemResult } from "../../listingBlockQuery";
 import { Card } from "./Card";
 
 interface CarouselProps {

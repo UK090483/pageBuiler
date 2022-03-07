@@ -7,9 +7,7 @@ import {
 import { seoQuery, SeoResult } from "@lib/SeoService/SeoQuerys";
 import HeroBlock from "@components/Blocks/HeroBlock/HeroBlock";
 import { heroBlockQuery } from "@components/Blocks/HeroBlock/HeroBlockQuery";
-import ListingBlock, {
-  listingBlockQuery,
-} from "@components/Blocks/ListingBlock/ListingsBlock";
+
 import SectionBlock, {
   sectionBlockQuery,
 } from "@components/Blocks/SectionBlock/SectionBlock";
@@ -17,6 +15,8 @@ import SPB from "@lib/SanityPageBuilder/SPB";
 import { NavigationQuery, NavigationResult } from "@lib/Navigation/query";
 import blockFactory from "@lib/SanityPageBuilder/lib/BlockFactory";
 import { layoutQuery, layoutQueryResult } from "@components/Layout/LayoutQuery";
+import { listingBlockQuery } from "@components/Blocks/ListingBlock/listingBlockQuery";
+import ListingBlock from "@components/Blocks/ListingBlock/ListingsBlock";
 
 export type PageResult = { title?: string } & layoutQueryResult &
   LangSwitcherResult &

@@ -1,7 +1,7 @@
 import Typo from "@components/Typography/Typography";
 import SanityImage from "@lib/SanityImage";
 import * as React from "react";
-import { TestimonialItemResult } from "./testimonialTypes";
+import { TestimonialItemResult } from "./testimaonialQuery";
 
 interface ITestimonialListItemProps extends TestimonialItemResult {
   active?: boolean;

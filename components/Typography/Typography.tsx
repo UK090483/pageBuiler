@@ -55,34 +55,34 @@ const Typo: React.FC<TypographyProps> = ({
   space,
 }) => {
   const Component: ElementKeys = as ? as : variantsMapping[variant] || "p";
+  // const Component: ElementKeys = variantsMapping[variant] || "p";
   const isBold =
     bold !== undefined ? bold : boldMap.includes(variant as string);
 
   if (spacer) {
-    return <div className=" h-14" />;
+    return <div className="h-14" />;
   }
 
   return (
     <Component
-      // style={{
-      //   paddingBottom:
-      //     space === undefined ? "0.8em" : space ? "0.8em" : undefined,
-      // }}
+      data-variant={variant}
       className={
-        clsx("antialiased", {
-          "pb-[0.8em]": space !== false,
+        clsx({
+          "pb-[0.8em]": space !== false && variant !== "body",
+          "pb-[2em]": space !== false && variant === "body",
           "font-hand": hand,
           "text-sm": variant === "body-s",
           "text-base-mobile md:text-base ": variant === "body",
           "text-lg font-header uppercase": ["body-l", "h6"].includes(
             variant as string
           ),
+
           "text-xl font-header uppercase": variant === "h5",
           "text-2xl-mobile md:text-2xl font-header uppercase": variant === "h4",
           "text-3xl-mobile md:text-3xl font-header uppercase": variant === "h3",
           "text-4xl-mobile md:text-4xl font-header uppercase": variant === "h2",
           "text-5xl-mobile md:text-5xl font-header uppercase": variant === "h1",
-          "font-black": isBold,
+          "font-black tracking-normal": isBold,
         }) + ` ${className}`
       }
     >

@@ -1,6 +1,6 @@
 import * as React from "react";
+import { TestimonialItemResult } from "./testimaonialQuery";
 import TestimonialListItem from "./TestimonialListItem";
-import { TestimonialItemResult } from "./testimonialTypes";
 
 interface ITestimonialListProps {
   items: TestimonialItemResult[];

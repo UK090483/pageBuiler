@@ -1,5 +1,5 @@
 import List from "./List";
-import { ListItemResult } from "@components/Blocks/ListingBlock/ListingsBlock";
+
 import React from "react";
 import { Card } from "./Card";
 import { Carousel } from "./Carousel";
@@ -7,6 +7,7 @@ import { Carousel } from "./Carousel";
 import { Grid } from "./Grid";
 import { ListItem } from "./ListItem";
 import Filter from "./Filter";
+import { ListItemResult } from "../../listingBlockQuery";
 
 interface ListingProps {
   title?: string | null;

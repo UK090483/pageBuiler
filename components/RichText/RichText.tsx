@@ -42,8 +42,11 @@ const RichText: React.FC<any> = (props: any) => {
         }
         if (Object.keys(styles).includes(style)) {
           return (
-            //@ts-ignore
-            <Typo variant={styles[style]} as={"p"}>
+            <Typo
+              //@ts-ignore
+              variant={styles[style]}
+              //  as={"p"}
+            >
               {props.children}
             </Typo>
           );

@@ -1,5 +1,9 @@
 import React from "react";
 import { withLocalization } from "../Localizer";
+import imageUrlBuilder from "@sanity/image-url";
+import conf from "../../sanity.json";
+
+const builder = imageUrlBuilder({ ...conf.api });
 
 export default withLocalization({
   name: "hero",
@@ -31,12 +35,53 @@ export default withLocalization({
                 blockEditor: {
                   icon: () => <div>----</div>,
                   render: ({ children }) => (
-                    <span style={{ backgroundColor: "grey" }}>-{children}</span>
+                    <span style={{ backgroundColor: "lightcyan" }}>
+                      -{children}
+                    </span>
+                  ),
+                },
+              },
+              {
+                title: "Unbreakable",
+                value: "unbreakable",
+                blockEditor: {
+                  icon: () => <div>----</div>,
+                  render: ({ children }) => (
+                    <span style={{ backgroundColor: "lightblue" }}>
+                      {children}
+                    </span>
                   ),
                 },
               },
             ],
-            annotations: [{ name: "image", type: "image", title: "Image" }],
+            annotations: [
+              {
+                name: "image",
+                type: "image",
+                title: "Image",
+                blockEditor: {
+                  render: (props) => {
+                    // console.log(props);
+                    // const asset = props.asset;
+                    // const src = asset && builder.image(asset).width(50).url();
+
+                    // if (src) {
+                    //   return (
+                    //     <span>
+                    //       image
+                    //       <img
+                    //         style={{ height: "1em", pointerEvents: "none" }}
+                    //         src={src}
+                    //       />
+                    //     </span>
+                    //   );
+                    // }
+
+                    return <span>--Image--</span>;
+                  },
+                },
+              },
+            ],
           },
         },
       ],

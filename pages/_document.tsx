@@ -10,7 +10,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="text-black debug-screens">
+        <body className="text-black debug-screens ">
           <Main />
           <div id="app-portal" />
           <NextScript />

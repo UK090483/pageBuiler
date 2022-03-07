@@ -3,8 +3,9 @@ import React from "react";
 import Typo from "@components/Typography";
 
 import { Link } from "@components/Link";
-import { ListItemResult } from "@components/Blocks/ListingBlock/ListingsBlock";
+
 import SanityImage from "@lib/SanityImage";
+import { ListItemResult } from "../../listingBlockQuery";
 
 interface CardProps extends ListItemResult {
   className?: string;

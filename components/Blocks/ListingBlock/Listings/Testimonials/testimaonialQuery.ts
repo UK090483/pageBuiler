@@ -1,4 +1,4 @@
-import { imageMeta } from "@lib/SanityImage/query";
+import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
 
 const testimonialItemQuery = (locale: string) => `
 ...,
@@ -13,3 +13,12 @@ _id,
 export const testimonialQuery = (locale: string) => `
 'testimonialItems': testimonialItems[]->{${testimonialItemQuery(locale)}}
 `;
+
+export interface TestimonialItemResult {
+  name?: null | string;
+  position?: null | string;
+  description?: null | string;
+  text?: null | string;
+  avatar?: null | ImageMetaResult;
+  _id: string;
+}

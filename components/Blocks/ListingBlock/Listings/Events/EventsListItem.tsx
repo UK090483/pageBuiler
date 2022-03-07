@@ -16,7 +16,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
   const {
     name,
     description,
-    Text,
+    content,
     accordion = true,
     link,
     date,
@@ -37,8 +37,8 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
   }, [open, accordion]);
 
   return (
-    <li className="mb-20 border-black border-t-2 px-5">
-      <div className="container  mx-auto my-12">
+    <li className="mb-20 border-black border-t-2">
+      <div className="container  xl:max-w-screen-xl mx-auto my-12">
         <Typo variant="body-l" bold={false} space={false}>
           {date && parseDate(date)} {endDate && " - " + parseDate(endDate)}
         </Typo>
@@ -52,7 +52,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
           className=" overflow-hidden"
         >
           <div ref={ref}>
-            <RichText content={Text} />
+            <RichText content={content} />
           </div>
         </div>
 
