@@ -86,6 +86,15 @@ export default withLocalization({
         },
       ],
     },
+
+    {
+      title: "Logo",
+      name: "logo",
+      type: "logo",
+      options: {
+        collapsible: true,
+      },
+    },
   ],
   preview: {
     select: {

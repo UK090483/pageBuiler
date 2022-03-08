@@ -16,7 +16,7 @@ export const EventsListItemQuery: EventsListItemQueryFunction = (locale) => {
     locale
   )}},content[]{${richTextQueryShort(locale)}}),
   'name':coalesce(name_${locale},name),
-  'description':coalesce(description_${locale},name),
+  'description':coalesce(description_${locale},description),
   link,
   date,
   endDate,  

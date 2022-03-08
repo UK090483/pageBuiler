@@ -4,8 +4,10 @@ import pageHeader from "./pageHeader";
 import Seo from "./Seo";
 import Navigation from "./navigation";
 import localeString from "./localeString";
+import Logo from "./Logo";
 
 const Objects = [
+  Logo,
   defaultImage,
   link,
   pageHeader,
