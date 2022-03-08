@@ -51,7 +51,7 @@ const serializer: Serializers = {
 const Hero: React.FC<HeroProps> = (props) => {
   const { text, logo } = props;
   const [ready, setReady] = React.useState(false);
-  const withLogo = logo && logo?.image.url;
+  const withLogo = logo && logo?.image?.url;
 
   return (
     <div className="flex flex-col lg:flex-row ">
