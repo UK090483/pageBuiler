@@ -36,7 +36,7 @@ const Nav: React.FC<NavProps> = (props) => {
 
           <HeaderNavigation
             items={items}
-            className="items-center justify-center hidden lg:flex"
+            className="items-center justify-center hidden lg:flex  "
           />
 
           <LangSwitch className="hidden lg:flex" slugs={slugs} />

@@ -28,7 +28,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
   return (
     <>
       {title && (
-        <Section width="l">
+        <Section width="m">
           <Typo variant="h3" className=" uppercase pb-12  pt-6 md:pt-12 ">
             {title}
           </Typo>
