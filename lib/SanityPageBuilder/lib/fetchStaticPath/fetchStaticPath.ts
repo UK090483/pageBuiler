@@ -4,6 +4,8 @@ type FetchStaticPathProps = {} & getSlugsProps &
   Omit<ParseSlugsProps, "getSlugResult">;
 type FetchStaticPath = (props: FetchStaticPathProps) => any;
 
+console.log("fetchStaticPath");
+
 const fetchStaticPath: FetchStaticPath = async (props) => {
   const { client, doc, locales, query, fallback } = props;
   const getSlugResult = await getSlugs({ client, doc, locales, query });

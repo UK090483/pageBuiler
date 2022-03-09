@@ -50,3 +50,5 @@ export const Section: React.FC<SectionProps> = ({
     </SectionContextProvider>
   );
 };
+
+export default Section;

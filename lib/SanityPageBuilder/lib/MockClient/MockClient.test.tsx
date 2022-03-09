@@ -1,4 +1,4 @@
-import { mockClient } from "../MockClient";
+import { mockClient } from "./MockClient";
 
 describe("MockClient", () => {
   it("should have methods fetch ", () => {

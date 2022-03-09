@@ -1,5 +1,5 @@
 import { mockClient } from "./testPrepare";
-import { fetchStaticProps } from "../fetchStaticProps";
+import { fetchStaticProps } from "../fetchStaticProps/fetchStaticProps";
 
 const locales = {
   de: { title: "Deutsch", isDefault: true, flag: "🇩🇪" },

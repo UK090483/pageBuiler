@@ -28,10 +28,7 @@ export const navItemQuery2 = (locale: string = "") => `
       } 
   `;
 
-export const NavigationQuery = (
-  locale: string = "",
-  root: string = "mainNav"
-) => `
+const NavigationQuery = (locale: string = "", root: string = "mainNav") => `
    'navigation':*[_id == 'siteConfig'][0].${root}[]{
     ${navItemQuery2(locale)},
     'items':items[]{
@@ -53,3 +50,5 @@ export interface NavigationResult {
 export interface NavItemResult {
   link: LinkResult;
 }
+
+export default NavigationQuery;

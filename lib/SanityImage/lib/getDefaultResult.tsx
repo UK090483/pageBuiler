@@ -1,5 +1,5 @@
 import { ImageLoader, ImageProps } from "next/image";
-import { ImageMetaResult } from "../query";
+import type { ImageMetaResult } from "../query";
 
 const loader: ImageLoader = (props) => {
   const { src, width, quality } = props;

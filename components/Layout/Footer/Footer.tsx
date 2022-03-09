@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { Section } from "@components/Section/Section";
+import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { Link } from "@components/Link";
 import Image from "next/image";

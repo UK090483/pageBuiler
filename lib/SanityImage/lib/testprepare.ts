@@ -1,4 +1,4 @@
-import { ImageMetaResult } from "../query";
+import type { ImageMetaResult } from "../query";
 
 export const imageMeta: ImageMetaResult = {
   alt: "testAlt",

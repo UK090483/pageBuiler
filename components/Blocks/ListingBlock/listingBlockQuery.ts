@@ -26,7 +26,7 @@ export const listItemQuery = (locale: string) => {
   `;
 };
 
-export const listingBlockQuery = (locale: string) => `
+const listingBlockQuery = (locale: string) => `
 _type == "listing" => {
   ...,
   eventVariant,
@@ -83,3 +83,5 @@ export interface ListingBlogResult {
   type?: "custom";
   eventVariant?: "open" | "accordion" | null;
 }
+
+export default listingBlockQuery;
