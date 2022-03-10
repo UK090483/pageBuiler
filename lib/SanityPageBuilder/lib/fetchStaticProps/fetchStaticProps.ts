@@ -1,5 +1,5 @@
 import { GetStaticPropsResult } from "next";
-import { fetchStaticPropsProps, PageProps } from "../types";
+import { fetchStaticPropsProps, PageProps } from "../../types";
 
 export async function fetchStaticProps<P>(
   props: fetchStaticPropsProps
@@ -45,3 +45,5 @@ export async function fetchStaticProps<P>(
     revalidate,
   };
 }
+
+export default fetchStaticProps;

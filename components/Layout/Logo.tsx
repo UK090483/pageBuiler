@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import useIsReducedMotion from "@hooks/useIsReducedMotion";
+import useOnLoad from "@hooks/useOnLoad";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -22,14 +23,16 @@ export const Logo = () => {
   const isReducedMotion = useIsReducedMotion();
   const [seconds, setSeconds] = useState(-1);
 
+  const loaded = useOnLoad();
+
   useEffect(() => {
-    // if (isReducedMotion) return;
+    if (isReducedMotion || !loaded) return;
 
     let interval = setInterval(() => {
       setSeconds((seconds) => (seconds + 1) % steps);
     }, 3000);
     return () => clearInterval(interval);
-  }, [isReducedMotion, setSeconds]);
+  }, [isReducedMotion, setSeconds, loaded]);
 
   return old ? (
     <div>
@@ -95,16 +98,18 @@ const LetterOrImage: React.FC<{
         >
           {children}
         </span>
-        <Image
-          role="presentation"
-          className={`transition-opacity duration-[2s] ${
-            show ? "motion-reduce:opacity-0 opacity-100" : "opacity-0"
-          }`}
-          src={`/images/${image?.src || "denmark.png"}`}
-          alt=""
-          layout="fill"
-          objectFit="contain"
-        />
+        {show && (
+          <Image
+            role="presentation"
+            className={`transition-opacity duration-[2s] ${
+              show ? "motion-reduce:opacity-0 opacity-100" : "opacity-0"
+            }`}
+            src={`/images/${image?.src || "denmark.png"}`}
+            alt=""
+            layout="fill"
+            objectFit="contain"
+          />
+        )}
       </span>
     </>
   );

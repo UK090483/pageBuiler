@@ -1,60 +1,72 @@
+import HeroBlock from "@components/Blocks/HeroBlock";
+import heroBlockQuery from "@components/Blocks/HeroBlock/HeroBlockQuery";
+import listingBlockQuery from "@components/Blocks/ListingBlock/listingBlockQuery";
+import ListingBlock from "@components/Blocks/ListingBlock";
+import SectionBlock from "@components/Blocks/SectionBlock";
+import sectionBlockQuery from "@components/Blocks/SectionBlock/SectionBlockQuery";
+import type { layoutQueryResult } from "@components/Layout/LayoutQuery";
+import layoutQuery from "@components/Layout/LayoutQuery";
+import type { LangSwitcherResult } from "@lib/LangSwitcherService/LangSwitcherQuery";
+import LangSwitcherQuery from "@lib/LangSwitcherService/LangSwitcherQuery";
+import type { NavigationResult } from "@lib/Navigation/query";
+import NavigationQuery from "@lib/Navigation/query";
+import BodyParser from "@lib/SanityPageBuilder/lib/BodyParser";
+import fetchStaticPaths from "@lib/SanityPageBuilder/lib/fetchStaticPath/fetchStaticPath";
+import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchStaticProps";
 import { sanityClient as client } from "@lib/SanityService/sanity.server";
+import type { SeoResult } from "@lib/SeoService/SeoQuery";
+import seoQuery from "@lib/SeoService/SeoQuery";
 import config from "../app.config.json";
-import {
-  LangSwitcherQuery,
-  LangSwitcherResult,
-} from "@lib/LangSwitcherService/LangSwitcherQuery";
-import { seoQuery, SeoResult } from "@lib/SeoService/SeoQuerys";
-import HeroBlock from "@components/Blocks/HeroBlock/HeroBlock";
-import { heroBlockQuery } from "@components/Blocks/HeroBlock/HeroBlockQuery";
-
-import SectionBlock, {
-  sectionBlockQuery,
-} from "@components/Blocks/SectionBlock/SectionBlock";
-import SPB from "@lib/SanityPageBuilder/SPB";
-import { NavigationQuery, NavigationResult } from "@lib/Navigation/query";
-import blockFactory from "@lib/SanityPageBuilder/lib/BlockFactory";
-import { layoutQuery, layoutQueryResult } from "@components/Layout/LayoutQuery";
-import { listingBlockQuery } from "@components/Blocks/ListingBlock/listingBlockQuery";
-import ListingBlock from "@components/Blocks/ListingBlock/ListingsBlock";
 
 export type PageResult = { title?: string } & layoutQueryResult &
   LangSwitcherResult &
   NavigationResult &
   SeoResult;
 
-const { getStaticPaths, getStaticProps, PageComponent } = SPB<PageResult>({
-  revalidate: 1,
-  client,
-  locales: config.locales,
-  getQuery: (props) => {
-    const { locale } = props;
-    const res = `${layoutQuery(locale)} ${blockFactory.getRootQuery({
-      locale,
-    })}, ${seoQuery(locale)}, ${LangSwitcherQuery(
+//@ts-ignore
+const Page = (props) => {
+  const { data } = props;
+  return (
+    <BodyParser
+      components={{
+        hero: {
+          component: HeroBlock,
+        },
+        section: {
+          component: SectionBlock,
+        },
+        listing: {
+          component: ListingBlock,
+        },
+      }}
+      content={data?.content || []}
+    />
+  );
+};
+
+export const getStaticPaths = async () => {
+  return await fetchStaticPaths({
+    client,
+    doc: "page",
+    locales: config.locales,
+  });
+};
+//@ts-ignore
+export const getStaticProps = async (props) => {
+  const { params, preview, locale } = props;
+  return await fetchStaticProps<PageResult>({
+    locale,
+    revalidate: true,
+    params,
+    client,
+    query: ` content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
+      locale
+    )},${listingBlockQuery(locale)}},  ${seoQuery(locale)}, ${LangSwitcherQuery(
       config.locales
-    )}, ${NavigationQuery(locale)}`;
-    return res;
-  },
-  components: [
-    {
-      name: "hero",
-      component: HeroBlock,
-      query: heroBlockQuery,
-    },
-    {
-      name: "section",
-      component: SectionBlock,
-      query: sectionBlockQuery,
-    },
-    {
-      name: "listing",
-      component: ListingBlock,
-      query: listingBlockQuery,
-    },
-  ],
-});
+    )}, ${layoutQuery(locale)} ${NavigationQuery(locale)}`,
+    locales: config.locales,
+    preview,
+  });
+};
 
-export { getStaticPaths, getStaticProps };
-
-export default PageComponent;
+export default Page;

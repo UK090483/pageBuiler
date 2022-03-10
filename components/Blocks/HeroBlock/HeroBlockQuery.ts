@@ -8,7 +8,7 @@ markDefs[]{
   }
 }`;
 
-export const heroBlockQuery = (locale: string) => `
+const heroBlockQuery = (locale: string) => `
 _type == "hero" => {
   ...,
   'logo':{ 'image':logo.image{${imageMeta} },'text':coalesce(logo.text_${locale}, logo.text) },
@@ -24,3 +24,5 @@ export interface HeroBlogResult {
   text?: any;
   logo?: null | { image: ImageMetaResult; text?: null | string };
 }
+
+export default heroBlockQuery;

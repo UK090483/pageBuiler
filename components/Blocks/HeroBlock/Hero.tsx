@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = (props) => {
         </Textfit>
       )}
       {withLogo && (
-        <div className="w-full lg:w-fit   flex items-center flex-col justify-center mr-12 p-5 ">
+        <div className="w-full lg:w-fit flex items-center flex-col justify-center mr-12 p-5 ">
           {logo?.text && (
             <div className=" text-sm pb-4  w-[400px]">{logo.text}</div>
           )}

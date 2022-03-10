@@ -12,7 +12,7 @@ export interface SeoResult {
   seo: SeoType;
 }
 
-export const seoQuery = (locale: string = "") => `
+const seoQuery = (locale: string = "") => `
 'seo':{
   'canonical': select( 
     defined(pageType) => coalesce('/${locale}/'+ pageType->slug_${locale}.current,'/'+ pageType->slug.current ) + coalesce('/'+slug_${locale}.current , slug.current),
@@ -25,3 +25,5 @@ export const seoQuery = (locale: string = "") => `
   'shareDesc':coalesce(description_${locale},*[_id == 'siteConfig'][0].seo.metaDesc),
 }
 `;
+
+export default seoQuery;

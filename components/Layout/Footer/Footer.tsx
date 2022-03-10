@@ -1,11 +1,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { Section } from "@components/Section/Section";
+import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { Link } from "@components/Link";
 import Image from "next/image";
 import Sozial from "./SozialIcons";
-import { NavItem } from "@lib/Navigation/types";
 import { PageResult } from "pages/[[...slug]]";
 
 const Marque = dynamic(() => import("./Marque"));
@@ -17,11 +16,11 @@ const Footer: React.FC<FooterProps> = (props) => {
 
   return (
     <footer data-testid="footer" className="flex flex-col items-center ">
-      {/* <Marque /> */}
+      <Marque />
       <Section width="full" className=" px-5 ">
         <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <div className="relative  min-h-[200px]">
+            <div className="relative min-h-[200px]">
               <div className=" text-sm pb-4 ">
                 Dieses Projekt wird gefördert durch Interreg Deutschland-
                 Danmark mit Mitteln des Europäischen Fonds für regionale

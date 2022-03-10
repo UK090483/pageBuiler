@@ -7,7 +7,7 @@ import {
 import {
   TestimonialItemResult,
   testimonialQuery,
-} from "./Listings/Testimonials/testimaonialQuery";
+} from "./Listings/Testimonials/testimonialQuery";
 
 export const listItemQuery = (locale: string) => {
   return `
@@ -26,7 +26,7 @@ export const listItemQuery = (locale: string) => {
   `;
 };
 
-export const listingBlockQuery = (locale: string) => `
+const listingBlockQuery = (locale: string) => `
 _type == "listing" => {
   ...,
   eventVariant,
@@ -83,3 +83,5 @@ export interface ListingBlogResult {
   type?: "custom";
   eventVariant?: "open" | "accordion" | null;
 }
+
+export default listingBlockQuery;

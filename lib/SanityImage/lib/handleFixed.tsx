@@ -1,4 +1,4 @@
-import { ImageMetaResult } from "../query";
+import type { ImageMetaResult } from "../query";
 import { IImagePropsWithDimensions, UseSanityImageOptions } from "../types";
 import getDefaultResult from "./getDefaultResult";
 import handleCrop from "./handleCrop";

@@ -1,6 +1,6 @@
 import { LocationConfig } from "types";
 
-export const LangSwitcherQuery = (locales: LocationConfig) => {
+const LangSwitcherQuery = (locales: LocationConfig) => {
   const query = Object.entries(locales).reduce((acc, [key, value]) => {
     return value.isDefault
       ? `${acc} 'href': select( 
@@ -22,3 +22,5 @@ export const LangSwitcherQuery = (locales: LocationConfig) => {
 export type LangSwitcherResult = {
   langSwitchData: { [k: string]: string };
 };
+
+export default LangSwitcherQuery;

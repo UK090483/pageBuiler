@@ -1,4 +1,4 @@
-import { Section } from "@components/Section/Section";
+import Section from "@components/Section/Section";
 import React from "react";
 
 interface GridProps {}

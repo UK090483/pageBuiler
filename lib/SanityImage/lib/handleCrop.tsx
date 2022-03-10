@@ -1,4 +1,4 @@
-import { ImageMetaResult } from "../query";
+import type { ImageMetaResult } from "../query";
 
 const handleCrop = (image: ImageMetaResult) => {
   if (!image.crop) return null;

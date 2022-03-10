@@ -1,38 +1,11 @@
-import React from "react";
-import clsx from "clsx";
-import { AppColor, Section as SectionType } from "types";
 import RichText from "@components/RichText/RichText";
-import { Section } from "@components/Section/Section";
+import Section from "@components/Section/Section";
 import SanityImage from "@lib/SanityImage";
-import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
-import { richTextQuery } from "@components/RichText/richtTextQuery";
-
-export const sectionBlockQuery = (locale: string) => `
-_type == "section" => {
-  _key,
-  _type,
-  title,
-  bgColor,
-  type,
-  topSpace,
-  bottomSpace,
-  imagePosition,
-  'content':coalesce(
-      content_${locale}[]{${richTextQuery(locale)}},
-      content[]{${richTextQuery(locale)}}
-      ),
-  bgImage{${imageMeta}},
-  image{${imageMeta}}
-}
-`;
-
-export interface SectionResult
-  extends Omit<SectionType, "bgImage" | "content" | "image"> {
-  content: null | any;
-  bgImage: ImageMetaResult;
-  image: ImageMetaResult;
-  _key: string;
-}
+import type { ImageMetaResult } from "@lib/SanityImage/query";
+import clsx from "clsx";
+import React from "react";
+import type { SectionResult } from "./SectionBlockQuery";
+import Transition from "./Transition";
 
 interface SectionBlockProps extends SectionResult {}
 
@@ -47,6 +20,7 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
     type,
     imagePosition = "l",
   } = props;
+
   const hasImage = image && image.url;
   const autoType = hasImage ? "l" : "s";
 
@@ -94,8 +68,8 @@ const WithImage: React.FC<{
   const content = (
     <div
       className={clsx({
-        "pr-0  lg:pr-12 col-span-2": place === "r",
-        "pl-0  lg:pl-12 col-span-2": place === "l",
+        "pr-0 lg:pr-12 col-span-2": place === "r",
+        "pl-0 lg:pl-12 col-span-2": place === "l",
       })}
     >
       {children}
@@ -113,37 +87,3 @@ const WithImage: React.FC<{
 };
 
 export default SectionBlock;
-
-type TransitionProps = {
-  color?: AppColor;
-  pos: "top" | "bottom";
-};
-
-const topD = "M1000 100H-2.14577e-05V1.66893e-06L1000 100Z";
-const bottomD = "M0 0H1000V100L0 0Z";
-
-const Transition: React.FC<TransitionProps> = ({ color = "primary", pos }) => {
-  return (
-    <div className="relative">
-      <div
-        className={clsx("absolute w-full", {
-          "transform -translate-y-12": pos === "top",
-        })}
-      >
-        <svg
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1000 100"
-          className={clsx(" fill-current h-12  w-full", {
-            "text-white": color === "white",
-            "text-primary": color === "primary",
-            "text-secondary": color === "secondary",
-            "text-gray-300": color === "grey",
-          })}
-        >
-          <path d={pos === "top" ? topD : bottomD} />
-        </svg>
-      </div>
-    </div>
-  );
-};

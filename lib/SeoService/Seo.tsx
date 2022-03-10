@@ -1,5 +1,5 @@
 import { NextSeo } from "next-seo";
-import { SeoType } from "./SeoQuerys";
+import { SeoType } from "./SeoQuery";
 import React from "react";
 
 interface SeoProps extends SeoType {
@@ -7,6 +7,8 @@ interface SeoProps extends SeoType {
 }
 
 const metaImageParams = "?w=1200&h=630&bg=fff&fit=fillmax";
+
+const titlePrefix = "PERSPEKTIV REGION | ";
 
 const Seo: React.FC<SeoProps> = (props) => {
   const {
@@ -26,13 +28,17 @@ const Seo: React.FC<SeoProps> = (props) => {
     <NextSeo
       nofollow={true}
       noindex={true}
-      title={metaTitle}
+      title={titlePrefix + metaTitle}
       description={metaDesc}
       canonical={canUrl}
+      twitter={{
+        cardType: "summary",
+      }}
       openGraph={{
         url: canUrl,
-        title: shareTitle,
+        title: titlePrefix + metaTitle,
         description: shareDesc,
+
         type: "page",
         images: [
           {

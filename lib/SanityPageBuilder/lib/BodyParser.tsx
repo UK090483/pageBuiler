@@ -1,34 +1,21 @@
-/* eslint-disable no-underscore-dangle */
-import React from "react";
-
+import React, { ComponentType } from "react";
 import type { AppLocales } from "types";
-
-import { BlockFactory } from "./BlockFactory";
 
 export type BodyParserProps = {
   content: any[];
   lang?: AppLocales;
-  extraComponents?: { [k: string]: React.ReactElement };
-  blockFactory: BlockFactory;
+  components: { [k: string]: { component: ComponentType<any> } };
 };
 
 const BodyParser: React.FC<BodyParserProps> = (props) => {
-  const { content, lang, extraComponents, blockFactory } = props;
-
+  const { content, lang, components } = props;
   return (
     <>
       {content &&
         content.map((block) => {
-          if (extraComponents && extraComponents[block._type]) {
-            return extraComponents[block._type];
-          }
-
-          if (blockFactory.getComponent(block._type, { ...block })) {
-            return blockFactory.getComponent(block._type, {
-              ...block,
-              key: block._key,
-              lang,
-            });
+          if (components[block._type]) {
+            const Component = components[block._type].component;
+            return Component ? <Component key={block._key} {...block} /> : null;
           }
           return (
             <div key={block._key}>

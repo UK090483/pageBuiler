@@ -1,12 +1,17 @@
-import EventsList from "@components/Blocks/ListingBlock/Listings/Events/EventsList";
+import dynamic from "next/dynamic";
+const EventsList = dynamic(
+  () => import("@components/Blocks/ListingBlock/Listings/Events/EventsList")
+);
+const PersonList = dynamic(() => import("./Listings/Persons/PersonList"));
+const TestimonialList = dynamic(
+  () => import("./Listings/Testimonials/TestimonialList")
+);
 import Listing from "@components/Blocks/ListingBlock/Listings/Default/Listing";
 import React from "react";
-import PersonList from "./Listings/Persons/PersonList";
-import TestimonialList from "./Listings/Testimonials/TestimonialList";
+
 import { ListingBlogResult } from "./listingBlockQuery";
 
 export interface ListingBlockProps extends ListingBlogResult {}
-
 const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   const {
     items,
