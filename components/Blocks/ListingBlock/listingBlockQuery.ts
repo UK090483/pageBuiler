@@ -7,7 +7,7 @@ import {
 import {
   TestimonialItemResult,
   testimonialQuery,
-} from "./Listings/Testimonials/testimaonialQuery";
+} from "./Listings/Testimonials/testimonialQuery";
 
 export const listItemQuery = (locale: string) => {
   return `

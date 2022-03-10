@@ -5,7 +5,7 @@ import type { ImageMetaResult } from "@lib/SanityImage/query";
 import clsx from "clsx";
 import React from "react";
 import type { SectionResult } from "./SectionBlockQuery";
-import { Transition } from "./Transition";
+import Transition from "./Transition";
 
 interface SectionBlockProps extends SectionResult {}
 

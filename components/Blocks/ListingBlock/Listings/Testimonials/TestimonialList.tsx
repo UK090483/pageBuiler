@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TestimonialItemResult } from "./testimaonialQuery";
+import { TestimonialItemResult } from "./testimonialQuery";
 import TestimonialListItem from "./TestimonialListItem";
 
 interface ITestimonialListProps {

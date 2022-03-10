@@ -8,7 +8,7 @@ type TransitionProps = {
 };
 const topD = "M1000 100H-2.14577e-05V1.66893e-06L1000 100Z";
 const bottomD = "M0 0H1000V100L0 0Z";
-export const Transition: React.FC<TransitionProps> = (props) => {
+const Transition: React.FC<TransitionProps> = (props) => {
   const { color = "primary", pos } = props;
 
   return (
@@ -35,3 +35,5 @@ export const Transition: React.FC<TransitionProps> = (props) => {
     </div>
   );
 };
+
+export default Transition;

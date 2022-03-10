@@ -1,7 +1,7 @@
 import Typo from "@components/Typography/Typography";
 import SanityImage from "@lib/SanityImage";
 import * as React from "react";
-import { TestimonialItemResult } from "./testimaonialQuery";
+import { TestimonialItemResult } from "./testimonialQuery";
 
 interface ITestimonialListItemProps extends TestimonialItemResult {
   active?: boolean;
@@ -10,7 +10,7 @@ interface ITestimonialListItemProps extends TestimonialItemResult {
 const TestimonialListItem: React.FunctionComponent<
   ITestimonialListItemProps
 > = (props) => {
-  const { name, position, text, active } = props;
+  const { name, position, text, active, image } = props;
 
   return (
     <div
@@ -20,7 +20,7 @@ const TestimonialListItem: React.FunctionComponent<
     >
       <div className="flex flex-col justify-center items-center border-b-2 md:border-b-0 md:border-r-2 border-black py-12 px-5">
         <div className="relative w-32 h-32  overflow-hidden rounded-full">
-          <SanityImage objectFit="cover" />
+          {image?.url && <SanityImage image={image} objectFit="cover" />}
         </div>
         <Typo bold variant="body-l" className=" mt-10">
           {name}

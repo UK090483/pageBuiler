@@ -15,6 +15,7 @@ export const testimonialQuery = (locale: string) => `
 `;
 
 export interface TestimonialItemResult {
+  image?: ImageMetaResult;
   name?: null | string;
   position?: null | string;
   description?: null | string;

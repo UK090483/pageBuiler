@@ -1,5 +1,6 @@
+import useInViewport from "@hooks/useInViewport";
 import Image from "next/image";
-import * as React from "react";
+import React from "react";
 
 interface IMarqueProps {}
 
@@ -24,6 +25,9 @@ const text = [
 ];
 
 const Marque: React.FunctionComponent<IMarqueProps> = (props) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const inViewport = useInViewport(ref);
+
   const getParts = React.useMemo(
     () =>
       text.map((text, index) => {
@@ -47,11 +51,22 @@ const Marque: React.FunctionComponent<IMarqueProps> = (props) => {
   );
 
   return (
-    <div className="flex overflow-x-hidden border-t-2 border-b-2  border-black w-full  font-header font-bold text-xl md:text-5xl py-0 whitespace-nowrap">
-      <div className=" motion-reduce:animate-none  animate-marquee  ">
+    <div
+      ref={ref}
+      className="flex overflow-x-hidden border-t-2 border-b-2  border-black w-full  font-header font-bold text-xl md:text-5xl py-0 whitespace-nowrap"
+    >
+      <div
+        className={`${
+          inViewport ? "motion-reduce:animate-none  animate-marquee" : ""
+        } `}
+      >
         {getParts}
       </div>
-      <div className=" motion-reduce:animate-none  animate-marquee  ">
+      <div
+        className={`${
+          inViewport ? "motion-reduce:animate-none  animate-marquee" : ""
+        } `}
+      >
         {getParts}
       </div>
     </div>
