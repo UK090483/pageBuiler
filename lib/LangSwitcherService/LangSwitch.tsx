@@ -12,9 +12,15 @@ export interface LangSwitchProps {
 
 const defaultItems = [
   { label: "DE", locale: "de" },
-  // { label: "EN", locale: "en" },
+  //{ label: "EN", locale: "en" },
   { label: "DK", locale: "da" },
 ];
+
+const langAriaMap: { [k: string]: string } = {
+  de: "Deutsch",
+  en: "English",
+  da: "Dansk",
+};
 export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
   const { className, slugs, onClick = () => {} } = props;
   const items = defaultItems;
@@ -25,6 +31,7 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
       {items.map((item) => {
         return (
           <Link
+            aria-label={langAriaMap[item.locale]}
             onClick={onClick}
             scroll={false}
             key={item.locale}

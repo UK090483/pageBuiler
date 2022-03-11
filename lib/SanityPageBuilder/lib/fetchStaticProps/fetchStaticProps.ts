@@ -22,7 +22,7 @@ export async function fetchStaticProps<P>(
     }, `slug.current == "${slug}"`);
 
   const filter = slug
-    ? `_type == "page" && ${localizedQuery(slug)}`
+    ? `_type == "page" && (${localizedQuery(slug)})`
     : `_id == *[_id == 'siteConfig'][0].indexPage._ref`;
 
   const fetch = `*[${filter}][0]{

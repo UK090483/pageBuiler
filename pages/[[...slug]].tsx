@@ -16,7 +16,9 @@ import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchS
 import { sanityClient as client } from "@lib/SanityService/sanity.server";
 import type { SeoResult } from "@lib/SeoService/SeoQuery";
 import seoQuery from "@lib/SeoService/SeoQuery";
-import config from "../app.config.json";
+import appConfig from "../app.config.json";
+
+const locales = appConfig.locales;
 
 export type PageResult = { title?: string } & layoutQueryResult &
   LangSwitcherResult &
@@ -48,7 +50,7 @@ export const getStaticPaths = async () => {
   return await fetchStaticPaths({
     client,
     doc: "page",
-    locales: config.locales,
+    locales,
   });
 };
 //@ts-ignore
@@ -62,9 +64,9 @@ export const getStaticProps = async (props) => {
     query: ` content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
       locale
     )},${listingBlockQuery(locale)}},  ${seoQuery(locale)}, ${LangSwitcherQuery(
-      config.locales
+      locales
     )}, ${layoutQuery(locale)} ${NavigationQuery(locale)}`,
-    locales: config.locales,
+    locales,
     preview,
   });
 };

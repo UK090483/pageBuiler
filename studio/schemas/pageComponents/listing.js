@@ -8,18 +8,7 @@ export default withLocalization({
   icon: AiOutlineOrderedList,
   fields: [
     { name: "title", type: "string", title: "Title", localize: true },
-    // {
-    //   title: "Variant",
-    //   name: "variant",
-    //   type: "string",
-    //   options: {
-    //     list: [
-    //       { title: "Grid", value: "grid" },
-    //       { title: "List", value: "list" },
-    //       { title: "Carousel", value: "carousel" },
-    //     ],
-    //   },
-    // },
+
     {
       title: "Type",
       name: "type",
@@ -39,7 +28,7 @@ export default withLocalization({
         list: [
           { title: "Events", value: "event" },
           { title: "Documentations", value: "documentations" },
-          { title: "Pages", value: "pages" },
+          { title: "Kunst", value: "art" },
           { title: "Persons", value: "persons" },
           { title: "Testimonials", value: "testimonials" },
         ],
@@ -69,6 +58,21 @@ export default withLocalization({
           parent?.type === "contentType" &&
           parent?.contentType === "testimonials"
         ),
+    },
+    {
+      name: "artItems",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "page" }],
+          options: {
+            filter: 'pageType._ref == "3deed84f-18d4-4149-b588-ee130d7b9234"',
+          },
+        },
+      ],
+      hidden: ({ parent }) =>
+        !(parent?.type === "contentType" && parent?.contentType === "art"),
     },
     {
       name: "eventIncludeTags",

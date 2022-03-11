@@ -13,6 +13,7 @@ interface HeroProps extends HeroBlogResult {}
 const InlineImage = (props) => {
   //@ts-ignore
   const { src } = useSanityImage(props.mark);
+
   return (
     <span style={{ height: "0.705em" }} className="relative inline-block ">
       {src && (
@@ -28,7 +29,7 @@ const InlineImage = (props) => {
 };
 //@ts-ignore
 const BlockRenderer = (props) => {
-  return React.createElement("h1", { className: "" }, props.children);
+  return React.createElement("span", { className: "" }, props.children);
 };
 
 const serializer: Serializers = {
@@ -42,10 +43,9 @@ const serializer: Serializers = {
       return <span className="whitespace-nowrap">{children}</span>;
     },
   },
-  //@ts-ignore
-  // container: ({ children }) => {
-  //   return <h1>{children}</h1>;
-  // },
+  container: (props: any) => {
+    return <h1>{props?.children}</h1>;
+  },
 };
 
 const Hero: React.FC<HeroProps> = (props) => {

@@ -22,7 +22,7 @@ const Seo: React.FC<SeoProps> = (props) => {
       ? window.location.origin
       : "https://www.example.ie/",
   } = props;
-  const canUrl = `${pageUrl}${canonical}`;
+  const canUrl = `${pageUrl}/${canonical}`;
 
   return (
     <NextSeo

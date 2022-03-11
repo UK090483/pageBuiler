@@ -30,7 +30,7 @@ const Nav: React.FC<NavProps> = (props) => {
     <>
       <nav>
         <div className="flex items-center justify-between w-full  border-b-2 border-black ">
-          <Link href="/">
+          <Link aria-label="Home" href="/">
             <Logo />
           </Link>
 

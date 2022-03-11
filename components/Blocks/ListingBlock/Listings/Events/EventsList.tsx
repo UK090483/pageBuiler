@@ -35,7 +35,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
         </Section>
       )}
       {filterItems && accordion && (
-        <Section width="m">
+        <Section width="m" as="div">
           <Filter
             active={filter}
             onChange={handleFilterChange}

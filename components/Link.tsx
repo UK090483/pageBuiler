@@ -2,7 +2,7 @@ import React from "react";
 import NextLink from "next/link";
 import { useHomeRoute } from "./Layout/LayoutContext";
 
-interface LinkProps {
+interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   className?: string;
   external?: boolean;
@@ -12,21 +12,25 @@ interface LinkProps {
   role?: string;
 }
 
-export const Link: React.FC<LinkProps> = ({
-  href,
-  children,
-  className,
-  external,
-  locale,
-  onClick,
-  scroll,
-  role,
-}) => {
+export const Link: React.FC<LinkProps> = (props) => {
+  const {
+    href,
+    children,
+    className,
+    external,
+    locale,
+    onClick,
+    scroll,
+    role,
+    ...rest
+  } = props;
+
   const { parseRoute } = useHomeRoute();
 
   if (external) {
     return (
       <a
+        {...rest}
         href={href}
         role={role}
         className={className}
@@ -40,7 +44,7 @@ export const Link: React.FC<LinkProps> = ({
 
   return (
     <NextLink href={parseRoute(href)} passHref locale={locale} scroll={scroll}>
-      <a onClick={onClick} role={role} className={className}>
+      <a {...rest} onClick={onClick} role={role} className={className}>
         {children}
       </a>
     </NextLink>

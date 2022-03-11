@@ -52,6 +52,7 @@ const Marque: React.FunctionComponent<IMarqueProps> = (props) => {
 
   return (
     <div
+      aria-hidden={true}
       ref={ref}
       className="flex overflow-x-hidden border-t-2 border-b-2  border-black w-full  font-header font-bold text-xl md:text-5xl py-0 whitespace-nowrap"
     >

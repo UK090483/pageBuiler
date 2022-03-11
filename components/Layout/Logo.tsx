@@ -42,6 +42,7 @@ export const Logo = () => {
     <>
       <div
         role="banner"
+        aria-hidden={true}
         className="whitespace-nowrap p-1 font-bold font-header text-[28px] leading-6"
       >
         <span className="block">

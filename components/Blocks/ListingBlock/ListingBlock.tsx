@@ -26,6 +26,8 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
     eventVariant,
   } = props;
 
+  console.log(props);
+
   if (type !== "custom" && contentType === "testimonials") {
     return <TestimonialList items={testimonialItems || []} />;
   }
@@ -47,7 +49,11 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   }
   return (
     <Listing
-      filterItems={contentType === "documentations" ? filterItems : undefined}
+      filterItems={
+        ["documentations", "art"].includes(contentType || "")
+          ? filterItems
+          : undefined
+      }
       title={showTitle ? title : null}
       variant={variant || "list"}
       items={type === "custom" ? items || [] : items || []}

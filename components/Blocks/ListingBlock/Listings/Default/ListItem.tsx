@@ -41,9 +41,11 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
           </div>
         )}
         <div className={`px-3 w-full`}>
-          <Typo bold space={false} className=" pb-3 " variant="body-l">
-            {subTitle ? subTitle.toUpperCase() : slug?.toUpperCase()}
-          </Typo>
+          {subTitle && (
+            <Typo bold space={false} className=" pb-3 " variant="body-l">
+              {subTitle.toUpperCase()}
+            </Typo>
+          )}
           <Typo as={"h2"} variant="h2">
             {title}
           </Typo>

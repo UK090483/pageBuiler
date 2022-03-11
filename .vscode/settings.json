@@ -44,5 +44,14 @@
   },
   "explorerExclude.backup": null,
   "workspace.isHidden": false,
-  "cSpell.words": ["clsx", "Grotesk", "serializers", "Textfit"]
+  "cSpell.words": [
+    "clsx",
+    "Dansk",
+    "Deutsch",
+    "Grotesk",
+    "postbuild",
+    "serializers",
+    "tailwindcss",
+    "Textfit"
+  ]
 }

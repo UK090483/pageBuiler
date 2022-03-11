@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req.body._id);
   //   try {
-
   //     await res.unstable_revalidate('/path-to-revalidate')
   //     return res.json({ revalidated: true })
   //   } catch (err) {
