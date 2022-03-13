@@ -1,6 +1,6 @@
 import List from "./List";
 
-import React from "react";
+import React, { useReducer } from "react";
 import { Card } from "./Card";
 import { Carousel } from "./Carousel";
 
@@ -9,6 +9,7 @@ import { ListItem } from "./ListItem";
 import Filter from "./Filter";
 import { ListItemResult } from "../../listingBlockQuery";
 import useFilter from "../useFilter";
+import { useRouter } from "next/router";
 
 interface ListingProps {
   title?: string | null;
@@ -19,6 +20,8 @@ interface ListingProps {
 
 const Listing: React.FC<ListingProps> = (props) => {
   const { items, variant = "list", title, filterItems } = props;
+
+  const { locale } = useRouter();
 
   const { filter, setFilter, filteredItems } = useFilter({
     items,
@@ -51,6 +54,7 @@ const Listing: React.FC<ListingProps> = (props) => {
         )}
         {filteredItems.map((i, index) => (
           <ListItem
+            locale={locale}
             key={i._id}
             position={index % 2 === 0 ? "right" : "left"}
             {...i}

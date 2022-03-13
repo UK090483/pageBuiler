@@ -1,5 +1,6 @@
 import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
+import { useRouter } from "next/router";
 import * as React from "react";
 import Filter from "../Default/Filter";
 import useFilter from "../useFilter";
@@ -15,6 +16,8 @@ interface IEventsListProps {
 
 const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
   const { items, filterItems, accordion, title } = props;
+
+  const { locale } = useRouter();
 
   const { filter, setFilter, filteredItems } = useFilter({
     items,
@@ -46,7 +49,12 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
       <ul className="w-full">
         <div>
           {filteredItems?.map((i) => (
-            <EventsListItem key={i._id} {...i} accordion={accordion} />
+            <EventsListItem
+              locale={locale}
+              key={i._id}
+              {...i}
+              accordion={accordion}
+            />
           ))}
         </div>
       </ul>

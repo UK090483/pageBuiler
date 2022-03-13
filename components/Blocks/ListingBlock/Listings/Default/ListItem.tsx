@@ -7,26 +7,34 @@ import { Link } from "@components/Link";
 import SanityImage from "@lib/SanityImage";
 import Button from "@components/Button/Button";
 import { ListItemResult } from "../../listingBlockQuery";
+import { readMore } from "translations";
 
 interface ListItemProps extends ListItemResult {
   className?: string;
   position?: "left" | "right";
+  locale?: string;
 }
+
+const readMoreMap: { [k: string]: string } = {
+  de: "Mehr erfahren",
+  da: "Læs mere",
+  en: "read more",
+};
 
 export const ListItem: React.FC<ListItemProps> = (props) => {
   const {
     slug,
     title,
     description,
-
     className,
     position = "left",
     featuredImage,
     subTitle,
+    locale,
   } = props;
 
   return (
-    <li className="list-none ">
+    <li className="list-none">
       <Link
         className={`flex flex-wrap md:flex-nowrap bg-white mx-auto w-full  ${className}`}
         href={`/${slug}` || "/"}
@@ -52,7 +60,7 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
           <Typo className="w-full overflow-hidden whitespace-pre-line mb-4 ">
             {description}
           </Typo>
-          <Button tabIndex={-1}>Mehr erfahren</Button>
+          <Button tabIndex={-1}>{readMore[locale || "de"]}</Button>
         </div>
       </Link>
     </li>

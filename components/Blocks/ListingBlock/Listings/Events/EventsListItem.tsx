@@ -4,10 +4,12 @@ import Svg from "@components/Svg";
 import Typo from "@components/Typography/Typography";
 
 import * as React from "react";
+import { registerNow } from "translations";
 import { EventsListItemResult } from "./EventsListQuery";
 
 interface IEventsListItemProps extends EventsListItemResult {
   accordion?: boolean;
+  locale?: string;
 }
 
 const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
@@ -21,6 +23,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
     link,
     date,
     endDate,
+    locale,
   } = props;
 
   const [open, setOpen] = React.useState(false);
@@ -59,7 +62,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
         <div className=" w-full flex justify-between items-center">
           {link && (
             <Button href={link} external={true}>
-              jetzt Anmelden
+              {registerNow[locale || "de"]}
             </Button>
           )}
           {accordion && (

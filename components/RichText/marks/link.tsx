@@ -16,6 +16,7 @@ _type == "link" => {
 
 const LinkMark: React.FC<LinkMarkPros> = (props) => {
   const { link, asButton } = props;
+
   if (asButton) {
     return (
       <Button href={link?.href} external={link?.external}>
