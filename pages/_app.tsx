@@ -22,6 +22,8 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
     enabled: preview,
   });
 
+  preview && console.log({ error, preview });
+
   const pageProps = { ..._pageProps, data };
 
   return (
