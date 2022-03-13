@@ -43,9 +43,7 @@ interface NavigationItemResult {
   link?: LinkResult;
   items?: NavigationItemResult[];
 }
-export interface NavigationResult {
-  navigation: NavigationItemResult[];
-}
+export type NavigationResult = NavigationItemResult[];
 
 export interface NavItemResult {
   link: LinkResult;

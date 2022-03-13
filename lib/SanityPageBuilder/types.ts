@@ -66,6 +66,7 @@ export type fetchStaticPropsProps = {
   client: SanityClient;
   locales: LocationConfig;
   query: string;
+  previewQuery?: string;
   revalidate?: Revalidate;
 };
 

@@ -22,9 +22,9 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
     enabled: preview,
   });
 
-  preview && console.log({ error, preview });
+  const aData = { ..._data, ...data };
 
-  const pageProps = { ..._pageProps, data };
+  const pageProps = { ..._pageProps, data: aData } as PageProps<PageResult>;
 
   return (
     <>

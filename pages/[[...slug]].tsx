@@ -6,24 +6,17 @@ import SectionBlock from "@components/Blocks/SectionBlock";
 import sectionBlockQuery from "@components/Blocks/SectionBlock/SectionBlockQuery";
 import type { layoutQueryResult } from "@components/Layout/LayoutQuery";
 import layoutQuery from "@components/Layout/LayoutQuery";
-import type { LangSwitcherResult } from "@lib/LangSwitcherService/LangSwitcherQuery";
-import LangSwitcherQuery from "@lib/LangSwitcherService/LangSwitcherQuery";
-import type { NavigationResult } from "@lib/Navigation/query";
-import NavigationQuery from "@lib/Navigation/query";
+
 import BodyParser from "@lib/SanityPageBuilder/lib/BodyParser";
 import fetchStaticPaths from "@lib/SanityPageBuilder/lib/fetchStaticPath/fetchStaticPath";
 import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchStaticProps";
 import { sanityClient as client } from "@lib/SanityService/sanity.server";
-import type { SeoResult } from "@lib/SeoService/SeoQuery";
-import seoQuery from "@lib/SeoService/SeoQuery";
+
 import appConfig from "../app.config.json";
 
 const locales = appConfig.locales;
 
-export type PageResult = { title?: string } & layoutQueryResult &
-  LangSwitcherResult &
-  NavigationResult &
-  SeoResult;
+export type PageResult = { title?: string } & layoutQueryResult;
 
 //@ts-ignore
 const Page = (props) => {
@@ -61,11 +54,12 @@ export const getStaticProps = async (props) => {
     revalidate: true,
     params,
     client,
-    query: ` content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
+    previewQuery: `content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
       locale
-    )},${listingBlockQuery(locale)}},  ${seoQuery(locale)}, ${LangSwitcherQuery(
-      locales
-    )}, ${layoutQuery(locale)} ${NavigationQuery(locale)}`,
+    )}, ${listingBlockQuery(locale)}}`,
+    query: `content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
+      locale
+    )},${listingBlockQuery(locale)}},  ${layoutQuery(locale)}`,
     locales,
     preview,
   });

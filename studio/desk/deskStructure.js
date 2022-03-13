@@ -2,6 +2,22 @@ import S from "@sanity/desk-tool/structure-builder";
 import client from "part:@sanity/base/client";
 import { CgWebsite, CgProfile, CgCalendar, CgTag } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
+import Iframe from "sanity-plugin-iframe-pane";
+import resolveProductionUrl from "../resolveProductionUrl";
+export const getDefaultDocumentNode = (doc) => {
+  if (doc.schemaType !== "page") return S.document().views([S.view.form()]);
+
+  return S.document().views([
+    S.view.form(),
+    S.view
+      .component(Iframe)
+      .options({
+        url: (doc) => resolveProductionUrl(doc),
+        defaultSize: `mobile`,
+      })
+      .title("Preview"),
+  ]);
+};
 
 export default () =>
   S.list()
@@ -30,7 +46,6 @@ export default () =>
           const pageTypes = await client.fetch(
             '*[_type == "pageType"]{_id ,name}'
           );
-
           const root = S.listItem()
             .id("page")
             .title("Root")
