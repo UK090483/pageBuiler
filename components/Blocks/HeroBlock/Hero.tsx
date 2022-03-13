@@ -29,7 +29,7 @@ const InlineImage = (props) => {
 };
 //@ts-ignore
 const BlockRenderer = (props) => {
-  return React.createElement("span", { className: "" }, props.children);
+  return React.createElement("span", { className: " block " }, props.children);
 };
 
 const serializer: Serializers = {

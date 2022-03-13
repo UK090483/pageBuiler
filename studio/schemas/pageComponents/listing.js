@@ -28,7 +28,6 @@ export default withLocalization({
         list: [
           { title: "Events", value: "event" },
           { title: "Documentations", value: "documentations" },
-          { title: "Kunst", value: "art" },
           { title: "Persons", value: "persons" },
           { title: "Testimonials", value: "testimonials" },
         ],
@@ -59,21 +58,7 @@ export default withLocalization({
           parent?.contentType === "testimonials"
         ),
     },
-    {
-      name: "artItems",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "page" }],
-          options: {
-            filter: 'pageType._ref == "3deed84f-18d4-4149-b588-ee130d7b9234"',
-          },
-        },
-      ],
-      hidden: ({ parent }) =>
-        !(parent?.type === "contentType" && parent?.contentType === "art"),
-    },
+
     {
       name: "eventIncludeTags",
       type: "array",

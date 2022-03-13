@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 export type NavItemBaseProps = {
   icon?: boolean;
   hover?: boolean;
@@ -16,7 +18,7 @@ export const NavigationItemBase: React.FC<NavItemBaseProps> = ({
 }) => {
   return (
     <span
-      className={`block w-full px-5 py-4 leading-none whitespace-nowrap transition-colors duration-500 font-bold text-base-mobile xl:text-base truncate ${
+      className={`block w-full px-5 py-4 hover:underline decoration-4 underline-offset-2 leading-none whitespace-nowrap transition-colors duration-500 font-bold text-base-mobile xl:text-base truncate ${
         place === "dropdown/link" ? "hover:bg-black  hover:text-white " : ""
       }  ${bold ? " font-bold " : ""}  `}
     >

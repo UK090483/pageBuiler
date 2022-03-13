@@ -43,7 +43,12 @@ export const Link: React.FC<LinkProps> = (props) => {
   }
 
   return (
-    <NextLink href={parseRoute(href)} passHref locale={locale} scroll={scroll}>
+    <NextLink
+      href={parseRoute(href, locale)}
+      passHref
+      locale={locale}
+      scroll={scroll}
+    >
       <a {...rest} onClick={onClick} role={role} className={className}>
         {children}
       </a>

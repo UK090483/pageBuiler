@@ -1,5 +1,3 @@
-export * from "../studio/schema";
-
 import config from "../app.config.json";
 
 export type AppSizes = "s" | "m" | "l" | "xl" | "xxl";

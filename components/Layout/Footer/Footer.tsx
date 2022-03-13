@@ -4,7 +4,7 @@ import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { Link } from "@components/Link";
 import Image from "next/image";
-import Sozial from "./SozialIcons";
+import Social from "./SocialIcons";
 import { PageResult } from "pages/[[...slug]]";
 
 const Marque = dynamic(() => import("./Marque"));
@@ -49,7 +49,7 @@ const Footer: React.FC<FooterProps> = (props) => {
               Follow Us
             </Typo>
 
-            <Sozial />
+            <Social items={footer.socialMedia || []} />
           </div>
         </div>
         <div className="flex flex-col md:flex-row  gap-6 items-center justify-center mt-16 mb-12">

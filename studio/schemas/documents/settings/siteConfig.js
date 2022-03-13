@@ -37,6 +37,16 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "socialMedia",
+      type: "array",
+      title: "SocialMedia",
+      of: [
+        {
+          type: "socialMedia.item",
+        },
+      ],
+    },
+    {
       title: "Default / Seo",
       name: "seo",
       type: "seo",

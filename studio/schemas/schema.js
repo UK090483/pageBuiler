@@ -12,12 +12,14 @@ import tag from "./documents/tag";
 import Persons from "./Persons";
 import Page from "./Page";
 import Testimonial from "./Testimonials";
+import SocialMedia from "./SocialMedia";
 
 export default createSchema({
   name: "default",
 
   types: schemaTypes.concat([
     tag,
+    ...SocialMedia,
     ...Page,
     ...Persons,
     ...Testimonial,

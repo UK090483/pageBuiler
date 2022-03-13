@@ -20,7 +20,7 @@ export const listItemQuery = (locale: string) => {
   'slug':select(
     defined(pageType) && defined(pageType->slug_${locale}.current)  => pageType->slug_${locale}.current + '/' + coalesce(slug_${locale}.current,slug.current),
     defined(pageType) => pageType->slug.current + '/' +  coalesce(slug_${locale}.current,slug.current),
-    slug.current
+    coalesce(slug_${locale}.current,slug.current)
     ),
   'featuredImage':featuredImage{${imageMeta}}
   `;

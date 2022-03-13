@@ -6,6 +6,7 @@ const withPWA = require("next-pwa");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const config = {
+  reactStrictMode: true,
   i18n: {
     locales: Object.keys(appConfig.locales),
     defaultLocale: Object.entries(appConfig.locales).reduce(

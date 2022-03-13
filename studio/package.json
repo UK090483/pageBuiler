@@ -8,8 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build",
-    "types": "npx sanity-codegen"
+    "build": "sanity build"
   },
   "keywords": [
     "sanity"
@@ -33,7 +32,6 @@
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
-    "prettier": "^2.4.1",
-    "sanity-codegen": "^0.9.6"
+    "prettier": "^2.4.1"
   }
 }
