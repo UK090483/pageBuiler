@@ -49,14 +49,14 @@ const Footer: React.FC<FooterProps> = (props) => {
               Follow Us
             </Typo>
 
-            <Social items={footer.socialMedia || []} />
+            <Social items={footer?.socialMedia || []} />
           </div>
         </div>
         <div className="flex flex-col md:flex-row  gap-6 items-center justify-center mt-16 mb-12">
           <span>© 2021</span>
-          {footer.imprintPage?.href && footer.imprintPage.label && (
-            <Link href={footer.imprintPage.href}>
-              {footer.imprintPage.label}
+          {footer?.imprintPage?.href && footer?.imprintPage?.label && (
+            <Link href={footer?.imprintPage?.href}>
+              {footer?.imprintPage?.label}
             </Link>
           )}
           <Link href="/datenschutz">Datenschutz</Link>
