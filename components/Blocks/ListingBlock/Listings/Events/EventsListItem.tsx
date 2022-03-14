@@ -73,7 +73,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
         </div>
 
         <div className=" w-full flex justify-between items-center">
-          {link && (
+          {link && !isOver && (
             <Button href={link} external={true}>
               {registerNow[locale || "de"]}
             </Button>
