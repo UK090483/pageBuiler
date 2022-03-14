@@ -11,7 +11,7 @@ import {
 
 export const listItemQuery = (locale: string) => {
   return `
-  ...,
+ 
   _id,
   'tags': tags._ref,
   'title':coalesce(title_${locale},title),
@@ -28,13 +28,10 @@ export const listItemQuery = (locale: string) => {
 
 const listingBlockQuery = (locale: string) => `
 _type == "listing" => {
-  ...,
+ 
   eventVariant,
   'personItems': personItems[]->{${personItemQuery(locale)}},
   'testimonialItems': testimonialItems[]->{${testimonialItemQuery(locale)}},
-  'artItems': *[pageType._ref == "3deed84f-18d4-4149-b588-ee130d7b9234"][]{${listItemQuery(
-    locale
-  )}},
   _type,
   _key,
   contentType,

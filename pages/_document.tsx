@@ -1,5 +1,7 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 class MyDocument extends Document {
   render() {
     return (
@@ -19,7 +21,9 @@ class MyDocument extends Document {
           />
         </Head>
 
-        <body className="text-black debug-screens ">
+        <body
+          className={`text-black  ${isDevelopment ? "debug-screens" : ""} `}
+        >
           <Main />
           <div id="app-portal" />
           <NextScript />

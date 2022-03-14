@@ -10,9 +10,7 @@ import BodyParser from "@lib/SanityPageBuilder/lib/BodyParser";
 import fetchStaticPaths from "@lib/SanityPageBuilder/lib/fetchStaticPath/fetchStaticPath";
 import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchStaticProps";
 import { sanityClient as client } from "@lib/SanityService/sanity.server";
-
 import appConfig from "../app.config.json";
-
 const locales = appConfig.locales;
 
 export type PageResult = { title?: string } & layoutQueryResult;
@@ -20,6 +18,7 @@ export type PageResult = { title?: string } & layoutQueryResult;
 //@ts-ignore
 const Page = (props) => {
   const { data } = props;
+
   return (
     <BodyParser
       components={{
