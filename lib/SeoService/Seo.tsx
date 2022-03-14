@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import { SeoType } from "./SeoQuery";
 import React from "react";
+import { useRouter } from "next/router";
 
 interface SeoProps extends SeoType {
   pageUrl?: string;
@@ -24,11 +25,17 @@ const Seo: React.FC<SeoProps> = (props) => {
   } = props;
   const canUrl = `${pageUrl}/${canonical}`;
 
+  const { pathname } = useRouter();
+
+  const is404 = pathname === "/404";
+
+  const title = is404 ? titlePrefix + "404" : titlePrefix + metaTitle;
+
   return (
     <NextSeo
       nofollow={true}
       noindex={true}
-      title={titlePrefix + metaTitle}
+      title={title}
       description={metaDesc}
       canonical={canUrl}
       twitter={{
@@ -36,7 +43,7 @@ const Seo: React.FC<SeoProps> = (props) => {
       }}
       openGraph={{
         url: canUrl,
-        title: titlePrefix + metaTitle,
+        title: title,
         description: shareDesc,
 
         type: "page",
@@ -45,11 +52,9 @@ const Seo: React.FC<SeoProps> = (props) => {
             url: shareGraphic + metaImageParams || "",
             width: 800,
             height: 600,
-            alt: "Og Image Alt",
-            type: "image/jpeg",
           },
         ],
-        site_name: "SiteName",
+        site_name: "Perspektiv Region",
       }}
     />
   );

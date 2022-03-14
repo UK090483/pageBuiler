@@ -47,6 +47,7 @@ export const getStaticPaths = async () => {
 //@ts-ignore
 export const getStaticProps = async (props) => {
   const { params, preview, locale } = props;
+
   return await fetchStaticProps<PageResult>({
     locale,
     revalidate: true,
