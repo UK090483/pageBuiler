@@ -22,17 +22,19 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
   const isImage = variant === "image";
 
   return (
-    <li className="flex flex-col items-center justify-center sm:min-w-[150px] w-1/2   sm:w-1/4 py-8 self-start">
+    <li className="flex flex-col items-center justify-center sm:min-w-[250px] w-1/2   sm:w-1/4 py-8 self-start">
       <div className="tooltip hidden" />
       <div
         className={`relative h-24  sm:h-32  overflow-hidden ${
-          isImage ? "w-full" : "rounded-full w-24 sm:w-32"
+          isImage
+            ? "w-full border-[10px] border-transparent "
+            : "rounded-full w-24 sm:w-32"
         } `}
       >
         <SanityImage image={avatar} objectFit={isImage ? "contain" : "cover"} />
       </div>
 
-      <div className="pt-3 h-12 flex flex-col items-center justify-center ">
+      <div className="pt-3 h-12 ">
         <Typo
           bold
           variant="h4"
