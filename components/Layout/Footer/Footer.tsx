@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = (props) => {
       <Marque />
       <Section width="full" className=" px-5 ">
         <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
-          <Logos items={footer.logos} />
+          <Logos items={footer?.logos} />
 
           <div>
             <Typo variant="h1" as="p">
