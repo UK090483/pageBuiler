@@ -9,6 +9,9 @@ module.exports = {
   ],
   darkMode: "media", // or 'media' or 'class'
   theme: {
+    debugScreens: {
+      ignore: ["menu"],
+    },
     fontFamily: {
       sans: ["Montserrat", "Helvetica", "sans-serif"],
       header: ["grotesk"],
