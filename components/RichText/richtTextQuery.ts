@@ -26,5 +26,4 @@ export const richTextQuery = (locale: string = "") => {
 export const richTextQueryShort = (locale: string = "") => `
   ...,
   ${marksQuery},
-  
 `;

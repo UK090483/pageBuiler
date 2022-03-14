@@ -65,7 +65,7 @@ const SanityRichText: React.FunctionComponent<ISanityRichTextProps> = (
     <BlockContent
       dataset={dataset || process.env.SANITY_PROJECT_DATASET}
       projectId={projectId || process.env.SANITY_PROJECT_ID}
-      blocks={content}
+      blocks={content || []}
       serializers={{
         list,
         types: { ...plugs, block: BlockRenderer },

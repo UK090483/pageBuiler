@@ -14,14 +14,14 @@ const images = [
 ];
 
 const text = [
-  ["#PER", "SPECTIVREGION"],
-  ["#PERSPEC", "TIVREGION"],
-  ["#PERSP", "ECTIVREGION"],
-  ["#PERSPE", "CTIVREGION"],
-  ["#PERSPECTI", "VREGION"],
-  ["#PERSPECTIVR", "EGION"],
-  ["#PERS", "PECTIVREGION"],
-  ["#PERSPECTIVRE", "GION"],
+  ["#PER", "SPEKTIVREGION"],
+  ["#PERSPEK", "TIVREGION"],
+  ["#PERSP", "EKTIVREGION"],
+  ["#PERSPE", "KTIVREGION"],
+  ["#PERSPEKTI", "VREGION"],
+  ["#PERSPEKTIVR", "EGION"],
+  ["#PERS", "PEKTIVREGION"],
+  ["#PERSPEKTIVRE", "GION"],
 ];
 
 const Marque: React.FunctionComponent<IMarqueProps> = (props) => {

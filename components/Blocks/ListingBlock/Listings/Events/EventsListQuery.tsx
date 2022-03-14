@@ -8,7 +8,6 @@ type EventsListItemQueryFunction = (locale?: string) => string;
 
 export const EventsListItemQuery: EventsListItemQueryFunction = (locale) => {
   return `
-  
   _type,
   _id,
   'tags': tags._ref,
@@ -19,7 +18,7 @@ export const EventsListItemQuery: EventsListItemQueryFunction = (locale) => {
   'description':coalesce(description_${locale},description),
   link,
   date,
-  endDate,  
+  endDate,
 `;
 };
 
