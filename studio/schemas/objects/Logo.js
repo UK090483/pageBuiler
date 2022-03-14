@@ -18,4 +18,10 @@ export default withLocalization({
       type: "defaultImage",
     },
   ],
+  preview: {
+    select: {
+      title: "image.alt",
+      media: "image",
+    },
+  },
 });

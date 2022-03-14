@@ -3,9 +3,9 @@ import dynamic from "next/dynamic";
 import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { Link } from "@components/Link";
-import Image from "next/image";
 import Social from "./SocialIcons";
 import { PageResult } from "pages/[[...slug]]";
+import Logos from "./Logos";
 
 const Marque = dynamic(() => import("./Marque"));
 
@@ -19,31 +19,8 @@ const Footer: React.FC<FooterProps> = (props) => {
       <Marque />
       <Section width="full" className=" px-5 ">
         <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <div className="relative min-h-[200px]">
-              <div className=" text-sm pb-4 ">
-                Dieses Projekt wird gefördert durch Interreg Deutschland-
-                Danmark mit Mitteln des Europäischen Fonds für regionale
-                Entwicklung. Erfahren Sie mehr über Interreg Deutschland-
-                Danmark unter www.interreg5a.eu
-              </div>
-              <Image
-                src={`/images/logo_interreg_logo.png`}
-                alt="me"
-                width={500}
-                height={86}
-              />
-            </div>
-            <div className="relative  min-h-[200px]">
-              <div className=" text-sm pb-7 ">Weitere Förderer </div>
-              <Image
-                src={`/images/kiel_marke_logo.png`}
-                alt="me"
-                width={301}
-                height={108}
-              />
-            </div>
-          </div>
+          <Logos items={footer.logos} />
+
           <div>
             <Typo variant="h1" as="p">
               Follow Us

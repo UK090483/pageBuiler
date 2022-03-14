@@ -47,6 +47,16 @@ export default {
       ],
     },
     {
+      name: "logos",
+      type: "array",
+      title: "Logos",
+      of: [
+        {
+          type: "logo",
+        },
+      ],
+    },
+    {
       title: "Default / Seo",
       name: "seo",
       type: "seo",
