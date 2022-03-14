@@ -36,15 +36,15 @@ const Nav: React.FC<NavProps> = (props) => {
 
           <HeaderNavigation
             items={items}
-            className="items-center justify-center hidden lg:flex  "
+            className="items-center justify-center hidden  menu:flex "
           />
 
-          <LangSwitch className="hidden lg:flex" slugs={slugs} />
+          <LangSwitch className="hidden menu:flex" slugs={slugs} />
 
           <button
             data-testid="menu-overlay-toggle "
             onClick={() => setOpen((s) => !s)}
-            className="lg:hidden mr-2"
+            className="menu:hidden mr-2"
           >
             <Svg className="w-[30px] h-[30px]" icon="hamburger" />
           </button>

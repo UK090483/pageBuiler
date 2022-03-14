@@ -30,6 +30,9 @@ module.exports = {
     },
 
     extend: {
+      screens: {
+        menu: "1166px",
+      },
       height: {
         hero: "calc(100vh - 60px)",
         "hero-mobile": "calc(100vh - 120px)",
