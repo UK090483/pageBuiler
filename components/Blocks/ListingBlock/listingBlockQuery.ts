@@ -42,10 +42,10 @@ _type == "listing" => {
   'items': 
     select(
       type == 'custom' => customItems[]->{${listItemQuery(locale)}},
-      contentType == 'event' && count(eventIncludeTags) > 0 => *[ _type == 'event' && references(^.eventIncludeTags[]._ref ) ][]{${EventsListItemQuery(
+      contentType == 'event' && count(eventIncludeTags) > 0 => *[ _type == 'event' && references(^.eventIncludeTags[]._ref ) ]| order(date desc)[]{${EventsListItemQuery(
         locale
       )}},
-      contentType == 'event' => *[ _type == 'event']| order(date asc)[]{${EventsListItemQuery(
+      contentType == 'event' => *[ _type == 'event']| order(date desc)[]{${EventsListItemQuery(
         locale
       )}},
       contentType  == 'documentations' => *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" ][]{${listItemQuery(
