@@ -19,8 +19,17 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
 
   const { locale } = useRouter();
 
+  const sortedItems = React.useMemo(() => {
+    const now = new Date().toISOString().slice(0, 10);
+    return items
+      ? items.sort((a) => {
+          return a.date < now ? 1 : -1;
+        })
+      : [];
+  }, [items]);
+
   const { filter, setFilter, filteredItems } = useFilter({
-    items,
+    items: sortedItems,
     filterFn: (item, currentFilter) => item?.tags === currentFilter,
   });
 
