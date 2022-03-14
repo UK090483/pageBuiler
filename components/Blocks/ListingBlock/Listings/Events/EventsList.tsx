@@ -56,7 +56,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
       )}
       <ul className="w-full">
         <div>
-          {sortedItems?.map((i) => (
+          {filteredItems?.map((i) => (
             <EventsListItem
               locale={locale}
               key={i._id}
