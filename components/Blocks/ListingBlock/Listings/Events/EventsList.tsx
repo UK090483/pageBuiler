@@ -18,15 +18,14 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
   const { items, filterItems, accordion, title } = props;
 
   const { locale } = useRouter();
-
+  const now = new Date().toISOString().slice(0, 10);
   const sortedItems = React.useMemo(() => {
-    const now = new Date().toISOString().slice(0, 10);
     return items
-      ? items.sort((a) => {
-          return a.date < now ? 1 : -1;
+      ? items.sort((a, b) => {
+          return a.date < now ? 1 : a.date < b.date ? -1 : 1;
         })
       : [];
-  }, [items]);
+  }, [items, now]);
 
   const { filter, setFilter, filteredItems } = useFilter({
     items: sortedItems,
@@ -57,7 +56,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
       )}
       <ul className="w-full">
         <div>
-          {filteredItems?.map((i) => (
+          {sortedItems?.map((i) => (
             <EventsListItem
               locale={locale}
               key={i._id}

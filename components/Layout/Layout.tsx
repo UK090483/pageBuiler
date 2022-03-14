@@ -12,8 +12,6 @@ interface LayoutProps extends PageProps<PageResult> {}
 export const Layout: React.FC<LayoutProps> = (props) => {
   const { children, data } = props;
 
-  console.log(data);
-
   return (
     <>
       <style global jsx>
