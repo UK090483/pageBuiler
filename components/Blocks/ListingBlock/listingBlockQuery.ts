@@ -28,7 +28,7 @@ export const listItemQuery = (locale: string) => {
 
 const listingBlockQuery = (locale: string = "") => `
 _type == "listing" => {
- 
+  hideDoneEvents,
   eventVariant,
   'personItems': personItems[]->{${personItemQuery(locale)}},
   'testimonialItems': testimonialItems[]->{${testimonialItemQuery(locale)}},
@@ -85,6 +85,7 @@ export interface ListingBlogResult {
   showTitle?: boolean;
   type?: "custom";
   eventVariant?: "open" | "accordion" | null;
+  hideDoneEvents?: boolean | null;
 }
 
 export default listingBlockQuery;

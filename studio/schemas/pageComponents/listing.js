@@ -81,6 +81,13 @@ export default withLocalization({
         !(parent?.type === "contentType" && parent?.contentType === "event"),
     },
     {
+      title: "hide done Events",
+      name: "hideDoneEvents",
+      type: "boolean",
+      hidden: ({ parent }) =>
+        !(parent?.type === "contentType" && parent?.contentType === "event"),
+    },
+    {
       title: "Show Title",
       name: "showTitle",
       type: "boolean",

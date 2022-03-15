@@ -1,36 +1,26 @@
+import React, { useState } from "react";
 import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { useRouter } from "next/router";
-import * as React from "react";
 import Filter from "../Default/Filter";
-import useFilter from "../useFilter";
 
 import EventsListItem from "./EventsListItem";
+import { parseItem } from "./helper";
 
 interface IEventsListProps {
   items?: any[] | null;
   filterItems?: { label: string; value: string }[];
   accordion?: boolean;
   title?: string | null;
+  hideDoneEvents?: boolean | null;
 }
 
 const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
-  const { items, filterItems, accordion, title } = props;
-
+  const { items, filterItems, accordion, title, hideDoneEvents } = props;
   const { locale } = useRouter();
-  const now = new Date().toISOString().slice(0, 10);
-  const sortedItems = React.useMemo(() => {
-    return items
-      ? items.sort((a, b) => {
-          return a.date < now ? 1 : a.date < b.date ? -1 : 1;
-        })
-      : [];
-  }, [items, now]);
+  const [filter, setFilter] = useState("all");
 
-  const { filter, setFilter, filteredItems } = useFilter({
-    items: sortedItems,
-    filterFn: (item, currentFilter) => item?.tags === currentFilter,
-  });
+  const now = new Date().toISOString().slice(0, 10);
 
   const handleFilterChange = (i: { label: string; value: string }) => {
     setFilter(i.value);
@@ -56,14 +46,19 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
       )}
       <ul className="w-full">
         <div>
-          {filteredItems?.map((i) => (
-            <EventsListItem
-              locale={locale}
-              key={i._id}
-              {...i}
-              accordion={accordion}
-            />
-          ))}
+          {items?.map((i) => {
+            const preparedProps = parseItem(i, now);
+            if (filter !== "all" && preparedProps?.tags !== filter) return null;
+            if (preparedProps.done && hideDoneEvents) return null;
+            return (
+              <EventsListItem
+                locale={locale}
+                key={i._id}
+                {...preparedProps}
+                accordion={accordion}
+              />
+            );
+          })}
         </div>
       </ul>
     </>

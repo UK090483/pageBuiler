@@ -24,11 +24,13 @@ const config = {
   images: {
     domains: ["picsum.photos", "cdn.sanity.io"],
   },
+
   async redirects() {
     return [
       {
-        source: "/home",
-        destination: "/",
+        source: "/rewrite",
+        destination:
+          "https://nextjs.org/docs/api-reference/next.config.js/cdn-support-with-asset-prefix",
         permanent: true,
       },
     ];

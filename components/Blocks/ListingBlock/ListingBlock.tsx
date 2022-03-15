@@ -24,6 +24,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
     showTitle,
     type,
     eventVariant,
+    hideDoneEvents,
   } = props;
 
   if (type !== "custom" && contentType === "testimonials") {
@@ -38,6 +39,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   if (type !== "custom" && contentType === "event") {
     return (
       <EventsList
+        hideDoneEvents={hideDoneEvents}
         title={showTitle ? title : null}
         filterItems={filterItems}
         items={items || []}

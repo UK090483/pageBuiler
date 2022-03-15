@@ -18,8 +18,6 @@ function useInterval(
 
   // Set up the interval.
   useEffect(() => {
-    console.log("setup interval");
-
     // Don't schedule if no delay is specified.
     // Note: 0 is a valid value for delay.
     if (!running && delay !== 0) {

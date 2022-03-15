@@ -1,16 +1,16 @@
+import React from "react";
 import Button from "@components/Button/Button";
 import RichText from "@components/RichText/RichText";
 import Typo from "@components/Typography/Typography";
-import useEventDate from "@hooks/useEventDate";
-
-import * as React from "react";
 import { registerNow } from "translations";
 
 import { EventsListItemResult } from "./EventsListQuery";
+import useAccordion from "@hooks/useAccordion";
 
 interface IEventsListItemProps extends EventsListItemResult {
   accordion?: boolean;
   locale?: string;
+  done?: boolean | null;
 }
 
 const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
@@ -23,45 +23,30 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
     accordion = true,
     link,
     date,
-    endDate: _endDate,
+    endDate,
     locale,
+    done,
   } = props;
 
-  const [open, setOpen] = React.useState(false);
-  const [height, setHeight] = React.useState(0);
-  const ref = React.useRef<HTMLDivElement>(null);
   const hasContent = !!(content && content.length > 0);
-
-  const { startDate, endDate, isOver } = useEventDate({
-    start: date,
-    end: _endDate,
-  });
-
-  React.useEffect(() => {
-    if (!accordion) return;
-    if (open && ref.current) {
-      const { height } = ref.current.getBoundingClientRect();
-      return setHeight(height);
-    }
-    return setHeight(0);
-  }, [open, accordion]);
+  const { ref, maxHeight, toggle, open } = useAccordion();
 
   return (
     <li
       className={` border-black border-t-2 ${hasContent ? "mb-20" : "mb-10"} ${
-        isOver ? "opacity-60" : ""
+        done ? "opacity-60" : ""
       }`}
     >
       <div className="container  lg:max-w-screen-lg mx-auto px-5 my-12">
         <Typo variant="body-l" bold={false} space={false}>
-          {startDate && startDate} {endDate && " - " + endDate}
-          {isOver && " (Done)"}
+          {date && date} {endDate && " - " + endDate}
+          {done && " (Done)"}
         </Typo>
         <Typo variant="h3">{name}</Typo>
         <Typo>{description}</Typo>
         <div
           style={{
-            maxHeight: accordion ? height : undefined,
+            maxHeight: accordion ? maxHeight : undefined,
             transition: "max-height 1s",
           }}
           className=" overflow-hidden"
@@ -72,13 +57,13 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
         </div>
 
         <div className=" w-full flex justify-between items-center">
-          {link && !isOver && (
+          {link && !done && (
             <Button href={link} external={true}>
               {registerNow[locale || "de"]}
             </Button>
           )}
           {accordion && hasContent && (
-            <button onClick={() => setOpen((i) => !i)}>
+            <button onClick={toggle}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

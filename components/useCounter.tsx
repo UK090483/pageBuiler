@@ -12,7 +12,7 @@ function useCounter(max: number, initialValue?: number): ReturnType {
   const [count, setCount] = useState(initialValue || 0);
 
   const next = () => setCount((x) => (x + 1) % max);
-  const prev = () => setCount((x) => (x === 0 ? max : x - 1));
+  const prev = () => setCount((x) => (x === 0 ? max - 1 : x - 1));
   const reset = () => setCount(initialValue || 0);
 
   return {
