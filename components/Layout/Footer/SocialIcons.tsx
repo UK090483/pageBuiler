@@ -7,9 +7,6 @@ interface ISocialProps {
 
 const Social: React.FunctionComponent<ISocialProps> = (props) => {
   const { items } = props;
-  const className = "w-16 h-16 md:w-24 md:h-24  ";
-
-  console.log(props);
 
   return (
     <div className=" grid grid-cols-3 gap-12  place-content-center ">

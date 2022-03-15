@@ -1,6 +1,5 @@
 import { PageProps } from "@lib/SanityPageBuilder/types";
 import SkipToContent from "@lib/SkipToContent/SkipComponent";
-import { useRouter } from "next/router";
 import { PageResult } from "pages/[[...slug]]";
 import React from "react";
 import Footer from "./Footer";

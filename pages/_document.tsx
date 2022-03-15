@@ -17,6 +17,7 @@ class MyDocument extends Document {
             rel="preload"
             href="/fonts/PPRightGrotesk-CompactBlack.woff2"
             as="font"
+            type="font/woff2"
             crossOrigin=""
           />
         </Head>
