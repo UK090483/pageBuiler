@@ -44,6 +44,8 @@ const Nav: React.FC<NavProps> = (props) => {
           <button
             data-testid="menu-overlay-toggle "
             onClick={() => setOpen((s) => !s)}
+            aria-label={"Open the menu"}
+            aria-expanded={open}
             className="menu:hidden mr-2"
           >
             <Svg className="w-[30px] h-[30px]" icon="hamburger" />

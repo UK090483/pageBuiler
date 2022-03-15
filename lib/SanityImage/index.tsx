@@ -9,7 +9,7 @@ const SanityImage: SanityImageComponent = (props) => {
   let imageProps = useSanityImage(image, rest);
   if (!imageProps) return null;
 
-  return <NextImage {...imageProps} />;
+  return <NextImage alt={image?.alt || ""} {...imageProps} />;
 };
 
 export default SanityImage;

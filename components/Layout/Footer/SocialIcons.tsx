@@ -9,11 +9,18 @@ const Social: React.FunctionComponent<ISocialProps> = (props) => {
   const { items } = props;
   const className = "w-16 h-16 md:w-24 md:h-24  ";
 
+  console.log(props);
+
   return (
     <div className=" grid grid-cols-3 gap-12  place-content-center ">
       {items &&
         items.map((i) => (
-          <Link external={true} href={i.url || "/"} key={i._key}>
+          <Link
+            external={true}
+            href={i.url || "/"}
+            key={i._key}
+            aria-label={`Social media Link ${i.icon}`}
+          >
             <Icon icon={i.icon}></Icon>
           </Link>
         ))}
@@ -88,6 +95,8 @@ const Icon = (props: IconProps) => {
   if (!_path) return null;
   return (
     <svg
+      role="img"
+      aria-label={`${icon} Logo`}
       viewBox="0 0 101 102"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
