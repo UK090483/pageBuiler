@@ -18,8 +18,6 @@ export type PageResult = layoutQueryResult;
 
 //@ts-ignore
 const Page = (props) => {
-  console.log(props);
-
   const { data } = props;
 
   return (
