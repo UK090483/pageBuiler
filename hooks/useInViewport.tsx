@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 type useInViewportOptions = {
   callBack?: (entry: IntersectionObserverEntry) => boolean;
+  onChange?: (isIntersecting: boolean) => void;
 };
 
 const useInViewport = (
@@ -17,6 +18,7 @@ const useInViewport = (
           ? options.callBack(entries[0])
           : !(entries[0].intersectionRatio < 1);
         if (intersecting !== isIntersecting) {
+          options?.onChange && options?.onChange(isIntersecting);
           setIntersecting(isIntersecting);
         }
       };

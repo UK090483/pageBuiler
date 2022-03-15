@@ -1,6 +1,8 @@
 import * as React from "react";
 import { TestimonialItemResult } from "./testimonialQuery";
 import TestimonialListItem from "./TestimonialListItem";
+import useInterval from "@hooks/useCounter";
+import useInViewport from "@hooks/useInViewport";
 
 interface ITestimonialListProps {
   items: TestimonialItemResult[];
@@ -10,30 +12,30 @@ const TestimonialList: React.FunctionComponent<ITestimonialListProps> = (
   props
 ) => {
   const { items = [] } = props;
-
-  const timeout = React.useRef<NodeJS.Timeout | null>(null);
+  const ref = React.useRef(null);
   const [active, setActive] = React.useState(0);
+
+  const { start, stop } = useInterval(() => {
+    setActive((active + 1) % items.length);
+  }, 5000);
+
+  useInViewport(ref, {
+    onChange: (inViewport) => {
+      inViewport ? start() : stop();
+    },
+  });
 
   const setNext = () => {
     setActive((active + 1) % items.length);
   };
 
-  React.useEffect(() => {
-    timeout.current = setTimeout(() => {
-      setActive((active + 1) % items.length);
-    }, 5000);
-
-    return () => {
-      if (timeout.current) {
-        clearTimeout(timeout.current);
-      }
-    };
-  }, [active, timeout, setActive, items.length]);
-
   return (
     <>
       <div
+        ref={ref}
         onClick={setNext}
+        onMouseEnter={() => stop()}
+        onMouseLeave={() => start()}
         className="flex w-full overflow-hidden  border-t-2 border-b-2  border-black"
       >
         {items?.map((i, index) => (
