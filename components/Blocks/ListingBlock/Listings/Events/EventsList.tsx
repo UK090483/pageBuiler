@@ -44,7 +44,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
           />
         </Section>
       )}
-      <ul className="w-full">
+      <ul className="w-full pb-9 md:pb-20">
         <div>
           {items?.map((i) => {
             const preparedProps = parseItem(i, now);

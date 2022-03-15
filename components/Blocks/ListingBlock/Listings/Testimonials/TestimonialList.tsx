@@ -69,7 +69,7 @@ const Navigation: React.FC<NavigationProps> = (props) => {
   const { count = 0, active = 0, onChange } = props;
   if (count < 2) return <></>;
   return (
-    <div className=" flex justify-center items-center py-4">
+    <div className=" flex justify-center items-center py-4 pb-9 md:pb-20">
       {new Array(count).fill("a").map((i, index) => (
         <div
           onClick={() => onChange(index)}

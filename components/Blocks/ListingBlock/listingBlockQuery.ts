@@ -37,7 +37,7 @@ _type == "listing" => {
   contentType,
   showTitle,
   variant,
-  'filterItems': select( contentType == 'event' || contentType  == 'documentations'  => *[_type == "tag"]{'label':coalesce(name_${locale},name),'value':_id},null ),
+  'filterItems': select( contentType == 'event' || (contentType  == 'documentations' && !defined(documentationsIncludeTags) )  => *[_type == "tag"]{'label':coalesce(name_${locale},name),'value':_id},null ),
   'title':coalesce(title_${locale},title),
   'items': 
     select(
@@ -46,6 +46,9 @@ _type == "listing" => {
         locale
       )}},
       contentType == 'event' => *[ _type == 'event']| order(date desc)[]{${EventsListItemQuery(
+        locale
+      )}},
+      contentType  == 'documentations' && count(documentationsIncludeTags) > 0 => *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" && references(^.documentationsIncludeTags[]._ref ) ][]{${listItemQuery(
         locale
       )}},
       contentType  == 'documentations' => *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" ][]{${listItemQuery(

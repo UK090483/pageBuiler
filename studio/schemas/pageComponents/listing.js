@@ -58,14 +58,36 @@ export default withLocalization({
           parent?.contentType === "testimonials"
         ),
     },
-
     {
       name: "eventIncludeTags",
       type: "array",
       description: "shows all Events if left empty",
-      of: [{ type: "reference", to: [{ type: "tag" }] }],
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "tag" }],
+          options: { disableNew: true },
+        },
+      ],
       hidden: ({ parent }) =>
         !(parent?.type === "contentType" && parent?.contentType === "event"),
+    },
+    {
+      name: "documentationsIncludeTags",
+      type: "array",
+      description: "shows all Documentations if left empty",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "tag" }],
+          options: { disableNew: true },
+        },
+      ],
+      hidden: ({ parent }) =>
+        !(
+          parent?.type === "contentType" &&
+          parent?.contentType === "documentations"
+        ),
     },
     {
       title: "Variant",
@@ -95,7 +117,8 @@ export default withLocalization({
         !(
           parent?.type === "custom" ||
           parent?.contentType === "persons" ||
-          parent?.contentType === "event"
+          parent?.contentType === "event" ||
+          parent?.contentType === "documentations"
         ),
     },
   ],
