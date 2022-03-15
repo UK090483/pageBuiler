@@ -22,18 +22,7 @@ const variantsMapping: mappingObject = {
 };
 
 interface TypographyProps {
-  variant?:
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6"
-    | "body"
-    | "body-l"
-    | "body-s"
-    | "subheading1"
-    | "subheading2";
+  variant?: keyof typeof variantsMapping;
   as?: ElementKeys;
   className?: string;
   spacer?: boolean;

@@ -12,11 +12,14 @@ import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchS
 import { sanityClient as client } from "@lib/SanityService/sanity.server";
 import appConfig from "../app.config.json";
 const locales = appConfig.locales;
+import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 
-export type PageResult = { title?: string } & layoutQueryResult;
+export type PageResult = layoutQueryResult;
 
 //@ts-ignore
 const Page = (props) => {
+  console.log(props);
+
   const { data } = props;
 
   return (
@@ -37,17 +40,16 @@ const Page = (props) => {
   );
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return await fetchStaticPaths({
     client,
     doc: "page",
     locales,
   });
 };
-//@ts-ignore
-export const getStaticProps = async (props) => {
-  const { params, preview, locale } = props;
 
+export const getStaticProps: GetStaticProps = async (props) => {
+  const { params, preview, locale } = props;
   return await fetchStaticProps<PageResult>({
     locale,
     revalidate: true,

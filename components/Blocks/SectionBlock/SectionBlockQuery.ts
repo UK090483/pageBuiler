@@ -1,7 +1,7 @@
 import { richTextQuery } from "@components/RichText/richtTextQuery";
 import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
 
-const sectionBlockQuery = (locale: string) => `
+const sectionBlockQuery = (locale: string = "") => `
 _type == "section" => {
   _key,
   _type,

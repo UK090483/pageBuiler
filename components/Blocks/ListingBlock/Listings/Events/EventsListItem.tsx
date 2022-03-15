@@ -1,6 +1,5 @@
 import Button from "@components/Button/Button";
 import RichText from "@components/RichText/RichText";
-import Svg from "@components/Svg";
 import Typo from "@components/Typography/Typography";
 import useEventDate from "@hooks/useEventDate";
 

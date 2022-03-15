@@ -3,7 +3,7 @@ import client from "part:@sanity/base/client";
 import { CgWebsite, CgProfile, CgCalendar, CgTag } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 import Iframe from "sanity-plugin-iframe-pane";
-import resolveProductionUrl from "../resolveProductionUrl";
+import resolveProductionUrl from "../parts/resolveProductionUrl";
 export const getDefaultDocumentNode = (doc) => {
   if (doc.schemaType !== "page") return S.document().views([S.view.form()]);
 

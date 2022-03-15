@@ -1,30 +1,30 @@
-import { AiOutlineLink } from "react-icons/ai";
-import { withLocalization } from "../../Localizer";
+import { RiFileListFill } from "react-icons/ri";
+import { withLocalization } from "../Localizer";
 
 export default withLocalization({
-  title: "Link",
-  name: "navigationItem",
+  title: "Navigation Dropdown",
+  name: "navigationDropdown",
   type: "object",
   fields: [
     { name: "label", type: "string", title: "Label", localize: true },
+
     {
-      name: "link",
-      title: "Link",
-      type: "link",
+      name: "items",
+      type: "array",
+      title: "Main Navigation",
+      of: [{ type: "navigationItem" }],
     },
   ],
-
   preview: {
     select: {
       label: "label",
     },
     prepare(selection) {
       const { label } = selection;
-
       return {
         title: label,
-
-        media: AiOutlineLink,
+        subtitle: "Link",
+        media: RiFileListFill,
       };
     },
   },

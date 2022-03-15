@@ -20,7 +20,7 @@ const InlineImage = (props) => {
         <img
           style={{ height: "0.705em" }}
           height="0.8em"
-          src={src + "&w=150"}
+          src={src + "&w=200"}
           alt=""
         />
       )}

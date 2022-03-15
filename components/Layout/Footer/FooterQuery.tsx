@@ -6,7 +6,7 @@ export const footerQuery = (locale?: string) => `
 'socialMedia': *[_id == 'siteConfig'].socialMedia[]{icon,url,_key},
 'logos': *[_id == 'siteConfig'].logos[]{'image':image{${imageMeta}},'text':coalesce(text_${locale},text), _key},
 `;
-// []{image:image{${imageMeta}},text:coalesce(text_${locale},text)},
+
 export type FooterQueryResult = {
   imprintPage?: { href?: string; label?: string };
   privacyPolicyPage?: { href?: string; label?: string };

@@ -85,5 +85,4 @@ const useAnimationDelay = ({ delay, listener }: UseAnimationDelayProps) => {
       (dir === "out" && phase === "start"),
   };
 };
-
 export default useAnimationDelay;

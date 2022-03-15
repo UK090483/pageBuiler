@@ -26,7 +26,7 @@ export const listItemQuery = (locale: string) => {
   `;
 };
 
-const listingBlockQuery = (locale: string) => `
+const listingBlockQuery = (locale: string = "") => `
 _type == "listing" => {
  
   eventVariant,

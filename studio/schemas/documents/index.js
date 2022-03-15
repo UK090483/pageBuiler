@@ -1,5 +1,4 @@
-import navigation from "./navigation";
 import redirect from "./redirect";
-const Documents = [navigation, redirect];
+const Documents = [redirect];
 
 export default Documents;

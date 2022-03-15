@@ -19,9 +19,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
@@ -35,7 +33,7 @@
     },
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
-      "path": "./resolveProductionUrl.js"
+      "path": "./parts/resolveProductionUrl.js"
     },
     {
       "name": "part:@sanity/base/initial-value-templates",

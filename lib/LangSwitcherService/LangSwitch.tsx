@@ -1,4 +1,3 @@
-import { useHomeRoute } from "@components/Layout/LayoutContext";
 import { Link } from "@components/Link";
 import { useRouter } from "next/router";
 import React from "react";

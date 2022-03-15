@@ -1,7 +1,12 @@
 import { useCallback } from "react";
 
 type useKeyPressCallbacks = { [k: string]: () => void };
-const useKeyPress = (callBacks: useKeyPressCallbacks) => {
+
+type UseKeyPress = (callBacks: useKeyPressCallbacks) => {
+  onKeyDown: React.KeyboardEventHandler<HTMLElement>;
+};
+
+const useKeyPress: UseKeyPress = (callBacks) => {
   const downHandler = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
       if (typeof callBacks[e.key] === "function") {
@@ -13,19 +18,11 @@ const useKeyPress = (callBacks: useKeyPressCallbacks) => {
     [callBacks]
   );
 
-  const res: {
-    onKeyDown: React.KeyboardEventHandler<HTMLElement>;
-    onFocus: React.FocusEventHandler<HTMLElement>;
-    onBlur: React.FocusEventHandler<HTMLElement>;
-  } = {
-    onFocus: () => {},
-    onBlur: () => {},
+  return {
     onKeyDown: (e) => {
       downHandler(e);
     },
   };
-
-  return res;
 };
 
 export default useKeyPress;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useIntersection } from "react-use";
 
 type useInViewportOptions = {
   callBack?: (entry: IntersectionObserverEntry) => boolean;

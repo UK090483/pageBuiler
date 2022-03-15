@@ -21,7 +21,7 @@ const Page404: React.FunctionComponent<IStypeProps> = (props) => {
           src="/images/404_Page.png"
           width={600}
           height={600}
-          alt={"man on blackbord"}
+          alt={"man on blackboard with 404 written on"}
           layout="responsive"
         />
       </div>
