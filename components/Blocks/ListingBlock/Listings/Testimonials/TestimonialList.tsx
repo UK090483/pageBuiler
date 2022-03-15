@@ -1,8 +1,10 @@
 import * as React from "react";
 import { TestimonialItemResult } from "./testimonialQuery";
 import TestimonialListItem from "./TestimonialListItem";
-import useInterval from "@hooks/useCounter";
+import useInterval from "@hooks/useInterval";
 import useInViewport from "@hooks/useInViewport";
+import useKeyPress from "@hooks/useKeyPress";
+import useCounter from "@components/useCounter";
 
 interface ITestimonialListProps {
   items: TestimonialItemResult[];
@@ -13,40 +15,42 @@ const TestimonialList: React.FunctionComponent<ITestimonialListProps> = (
 ) => {
   const { items = [] } = props;
   const ref = React.useRef(null);
-  const [active, setActive] = React.useState(0);
-
-  const { start, stop } = useInterval(() => {
-    setActive((active + 1) % items.length);
-  }, 5000);
-
+  const { count, next, prev, setCount } = useCounter(items.length);
+  const { start, stop } = useInterval(next, 5000);
   useInViewport(ref, {
-    onChange: (inViewport) => {
-      inViewport ? start() : stop();
-    },
+    onChange: (inViewport) => (inViewport ? start() : stop()),
   });
 
-  const setNext = () => {
-    setActive((active + 1) % items.length);
-  };
+  const keyPressHandler = useKeyPress({
+    ArrowUp: next,
+    ArrowRight: next,
+    ArrowDown: prev,
+    ArrowLeft: prev,
+  });
 
   return (
     <>
       <div
+        aria-label="Testimonials"
+        tabIndex={0}
+        {...keyPressHandler}
         ref={ref}
-        onClick={setNext}
-        onMouseEnter={() => stop()}
-        onMouseLeave={() => start()}
+        onClick={next}
+        onFocus={stop}
+        onBlur={start}
+        onMouseEnter={stop}
+        onMouseLeave={start}
         className="flex w-full overflow-hidden  border-t-2 border-b-2  border-black"
       >
         {items?.map((i, index) => (
-          <TestimonialListItem active={index === active} key={i._id} {...i} />
+          <TestimonialListItem active={index === count} key={i._id} {...i} />
         ))}
       </div>
       <Navigation
         count={items.length}
-        active={active}
+        active={count}
         onChange={(n) => {
-          setActive(n);
+          setCount(n);
         }}
       />
     </>
@@ -63,7 +67,6 @@ type NavigationProps = {
 
 const Navigation: React.FC<NavigationProps> = (props) => {
   const { count = 0, active = 0, onChange } = props;
-
   if (count < 2) return <></>;
   return (
     <div className=" flex justify-center items-center py-4">

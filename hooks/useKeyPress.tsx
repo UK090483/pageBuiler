@@ -1,6 +1,8 @@
 import { useCallback } from "react";
 
-type useKeyPressCallbacks = { [k: string]: () => void };
+type KeydownItems = "ArrowDown" | "ArrowUp" | "ArrowLeft" | "ArrowRight";
+
+type useKeyPressCallbacks = { [k: KeydownItems | string]: () => void };
 
 type UseKeyPress = (callBacks: useKeyPressCallbacks) => {
   onKeyDown: React.KeyboardEventHandler<HTMLElement>;
