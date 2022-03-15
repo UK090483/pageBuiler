@@ -31,7 +31,7 @@ const TestimonialList: React.FunctionComponent<ITestimonialListProps> = (
   return (
     <>
       <div
-        aria-label="Testimonials"
+        aria-label=" Testimonials "
         tabIndex={0}
         {...keyPressHandler}
         ref={ref}
