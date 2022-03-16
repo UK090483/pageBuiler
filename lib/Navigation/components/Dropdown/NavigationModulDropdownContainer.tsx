@@ -30,10 +30,10 @@ const Render: React.ForwardRefRenderFunction<
           onMouseLeave={handleMouseLeave}
           onMouseEnter={handleMouseEnter}
           style={{
-            top: targetY,
+            top: targetY - 4,
             left: prepared.hasLists ? undefined : targetX,
           }}
-          className={`fixed  animate-fadeInMenuItemFast  flex items-center justify-between bg-white border-black border-2 border-t-transparent   ${
+          className={`fixed  animate-fadeInMenuItemFast flex items-center justify-between bg-white border-black border-2 border-t-transparent   ${
             prepared.hasLists
               ? "left-[50%] transform -translate-x-1/2  min-w-[80vw] "
               : ""
