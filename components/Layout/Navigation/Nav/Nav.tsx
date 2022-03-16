@@ -47,7 +47,15 @@ const Nav: React.FC<NavProps> = (props) => {
           />
 
           <div className="flex gap-4   flex-shrink-0 items-center">
-            {mainLogo && <SanityImage image={mainLogo.image} height={45} />}
+            {mainLogo && (
+              <div className="relative hidden sm:block  sm:w-[200px] h-11">
+                <SanityImage
+                  image={mainLogo.image}
+                  layout={"fill"}
+                  objectFit="contain"
+                />
+              </div>
+            )}
             <LangSwitch className="hidden menu:flex" slugs={slugs} />
           </div>
 
