@@ -5,19 +5,15 @@ import { Link } from "@components/Link";
 
 import { Logo } from "@components/Layout/Logo";
 
-import {
-  LangSwitch,
-  LangSwitchProps,
-} from "@lib/LangSwitcherService/LangSwitch";
+import { LangSwitch } from "@lib/LangSwitcherService/LangSwitch";
 import { LangSwitcherResult } from "@lib/LangSwitcherService/LangSwitcherQuery";
 
 import { HeaderNavigation } from "@lib/Navigation";
 import NavigationMobile from "@lib/Navigation/NavigationMobile";
 import { NavItem } from "@lib/Navigation/types";
-import Burger from "./Burger";
-import Image from "next/image";
 import { useAppContext } from "@components/AppContext";
 import SanityImage from "@lib/SanityImage";
+import { useScrollThreshold } from "@hooks/useScrollThreshold";
 
 interface NavProps {
   items: NavItem[];
@@ -33,10 +29,12 @@ const Nav: React.FC<NavProps> = (props) => {
 
   const mainLogo = data?.footer?.logos && data.footer.logos[0];
 
+  const scrolled = useScrollThreshold(800);
+
   return (
     <>
       <nav>
-        <div className="flex items-center justify-between w-full  border-b-2 border-black ">
+        <div className="flex items-center justify-between w-full  border-b-2 border-black h-14 ">
           <Link aria-label="Home" href="/">
             <Logo />
           </Link>
@@ -47,7 +45,7 @@ const Nav: React.FC<NavProps> = (props) => {
           />
 
           <div className="flex gap-4   flex-shrink-0 items-center">
-            {mainLogo && (
+            {/* {mainLogo && (
               <div className="relative hidden sm:block  sm:w-[200px] h-11">
                 <SanityImage
                   image={mainLogo.image}
@@ -55,7 +53,7 @@ const Nav: React.FC<NavProps> = (props) => {
                   objectFit="contain"
                 />
               </div>
-            )}
+            )} */}
             <LangSwitch className="hidden menu:flex" slugs={slugs} />
           </div>
 
@@ -69,6 +67,24 @@ const Nav: React.FC<NavProps> = (props) => {
             <Svg className="w-[30px] h-[30px]" icon="hamburger" />
           </button>
         </div>
+
+        {mainLogo && (
+          <div
+            className={`
+            transition-transform
+            ${
+              !scrolled ? "" : "translate-x-full"
+            } absolute top-14 -translate-y-0.5 right-0 border-t-0 border-r-0 bg-white  border-2 border-black p-2`}
+          >
+            <div className="relative w-[200px] h-11">
+              <SanityImage
+                image={mainLogo.image}
+                layout={"fill"}
+                objectFit="contain"
+              />
+            </div>
+          </div>
+        )}
       </nav>
       <NavigationMobile
         items={items}
