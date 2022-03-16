@@ -21,8 +21,6 @@ interface ListingProps {
 const Listing: React.FC<ListingProps> = (props) => {
   const { items, variant = "list", title, filterItems } = props;
 
-  console.log(props);
-
   const { locale } = useRouter();
 
   const { filter, setFilter, filteredItems } = useFilter({

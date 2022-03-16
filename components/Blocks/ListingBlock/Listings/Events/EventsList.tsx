@@ -19,12 +19,11 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
   const { items, filterItems, accordion, title, hideDoneEvents } = props;
   const { locale } = useRouter();
   const [filter, setFilter] = useState("all");
-
   const now = new Date().toISOString().slice(0, 10);
 
-  const handleFilterChange = (i: { label: string; value: string }) => {
-    setFilter(i.value);
-  };
+  items?.map((i) => {
+    console.log(i.date);
+  });
 
   return (
     <>
@@ -39,26 +38,36 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
         <Section width="m" as="div">
           <Filter
             active={filter}
-            onChange={handleFilterChange}
+            onChange={(item) => setFilter(item.value)}
             items={filterItems}
           />
         </Section>
       )}
+
       <ul className="w-full pb-9 md:pb-20">
         <div>
-          {items?.map((i) => {
-            const preparedProps = parseItem(i, now);
-            if (filter !== "all" && preparedProps?.tags !== filter) return null;
-            if (preparedProps.done && hideDoneEvents) return null;
-            return (
-              <EventsListItem
-                locale={locale}
-                key={i._id}
-                {...preparedProps}
-                accordion={accordion}
-              />
-            );
-          })}
+          {items?.reduce(
+            (acc, i) => {
+              const preparedProps = parseItem(i, now);
+
+              if (filter !== "all" && preparedProps?.tags !== filter)
+                return acc;
+              if (preparedProps.done && hideDoneEvents) return acc;
+
+              const component = (
+                <EventsListItem
+                  locale={locale}
+                  key={i._id}
+                  {...preparedProps}
+                  accordion={accordion}
+                />
+              );
+              return preparedProps.done
+                ? [[...acc[0]], [component, ...acc[1]]]
+                : [[...acc[0], component], [...acc[1]]];
+            },
+            [[], []]
+          )}
         </div>
       </ul>
     </>

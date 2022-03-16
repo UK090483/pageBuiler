@@ -54,11 +54,11 @@ const Hero: React.FC<HeroProps> = (props) => {
   const withLogo = logo && logo?.image?.url;
 
   return (
-    <div className="flex flex-col lg:flex-row ">
+    <div className="flex flex-col h-hero-mobile  sm:h-hero">
       {text && (
         <Textfit
           max={200}
-          className={`w-full  h-hero-mobile  sm:h-hero   px-5 container mx-auto ${
+          className={`w-full h-full  px-5 container mx-auto ${
             withLogo ? "" : ""
           } font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
             ready ? "opacity-100" : "opacity-0"
@@ -75,15 +75,15 @@ const Hero: React.FC<HeroProps> = (props) => {
           />
         </Textfit>
       )}
-      {withLogo && (
+      {/* {withLogo && (
         <div className="w-full lg:w-fit flex items-center flex-col justify-center mr-12 p-5 ">
           {logo?.text && (
             <div className=" text-sm pb-4  w-[400px]">{logo.text}</div>
           )}
 
-          <SanityImage image={logo.image} width={400} />
+          <SanityImage image={logo.image} width={200} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

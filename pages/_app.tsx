@@ -8,6 +8,7 @@ import Seo from "@lib/SeoService/Seo";
 import { PageResult } from "./[[...slug]]";
 import { PageProps } from "@lib/SanityPageBuilder/types";
 import usePreviewSubscription from "@lib/SanityPageBuilder/lib/preview/previewSubscription";
+import { AppContextProvider } from "@components/AppContext";
 
 interface AppPropsWithStaticProps {
   pageProps: PageProps<PageResult>;
@@ -27,14 +28,14 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
   const pageProps = { ..._pageProps, data: aData } as PageProps<PageResult>;
 
   return (
-    <>
+    <AppContextProvider data={pageProps.data}>
       <Layout {...pageProps}>
         <Component {...pageProps} />
       </Layout>
       {preview && <PreviewIndicator />}
       <Cookie />
       {data?.seo && <Seo {...data.seo} />}
-    </>
+    </AppContextProvider>
   );
 }
 

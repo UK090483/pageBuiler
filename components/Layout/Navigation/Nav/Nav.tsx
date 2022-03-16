@@ -15,6 +15,9 @@ import { HeaderNavigation } from "@lib/Navigation";
 import NavigationMobile from "@lib/Navigation/NavigationMobile";
 import { NavItem } from "@lib/Navigation/types";
 import Burger from "./Burger";
+import Image from "next/image";
+import { useAppContext } from "@components/AppContext";
+import SanityImage from "@lib/SanityImage";
 
 interface NavProps {
   items: NavItem[];
@@ -25,6 +28,10 @@ const Nav: React.FC<NavProps> = (props) => {
   const { items, slugs } = props;
 
   const [open, setOpen] = React.useState(false);
+
+  const { data } = useAppContext();
+
+  const mainLogo = data?.footer?.logos && data.footer.logos[0];
 
   return (
     <>
@@ -39,7 +46,10 @@ const Nav: React.FC<NavProps> = (props) => {
             className="items-center justify-center hidden  menu:flex "
           />
 
-          <LangSwitch className="hidden menu:flex" slugs={slugs} />
+          <div className="flex gap-4   flex-shrink-0 items-center">
+            {mainLogo && <SanityImage image={mainLogo.image} height={45} />}
+            <LangSwitch className="hidden menu:flex" slugs={slugs} />
+          </div>
 
           <button
             data-testid="menu-overlay-toggle "
