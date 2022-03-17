@@ -4,6 +4,8 @@ import type { ImageMetaResult } from "@lib/SanityImage/query";
 import ReactTooltip from "react-tooltip";
 
 import * as React from "react";
+import { readMore } from "translations";
+import { useRouter } from "next/router";
 
 interface IPersonListItemProps {
   name?: null | string;
@@ -19,7 +21,10 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
 ) => {
   const { name, description, position, avatar, _id, variant } = props;
 
+  const { locale } = useRouter();
+
   const isImage = variant === "image";
+  const readMoreText = locale ? readMore[locale] : "mehr Erfahren";
 
   return (
     <li className="flex flex-col items-center justify-center sm:min-w-[250px] w-1/2   sm:w-1/4 py-8 self-start">
@@ -50,7 +55,7 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
         data-tip
         data-for={_id}
       >
-        mehr Erfahren
+        {readMoreText}
       </button>
 
       <ReactTooltip
