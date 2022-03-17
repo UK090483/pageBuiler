@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import ReactGA from "react-ga";
 import Cookies from "js-cookie";
+import Script from "next/script";
+import Head from "next/head";
 
 interface IAnalyticsContextState {
   setConsent: () => void;
@@ -35,19 +36,16 @@ export const AnalyticsContextProvider = (
     [DefaultCookieName]: Cookies.get(DefaultCookieName),
   });
 
+  const hasCookie = consent[DefaultCookieName];
+
   useEffect(() => {
     const hasCookie = Cookies.get(DefaultCookieName);
-
     if (!hasCookie) return;
-    console.log("init ga");
-
-    ReactGA.initialize(id, { debug: false });
   }, [id, consent]);
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
-      console.log("pageView ga");
-      ReactGA.pageview(window.location.pathname + window.location.search);
+      pageView(url);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
@@ -57,16 +55,41 @@ export const AnalyticsContextProvider = (
 
   const setConsent = () => {
     Cookies.set(DefaultCookieName, "allow");
-    //_setConsent((i) => ({ ...i, [DefaultCookieName]: "allow" }));
+    _setConsent((i) => ({ ...i, [DefaultCookieName]: "allow" }));
   };
 
   const { children, ...rest } = props;
 
   return (
     <AnalyticsContext.Provider value={{ consent, setConsent, ...rest }}>
+      {hasCookie && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${id}');
+        `}
+          </Script>
+        </>
+      )}
+
       {children}
     </AnalyticsContext.Provider>
   );
+};
+
+const pageView = (url: string) => {
+  if (!window || !window.gtag) return;
+  console.log("ga pageView");
+
+  window.gtag("set", "page_path", url);
+  window.gtag("event", "page_view");
 };
 
 export const useAnalyticsContext = () => {
