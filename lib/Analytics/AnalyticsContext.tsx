@@ -86,7 +86,7 @@ export const AnalyticsContextProvider = (
 
 const pageView = (url: string) => {
   if (!window || !window.gtag) return;
-  console.log("ga pageView");
+  console.log("ga pageView " + url);
 
   window.gtag("set", "page_path", url);
   window.gtag("event", "page_view");
