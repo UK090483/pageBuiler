@@ -7,6 +7,21 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          {/* <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=G-Q8WLD17DV2`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                          
+                            gtag('config', 'G-Q8WLD17DV2');
+                            `,
+            }}
+          /> */}
           <link rel="icon" href="/favicon.ico" />
           <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"

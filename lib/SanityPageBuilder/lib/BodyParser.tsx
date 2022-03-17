@@ -8,14 +8,14 @@ export type BodyParserProps = {
 };
 
 const BodyParser: React.FC<BodyParserProps> = (props) => {
-  const { content, lang, components } = props;
+  const { content, components } = props;
   return (
     <>
       {content &&
         content.map((block) => {
           if (components[block._type]) {
             const Component = components[block._type].component;
-            return Component ? <Component key={block._key} {...block} /> : null;
+            return <Component key={block._key} {...block} />;
           }
           return (
             <div key={block._key}>

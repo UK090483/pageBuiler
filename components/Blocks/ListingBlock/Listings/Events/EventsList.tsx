@@ -21,10 +21,6 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
   const [filter, setFilter] = useState("all");
   const now = new Date().toISOString().slice(0, 10);
 
-  items?.map((i) => {
-    console.log(i.date);
-  });
-
   return (
     <>
       {title && (

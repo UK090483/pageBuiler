@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useRouter } from "next/router";
 import Button from "@components/Button/Button";
 import useCookie from "./useCookie";
 import CookieIcon from "./CookieIcon";
+import { useConsent } from "@lib/Analytics/AnalyticsContext";
 
 // import Icon from "./Icon";
 // import useCookie from "@lib/context/useCookie";
@@ -34,30 +35,39 @@ const CookieBar: React.FC = () => {
   const message_en =
     "We use cookies to make your experience on our website pleasant and to improve it!";
 
-  const { accepted, declined, acceptCookies, declineCookies } = useCookie();
+  const [open, setOpen] = useState(true);
 
-  // if (!hasMounted || !message) return null;
+  const { setConsent, consent } = useConsent();
+
+  const hasCookie = consent["consent"] === "allow";
+
+  const accept = () => {
+    setConsent();
+    setOpen(false);
+  };
+  const decline = () => {
+    setOpen(false);
+  };
+  const show = hasCookie ? false : open;
 
   return (
     <>
-      {false && (
+      {show && (
         <div
           role="dialog"
           aria-live="polite"
-          className="fixed bottom-0 left-0 right-0 w-full p-2 bg-white z-90 md:p-4 "
+          className="fixed bottom-0 left-0 right-0 border-t-2 border-black p-2 bg-white z-90 md:p-4 "
         >
           <div className="flex flex-wrap items-center justify-between md:flex-nowrap">
             <div className="flex items-center justify-between text-xs-fluid ">
-              <CookieIcon />
-
               <p className=" text-xs-fluid">
                 {locale === "en" ? message_en : message}
               </p>
             </div>
 
-            <div className={"flex justify-between items-center w-full md:w-60"}>
-              <Button onClick={() => acceptCookies()}>Accept</Button>
-              <Button onClick={() => acceptCookies()}>Decline</Button>
+            <div className={"flex justify-between items-center  gap-8 "}>
+              <button onClick={decline}>Decline</button>
+              <Button onClick={accept}>Accept</Button>
             </div>
           </div>
         </div>
