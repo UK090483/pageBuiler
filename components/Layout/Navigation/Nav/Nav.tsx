@@ -76,7 +76,7 @@ const Nav: React.FC<NavProps> = (props) => {
               !scrolled ? "" : "translate-x-full"
             } absolute top-14 -translate-y-0.5 right-0 border-t-0 border-r-0 bg-white  border-2 border-black p-2`}
           >
-            <div className="relative w-[200px] h-11">
+            <div className="relative w-[200px] h-11 lg:w-[360px] lg:h-16">
               <SanityImage
                 image={mainLogo.image}
                 layout={"fill"}
