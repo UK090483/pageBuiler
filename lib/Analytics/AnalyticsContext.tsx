@@ -29,6 +29,7 @@ export const AnalyticsContextProvider = (
   props: AnalyticsContextProviderProps
 ) => {
   const { id } = props;
+
   const router = useRouter();
   const [consent, _setConsent] = useState<Consents>({
     [DefaultCookieName]: Cookies.get(DefaultCookieName),
@@ -36,7 +37,11 @@ export const AnalyticsContextProvider = (
 
   useEffect(() => {
     const hasCookie = Cookies.get(DefaultCookieName);
-    hasCookie && ReactGA.initialize(id);
+
+    if (!hasCookie) return;
+    console.log("init ga");
+
+    ReactGA.initialize(id, { debug: false });
   }, [id, consent]);
 
   useEffect(() => {

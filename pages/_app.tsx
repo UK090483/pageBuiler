@@ -28,7 +28,7 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
   const pageProps = { ..._pageProps, data: aData } as PageProps<PageResult>;
 
   return (
-    <AnalyticsContextProvider id="G-Q8WLD17DV2">
+    <AnalyticsContextProvider id="G-YVH817HM4Z">
       <AppContextProvider data={pageProps.data}>
         <Layout {...pageProps}>
           <Component {...pageProps} />
