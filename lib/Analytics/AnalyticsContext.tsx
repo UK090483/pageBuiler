@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Script from "next/script";
-import Head from "next/head";
 
 interface IAnalyticsContextState {
   setConsent: () => void;
@@ -47,9 +46,9 @@ export const AnalyticsContextProvider = (
     const handleRouteChange = (url: string) => {
       pageView(url);
     };
-    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on("beforeHistoryChange", handleRouteChange);
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off("beforeHistoryChange", handleRouteChange);
     };
   }, [router.events]);
 
@@ -86,10 +85,7 @@ export const AnalyticsContextProvider = (
 
 const pageView = (url: string) => {
   if (!window || !window.gtag) return;
-  console.log("ga pageView " + url);
-
-  window.gtag("set", "page_path", url);
-  window.gtag("event", "page_view");
+  window.gtag("set", { page_path: url, page_title: url });
 };
 
 export const useAnalyticsContext = () => {
@@ -98,6 +94,5 @@ export const useAnalyticsContext = () => {
 
 export const useConsent = () => {
   const { setConsent, consent } = useContext(AnalyticsContext);
-
   return { setConsent, consent };
 };
