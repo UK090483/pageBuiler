@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
 export type NavItemBaseProps = {
   icon?: boolean;
   hover?: boolean;

@@ -40,18 +40,13 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
       </div>
 
       <div className="pt-3 h-12 ">
-        <Typo
-          bold
-          variant="h4"
-          space={false}
-          className=" uppercase  text-center"
-        >
+        <Typo bold variant="h4" space={false} className="uppercase text-center">
           {name}
         </Typo>
       </div>
       <Typo className="whitespace-pre-line text-center w-60">{position}</Typo>
       <button
-        className=" underline   text-sm sm:text-base "
+        className="underline text-sm sm:text-base"
         data-tip
         data-for={_id}
       >

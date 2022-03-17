@@ -2,6 +2,7 @@ import { NavigationContextProvider } from "../../NavigationContext";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import DropdownNavItem from "./DropdownNavItem";
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 const customRender = (items?: boolean) => {
   render(
@@ -32,6 +33,9 @@ describe("DropdownNavItem", () => {
   });
 
   it(" should render overlay on mouseEnter  ", () => {
+    useRouter.mockImplementationOnce(() => ({
+      query: { locale: "de" },
+    }));
     customRender(true);
 
     const element = screen.queryByTestId("DropdownNavItem_test");
@@ -47,6 +51,9 @@ describe("DropdownNavItem", () => {
     expect(screen.queryByText("testItem")).not.toBeInTheDocument();
   });
   it(" should render overlay on click  ", () => {
+    useRouter.mockImplementationOnce(() => ({
+      query: { locale: "de" },
+    }));
     customRender(true);
     const element = screen.queryByTestId("DropdownNavItem_test");
     if (element) {
