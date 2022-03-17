@@ -54,7 +54,7 @@ const Hero: React.FC<HeroProps> = (props) => {
   const withLogo = logo && logo?.image?.url;
 
   return (
-    <div className="flex flex-col h-hero-mobile  sm:h-hero">
+    <div className="flex flex-col h-hero-mobile  sm:h-hero pt-11 lg:pt-16">
       {text && (
         <Textfit
           max={200}
