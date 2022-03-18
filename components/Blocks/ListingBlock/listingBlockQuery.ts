@@ -29,6 +29,7 @@ const isDocumentation =
   'pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f"';
 const listingBlockQuery = (locale: string = "") => `
 _type == "listing" => {
+  ...,
   hideDoneEvents,
   eventVariant,
   'personItems': personItems[]->{${personItemQuery(locale)}},
@@ -41,7 +42,7 @@ _type == "listing" => {
   'filterItems': select( contentType == 'event' || (contentType  == 'documentations' && !defined(documentationsIncludeTags) )  => *[_type == "tag"]{'label':coalesce(name_${locale},name),'value':_id},null ),
   'title':coalesce(title_${locale},title),
   'listItems':(select(
-    type == 'custom' => customItems,
+    type == 'custom' => [ ...customItems[]->] ,
     contentType  == 'documentations' && count(documentationsIncludeTags) > 0 => *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" && references(^.documentationsIncludeTags[]._ref ) ],
     contentType  == 'documentations' => *[ pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f" ],
     contentType  == 'art' => *[ pageType._ref == "3deed84f-18d4-4149-b588-ee130d7b9234" ],
