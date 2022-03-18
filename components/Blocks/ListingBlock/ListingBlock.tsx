@@ -14,7 +14,6 @@ import { ListingBlogResult } from "./listingBlockQuery";
 export interface ListingBlockProps extends ListingBlogResult {}
 const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   const {
-    items,
     variant,
     title,
     contentType,
@@ -24,7 +23,9 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
     showTitle,
     type,
     eventVariant,
+    eventItems,
     hideDoneEvents,
+    listItems,
   } = props;
 
   if (type !== "custom" && contentType === "testimonials") {
@@ -42,7 +43,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
         hideDoneEvents={hideDoneEvents}
         title={showTitle ? title : null}
         filterItems={filterItems}
-        items={items || []}
+        items={eventItems || []}
         accordion={!(eventVariant === "open")}
       />
     );
@@ -56,7 +57,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
       }
       title={showTitle ? title : null}
       variant={variant || "list"}
-      items={type === "custom" ? items || [] : items || []}
+      items={type === "custom" ? listItems || [] : listItems || []}
     />
   );
 };

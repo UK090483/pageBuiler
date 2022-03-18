@@ -11,10 +11,7 @@ _type == "section" => {
   topSpace,
   bottomSpace,
   imagePosition,
-  'content':coalesce(
-      content_${locale}[]{${richTextQuery(locale)}},
-      content[]{${richTextQuery(locale)}}
-      ),
+  'content':(coalesce(content_${locale},content))[]{${richTextQuery(locale)}},
   bgImage{${imageMeta}},
   image{${imageMeta}}
 }

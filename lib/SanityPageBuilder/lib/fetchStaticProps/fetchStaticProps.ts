@@ -42,9 +42,7 @@ export async function fetchStaticProps<P>(
     ${previewQuery}
    }`;
 
-  console.time("fetch");
   const data = await client.fetch(fetch);
-  console.timeEnd("fetch");
 
   if (!data) {
     return { notFound: true, revalidate };
@@ -54,8 +52,7 @@ export async function fetchStaticProps<P>(
     props: {
       data,
       preview: preview || false,
-      // query: preview ? (previewQuery ? previewFetch : fetch) : "",
-      query: fetch,
+      query: preview ? (previewQuery ? previewFetch : fetch) : "",
       id: slug || "noId",
     },
     revalidate,
