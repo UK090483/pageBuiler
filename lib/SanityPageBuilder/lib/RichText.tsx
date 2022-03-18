@@ -1,11 +1,8 @@
 import React from "react";
 import BlockContent from "@sanity/block-content-to-react";
+import type { Block, Span } from "@sanity/types/src/portableText/types";
 
-export interface SanityBlock {
-  _type: "block";
-  style: string;
-  [key: string]: any;
-}
+export interface SanityBlock extends Block<Span> {}
 
 export type MarkProps<P = {}> = {
   children: string[];
@@ -23,7 +20,7 @@ export type PlugProps<P = {}> = {
 
 interface ISanityRichTextProps {
   marks?: Record<string, (props: any) => JSX.Element | null>;
-  plugs?: Record<string, (props: any) => JSX.Element | null>;
+  plugs?: Record<string, React.ComponentType<any>>;
   content: SanityBlock[];
   list?: React.ReactNode;
   listItem?: React.Component;

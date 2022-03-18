@@ -19,6 +19,9 @@ interface AppPropsWithStaticProps {
 
 function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
   const { data: _data, query, preview } = _pageProps;
+
+  console.log(query);
+
   const { data, error } = usePreviewSubscription<PageResult | null>(query, {
     initialData: _data,
     enabled: preview,

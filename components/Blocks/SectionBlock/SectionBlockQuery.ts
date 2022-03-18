@@ -1,4 +1,4 @@
-import { richTextQuery } from "@components/RichText/richtTextQuery";
+import { richTextQuery } from "@components/RichText/richTextQuery";
 import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
 
 const sectionBlockQuery = (locale: string = "") => `

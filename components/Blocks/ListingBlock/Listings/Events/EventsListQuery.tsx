@@ -1,4 +1,4 @@
-import { richTextQueryShort } from "@components/RichText/richtTextQuery";
+import { richTextQueryShort } from "@components/RichText/richTextQuery";
 
 export const EventsListQuery = (locale?: string) => `
 

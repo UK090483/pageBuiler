@@ -44,17 +44,15 @@ const Typo: React.FC<TypographyProps> = ({
   space,
 }) => {
   const Component: ElementKeys = as ? as : variantsMapping[variant] || "p";
-  // const Component: ElementKeys = variantsMapping[variant] || "p";
   const isBold =
     bold !== undefined ? bold : boldMap.includes(variant as string);
 
   if (spacer) {
-    return <div className="h-14" />;
+    return <hr className="h-14 border-0" />;
   }
 
   return (
     <Component
-      data-variant={variant}
       className={
         clsx({
           "pb-[0.8em]": space !== false && variant !== "body",
@@ -65,7 +63,6 @@ const Typo: React.FC<TypographyProps> = ({
           "text-lg font-header uppercase": ["body-l", "h6"].includes(
             variant as string
           ),
-
           "text-xl font-header uppercase": variant === "h5",
           "text-2xl-mobile md:text-2xl font-header uppercase": variant === "h4",
           "text-3xl-mobile md:text-3xl font-header uppercase": variant === "h3",
