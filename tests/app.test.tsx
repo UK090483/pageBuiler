@@ -1,8 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-
-import { render } from "@testing-library/react";
+import { customRender } from "./test-utils";
 import App from "../pages/_app";
 
 const TestComponent: React.FC = () => {
@@ -11,7 +7,11 @@ const TestComponent: React.FC = () => {
 
 describe("App", () => {
   test("smoke", () => {
-    // //@ts-ignore
-    // render(<App Component={TestComponent} pageProps={{}} />);
+    // customRender(
+    //   <App
+    //     Component={TestComponent}
+    //     pageProps={{ data: {}, id: "", query: "", preview: false }}
+    //   />
+    // );
   });
 });

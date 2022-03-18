@@ -2,35 +2,29 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Script from "next/script";
+const isDevelopment = process.env.NODE_ENV === "development";
+const DefaultCookieName = "consent";
 
+type Consents = { [k: string]: string | undefined };
 interface IAnalyticsContextState {
   setConsent: () => void;
   consent: Consents;
 }
-
 const defaultState: IAnalyticsContextState = {
   setConsent: () => console.log("No AnalyticsContext found"),
   consent: {},
 };
-
 const AnalyticsContext = React.createContext(defaultState);
 
 interface AnalyticsContextProviderProps {
   id: string;
-
-  children?: React.ReactNode;
 }
-
-const DefaultCookieName = "consent";
-
-type Consents = { [k: string]: string | undefined };
-
-export const AnalyticsContextProvider = (
-  props: AnalyticsContextProviderProps
-) => {
-  const { id } = props;
-
+export const AnalyticsContextProvider: React.FC<
+  AnalyticsContextProviderProps
+> = (props) => {
+  const { id, children, ...rest } = props;
   const router = useRouter();
+
   const [consent, _setConsent] = useState<Consents>({
     [DefaultCookieName]: Cookies.get(DefaultCookieName),
   });
@@ -38,12 +32,8 @@ export const AnalyticsContextProvider = (
   const hasCookie = consent[DefaultCookieName];
 
   useEffect(() => {
-    const hasCookie = Cookies.get(DefaultCookieName);
-    if (!hasCookie) return;
-  }, [id, consent]);
-
-  useEffect(() => {
     const handleRouteChange = (url: string) => {
+      if (isDevelopment) return;
       pageView(url);
     };
     router.events.on("beforeHistoryChange", handleRouteChange);
@@ -57,11 +47,9 @@ export const AnalyticsContextProvider = (
     _setConsent((i) => ({ ...i, [DefaultCookieName]: "allow" }));
   };
 
-  const { children, ...rest } = props;
-
   return (
     <AnalyticsContext.Provider value={{ consent, setConsent, ...rest }}>
-      {hasCookie && (
+      {hasCookie && !isDevelopment && (
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${id}`}

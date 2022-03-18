@@ -2,7 +2,7 @@ import React from "react";
 
 import Typo from "@components/Typography";
 
-import { Link } from "@components/Link";
+import Link from "@components/Link";
 
 import SanityImage from "@lib/SanityImage";
 import { ListItemResult } from "../../listingBlockQuery";

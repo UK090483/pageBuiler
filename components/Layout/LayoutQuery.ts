@@ -17,7 +17,7 @@ ${seoQuery(locale)}
 `;
 
 export type layoutQueryResult = {
-  footer: FooterQueryResult;
+  footer?: FooterQueryResult;
   title?: string | null;
   homeRoute?: { [k: string]: string };
   navigation?: NavigationResult;

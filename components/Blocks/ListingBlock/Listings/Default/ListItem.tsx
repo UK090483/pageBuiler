@@ -2,12 +2,12 @@ import React from "react";
 
 import Typo from "@components/Typography";
 
-import { Link } from "@components/Link";
+import Link from "@components/Link";
 
 import SanityImage from "@lib/SanityImage";
 import Button from "@components/Button/Button";
 import { ListItemResult } from "../../listingBlockQuery";
-import { readMore } from "translations";
+import { readMore } from "@constants/translations";
 
 interface ListItemProps extends ListItemResult {
   className?: string;

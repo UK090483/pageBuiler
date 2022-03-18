@@ -1,13 +1,9 @@
-import { Link } from "@components/Link";
-import * as React from "react";
+import { useAppContext } from "@components/AppContext";
+import Link from "@components/Link";
 
-interface ISocialProps {
-  items?: { icon?: string | null; url?: string | null; _key: string }[];
-}
-
-const Social: React.FunctionComponent<ISocialProps> = (props) => {
-  const { items } = props;
-
+const Social: React.FC = () => {
+  const { data } = useAppContext();
+  const items = data?.footer?.socialMedia;
   return (
     <div className=" grid grid-cols-3 gap-12  place-content-center ">
       {items &&

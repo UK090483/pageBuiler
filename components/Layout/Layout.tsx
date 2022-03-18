@@ -1,15 +1,14 @@
-import { PageProps } from "@lib/SanityPageBuilder/types";
-import SkipToContent from "@lib/SkipToContent/SkipComponent";
-import { PageResult } from "pages/[[...slug]]";
 import React from "react";
+import { useAppContext } from "@components/AppContext";
+import SkipToContent from "@lib/SkipToContent/SkipComponent";
 import Footer from "./Footer";
 import { Header } from "./Header";
 import { LayoutContextProvider } from "./LayoutContext";
 import Nav from "./Navigation/Nav/Nav";
-interface LayoutProps extends PageProps<PageResult> {}
 
-export const Layout: React.FC<LayoutProps> = (props) => {
-  const { children, data } = props;
+export const Layout: React.FC = (props) => {
+  const { children } = props;
+  const { data } = useAppContext();
 
   return (
     <>
@@ -30,11 +29,10 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         <Header>
           <Nav items={data?.navigation || []} slugs={data?.langSwitchData} />
         </Header>
-
         <main id="main-content" className="min-h-screen mt-[57px] select-none">
           {children}
         </main>
-        {data && <Footer {...data} />}
+        <Footer />
       </LayoutContextProvider>
     </>
   );

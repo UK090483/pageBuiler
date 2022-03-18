@@ -1,18 +1,10 @@
+import { useAppContext } from "@components/AppContext";
 import SanityImage from "@lib/SanityImage";
-import { ImageMetaResult } from "@lib/SanityImage/query";
-import Image from "next/image";
-import * as React from "react";
 
-interface ILogosProps {
-  items?: {
-    image?: ImageMetaResult | null;
-    text?: string | null;
-    _key: string;
-  }[];
-}
+const Logos: React.FC = (props) => {
+  const { data } = useAppContext();
 
-const Logos: React.FunctionComponent<ILogosProps> = (props) => {
-  const { items } = props;
+  const items = data?.footer?.logos;
   return (
     <div className="grid grid-cols-4 gap-12 lg:grid-cols-6">
       {items &&

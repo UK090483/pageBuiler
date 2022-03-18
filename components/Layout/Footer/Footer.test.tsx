@@ -1,29 +1,24 @@
-import { render, screen } from "@testing-library/react";
-
+import { customRender, screen, act } from "@tests/test-utils";
 import Footer from "./Footer";
 
-const testItems = [
-  {
-    label: "Home",
-    href: "/",
-  },
-  {
-    label: "About",
-    href: "/about",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-  },
-];
-
 describe("Footer", () => {
-  it(" should render Nav items ", () => {
-    // render(<Footer navItems={testItems} />);
-    // expect(screen.getByTestId("footer")).toHaveTextContent("Home");
-    // expect(screen.getByTestId("footer")).toHaveTextContent("About");
-    // expect(screen.getByTestId("footer")).toHaveTextContent("Contact");
-    // expect(screen.getByTestId("footer")).toHaveTextContent("Impressum");
-    // expect(screen.getByTestId("footer")).toHaveTextContent("Datenschutz");
+  it(" should render as expected ", async () => {
+    const promise = Promise.resolve();
+    customRender(<Footer />);
+    expect(screen.getByTestId("footer")).toBeInTheDocument();
+    await act(() => promise);
+  });
+
+  it(" should render imprintPage ", async () => {
+    const promise = Promise.resolve();
+    customRender(<Footer />, {
+      data: {
+        footer: { imprintPage: { href: "testHref", label: "testLabel" } },
+      },
+    });
+    expect(screen.getByTestId("footer")).toBeInTheDocument();
+    expect(screen.getByText("testLabel")).toBeInTheDocument();
+    expect(screen.getByText("testLabel")).toHaveAttribute("href", "testHref");
+    await act(() => promise);
   });
 });

@@ -25,7 +25,11 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
     <>
       {title && (
         <Section width="m">
-          <Typo variant="h3" className=" uppercase pb-12  pt-6 md:pt-12 ">
+          <Typo
+            variant="h3"
+            as="h2"
+            className=" uppercase pb-12  pt-6 md:pt-12 "
+          >
             {title}
           </Typo>
         </Section>
@@ -40,7 +44,7 @@ const EventsList: React.FunctionComponent<IEventsListProps> = (props) => {
         </Section>
       )}
 
-      <ul className="w-full pb-9 md:pb-20">
+      <ul className="w-full pb-9 md:pb-20" data-testid="EventList">
         <div>
           {items?.reduce(
             (acc, i) => {

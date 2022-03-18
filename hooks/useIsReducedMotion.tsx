@@ -1,7 +1,9 @@
+const support =
+  typeof window !== "undefined" && typeof window.matchMedia === "function";
 const useIsReducedMotion = () => {
-  const mediaQuery =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)");
+  // Return false if no support
+  if (!support) return false;
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   return mediaQuery && mediaQuery.matches;
 };
 

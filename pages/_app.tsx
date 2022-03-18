@@ -19,7 +19,6 @@ interface AppPropsWithStaticProps {
 
 function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
   const { data: _data, query, preview } = _pageProps;
-
   const { data, error } = usePreviewSubscription<PageResult | null>(query, {
     initialData: _data,
     enabled: preview,
@@ -30,12 +29,12 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
   return (
     <AnalyticsContextProvider id="G-YVH817HM4Z">
       <AppContextProvider data={pageProps.data}>
-        <Layout {...pageProps}>
+        <Layout>
           <Component {...pageProps} />
         </Layout>
-        {preview && <PreviewIndicator />}
+        <PreviewIndicator show={!!preview} />
         <Cookie />
-        {data?.seo && <Seo {...data.seo} />}
+        <Seo />
       </AppContextProvider>
     </AnalyticsContextProvider>
   );

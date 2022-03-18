@@ -1,3 +1,9 @@
+const { pathsToModuleNameMapper } = require("ts-jest");
+const { compilerOptions } = require("./tsconfig");
+
+console.log(
+  pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" })
+);
 module.exports = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
@@ -9,6 +15,8 @@ module.exports = {
     "^@services/(.*)$": "<rootDir>/services/$1",
     "^@hooks/(.*)$": "<rootDir>/hooks/$1",
     "^@lib/(.*)$": "<rootDir>/lib/$1",
+    "^@tests/(.*)$": "<rootDir>/tests/$1",
+    "^@constants/(.*)$": "<rootDir>/constants/$1",
 
     /* Handle CSS imports (with CSS modules)
       https://jestjs.io/docs/webpack#mocking-css-modules */

@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@components/Button/Button";
 import RichText from "@components/RichText/RichText";
 import Typo from "@components/Typography/Typography";
-import { registerNow } from "translations";
+import { registerNow } from "@constants/translations";
 
 import { EventsListItemResult } from "./EventsListQuery";
 import useAccordion from "@hooks/useAccordion";
@@ -33,6 +33,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
 
   return (
     <li
+      data-testid="EventsListItem"
       className={` border-black border-t-2 ${hasContent ? "mb-20" : "mb-10"} ${
         done ? "opacity-60" : ""
       }`}

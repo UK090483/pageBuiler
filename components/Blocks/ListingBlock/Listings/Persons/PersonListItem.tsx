@@ -4,7 +4,7 @@ import type { ImageMetaResult } from "@lib/SanityImage/query";
 import ReactTooltip from "react-tooltip";
 
 import * as React from "react";
-import { readMore } from "translations";
+import { readMore } from "@constants/translations";
 import { useRouter } from "next/router";
 
 interface IPersonListItemProps {
@@ -40,7 +40,13 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
       </div>
 
       <div className="pt-3 h-12 ">
-        <Typo bold variant="h4" space={false} className="uppercase text-center">
+        <Typo
+          bold
+          variant="h4"
+          as="h3"
+          space={false}
+          className="uppercase text-center"
+        >
           {name}
         </Typo>
       </div>

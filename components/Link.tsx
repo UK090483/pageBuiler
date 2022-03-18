@@ -56,6 +56,8 @@ export const Link: React.FC<LinkProps> = (props) => {
   );
 };
 
+export default Link;
+
 export const ConditionalLink: React.FC<LinkProps & { condition: boolean }> = ({
   condition,
   ...rest

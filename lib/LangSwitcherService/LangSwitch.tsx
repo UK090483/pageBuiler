@@ -1,4 +1,4 @@
-import { Link } from "@components/Link";
+import Link from "@components/Link";
 import { useRouter } from "next/router";
 import React from "react";
 import { LangSwitcherResult } from "./LangSwitcherQuery";

@@ -1,7 +1,9 @@
 import { mockClient } from "@lib/SanityPageBuilder/lib/MockClient/MockClient";
-import { render } from "@testing-library/react";
+import { customRender, screen } from "@tests/test-utils";
 import { EventsListQuery } from "./EventsListQuery";
-// import ListingBlock from "./ListingBlock";
+import EventList from "./EventsList";
+
+import EventsListItem from "./EventsListItem";
 
 const database: any[] = [];
 
@@ -14,7 +16,40 @@ describe("EventsListing", () => {
       }
     }`);
   });
-  // it("should render no Items", async () => {
-  //   render(<ListingBlock _type="listing" _key="test" />);
+  it("should render no Items", async () => {
+    customRender(<EventList />);
+    expect(screen.getByTestId("EventList")).toBeInTheDocument();
+  });
+  it("should render title", async () => {
+    customRender(<EventList title="testTitle" />);
+    expect(screen.getByText("testTitle")).toBeInTheDocument();
+  });
+});
+
+describe("EventsListingItem", () => {
+  it("should render ", () => {
+    //@ts-ignore
+    customRender(<EventsListItem />);
+    expect(screen.getByTestId("EventsListItem")).toBeInTheDocument();
+  });
+
+  it("should render ", () => {
+    customRender(
+      <EventsListItem
+        _id="testid"
+        description={"testDescription"}
+        link="testLink"
+        name="testName"
+      />
+    );
+    expect(screen.getByTestId("EventsListItem")).toBeInTheDocument();
+    expect(screen.getByText("testDescription")).toBeInTheDocument();
+    expect(screen.getByText("testName")).toBeInTheDocument();
+    expect(screen.getByRole("link")).toBeInTheDocument();
+    expect(screen.getByRole("link")).toHaveAttribute("href", "testLink");
+  });
+
+  // it("should render content", () => {
+  //   customRender(<EventsListItem _id="testid" content={[{}, {}]} />);
   // });
 });

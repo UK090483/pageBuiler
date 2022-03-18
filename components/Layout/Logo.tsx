@@ -83,6 +83,8 @@ export const Logo = () => {
   );
 };
 
+export default Logo;
+
 const LetterOrImage: React.FC<{
   image?: { alt: string; src: string };
   show?: boolean;

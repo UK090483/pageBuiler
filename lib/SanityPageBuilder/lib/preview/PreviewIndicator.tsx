@@ -2,9 +2,9 @@
 import { useRouter } from "next/router";
 import * as React from "react";
 
-const PreviewIndicator: React.FC = () => {
+const PreviewIndicator: React.FC<{ show: boolean }> = ({ show }) => {
   const { asPath } = useRouter();
-
+  if (!show) return null;
   return (
     <a
       className="fixed p-3 font-bold text-red-500 border-4 border-red-500 rounded-md left-2 bottom-2"

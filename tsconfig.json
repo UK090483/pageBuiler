@@ -20,6 +20,8 @@
       "@lib/*": ["lib/*"],
       "@services/*": ["services/*"],
       "@hooks/*": ["hooks/*"],
+      "@tests/*": ["tests/*"],
+      "@constants/*": ["constants/*"],
       "types/*": ["types/*"]
     }
   },

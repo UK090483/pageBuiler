@@ -1,32 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import Button from "@components/Button/Button";
-import useCookie from "./useCookie";
-import CookieIcon from "./CookieIcon";
 import { useConsent } from "@lib/Analytics/AnalyticsContext";
-
-// import Icon from "./Icon";
-// import useCookie from "@lib/context/useCookie";
-// import useHasMounted from "@hooks/useHasMounted";
-// import Button from "@components/Button/Button";
-
-const barAnim = {
-  show: {
-    y: "0%",
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-  hide: {
-    y: "100%",
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
 
 const CookieBar: React.FC = () => {
   const { locale } = useRouter();
@@ -35,10 +11,8 @@ const CookieBar: React.FC = () => {
   const message_en =
     "We use cookies to make your experience on our website pleasant and to improve it!";
 
-  const [open, setOpen] = useState(true);
-
+  const [open, setOpen] = useState(false);
   const { setConsent, consent } = useConsent();
-
   const hasCookie = consent["consent"] === "allow";
 
   const accept = () => {
@@ -48,11 +22,15 @@ const CookieBar: React.FC = () => {
   const decline = () => {
     setOpen(false);
   };
-  const show = hasCookie ? false : open;
+
+  useEffect(() => {
+    if (hasCookie) return;
+    setOpen(true);
+  }, [hasCookie]);
 
   return (
     <>
-      {show && (
+      {open && (
         <div
           role="dialog"
           aria-live="polite"
@@ -76,4 +54,4 @@ const CookieBar: React.FC = () => {
   );
 };
 
-export default React.memo(CookieBar);
+export default CookieBar;

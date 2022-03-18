@@ -22,6 +22,7 @@ const PersonList: React.FunctionComponent<IPersonListProps> = (props) => {
       {title && (
         <Typo
           variant="h3"
+          as="h2"
           className="text-center uppercase pb-12 md:pb-24 pt-6 md:pt-12 "
         >
           {title}

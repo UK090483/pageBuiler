@@ -9,7 +9,7 @@ export interface SeoType {
 }
 
 export interface SeoResult {
-  seo: SeoType;
+  seo?: SeoType;
 }
 
 const seoQuery = (locale: string = "") => `

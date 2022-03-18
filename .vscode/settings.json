@@ -54,5 +54,6 @@
     "serializers",
     "tailwindcss",
     "Textfit"
-  ]
+  ],
+  "cSpell.ignoreWords": ["PERSPEKTIV", "fillmax", "testid"]
 }

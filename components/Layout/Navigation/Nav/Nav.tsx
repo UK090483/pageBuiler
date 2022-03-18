@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Svg from "@components/Svg";
 import React from "react";
-import { Link } from "@components/Link";
+import Link from "@components/Link";
 
 import { Logo } from "@components/Layout/Logo";
 
@@ -45,15 +45,6 @@ const Nav: React.FC<NavProps> = (props) => {
           />
 
           <div className="flex gap-4   flex-shrink-0 items-center">
-            {/* {mainLogo && (
-              <div className="relative hidden sm:block  sm:w-[200px] h-11">
-                <SanityImage
-                  image={mainLogo.image}
-                  layout={"fill"}
-                  objectFit="contain"
-                />
-              </div>
-            )} */}
             <LangSwitch className="hidden menu:flex" slugs={slugs} />
           </div>
 

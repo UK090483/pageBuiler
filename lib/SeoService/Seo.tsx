@@ -1,17 +1,16 @@
-import { NextSeo } from "next-seo";
-import { SeoType } from "./SeoQuery";
 import React from "react";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-
-interface SeoProps extends SeoType {
-  pageUrl?: string;
-}
+import { useAppContext } from "@components/AppContext";
 
 const metaImageParams = "?w=1200&h=630&bg=fff&fit=fillmax";
-
 const titlePrefix = "PERSPEKTIV REGION | ";
 
-const Seo: React.FC<SeoProps> = (props) => {
+const Seo: React.FC = (props) => {
+  const { pathname } = useRouter();
+  const { data } = useAppContext();
+  const seo = data?.seo;
+  if (!seo) return null;
   const {
     metaTitle,
     metaDesc,
@@ -22,13 +21,10 @@ const Seo: React.FC<SeoProps> = (props) => {
     pageUrl = typeof window !== "undefined"
       ? window.location.origin
       : "https://www.example.ie/",
-  } = props;
+  } = seo;
+
   const canUrl = `${pageUrl}/${canonical}`;
-
-  const { pathname } = useRouter();
-
   const is404 = pathname === "/404";
-
   const title = is404 ? titlePrefix + "404" : titlePrefix + metaTitle;
 
   return (
@@ -45,13 +41,12 @@ const Seo: React.FC<SeoProps> = (props) => {
         url: canUrl,
         title: title,
         description: shareDesc,
-
         type: "page",
         images: [
           {
             url: shareGraphic + metaImageParams || "",
-            width: 800,
-            height: 600,
+            width: 1200,
+            height: 630,
           },
         ],
         site_name: "Perspektiv Region",

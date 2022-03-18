@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@components/Link";
+import Link from "@components/Link";
 import { LinkResult, linkQuery } from "@lib/Navigation/query";
 import Button from "@components/Button/Button";
 

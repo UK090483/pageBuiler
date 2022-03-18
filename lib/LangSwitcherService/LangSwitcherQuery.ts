@@ -20,7 +20,7 @@ const LangSwitcherQuery = (locales: LocationConfig) => {
   `;
 };
 export type LangSwitcherResult = {
-  langSwitchData: { [k: string]: string };
+  langSwitchData?: { [k: string]: string };
 };
 
 export default LangSwitcherQuery;

@@ -1,7 +1,8 @@
+import { useAppContext } from "@components/AppContext";
 import HeroBlock from "@components/Blocks/HeroBlock";
 import heroBlockQuery from "@components/Blocks/HeroBlock/HeroBlockQuery";
-import listingBlockQuery from "@components/Blocks/ListingBlock/listingBlockQuery";
 import ListingBlock from "@components/Blocks/ListingBlock";
+import listingBlockQuery from "@components/Blocks/ListingBlock/listingBlockQuery";
 import SectionBlock from "@components/Blocks/SectionBlock";
 import sectionBlockQuery from "@components/Blocks/SectionBlock/SectionBlockQuery";
 import type { layoutQueryResult } from "@components/Layout/LayoutQuery";
@@ -10,16 +11,14 @@ import BodyParser from "@lib/SanityPageBuilder/lib/BodyParser";
 import fetchStaticPaths from "@lib/SanityPageBuilder/lib/fetchStaticPath/fetchStaticPath";
 import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchStaticProps";
 import { sanityClient as client } from "@lib/SanityService/sanity.server";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import appConfig from "../app.config.json";
 const locales = appConfig.locales;
-import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 
-export type PageResult = layoutQueryResult;
+export type PageResult = layoutQueryResult & { content?: any };
 
-//@ts-ignore
-const Page = (props) => {
-  const { data } = props;
-
+const Page = () => {
+  const { data } = useAppContext();
   return (
     <BodyParser
       components={{

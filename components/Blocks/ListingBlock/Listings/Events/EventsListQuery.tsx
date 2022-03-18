@@ -23,7 +23,7 @@ export const EventsListItemQuery: EventsListItemQueryFunction = (locale) => {
 };
 
 export type EventsListItemResult = {
-  content?: string | null;
+  content?: any;
   name?: string | null;
   description?: string | null;
   link?: string;
