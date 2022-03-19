@@ -1,8 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-
-import { render } from "@testing-library/react";
+import { customRender } from "./test-utils";
 import Document from "../pages/_document";
 
 const TestComponent: React.FC = () => {
@@ -11,7 +7,6 @@ const TestComponent: React.FC = () => {
 
 describe("Document", () => {
   test("smoke", () => {
-    //@ts-ignore
-    // render(<Document inAmpMode={false} />);
+    // customRender(<Document />);
   });
 });

@@ -21,23 +21,22 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
     personItems,
     testimonialItems,
     showTitle,
-    type,
     eventVariant,
     eventItems,
     hideDoneEvents,
     listItems,
   } = props;
 
-  if (type !== "custom" && contentType === "testimonials") {
+  if (contentType === "testimonials") {
     return <TestimonialList items={testimonialItems || []} />;
   }
 
-  if (type !== "custom" && contentType === "persons") {
+  if (contentType === "persons") {
     return (
       <PersonList title={showTitle ? title : null} items={personItems || []} />
     );
   }
-  if (type !== "custom" && contentType === "event") {
+  if (contentType === "event") {
     return (
       <EventsList
         hideDoneEvents={hideDoneEvents}
@@ -57,9 +56,8 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
       }
       title={showTitle ? title : null}
       variant={variant || "list"}
-      items={type === "custom" ? listItems || [] : listItems || []}
+      items={listItems || []}
     />
   );
 };
-
 export default ListingBlock;

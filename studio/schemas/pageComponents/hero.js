@@ -61,21 +61,7 @@ export default withLocalization({
                 title: "Image",
                 blockEditor: {
                   render: (props) => {
-                    // console.log(props);
-                    // const asset = props.asset;
-                    // const src = asset && builder.image(asset).width(50).url();
-
-                    // if (src) {
-                    //   return (
-                    //     <span>
-                    //       image
-                    //       <img
-                    //         style={{ height: "1em", pointerEvents: "none" }}
-                    //         src={src}
-                    //       />
-                    //     </span>
-                    //   );
-                    // }
+                    console.log(props);
 
                     return <span>--Image--</span>;
                   },
@@ -85,15 +71,6 @@ export default withLocalization({
           },
         },
       ],
-    },
-
-    {
-      title: "Logo",
-      name: "logo",
-      type: "logo",
-      options: {
-        collapsible: true,
-      },
     },
   ],
   preview: {

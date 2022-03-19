@@ -1,34 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import Svg from "@components/Svg";
-import React from "react";
-import Link from "@components/Link";
-
+import { useAppContext } from "@components/AppContext";
 import { Logo } from "@components/Layout/Logo";
-
+import Link from "@components/Link";
+import Svg from "@components/Svg";
+import { useScrollThreshold } from "@hooks/useScrollThreshold";
 import { LangSwitch } from "@lib/LangSwitcherService/LangSwitch";
-import { LangSwitcherResult } from "@lib/LangSwitcherService/LangSwitcherQuery";
-
 import { HeaderNavigation } from "@lib/Navigation";
 import NavigationMobile from "@lib/Navigation/NavigationMobile";
-import { NavItem } from "@lib/Navigation/types";
-import { useAppContext } from "@components/AppContext";
 import SanityImage from "@lib/SanityImage";
-import { useScrollThreshold } from "@hooks/useScrollThreshold";
+import React from "react";
 
-interface NavProps {
-  items: NavItem[];
-  slugs?: LangSwitcherResult["langSwitchData"];
-}
-
-const Nav: React.FC<NavProps> = (props) => {
-  const { items, slugs } = props;
-
+const Nav: React.FC = () => {
   const [open, setOpen] = React.useState(false);
-
   const { data } = useAppContext();
-
   const mainLogo = data?.footer?.logos && data.footer.logos[0];
-
+  const navItems = data?.navigation;
+  const langSwitchData = data?.langSwitchData;
   const scrolled = useScrollThreshold(800);
 
   return (
@@ -40,12 +27,12 @@ const Nav: React.FC<NavProps> = (props) => {
           </Link>
 
           <HeaderNavigation
-            items={items}
+            items={navItems || []}
             className="items-center justify-center hidden  menu:flex "
           />
 
           <div className="flex gap-4   flex-shrink-0 items-center">
-            <LangSwitch className="hidden menu:flex" slugs={slugs} />
+            <LangSwitch className="hidden menu:flex" slugs={langSwitchData} />
           </div>
 
           <button
@@ -78,14 +65,14 @@ const Nav: React.FC<NavProps> = (props) => {
         )}
       </nav>
       <NavigationMobile
-        items={items}
+        items={navItems}
         open={open}
         closeMenu={() => {
           setOpen(false);
         }}
       >
         <LangSwitch
-          slugs={slugs}
+          slugs={langSwitchData}
           onClick={() => {
             setOpen(false);
           }}

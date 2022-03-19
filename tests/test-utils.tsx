@@ -1,4 +1,6 @@
 import { AppContextProvider } from "@components/AppContext";
+import { textBlock } from "@components/RichText/testPrepare";
+import { ImageMetaResult } from "@lib/SanityImage/query";
 import { render, RenderOptions } from "@testing-library/react";
 import { PageResult } from "pages/[[...slug]]";
 
@@ -58,8 +60,34 @@ const customRender = (
   });
 };
 
-// re-export everything
 export * from "@testing-library/react";
 
-// override render method
 export { customRender };
+
+type TestImage = (props?: Partial<ImageMetaResult>) => ImageMetaResult;
+export const testImage: TestImage = (props = {}) => {
+  return {
+    alt: "testImage",
+    aspectRatio: 1,
+    height: 10,
+    width: 10,
+    id: "testid",
+    lqip: "any",
+    type: "any",
+    url: "testUrl",
+    ...props,
+  };
+};
+
+type TestTextProps = {
+  text?: string;
+  marks?: string[];
+};
+type TestText = (props?: TestTextProps) => {};
+export const testText: TestText = (props) => {
+  return textBlock({
+    text: props?.text || "testText",
+    style: "normal",
+    marks: props?.marks || [],
+  });
+};

@@ -1,6 +1,6 @@
 import React from "react";
 import NextLink from "next/link";
-import { useHomeRoute } from "./Layout/LayoutContext";
+import { useHomeRoute } from "./AppContext";
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;

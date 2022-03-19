@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-import SanityImage from "@lib/SanityImage";
 import useSanityImage from "@lib/SanityImage/useSanityImage";
 import BlockContent, { Serializers } from "@sanity/block-content-to-react";
 import React from "react";
@@ -29,7 +28,7 @@ const InlineImage = (props) => {
 };
 //@ts-ignore
 const BlockRenderer = (props) => {
-  return React.createElement("span", { className: " block " }, props.children);
+  return React.createElement("span", { className: "block" }, props.children);
 };
 
 const serializer: Serializers = {
@@ -49,18 +48,20 @@ const serializer: Serializers = {
 };
 
 const Hero: React.FC<HeroProps> = (props) => {
-  const { text, logo } = props;
+  const { text } = props;
   const [ready, setReady] = React.useState(false);
-  const withLogo = logo && logo?.image?.url;
+
+  // console.log(props.text && props.text[0]);
 
   return (
-    <div className="flex flex-col h-hero-mobile  sm:h-hero pt-11 lg:pt-16">
+    <div
+      data-testid="heroBlock"
+      className="flex flex-col h-hero-mobile  sm:h-hero pt-11 lg:pt-16"
+    >
       {text && (
         <Textfit
           max={200}
-          className={`w-full h-full  px-5 container mx-auto ${
-            withLogo ? "" : ""
-          } font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
+          className={`w-full h-full  px-5 container mx-auto font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
             ready ? "opacity-100" : "opacity-0"
           }`}
           mode="multi"
@@ -75,15 +76,6 @@ const Hero: React.FC<HeroProps> = (props) => {
           />
         </Textfit>
       )}
-      {/* {withLogo && (
-        <div className="w-full lg:w-fit flex items-center flex-col justify-center mr-12 p-5 ">
-          {logo?.text && (
-            <div className=" text-sm pb-4  w-[400px]">{logo.text}</div>
-          )}
-
-          <SanityImage image={logo.image} width={200} />
-        </div>
-      )} */}
     </div>
   );
 };

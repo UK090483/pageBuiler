@@ -11,22 +11,26 @@ interface SectionProps {
   as?: "section" | "div" | "ul";
   asInner?: "div" | "ul";
   style?: React.CSSProperties;
+  "data-testid"?: string;
 }
 
-export const Section: React.FC<SectionProps> = ({
-  children,
-  width = "m",
-  className,
-  id,
-  bg = "white",
-  noPadding = false,
-  as: Component = "section",
-  asInner: InnerComponent = "div",
-  style,
-}) => {
+export const Section: React.FC<SectionProps> = (props) => {
+  const {
+    children,
+    width = "m",
+    className,
+    id,
+    bg = "white",
+    noPadding = false,
+    as: Component = "section",
+    asInner: InnerComponent = "div",
+    style,
+  } = props;
+
   return (
     <SectionContextProvider bgColor={bg} width={width}>
       <Component
+        data-testid={props["data-testid"] || "section"}
         id={id}
         className={clsx(`w-full `, {
           "bg-white": bg === "white",

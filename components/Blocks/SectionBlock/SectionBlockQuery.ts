@@ -6,13 +6,11 @@ _type == "section" => {
   _key,
   _type,
   title,
-  bgColor,
   type,
   topSpace,
   bottomSpace,
   imagePosition,
   'content':(coalesce(content_${locale},content))[]{${richTextQuery(locale)}},
-  bgImage{${imageMeta}},
   image{${imageMeta}}
 }
 `;
@@ -21,11 +19,10 @@ export interface SectionResult {
   title?: string;
   topSpace?: "s" | "m" | "l" | "xl" | "xxl";
   bottomSpace?: "s" | "m" | "l" | "xl" | "xxl";
-  content: null | any;
-  bgImage: ImageMetaResult;
-  bgColor?: "black" | "white" | "primary" | "secondary" | "grey";
+  content?: null | any;
+  bgImage?: ImageMetaResult;
   imagePosition?: "l" | "r";
-  image: ImageMetaResult;
+  image?: ImageMetaResult;
   type?: "m" | "l" | "s";
   _key: string;
 }

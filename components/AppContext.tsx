@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { PageResult } from "pages/[[...slug]]";
 import React, { useContext } from "react";
 
@@ -30,4 +31,21 @@ export const AppContextProvider = (props: AppContextProviderProps) => {
 
 export const useAppContext = () => {
   return useContext(AppContext);
+};
+
+export const useHomeRoute = () => {
+  const { data } = useAppContext();
+  const homeRoute = data?.homeRoute;
+  const { locale: currentLocale, defaultLocale } = useRouter();
+
+  const parseRoute = (href: string, locale?: string) => {
+    const linkLocale = locale || currentLocale;
+    const isDefaultLocale = linkLocale === defaultLocale;
+    const homeLink =
+      homeRoute && homeRoute[isDefaultLocale ? "slug" : `slug_${linkLocale}`];
+    const isHomeLink = `/${homeLink}` === href;
+    return isHomeLink ? "/" : href;
+  };
+
+  return { homeRoute, parseRoute };
 };

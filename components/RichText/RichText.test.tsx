@@ -19,11 +19,11 @@ describe("RichText", () => {
     customRender(
       <RichText
         content={[
-          textBlock("testP", "normal"),
-          textBlock("testH1", "h1"),
-          textBlock("testH2", "h2"),
-          textBlock("testH3", "h3"),
-          textBlock("testH4", "h4"),
+          textBlock({ text: "testP", style: "normal" }),
+          textBlock({ text: "testH1", style: "h1" }),
+          textBlock({ text: "testH2", style: "h2" }),
+          textBlock({ text: "testH3", style: "h3" }),
+          textBlock({ text: "testH4", style: "h4" }),
         ]}
       />
     );
