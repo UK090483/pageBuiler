@@ -8,7 +8,9 @@ import { PageResult } from "pages/[[...slug]]";
 const Wrap: React.FC<{ data?: PageResult }> = ({ children, data }) => {
   return (
     <>
-      <AppContextProvider data={data}>{children}</AppContextProvider>
+      <AppContextProvider hostName="testHost" data={data}>
+        {children}
+      </AppContextProvider>
     </>
   );
 };
