@@ -1,38 +1,33 @@
 import { getSanityClient } from "@lib/SanityService/sanity.server";
+import buildSitemap from "@lib/SiteMap/buildSitemap";
 import { GetServerSideProps } from "next";
-
+import AppConfig from "../app.config.json";
 const Sitemap = () => {};
-let pages: { slug: string | null }[] | undefined;
+
+let pages: { slug: string }[] | undefined;
+let lastMod: number | null = null;
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  let lastMod: string | null = null;
-
-  if (!pages) {
-    lastMod = new Date().toISOString();
-
-    pages = await getSanityClient().fetch<{ slug: string | null }[]>(
-      `*[_type == 'page'][]{ 'slug':slug.current }`
-    );
-  } else {
-    console.log("from cache");
+  if (lastMod && new Date().getTime() - lastMod > 60000) {
+    pages = undefined;
   }
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${pages
-        .map(({ slug }) => {
-          return `
-            <url>
-              <loc>${slug}</loc>
-              <lastmod>${new Date().toISOString()}</lastmod>
-              <changefreq>monthly</changefreq>
-              <priority>1.0</priority>
-            </url>
-          `;
-        })
-        .join("")}
-    </urlset>
-  `;
+  if (!pages) {
+    lastMod = new Date().getTime();
+    pages = await getSanityClient().fetch<{ slug: string }[]>(
+      `*[_type == 'page'][]{   
+      'slug':  coalesce('/'+pageType->slug.current,'') + '/' + slug.current,
+      'slug_en': coalesce('/'+pageType->slug_en.current,pageType->slug.current,'') +'/'+  coalesce(slug_en,slug).current,
+      'slug_da': coalesce('/'+pageType->slug_da.current,pageType->slug.current,'') +'/'+  coalesce(slug_da,slug).current 
+    }
+      `
+    );
+  }
+  const sitemap = await buildSitemap({
+    pages: pages || [],
+    hostname: "https://perspectiv.vercel.app/",
+    locales: AppConfig.locales,
+  });
 
   res.setHeader("Content-Type", "text/xml");
   res.write(sitemap);
