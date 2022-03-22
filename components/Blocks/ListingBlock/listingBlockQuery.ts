@@ -1,5 +1,11 @@
-import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
-import { EventsListItemQuery } from "./Listings/Events/EventsListQuery";
+import {
+  defaultListItemQuery,
+  DefaultListItemResult,
+} from "./Listings/Default/defaultListQuery";
+import {
+  EventsListItemQuery,
+  EventsListItemResult,
+} from "./Listings/Events/EventsListQuery";
 import {
   personItemQuery,
   PersonItemResult,
@@ -8,22 +14,6 @@ import {
   TestimonialItemResult,
   testimonialItemQuery,
 } from "./Listings/Testimonials/testimonialQuery";
-
-export const listItemQuery = (locale: string) => {
-  return `
-  _id,
-  'tags': tags._ref,
-  'title':coalesce(title_${locale},title),
-  'subTitle':coalesce(subTitle_${locale},subTitle),
-  'description':coalesce(description_${locale},description),
-  'slug':select(
-    defined(pageType) && defined(pageType->slug_${locale}.current)  => pageType->slug_${locale}.current + '/' + coalesce(slug_${locale}.current,slug.current),
-    defined(pageType) => pageType->slug.current + '/' +  coalesce(slug_${locale}.current,slug.current),
-    coalesce(slug_${locale}.current,slug.current)
-    ),
-  'featuredImage':featuredImage{${imageMeta}}
-  `;
-};
 
 const isDocumentation =
   'pageType._ref == "88e611ea-581e-48c4-b63c-13e1084acf4f"';
@@ -46,7 +36,7 @@ _type == "listing" => {
     contentType  == 'pages' => [...pagesItems[]->],
     contentType  == 'documentations' && count(documentationsIncludeTags) > 0 => *[ ${isDocumentation} && references(^.documentationsIncludeTags[]._ref ) ],
     contentType  == 'documentations' => *[ ${isDocumentation} ]
-  ))[]{${listItemQuery(locale)}},
+  ))[]{${defaultListItemQuery(locale)}},
   'eventItems':(select(
     contentType == 'event' && count(eventIncludeTags) > 0 => *[ _type == 'event' && references(^.eventIncludeTags[]._ref ) ]| order(date asc),
     contentType == 'event' => *[ _type == 'event']| order(date asc)
@@ -54,21 +44,11 @@ _type == "listing" => {
 }
 `;
 
-export interface ListItemResult {
-  title?: null | string;
-  description?: null | string;
-  subTitle?: null | string;
-  slug?: null | string;
-  featuredImage?: null | ImageMetaResult;
-  _id: string;
-  _updatedAt?: string;
-}
-
 export interface ListingBlogResult {
   _type: "listing";
   _key: string;
-  eventItems?: ListItemResult[];
-  listItems?: ListItemResult[];
+  eventItems?: EventsListItemResult[];
+  listItems?: DefaultListItemResult[];
   contentType?:
     | "event"
     | "documentations"
@@ -80,7 +60,7 @@ export interface ListingBlogResult {
   filterItems?: { label: string; value: string }[];
   personItems?: PersonItemResult[] | null;
   testimonialItems?: TestimonialItemResult[] | null;
-  customItems?: ListItemResult[];
+  customItems?: DefaultListItemResult[];
   showTitle?: boolean;
   eventVariant?: "open" | "accordion" | null;
   hideDoneEvents?: boolean | null;

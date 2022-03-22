@@ -1,13 +1,13 @@
 import useKeyPress from "@hooks/useKeyPress";
 
 type FilterProps = {
-  items: { label: string; value: string }[];
+  items?: { label: string; value: string }[];
   active?: string;
-  onChange: (item: { label: string; value: string }) => void;
+  onChange?: (item: { label: string; value: string }) => void;
 };
 
 const Filter: React.FC<FilterProps> = (props) => {
-  const { items = [], active = "all", onChange } = props;
+  const { items = [], active = "all", onChange = () => {} } = props;
   const withAll = [{ label: "All", value: "all" }, ...items];
 
   const currentIndex = () => withAll.findIndex((i) => i.value === active);
@@ -31,6 +31,7 @@ const Filter: React.FC<FilterProps> = (props) => {
 
   return (
     <div
+      data-testid="ListingFilter"
       {...targetProps}
       tabIndex={0}
       aria-label="Filter "

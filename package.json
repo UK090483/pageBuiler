@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch"
@@ -42,6 +41,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.2",
     "@testing-library/dom": "^8.11.3",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/gtag.js": "^0.0.10",
     "@types/jest": "^27.4.1",

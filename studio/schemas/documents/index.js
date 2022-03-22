@@ -1,4 +1,3 @@
-import redirect from "./redirect";
-const Documents = [redirect];
+const Documents = [];
 
 export default Documents;

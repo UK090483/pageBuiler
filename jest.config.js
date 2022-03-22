@@ -1,9 +1,3 @@
-const { pathsToModuleNameMapper } = require("ts-jest");
-const { compilerOptions } = require("./tsconfig");
-
-console.log(
-  pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" })
-);
 module.exports = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",

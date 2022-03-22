@@ -9,12 +9,12 @@ export default {
     {
       title: "From",
       name: "from",
-      type: "string",
+      type: "slug",
     },
     {
       title: "To",
       name: "to",
-      type: "string",
+      type: "url",
     },
     {
       title: "Is Permanent?",

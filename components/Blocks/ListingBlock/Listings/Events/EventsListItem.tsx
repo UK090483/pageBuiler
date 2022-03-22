@@ -5,7 +5,7 @@ import Typo from "@components/Typography/Typography";
 import { registerNow } from "@constants/translations";
 
 import { EventsListItemResult } from "./EventsListQuery";
-import useAccordion from "@hooks/useAccordion";
+import useAccordion from "@hooks/useAccordion/useAccordion";
 
 interface IEventsListItemProps extends EventsListItemResult {
   accordion?: boolean;
@@ -29,7 +29,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
   } = props;
 
   const hasContent = !!(content && content.length > 0);
-  const { ref, maxHeight, toggle, open } = useAccordion();
+  const { ref, maxHeight, toggle, isOpen } = useAccordion();
 
   return (
     <li
@@ -69,7 +69,7 @@ const EventsListItem: React.FunctionComponent<IEventsListItemProps> = (
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 className={`inline-block  stroke-current fill-current  border-2 rounded-full w-9 h-9 md:w-11 md:h-11 p-1.5 border-black ${
-                  open ? "rotate-90 " : "-rotate-90"
+                  isOpen ? "rotate-90 " : "-rotate-90"
                 }`}
               >
                 <path fill="none" strokeWidth="2" d="M9 5l7 7-7 7" />
