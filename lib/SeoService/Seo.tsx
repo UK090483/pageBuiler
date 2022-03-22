@@ -6,9 +6,13 @@ import { useAppContext } from "@components/AppContext";
 const metaImageParams = "?w=1200&h=630&bg=fff&fit=fillmax";
 const titlePrefix = "PERSPEKTIV REGION | ";
 
-const Seo: React.FC = (props) => {
+type SeoProps = {
+  hostName?: string;
+};
+
+const Seo: React.FC<SeoProps> = (props) => {
   const { pathname } = useRouter();
-  const { data } = useAppContext();
+  const { data, hostName } = useAppContext();
   const seo = data?.seo;
   if (!seo) return null;
   const {
@@ -18,9 +22,7 @@ const Seo: React.FC = (props) => {
     shareDesc,
     canonical,
     shareGraphic,
-    pageUrl = typeof window !== "undefined"
-      ? window.location.origin
-      : "https://www.example.ie/",
+    pageUrl = hostName,
   } = seo;
 
   const canUrl = `${pageUrl}/${canonical}`;

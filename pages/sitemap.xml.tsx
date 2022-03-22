@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   }
   const sitemap = await buildSitemap({
     pages: pages || [],
-    hostname: "https://perspectiv.vercel.app/",
+    hostname: AppConfig.hostname,
     locales: AppConfig.locales,
   });
 

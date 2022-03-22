@@ -5,11 +5,13 @@ import React, { useContext } from "react";
 interface IAppContextState {
   data?: PageResult | null;
   preview: boolean;
+  hostName: string;
 }
 
 const defaultState: IAppContextState = {
   data: null,
   preview: false,
+  hostName: "noHostname",
 };
 
 const AppContext = React.createContext(defaultState);
@@ -18,6 +20,7 @@ interface AppContextProviderProps {
   data: IAppContextState["data"];
   children?: React.ReactNode;
   preview?: boolean;
+  hostName: string;
 }
 
 export const AppContextProvider = (props: AppContextProviderProps) => {

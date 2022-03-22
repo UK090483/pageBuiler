@@ -24,8 +24,15 @@ module.exports = {
     "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$":
       "<rootDir>/__mocks__/fileMock.js",
   },
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "<rootDir>/cypress/",
+    "<rootDir>/studio/",
+  ],
+
   testPathIgnorePatterns: [
     "<rootDir>/node_modules/",
+    "<rootDir>/cypress/",
     "<rootDir>/.next/",
     "<rootDir>/studio/",
     "testPrepare.ts",

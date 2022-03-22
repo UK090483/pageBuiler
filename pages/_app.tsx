@@ -12,6 +12,8 @@ import { AppContextProvider } from "@components/AppContext";
 
 import { AnalyticsContextProvider } from "@lib/Analytics/AnalyticsContext";
 
+import AppConfig from "app.config.json";
+
 interface AppPropsWithStaticProps {
   pageProps: PageProps<PageResult>;
   Component: NextComponentType<NextPageContext, any, PageProps<PageResult>>;
@@ -29,7 +31,7 @@ function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
 
   return (
     <AnalyticsContextProvider id="G-YVH817HM4Z">
-      <AppContextProvider data={pageProps.data}>
+      <AppContextProvider data={pageProps.data} hostName={AppConfig.hostname}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

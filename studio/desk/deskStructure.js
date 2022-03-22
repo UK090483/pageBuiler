@@ -1,12 +1,13 @@
 import S from "@sanity/desk-tool/structure-builder";
 import client from "part:@sanity/base/client";
-import { CgWebsite, CgProfile, CgCalendar, CgTag } from "react-icons/cg";
+import { CgProfile, CgCalendar, CgTag } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 import Iframe from "sanity-plugin-iframe-pane";
+import SocialPreview from "part:social-preview/component";
 import resolveProductionUrl from "../parts/resolveProductionUrl";
+import AppConfig from "../../app.config.json";
 export const getDefaultDocumentNode = (doc) => {
   if (doc.schemaType !== "page") return S.document().views([S.view.form()]);
-
   return S.document().views([
     S.view.form(),
     S.view
@@ -16,6 +17,18 @@ export const getDefaultDocumentNode = (doc) => {
         defaultSize: `mobile`,
       })
       .title("Preview"),
+    S.view
+      .component(
+        SocialPreview({
+          prepareFunction: ({ title, description, featuredImage }) => ({
+            title,
+            description,
+            siteUrl: AppConfig.hostname,
+            ogImage: featuredImage,
+          }),
+        })
+      )
+      .title("Social & SEO"),
   ]);
 };
 
