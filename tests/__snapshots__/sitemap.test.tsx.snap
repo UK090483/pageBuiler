@@ -1,3 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sitemap should render  1`] = `Promise {}`;
+exports[`Sitemap should render  1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+    <urlset xmlns=\\"http://www.sitemaps.org/schemas/sitemap/0.9\\">
+      
+            <url>
+              <loc>testSlug1</loc>
+              <lastmod>2020-03-31T22:00:00.000Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          
+            <url>
+              <loc>testSlug2</loc>
+              <lastmod>2020-03-31T22:00:00.000Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          
+    </urlset>
+  "
+`;
+
+exports[`Sitemap should render no Lang  1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+    <urlset xmlns=\\"http://www.sitemaps.org/schemas/sitemap/0.9\\">
+      
+            <url>
+              <loc>testSlug1</loc>
+              <lastmod>2020-03-31T22:00:00.000Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          
+            <url>
+              <loc>testSlug2</loc>
+              <lastmod>2020-03-31T22:00:00.000Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          
+    </urlset>
+  "
+`;
+
+exports[`Sitemap should render with Lang  1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+    <urlset xmlns=\\"http://www.sitemaps.org/schemas/sitemap/0.9\\">
+      
+            <url>
+              <loc>testSlug1</loc>
+              <lastmod>2020-03-31T22:00:00.000Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          
+            <url>
+              <loc>testSlug2</loc>
+              <lastmod>2020-03-31T22:00:00.000Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          
+    </urlset>
+  "
+`;

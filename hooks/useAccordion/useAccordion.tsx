@@ -12,8 +12,6 @@ const useAccordion = () => {
 
   React.useEffect(() => {
     if (open && ref.current) {
-      console.log("open");
-
       const { height } = ref.current.getBoundingClientRect();
       return setHeight(height);
     }

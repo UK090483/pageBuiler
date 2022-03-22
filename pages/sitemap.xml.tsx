@@ -1,4 +1,4 @@
-import { sanityClient } from "@lib/SanityService/sanity.server";
+import { getSanityClient } from "@lib/SanityService/sanity.server";
 import { GetServerSideProps } from "next";
 
 const Sitemap = () => {};
@@ -9,10 +9,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   if (!pages) {
     lastMod = new Date().toISOString();
-    console.log("fetching pages");
-    console.log({ lastMod });
 
-    pages = await sanityClient.fetch<{ slug: string | null }[]>(
+    pages = await getSanityClient().fetch<{ slug: string | null }[]>(
       `*[_type == 'page'][]{ 'slug':slug.current }`
     );
   } else {
