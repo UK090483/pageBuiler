@@ -15,11 +15,14 @@
     "@sanity/desk-tool",
     "@sanity/production-preview",
     "media",
-    "iframe-pane"
+    "iframe-pane",
+    "social-preview"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"]
+      "plugins": [
+        "@sanity/vision"
+      ]
     }
   },
   "parts": [

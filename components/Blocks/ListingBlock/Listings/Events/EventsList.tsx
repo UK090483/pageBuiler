@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Section from "@components/Section/Section";
 import Typo from "@components/Typography/Typography";
 import { useRouter } from "next/router";
-import Filter from "../Default/Filter";
+import Filter from "../shared/Filter";
 
 import EventsListItem from "./EventsListItem";
 import { parseItem } from "./helper";

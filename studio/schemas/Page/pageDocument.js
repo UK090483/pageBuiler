@@ -13,6 +13,9 @@ export default withLocalization({
       title: "Title",
       validation: (Rule) => Rule.required(),
       localize: true,
+      hidden: ({ parent }) => {
+        return parent.redirect;
+      },
     },
     {
       name: "subTitle",
@@ -35,7 +38,17 @@ export default withLocalization({
       name: "slug",
       type: "slug",
       title: "Slug",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => [
+        Rule.required(),
+        Rule.custom((slug) => {
+          if (!slug) return true;
+          if (slug.current.indexOf(" ") >= 0)
+            return "no whitespace allowed (use - for binding words)";
+          if (slug.current.indexOf("/") >= 0)
+            return "no backslashes allowed (use - for binding words)";
+          return true;
+        }).error(),
+      ],
       localize: true,
     },
     {
@@ -64,6 +77,15 @@ export default withLocalization({
 
     defaultBockContent,
 
+    // {
+    //   title: "Redirect",
+    //   name: "redirect",
+    //   type: "redirect",
+    //   options: {
+    //     collapsible: true,
+    //   },
+    // },
+
     {
       title: "SEO / Share Settings",
       name: "seo",
@@ -73,6 +95,20 @@ export default withLocalization({
       },
     },
   ],
+
+  // preview: {
+  //   select: {
+  //     to: "redirect.to",
+  //     slug: 'slug.current',
+  //     isPermanent: "isPermanent",
+  //   },
+  //   prepare({ slug, to, isPermanent }) {
+  //     return {
+  //       title: from && to ? `/${from.current} → ${to}` : "New Redirect",
+  //       subtitle: isPermanent ? "301" : "302",
+  //     };
+  //   },
+  // },
   preview: {
     select: {
       title: "slug.current",

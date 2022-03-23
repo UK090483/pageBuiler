@@ -1,9 +1,3 @@
-const { pathsToModuleNameMapper } = require("ts-jest");
-const { compilerOptions } = require("./tsconfig");
-
-console.log(
-  pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" })
-);
 module.exports = {
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
@@ -30,8 +24,15 @@ module.exports = {
     "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$":
       "<rootDir>/__mocks__/fileMock.js",
   },
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "<rootDir>/cypress/",
+    "<rootDir>/studio/",
+  ],
+
   testPathIgnorePatterns: [
     "<rootDir>/node_modules/",
+    "<rootDir>/cypress/",
     "<rootDir>/.next/",
     "<rootDir>/studio/",
     "testPrepare.ts",

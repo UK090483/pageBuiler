@@ -14,6 +14,7 @@ import Testimonial from "./Testimonials";
 import SocialMedia from "./SocialMedia";
 import Navigation from "./Navigation";
 import siteConfig from "./siteConfig";
+import Redirect from "./Redirect";
 
 export default createSchema({
   name: "default",
@@ -21,6 +22,7 @@ export default createSchema({
   types: schemaTypes.concat([
     tag,
     siteConfig,
+    ...Redirect,
     ...Navigation,
     ...SocialMedia,
     ...Page,

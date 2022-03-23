@@ -1,10 +1,7 @@
-import { withLocalization } from "./Localizer";
-
 export const defaultBockContent = {
   name: "content",
   type: "array",
   title: "Page sections",
-
   description: "Add, edit, and reorder sections",
   of: [{ type: "section" }, { type: "hero" }, { type: "listing" }],
 };

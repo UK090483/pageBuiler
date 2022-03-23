@@ -6,15 +6,15 @@ const PersonList = dynamic(() => import("./Listings/Persons/PersonList"));
 const TestimonialList = dynamic(
   () => import("./Listings/Testimonials/TestimonialList")
 );
-import Listing from "@components/Blocks/ListingBlock/Listings/Default/Listing";
+
 import React from "react";
 
 import { ListingBlogResult } from "./listingBlockQuery";
+import DefaultList from "./Listings/Default/DefaultList";
 
 export interface ListingBlockProps extends ListingBlogResult {}
 const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   const {
-    variant,
     title,
     contentType,
     filterItems,
@@ -48,14 +48,13 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
     );
   }
   return (
-    <Listing
+    <DefaultList
       filterItems={
         ["documentations", "art"].includes(contentType || "")
           ? filterItems
           : undefined
       }
       title={showTitle ? title : null}
-      variant={variant || "list"}
       items={listItems || []}
     />
   );

@@ -4,7 +4,7 @@ import TestimonialListItem from "./TestimonialListItem";
 import useInterval from "@hooks/useInterval";
 import useInViewport from "@hooks/useInViewport";
 import useKeyPress from "@hooks/useKeyPress";
-import useCounter from "@components/useCounter";
+import useCounter from "@hooks/useCounter";
 
 interface ITestimonialListProps {
   items: TestimonialItemResult[];
