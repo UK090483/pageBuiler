@@ -51,8 +51,6 @@ const Hero: React.FC<HeroProps> = (props) => {
   const { text } = props;
   const [ready, setReady] = React.useState(false);
 
-  // console.log(props.text && props.text[0]);
-
   return (
     <div
       data-testid="heroBlock"

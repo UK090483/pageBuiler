@@ -40,7 +40,8 @@
     "jest.config.js": false,
     "setupTests.js": false,
     "tailwind.config.js": false,
-    "styles": false
+    "styles": false,
+    "cypress.json": false
   },
   "explorerExclude.backup": null,
   "workspace.isHidden": false,
