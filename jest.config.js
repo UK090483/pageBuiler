@@ -1,9 +1,26 @@
 module.exports = {
+  collectCoverage: true,
+  verbose: true,
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "<rootDir>/.next/",
+    "<rootDir>/cypress/",
+    "<rootDir>/studio/",
+  ],
+
+  testPathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/cypress/",
+    "<rootDir>/.next/",
+    "<rootDir>/studio/",
+    "testPrepare.ts",
+  ],
+
   moduleNameMapper: {
     "^@components/(.*)$": "<rootDir>/components/$1",
     "^@services/(.*)$": "<rootDir>/services/$1",
@@ -24,19 +41,7 @@ module.exports = {
     "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$":
       "<rootDir>/__mocks__/fileMock.js",
   },
-  coveragePathIgnorePatterns: [
-    "/node_modules/",
-    "<rootDir>/cypress/",
-    "<rootDir>/studio/",
-  ],
 
-  testPathIgnorePatterns: [
-    "<rootDir>/node_modules/",
-    "<rootDir>/cypress/",
-    "<rootDir>/.next/",
-    "<rootDir>/studio/",
-    "testPrepare.ts",
-  ],
   testEnvironment: "jsdom",
   transform: {
     /* Use babel-jest to transpile tests with the next/babel preset

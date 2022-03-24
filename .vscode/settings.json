@@ -4,8 +4,10 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   // "tailwindCSS.experimental.classRegex": ["clsx([^]*)"],
-  "jest.autoRun": { "watch": true },
+  // "jest.autoRun": { "watch": true },
   "jest.showCoverageOnLoad": true,
+  "jest.autoRun": { "watch": true, "onStartup": ["all-tests"] },
+
   "files.exclude": {
     "**/.git": false,
     "**/.svn": false,
@@ -43,7 +45,7 @@
     "styles": false,
     "cypress.json": false
   },
-  "explorerExclude.backup": null,
+
   "workspace.isHidden": false,
   "cSpell.words": [
     "clsx",
@@ -56,5 +58,6 @@
     "tailwindcss",
     "Textfit"
   ],
-  "cSpell.ignoreWords": ["PERSPEKTIV", "fillmax", "lqip", "testid"]
+  "cSpell.ignoreWords": ["PERSPEKTIV", "fillmax", "lqip", "testid"],
+  "explorerExclude.backup": null
 }

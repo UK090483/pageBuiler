@@ -49,7 +49,6 @@ describe("HeroBlock", () => {
     customRender(
       <HeroBlock _key="test" text={[testText({ marks: ["brake"] })]} />
     );
-
     userEvent.click(screen.getByTestId("text-fitMock"));
   });
 });

@@ -7,7 +7,6 @@ const Portal: React.FC = ({ children }) => {
 
   useEffect(() => {
     setMounted(true);
-
     return () => setMounted(false);
   }, []);
 

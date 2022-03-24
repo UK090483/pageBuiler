@@ -70,7 +70,7 @@ const AspectBox: React.FC<{ ratio?: ImagePlugProps["ratio"] }> = (props) => {
   }
   return (
     <div
-      className={clsx("border-2 relative", {
+      className={clsx("relative", {
         "aspect-w-3 aspect-h-2": ratio === "3:2",
         "aspect-w-5 aspect-h-9": ratio === "5:9",
         "aspect-w-16 aspect-h-9": ratio === "16:9",

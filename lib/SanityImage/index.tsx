@@ -6,6 +6,7 @@ import { SanityImageComponent } from "./types";
 
 const SanityImage: SanityImageComponent = (props) => {
   const { image, ...rest } = props;
+
   let imageProps = useSanityImage(image, rest);
   if (!imageProps) return null;
   return <NextImage alt={image?.alt || ""} {...imageProps} />;
