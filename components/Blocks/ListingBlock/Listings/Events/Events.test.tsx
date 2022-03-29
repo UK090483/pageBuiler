@@ -24,6 +24,13 @@ describe("EventsListing", () => {
     customRender(<EventList title="testTitle" />);
     expect(screen.getByText("testTitle")).toBeInTheDocument();
   });
+
+  it("should render items", async () => {
+    customRender(
+      <EventList items={[{ date: "", endDate: "", name: "testListitem" }]} />
+    );
+    expect(screen.getByText("testListitem")).toBeInTheDocument();
+  });
 });
 
 describe("EventsListingItem", () => {
@@ -49,7 +56,7 @@ describe("EventsListingItem", () => {
     expect(screen.getByRole("link")).toHaveAttribute("href", "testLink");
   });
 
-  // it("should render content", () => {
-  //   customRender(<EventsListItem _id="testid" content={[{}, {}]} />);
-  // });
+  it("should render content", () => {
+    customRender(<EventsListItem _id="testid" content={[{}, {}]} />);
+  });
 });
