@@ -36,7 +36,11 @@ const PersonListItem: React.FunctionComponent<IPersonListItemProps> = (
             : "rounded-full w-24 sm:w-32"
         } `}
       >
-        <SanityImage image={avatar} objectFit={isImage ? "contain" : "cover"} />
+        <SanityImage
+          image={avatar}
+          objectFit={isImage ? "contain" : "cover"}
+          sizes={"350px"}
+        />
       </div>
 
       <div className="pt-3 h-12 ">

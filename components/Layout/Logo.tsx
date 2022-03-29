@@ -108,6 +108,7 @@ const LetterOrImage: React.FC<{
               show ? "motion-reduce:opacity-0 opacity-100" : "opacity-0"
             }`}
             src={`/images/${image?.src || "denmark.png"}`}
+            sizes={"50px"}
             alt=""
             layout="fill"
             objectFit="contain"

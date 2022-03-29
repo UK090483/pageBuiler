@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import DefaultListItem from "./DefaultListItem";
 import Filter from "../shared/Filter";
