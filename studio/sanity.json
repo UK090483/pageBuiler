@@ -15,8 +15,7 @@
     "@sanity/desk-tool",
     "@sanity/production-preview",
     "media",
-    "iframe-pane",
-    "social-preview"
+    "iframe-pane"
   ],
   "env": {
     "development": {

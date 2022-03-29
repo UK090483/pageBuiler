@@ -3,7 +3,7 @@ import client from "part:@sanity/base/client";
 import { CgProfile, CgCalendar, CgTag } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 import Iframe from "sanity-plugin-iframe-pane";
-import SocialPreview from "part:social-preview/component";
+
 import resolveProductionUrl from "../parts/resolveProductionUrl";
 import AppConfig from "../../app.config.json";
 export const getDefaultDocumentNode = (doc) => {
@@ -17,18 +17,6 @@ export const getDefaultDocumentNode = (doc) => {
         defaultSize: `mobile`,
       })
       .title("Preview"),
-    S.view
-      .component(
-        SocialPreview({
-          prepareFunction: ({ title, description, featuredImage }) => ({
-            title,
-            description,
-            siteUrl: AppConfig.hostname,
-            ogImage: featuredImage,
-          }),
-        })
-      )
-      .title("Social & SEO"),
   ]);
 };
 
