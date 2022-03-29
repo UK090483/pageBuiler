@@ -68,7 +68,7 @@ const Typo: React.FC<TypographyProps> = ({
           "text-3xl-mobile md:text-3xl font-header uppercase": variant === "h3",
           "text-4xl-mobile md:text-4xl font-header uppercase": variant === "h2",
           "text-5xl-mobile md:text-5xl font-header uppercase": variant === "h1",
-          "font-black tracking-normal": isBold,
+          "font-black tracking-wide": isBold,
         }) + ` ${className}`
       }
     >

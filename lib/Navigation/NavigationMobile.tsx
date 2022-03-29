@@ -1,6 +1,8 @@
+import useFocusTrap from "@charlietango/use-focus-trap";
 import Portal from "@components/Portal";
 import Svg from "@components/Svg";
 import useAnimationDelay from "@hooks/useAnimationDelay";
+import useKeyPress from "@hooks/useKeyPress";
 import { LangSwitch } from "@lib/LangSwitcherService/LangSwitch";
 import React from "react";
 import { useLockBodyScroll } from "react-use";
@@ -63,11 +65,23 @@ const NavigationMobile: React.FC<NavigationMobileProps> = ({
   };
   useLockBodyScroll(render);
 
+  const ref = useFocusTrap(render);
+
+  useKeyPress(
+    {
+      Escape: (e) => {
+        closeMenu && closeMenu();
+      },
+    },
+    { useDocument: render }
+  );
+
   return (
     <>
       {render && (
         <Portal>
           <div
+            ref={ref}
             className={`flex flex-col items-center justify-center h-screen bg-white  fixed inset-0  z-10  transition-all transform duration-300 ${
               animation
                 ? " translate-y-0 opacity-100 "

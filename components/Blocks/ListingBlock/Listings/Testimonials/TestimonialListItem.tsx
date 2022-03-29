@@ -10,11 +10,11 @@ interface ITestimonialListItemProps extends TestimonialItemResult {
 const TestimonialListItem: React.FunctionComponent<
   ITestimonialListItemProps
 > = (props) => {
-  const { name, position, text, active, image } = props;
+  const { name, position, text, active, image, children } = props;
 
   return (
     <div
-      className={`w-full flex-shrink-0  animate-fadeIn  grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto ${
+      className={`w-full  flex-shrink-0  animate-fadeIn  grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto ${
         active ? "" : "hidden"
       }`}
     >
@@ -29,6 +29,7 @@ const TestimonialListItem: React.FunctionComponent<
         </Typo>
         <Typo className="text-center ">{position}</Typo>
       </div>
+      {children}
       <div className="px-5 p-24 whitespace-pre-line  flex justify-center items-center py-8">
         <Typo space={false}>{text}</Typo>
       </div>
