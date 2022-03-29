@@ -1,4 +1,3 @@
-import Typo from "@components/Typography/Typography";
 import React from "react";
 
 interface HeaderProps {}

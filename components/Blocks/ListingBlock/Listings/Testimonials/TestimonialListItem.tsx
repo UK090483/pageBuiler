@@ -20,7 +20,9 @@ const TestimonialListItem: React.FunctionComponent<
     >
       <div className="flex flex-col justify-center items-center border-b-2 md:border-b-0 md:border-r-2 border-black py-12 px-5">
         <div className="relative w-32 h-32  overflow-hidden rounded-full">
-          {image?.url && <SanityImage image={image} objectFit="cover" />}
+          {image?.url && (
+            <SanityImage image={image} objectFit="cover" sizes="360px" />
+          )}
         </div>
         <Typo bold variant="body-l" className=" mt-10">
           {name}
