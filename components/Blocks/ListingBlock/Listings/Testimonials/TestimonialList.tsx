@@ -1,8 +1,8 @@
 import * as React from "react";
 import { TestimonialItemResult } from "./testimonialQuery";
 import TestimonialListItem from "./TestimonialListItem";
-import useInterval from "@hooks/useInterval";
-import useInViewport from "@hooks/useInViewport";
+// import useInterval from "@hooks/useInterval";
+// import useInViewport from "@hooks/useInViewport";
 import useKeyPress from "@hooks/useKeyPress";
 import useCounter from "@hooks/useCounter";
 
@@ -45,6 +45,7 @@ const TestimonialList: React.FunctionComponent<ITestimonialListProps> = (
         {items?.map((i, index) => (
           <TestimonialListItem active={index === count} key={i._id} {...i}>
             <Navigation
+              count={items.length}
               onNext={next}
               onPrev={prev}
               className=" md:hidden  border-b-2 border-black"
@@ -61,6 +62,7 @@ const TestimonialList: React.FunctionComponent<ITestimonialListProps> = (
         ))}
       </div>
       <Navigation
+        count={items.length}
         onNext={next}
         onPrev={prev}
         className=" hidden md:flex mb-9 md:mb-20"
@@ -108,10 +110,18 @@ type NavigationProps = {
   onNext?: () => void;
   onPrev?: () => void;
   className?: string;
+  count?: number;
 };
 
 const Navigation: React.FC<NavigationProps> = (props) => {
-  const { children, onNext = () => {}, onPrev = () => {}, className } = props;
+  const {
+    children,
+    onNext = () => {},
+    onPrev = () => {},
+    className,
+    count = 0,
+  } = props;
+  if (count < 2) return <></>;
   return (
     <div className={` w-full flex  justify-between  ${className}`}>
       <button
