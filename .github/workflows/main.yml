@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          yarn install
-          yarn install @sanity/cli
+          npm install
+          yarn add @sanity/cli
 
       - name: Export dataset
         run: |
