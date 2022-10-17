@@ -36,7 +36,7 @@ function Conf(props?: MenuPluginProps): Config {
                   
                  }
             })
-        } `
+        }`
         );
       },
     },

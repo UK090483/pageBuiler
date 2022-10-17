@@ -16,8 +16,17 @@ const pageBuilderFieldTypes = ["link"];
 
 type queryResult = { needsQuery: boolean; query: string };
 
-function fieldToQuery(config: Config, field: Field): queryResult {
-  const res = { needsQuery: false, query: field.name };
+export function fieldToQuery(
+  config: Config,
+  field: Field,
+  locale?: string
+): queryResult {
+  const res = {
+    needsQuery: false,
+    query: locale
+      ? `'${field.name}': coalesce(${field.name}_${locale},${field.name})`
+      : field.name,
+  };
 
   if (field.query) {
     return { needsQuery: true, query: field.query };
@@ -95,8 +104,6 @@ function richtextToQuery(
   richtext: RichText,
   field: Field
 ): queryResult {
-  console.log(richtextToQuery);
-
   const plugs = defaultEmptyArray(config.plugs).filter((i) =>
     richtext.plugs.includes(i.name)
   );
@@ -114,8 +121,12 @@ function richtextToQuery(
   };
 }
 
-export const fieldsToQuery = (config: Config, fields: Field[]) => {
-  const queries = fields?.map((i) => fieldToQuery(config, i));
+export const fieldsToQuery = (
+  config: Config,
+  fields: Field[],
+  locale?: string
+) => {
+  const queries = fields?.map((i) => fieldToQuery(config, i, locale));
   return queries.map((i) => i.query).join(" ,") + ", ";
 };
 
@@ -129,7 +140,11 @@ export const schemaItemToQuery = (
   return fieldsToQuery(config, item.fields);
 };
 
-export const contentTypeQuery = (config: Config, contentType: contentType) => {
+export const contentTypeQuery = (
+  config: Config,
+  contentType: contentType,
+  locale?: string
+) => {
   const resolvedContentType = resolveContentType(config, contentType);
-  return fieldsToQuery(config, resolvedContentType.fields);
+  return fieldsToQuery(config, resolvedContentType.fields, locale);
 };

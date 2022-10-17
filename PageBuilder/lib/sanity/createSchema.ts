@@ -6,9 +6,9 @@ import createSettings from "./createSetting";
 
 const createSchema = (config: Config) => [
   ...createContentTypes(config),
+  ...createSettings(config),
   ...createObjects(config),
   ...createRichtext(config),
-  ...createSettings(config),
 ];
 
 export default createSchema;

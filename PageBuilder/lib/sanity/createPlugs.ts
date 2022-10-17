@@ -12,10 +12,7 @@ function createPlugs(config: Config): SanityObjectDefinition[] {
 function createPlug(
   props: Omit<SanityObjectDefinition, "type">
 ): SanityObjectDefinition {
-  const { name, title, fields } = props;
-
-  //@ts-ignore
-  return { type: "object", name, title, fields };
+  return { type: "object", ...props };
 }
 
 export default createPlugs;

@@ -1,11 +1,7 @@
 import { defaultEmptyArray } from "../../helper";
 import { Config, contentType } from "../../types";
-import { resolveContentType } from "../sanity/createContentTypes";
-import {
-  fieldsToQuery,
-  schemaItemToQuery,
-  contentTypeQuery,
-} from "./fieldsToQuery";
+
+import { contentTypeQuery } from "./fieldsToQuery";
 
 export const contentTypesQuery = (config: Config) => {
   return defaultEmptyArray(config.contentTypes).map((i) => {
@@ -13,12 +9,16 @@ export const contentTypesQuery = (config: Config) => {
   });
 };
 
-export const getContentTypeQuery = (config: Config, contentType: string) => {
+export const getContentTypeQuery = (
+  config: Config,
+  contentType: string,
+  locale?: string
+) => {
   const _contentType = defaultEmptyArray(config.contentTypes).find(
     (i) => i.name === contentType
   );
   if (_contentType) {
-    const q = contentTypeQuery(config, _contentType);
+    const q = contentTypeQuery(config, _contentType, locale);
 
     let query = "_id,_type, " + q;
 

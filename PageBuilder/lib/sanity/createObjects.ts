@@ -12,8 +12,8 @@ export function resolveObjects(config: Config): SanityObjectDefinition[] {
   return [
     ...(config.objects ? config.objects.map((i) => createObject(i)) : []),
     ...createComponents(config),
-    ...createDefaultObjects(config),
     ...createPlugs(config),
+    ...createDefaultObjects(config),
   ];
 }
 
