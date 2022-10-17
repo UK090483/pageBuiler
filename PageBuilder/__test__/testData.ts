@@ -17,7 +17,10 @@ export const testData = {
 
   get field() {
     return {
-      text: { name: "text", title: "text", type: "string" },
+      text: { name: "text", title: "text", type: "text" },
+      string: { name: "string", title: "string", type: "string" },
+      number: { name: "number", title: "number", type: "number" },
+      Boolean: { name: "bool", title: "bool", type: "bool" },
     };
   },
 };

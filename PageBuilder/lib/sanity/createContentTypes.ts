@@ -28,6 +28,7 @@ const slug = {
   name: "slug",
   type: "slug",
   title: "Slug",
+
   validation: (Rule: any) => [
     Rule.required(),
     Rule.custom((slug: any) => {
@@ -69,7 +70,7 @@ export function resolveContentType(
         type: "string",
         title: "Title",
         validation: (Rule: any) => Rule.required(),
-
+        localize: true,
         group: "base",
       },
       {
@@ -81,7 +82,7 @@ export function resolveContentType(
           Rule.max(160).warning("should not be more than 160 characters"),
           Rule.min(50).warning("should be at least 50 characters"),
         ],
-
+        localize: true,
         group: "base",
       },
       {
@@ -89,7 +90,7 @@ export function resolveContentType(
         type: "image",
         group: "base",
       },
-      ..._if(hasPage, slug),
+      ..._if(hasPage !== false, slug),
       ..._if(hasBlockEditor !== false, defaultBockContent(config)),
       ...fields,
     ],

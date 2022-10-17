@@ -11,6 +11,7 @@ import {
 import { PreviewConfig, PreviewValue } from "@sanity/types/src/schema/preview";
 
 import { Schema } from "sanity-v3-dev-prev/node_modules/@sanity/types/src/schema/types";
+import { I18NConfig } from "next/dist/server/config-shared";
 
 export interface IArrayField
   extends Omit<ArraySchemaType, "jsonType" | "of" | "type"> {
@@ -33,7 +34,7 @@ export interface IImageField
 // }
 
 export type Field<TType extends Schema.Type = Schema.Type> =
-  Schema.FieldDefinition<TType> & { query?: string };
+  Schema.FieldDefinition<TType> & { query?: string; localize?: boolean };
 
 export type FilterHook<T extends unknown = unknown> = (props: {
   config: Config;
@@ -87,10 +88,14 @@ export type Hooks = {
 export type SomePartial<T, K extends keyof T> = Omit<T, K> &
   Pick<Partial<T>, K>;
 
+export type PageBuilderLocales = {
+  [k: string]: { title: string; isDefault?: true; flag: string };
+};
 export interface Config {
   options?: {
     link?: { query?: string };
     image?: any;
+    locale?: PageBuilderLocales;
   };
   settings?: Omit<SanityDocumentDefinition, "type">[];
   hooks?: Hooks;

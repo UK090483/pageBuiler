@@ -23,9 +23,10 @@ export function fieldToQuery(
 ): queryResult {
   const res = {
     needsQuery: false,
-    query: locale
-      ? `'${field.name}': coalesce(${field.name}_${locale},${field.name})`
-      : field.name,
+    query:
+      locale && field.localize
+        ? `'${field.name}': coalesce(${field.name}_${locale},${field.name})`
+        : field.name,
   };
 
   if (field.query) {

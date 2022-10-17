@@ -1,10 +1,9 @@
-/** @type {import('next').NextConfig} */
-
 const appConfig = require("./app.config.json");
 const withPWA = require("next-pwa");
 const { withSentryConfig } = require("@sentry/nextjs");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
+/** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
   i18n: {

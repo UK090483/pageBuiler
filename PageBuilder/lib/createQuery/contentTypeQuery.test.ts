@@ -2,9 +2,9 @@ import { testData } from "../../__test__/testData";
 import { getContentTypeQuery } from "./contentTypeQuery";
 
 const initialQuery =
-  "_id,_type, title ,description ,'featuredImage': featuredImage{ ...asset->{url} } ,'body': body[]{}, ";
+  "_id,_type, title ,description ,'featuredImage': featuredImage{ ...asset->{url} } ,slug ,'body': body[]{}, ";
 const initialQuery_En =
-  "_id,_type, 'title': coalesce(title_en,title) ,'description': coalesce(description_en,description) ,'featuredImage': featuredImage{ ...asset->{url} } ,'body': body[]{}, ";
+  "_id,_type, 'title': coalesce(title_en,title) ,'description': coalesce(description_en,description) ,'featuredImage': featuredImage{ ...asset->{url} } ,'slug': coalesce(slug_en,slug) ,'body': body[]{}, ";
 
 describe("getContentTypeQuery", () => {
   afterEach(() => {
