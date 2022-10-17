@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "perspectivRegion"
-  },
   "api": {
-    "projectId": "d85o021b",
-    "dataset": "production"
+    "projectId": "j3oofl7g",
+    "dataset": "development"
+  },
+  "project": {
+    "name": "pageBuilder"
   },
   "plugins": [
     "@sanity/base",
@@ -19,9 +19,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [

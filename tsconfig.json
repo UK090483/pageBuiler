@@ -25,6 +25,12 @@
       "types/*": ["types/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "PageBuilderPlugins/SeoPlugin",
+    "tsBuilder/build.js"
+  ],
   "exclude": ["node_modules", "studio/**"]
 }

@@ -8,62 +8,43 @@ import SectionBlock from "@components/Blocks/SectionBlock";
 import sectionBlockQuery from "@components/Blocks/SectionBlock/SectionBlockQuery";
 import type { layoutQueryResult } from "@components/Layout/LayoutQuery";
 import layoutQuery from "@components/Layout/LayoutQuery";
-import BodyParser from "@lib/SanityPageBuilder/lib/BodyParser";
-import fetchStaticPaths from "@lib/SanityPageBuilder/lib/fetchStaticPath/fetchStaticPath";
-import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchStaticProps";
-import { sanityClient as client } from "@lib/SanityService/sanity.server";
+import BodyParser from "PageBuilder/BodyParser";
+
+import { sanityClient } from "@lib/SanityService/sanity.server";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import appConfig from "../app.config.json";
-const locales = appConfig.locales;
+
+import config from "PageBuilder.config";
+import { fetchStaticPath, fetchStaticProps } from "PageBuilder";
 
 export type PageResult = layoutQueryResult & appQueryResult & { content?: any };
 
 const Page = () => {
-  const { data } = useAppContext();
   return (
-    <BodyParser
-      components={{
-        hero: {
-          component: HeroBlock,
-        },
-        section: {
-          component: SectionBlock,
-        },
-        listing: {
-          component: ListingBlock,
-        },
-      }}
-      content={data?.content || []}
-    />
+    <>
+      <h1>Page</h1>
+      <BodyParser
+        components={{
+          hero: {
+            component: HeroBlock,
+          },
+          section: {
+            component: SectionBlock,
+          },
+          // listing: {
+          //   component: ListingBlock,
+          // },
+        }}
+      />
+    </>
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return await fetchStaticPaths({
-    client,
-    doc: "page",
-    locales,
-  });
+export const getStaticPaths: GetStaticPaths = async (context) => {
+  return await fetchStaticPath({ context, sanityClient, config });
 };
 
-export const getStaticProps: GetStaticProps = async (props) => {
-  const { params, preview, locale } = props;
-  return await fetchStaticProps<PageResult>({
-    locale,
-    revalidate: true,
-    params,
-    client,
-    previewQuery: `content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
-      locale
-    )}, ${listingBlockQuery(locale)}}`,
-    query: `content[]{${heroBlockQuery(locale)},${sectionBlockQuery(
-      locale
-    )},${listingBlockQuery(locale)}},  ${layoutQuery(locale)}, ${appQuery(
-      locale
-    )}`,
-    locales,
-    preview,
-  });
+export const getStaticProps: GetStaticProps = async (context) => {
+  return await fetchStaticProps({ context, sanityClient, config });
 };
 
 export default Page;

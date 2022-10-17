@@ -9,40 +9,27 @@ import { PageResult } from "./[[...slug]]";
 import { PageProps } from "@lib/SanityPageBuilder/types";
 import usePreviewSubscription from "@lib/SanityPageBuilder/lib/preview/previewSubscription";
 import { AppContextProvider } from "@components/AppContext";
-import { AnalyticsContextProvider } from "@lib/Analytics/AnalyticsContext";
 
 import AppConfig from "app.config.json";
+import { PageBuilderContextProvider } from "PageBuilder/PageBuilderContext";
+import { PageBuilderContentType } from "PageBuilder/types";
 
 interface AppPropsWithStaticProps {
-  pageProps: PageProps<PageResult>;
-  Component: NextComponentType<NextPageContext, any, PageProps<PageResult>>;
+  pageProps: { data: PageBuilderContentType };
+  Component: NextComponentType;
 }
 
-function App({ Component, pageProps: _pageProps }: AppPropsWithStaticProps) {
-  const { data: _data, query, preview } = _pageProps;
-
-  const { data, error, loading } = usePreviewSubscription<PageResult | null>(
-    query,
-    {
-      initialData: _data,
-      enabled: preview,
-    }
-  );
-
-  const aData = { ..._data, ...data };
-  const pageProps = { ..._pageProps, data: aData } as PageProps<PageResult>;
-
+function App({ Component, pageProps }: AppPropsWithStaticProps) {
   return (
-    <AnalyticsContextProvider id="G-YVH817HM4Z">
-      <AppContextProvider data={pageProps.data} hostName={AppConfig.hostname}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <PreviewIndicator show={!!preview} />
+    <PageBuilderContextProvider data={pageProps.data}>
+      <Layout>
+        <Component />
+      </Layout>
+
+      {/* <PreviewIndicator show={!!preview} />
         <Cookie />
-        <Seo />
-      </AppContextProvider>
-    </AnalyticsContextProvider>
+        <Seo />  */}
+    </PageBuilderContextProvider>
   );
 }
 

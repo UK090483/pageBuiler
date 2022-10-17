@@ -28,17 +28,5 @@ const Page404: React.FunctionComponent<IStypeProps> = (props) => {
     </div>
   );
 };
-//@ts-ignore
-export const getStaticProps = async (props) => {
-  const { preview, locale } = props;
-  return await fetchStaticProps<PageResult>({
-    locale,
-    params: {},
-    client,
-    query: `${layoutQuery(locale)}`,
-    locales,
-    preview,
-  });
-};
 
 export default Page404;

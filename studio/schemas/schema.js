@@ -16,22 +16,31 @@ import Navigation from "./Navigation";
 import siteConfig from "./siteConfig";
 import Redirect from "./Redirect";
 
+import { createSchema as cs } from "../../PageBuilder";
+
+import config from "../../PageBuilder.config";
+
+const SSSS = cs(config);
+
+console.log(SSSS);
 export default createSchema({
   name: "default",
 
   types: schemaTypes.concat([
-    tag,
+    // tag,
     siteConfig,
-    ...Redirect,
-    ...Navigation,
-    ...SocialMedia,
-    ...Page,
-    ...Persons,
-    ...Testimonial,
-    ...Events,
-    ...objects,
-    ...documents,
-    ...pageComponents,
-    ...plugs,
+    ...SSSS,
+
+    // ...Redirect,
+    //...Navigation,
+    //...SocialMedia,
+    // ...Page,
+    // ...Persons,
+    // ...Testimonial,
+    // ...Events,
+    //...objects,
+    // ...documents,
+    // ...pageComponents,
+    // ...plugs,
   ]),
 });
