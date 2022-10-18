@@ -1,11 +1,6 @@
 import { testData } from "../../__test__/testData";
 import { getContentTypeQuery } from "./contentTypeQuery";
 
-const initialQuery =
-  "_id,_type, title ,description ,'featuredImage': featuredImage{ ...asset->{url} } ,slug ,'body': body[]{}, ";
-const initialQuery_En =
-  "_id,_type, 'title': coalesce(title_en,title) ,'description': coalesce(description_en,description) ,'featuredImage': featuredImage{ ...asset->{url} } ,'slug': coalesce(slug_en,slug) ,'body': body[]{}, ";
-
 describe("getContentTypeQuery", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -24,7 +19,7 @@ describe("getContentTypeQuery", () => {
       { contentTypes: [testData.contentType.one] },
       testData.contentType.one.name
     );
-    expect(q).toBe(initialQuery);
+    expect(q).toMatchSnapshot();
   });
 
   it("should create initial Query with locale", () => {
@@ -33,6 +28,34 @@ describe("getContentTypeQuery", () => {
       testData.contentType.one.name,
       "en"
     );
-    expect(q).toBe(initialQuery_En);
+    expect(q).toMatchSnapshot();
+  });
+
+  it("should add components to query", () => {
+    const q = getContentTypeQuery(
+      {
+        contentTypes: [testData.contentType.one],
+        components: [testData.object.one],
+      },
+      testData.contentType.one.name,
+      "en"
+    );
+    expect(q).toMatchSnapshot();
+  });
+
+  it("should handle on create Query", () => {
+    const q = getContentTypeQuery(
+      {
+        contentTypes: [testData.contentType.one],
+        hooks: {
+          onContentTypeQuery: ({ result }) => {
+            return `${result} test,`;
+          },
+        },
+      },
+      testData.contentType.one.name,
+      "en"
+    );
+    expect(q).toMatchSnapshot();
   });
 });

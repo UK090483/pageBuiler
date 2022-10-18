@@ -8,7 +8,7 @@ export type NavigationLinkProps = NavItem["link"] & {
 };
 
 const NavigationLink: React.FC<NavigationLinkProps> = (props) => {
-  const { children, external, onClick, href, focus } = props;
+  const { children, onClick, href, focus, internal } = props;
 
   return (
     <Link
@@ -16,8 +16,8 @@ const NavigationLink: React.FC<NavigationLinkProps> = (props) => {
       className={`flex items-center leading-none text-center ${
         focus ? "" : ""
       }`}
-      href={href || "/"}
-      external={external}
+      href={internal || "/"}
+      external={!!href}
     >
       {children}
     </Link>

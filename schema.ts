@@ -68,11 +68,25 @@ export interface Page extends SanityDocument {
   title?: string;
 
   /**
+   * 🇺🇸 Title Englisch — `string`
+   *
+   *
+   */
+  title_en?: string;
+
+  /**
    * Description — `text`
    *
    * should be between 50 and 160 characters
    */
   description?: string;
+
+  /**
+   * 🇺🇸 Description Englisch — `text`
+   *
+   * should be between 50 and 160 characters
+   */
+  description_en?: string;
 
   /**
    * featuredImage — `image`
@@ -94,11 +108,18 @@ export interface Page extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
+   * 🇺🇸 Slug Englisch — `slug`
+   *
+   *
+   */
+  slug_en?: { _type: "slug_en"; current: string };
+
+  /**
    * Page sections — `array`
    *
    * Add, edit, and reorder sections
    */
-  body?: Array<Section | Listing>;
+  body?: Array<Hero | Section | Listing>;
 
   /**
    * Seo — `seo`
@@ -124,11 +145,25 @@ export interface Post extends SanityDocument {
   title?: string;
 
   /**
+   * 🇺🇸 Title Englisch — `string`
+   *
+   *
+   */
+  title_en?: string;
+
+  /**
    * Description — `text`
    *
    * should be between 50 and 160 characters
    */
   description?: string;
+
+  /**
+   * 🇺🇸 Description Englisch — `text`
+   *
+   * should be between 50 and 160 characters
+   */
+  description_en?: string;
 
   /**
    * featuredImage — `image`
@@ -150,11 +185,11 @@ export interface Post extends SanityDocument {
   slug?: { _type: "slug"; current: string };
 
   /**
-   * Page sections — `array`
+   * 🇺🇸 Slug Englisch — `slug`
    *
-   * Add, edit, and reorder sections
+   *
    */
-  body?: Array<Section | Listing>;
+  slug_en?: { _type: "slug_en"; current: string };
 
   /**
    * Seo — `seo`
@@ -180,11 +215,25 @@ export interface Event extends SanityDocument {
   title?: string;
 
   /**
+   * 🇺🇸 Title Englisch — `string`
+   *
+   *
+   */
+  title_en?: string;
+
+  /**
    * Description — `text`
    *
    * should be between 50 and 160 characters
    */
   description?: string;
+
+  /**
+   * 🇺🇸 Description Englisch — `text`
+   *
+   * should be between 50 and 160 characters
+   */
+  description_en?: string;
 
   /**
    * featuredImage — `image`
@@ -373,11 +422,42 @@ export type Section = {
   title?: string;
 
   /**
+   * 🇺🇸 Title Englisch — `string`
+   *
+   *
+   */
+  title_en?: string;
+
+  /**
    * Content — `defaultRichtext`
    *
    *
    */
   content?: DefaultRichtext;
+
+  /**
+   * 🇺🇸 Content Englisch — `defaultRichtext`
+   *
+   *
+   */
+  content_en?: DefaultRichtext;
+};
+
+export type Hero = {
+  _type: "hero";
+  /**
+   * Title — `string`
+   *
+   *
+   */
+  title?: string;
+
+  /**
+   * Text — `array`
+   *
+   *
+   */
+  text?: Array<SanityBlock>;
 };
 
 export type Listing = {

@@ -7,7 +7,8 @@ function Conf(): Config {
         name: "post",
         title: "Post",
         hasPage: true,
-        hasListing: true,
+        listing: "listing",
+        editor: "",
       },
     ],
   };

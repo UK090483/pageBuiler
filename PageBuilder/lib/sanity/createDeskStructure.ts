@@ -3,8 +3,8 @@ import { AiOutlineSetting } from "react-icons/ai";
 import {
   SanityStructureBuilder,
   Config,
-  contentType,
-  SanityDocumentDefinition,
+  PageBuilderContentType,
+  PageBuilderSetting,
 } from "../../types";
 
 const createDeskStructure = (
@@ -23,7 +23,7 @@ const createDeskStructure = (
 };
 
 const createStructureItem = (
-  props: contentType,
+  props: PageBuilderContentType,
   SanityStructureBuilder: SanityStructureBuilder
 ) => {
   const { title, name } = props;
@@ -33,7 +33,7 @@ const createStructureItem = (
 };
 
 const createSettingItems = (
-  props: Omit<SanityDocumentDefinition, "type">[],
+  props: PageBuilderSetting[],
   SanityStructureBuilder: SanityStructureBuilder
 ) => {
   return SanityStructureBuilder.listItem()

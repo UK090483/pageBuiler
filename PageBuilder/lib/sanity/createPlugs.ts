@@ -1,7 +1,7 @@
 import { defaultEmptyArray } from "../../helper";
-import { Config, SanityObjectDefinition } from "../../types";
+import { Config, PageBuilderObject, SanityObjectDefinition } from "../../types";
 
-function createPlugs(config: Config): SanityObjectDefinition[] {
+function createPlugs(config: Config): PageBuilderObject[] {
   const result = defaultEmptyArray(config.plugs).map(createPlug);
 
   return config.hooks?.onCreatePlugs
@@ -9,10 +9,8 @@ function createPlugs(config: Config): SanityObjectDefinition[] {
     : result;
 }
 
-function createPlug(
-  props: Omit<SanityObjectDefinition, "type">
-): SanityObjectDefinition {
-  return { type: "object", ...props };
+function createPlug(props: PageBuilderObject): SanityObjectDefinition {
+  return { type: "object", ...props } as SanityObjectDefinition;
 }
 
 export default createPlugs;

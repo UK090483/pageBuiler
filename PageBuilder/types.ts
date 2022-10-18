@@ -1,17 +1,8 @@
 import { GetStaticPropsResult, GetStaticPathsResult } from "next";
 import S from "studio/node_modules/@sanity/desk-tool/structure-builder";
-import {
-  ArraySchemaType,
-  BooleanSchemaType,
-  StringSchemaType,
-  TextSchemaType,
-  ReferenceSchemaType,
-  ImageSchemaType,
-} from "@sanity/types";
-import { PreviewConfig, PreviewValue } from "@sanity/types/src/schema/preview";
+import { ArraySchemaType, ImageSchemaType } from "@sanity/types";
 
 import { Schema } from "sanity-v3-dev-prev/node_modules/@sanity/types/src/schema/types";
-import { I18NConfig } from "next/dist/server/config-shared";
 
 export interface IArrayField
   extends Omit<ArraySchemaType, "jsonType" | "of" | "type"> {
@@ -34,7 +25,7 @@ export interface IImageField
 // }
 
 export type Field<TType extends Schema.Type = Schema.Type> =
-  Schema.FieldDefinition<TType> & { query?: string; localize?: boolean };
+  Schema.FieldDefinition<TType> & { query?: Query; localize?: boolean };
 
 export type FilterHook<T extends unknown = unknown> = (props: {
   config: Config;
@@ -48,62 +39,97 @@ export type QueryCreationHook<
 
 interface contentTypeStatic {}
 
-interface contentTypeFields {
+// export type contentType =
+//   | contentTypeFields
+//   | (contentTypeFields & contentTypeStatic);
+
+export type SanityDocumentDefinition = Omit<
+  Schema.DocumentDefinition,
+  "fields"
+> & {
+  query?: Query;
+  fields: Field[];
+};
+
+export type Query = string | ((props?: { locale?: string }) => string);
+
+export type SanityObjectDefinition = Schema.ObjectDefinition & {
+  query?: Query;
+};
+
+export interface PageBuilderContentType
+  extends Omit<Schema.DocumentDefinition, "fields" | "type" | "title"> {
   isRoot?: boolean;
   revalidate?: GetStaticPropsResult<any>["revalidate"];
   fallback?: GetStaticPathsResult["fallback"];
   /**
    Inspired by Wordpress :-)
+   name of the listing plugin that can list this ContentType
+
+  @type string | string[];
   */
-  hasListing?: boolean;
+  listing?: string | string[];
   hasPage?: boolean;
-  hasBlockEditor?: boolean;
+  editor?: string | string[];
   name: string;
   title: string;
   fields?: Field[];
 }
 
-export type contentType =
-  | contentTypeFields
-  | (contentTypeFields & contentTypeStatic);
+export interface PageBuilderSetting
+  extends Omit<Schema.DocumentDefinition, "fields" | "type" | "title"> {
+  name: string;
+  title: string;
+  fields: Field[];
+}
 
-export type SanityDocumentDefinition = Schema.DocumentDefinition & {
-  query?: string;
-} & contentTypeFields;
+export interface PageBuilderComponent
+  extends Omit<Schema.ObjectDefinition, "fields" | "type"> {
+  type?: "object";
+  fields: Field[];
+  query?: Query;
+}
+export interface PageBuilderObject
+  extends Omit<Schema.ObjectDefinition, "fields" | "type"> {
+  fields: Field[];
+  query?: Query;
+}
 
-export type SanityObjectDefinition = Schema.ObjectDefinition & {
-  query?: string;
-};
+export interface PageBuilderEditor
+  extends Omit<Schema.ArrayDefinition, "fields" | "type"> {
+  type: "array";
+  query?: Query;
+  group: string | string[];
+}
 
 export type Hooks = {
   onCreateContentTypes?: FilterHook<SanityDocumentDefinition[]>;
   onCreateComponents?: FilterHook<SanityObjectDefinition[]>;
   onCreateRichText?: FilterHook<RichText[]>;
   onCreateObjects?: FilterHook<SanityObjectDefinition[]>;
-  onCreatePlugs?: FilterHook<SanityObjectDefinition[]>;
+  onCreatePlugs?: FilterHook<PageBuilderObject[]>;
   onCreatePlug?: FilterHook<SanityObjectDefinition[]>;
   onContentTypeQuery?: FilterHook<string>;
 };
 
-export type SomePartial<T, K extends keyof T> = Omit<T, K> &
-  Pick<Partial<T>, K>;
-
 export type PageBuilderLocales = {
-  [k: string]: { title: string; isDefault?: true; flag: string };
+  [k: string]: { title: string; isDefault?: boolean; flag: string };
 };
+
 export interface Config {
   options?: {
     link?: { query?: string };
     image?: any;
     locale?: PageBuilderLocales;
   };
-  settings?: Omit<SanityDocumentDefinition, "type">[];
+  settings?: PageBuilderSetting[];
   hooks?: Hooks;
-  contentTypes?: SomePartial<SanityDocumentDefinition, "fields" | "type">[];
-  components?: Omit<SanityObjectDefinition, "type">[];
+  contentTypes?: PageBuilderContentType[];
+  components?: PageBuilderObject[];
   richText?: RichText[];
-  objects?: Omit<SanityObjectDefinition, "type">[];
-  plugs?: Omit<SanityObjectDefinition, "type">[];
+  editor?: PageBuilderEditor[];
+  objects?: PageBuilderObject[];
+  plugs?: PageBuilderObject[];
 }
 
 export interface ISchemaItem {
@@ -114,16 +140,6 @@ export interface ISchemaItem {
   preview?: any;
   type: "object" | "document";
 }
-
-// export interface IObject extends ISchemaItem {
-//   type: "object";
-// }
-
-export interface ISetting extends ISchemaItem {
-  type: "document";
-}
-
-export interface Component {}
 
 type SanitySchemaType = any;
 type titleValue = { title: string; value: string };
@@ -140,7 +156,7 @@ export interface RichText {
 
 export type SanityStructureBuilder = typeof S;
 
-export type PageBuilderContentType = {
+export type PageBuilderContentTypeResult = {
   title?: string;
   description?: string;
   body?: any[];

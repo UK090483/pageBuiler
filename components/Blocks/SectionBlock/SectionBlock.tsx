@@ -19,6 +19,8 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
     imagePosition = "l",
   } = props;
 
+  console.log(props);
+
   const hasImage = image && image.url;
   const autoType = hasImage ? "l" : "s";
 

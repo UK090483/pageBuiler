@@ -13,10 +13,14 @@ function Conf(): Config {
             type: "string",
           },
           {
+            title: "Image",
+            name: "image",
+            type: "image",
+          },
+          {
             title: "Text",
             name: "text",
             type: "array",
-
             of: [
               {
                 type: "block",

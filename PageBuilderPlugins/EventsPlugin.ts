@@ -14,9 +14,9 @@ function Conf(props?: EventsPluginProps): Config {
       {
         name,
         title,
-        hasListing: true,
+        listing: "listing",
         hasPage: false,
-        hasBlockEditor: false,
+        editor: "",
         fields: [
           {
             name: "date",

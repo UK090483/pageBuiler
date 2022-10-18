@@ -1,11 +1,16 @@
 import { Config, SanityObjectDefinition } from "../PageBuilder/types";
 
 import { defaultEmptyArray } from "../PageBuilder/helper";
-function Conf(): Config {
+
+type ListingPlugProps = {
+  name: string;
+};
+function Conf(props?: ListingPlugProps): Config {
+  const name = props?.name || "listing";
   return {
     hooks: {
       onCreateComponents: ({ config, result }) => {
-        return [...result, createListingComponent(config)];
+        return [...result, createListingComponent(config, name)];
       },
     },
   };
@@ -13,14 +18,20 @@ function Conf(): Config {
 
 export default Conf;
 
-export function createListingComponent(config: Config): SanityObjectDefinition {
+export function createListingComponent(
+  config: Config,
+  name: string
+): SanityObjectDefinition {
   const contentTypesWithListing = defaultEmptyArray(config.contentTypes).filter(
-    (i) => i.hasListing
+    (i) =>
+      i.listing && Array.isArray(i.listing)
+        ? i.listing.includes(name)
+        : i.listing === name
   );
 
   return {
     title: "Listing",
-    name: "listing",
+    name,
     type: "object",
     fields: [
       { name: "name", type: "string", title: "Name" },

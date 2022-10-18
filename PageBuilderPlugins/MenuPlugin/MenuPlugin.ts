@@ -25,10 +25,12 @@ function Conf(props?: MenuPluginProps): Config {
           `'menu':{
             ...(*[ _type == 'menuConfig'][0]{
                  'mainNav':mainNav[]{
+                     label,
                     'link':link{
                       ${config.options?.link?.query},
                     },
                     'items':items[]{
+                      label,
                       'link':link{
                         ${config.options?.link?.query},
                       }

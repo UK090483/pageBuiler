@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
+import SanityImage from "@lib/SanityImage";
 import useSanityImage from "@lib/SanityImage/useSanityImage";
 import BlockContent, { Serializers } from "@sanity/block-content-to-react";
 import React from "react";
-import { Textfit } from "react-textfit";
 import { HeroBlogResult } from "./HeroBlockQuery";
 
 interface HeroProps extends HeroBlogResult {}
@@ -48,31 +48,20 @@ const serializer: Serializers = {
 };
 
 const Hero: React.FC<HeroProps> = (props) => {
-  const { text } = props;
-  const [ready, setReady] = React.useState(false);
+  const { text, image } = props;
 
   return (
     <div
       data-testid="heroBlock"
-      className="flex flex-col h-hero-mobile  sm:h-hero pt-11 lg:pt-16"
+      className="flex flex-col h-hero-mobile  sm:h-hero pt-11 lg:pt-16 relative justify-center items-center"
     >
+      <SanityImage image={image} objectFit="cover" />
       {text && (
-        <Textfit
-          max={200}
-          className={`w-full h-full  px-5 container mx-auto font-header  flex items-center leading-[1.2em] transition-opacity duration-1000 overflow-hidden  ${
-            ready ? "opacity-100" : "opacity-0"
-          }`}
-          mode="multi"
-          onReady={() => {
-            !ready && setReady(true);
-          }}
-        >
-          <BlockContent
-            renderContainerOnSingleChild={true}
-            blocks={text}
-            serializers={serializer}
-          />
-        </Textfit>
+        <BlockContent
+          renderContainerOnSingleChild={true}
+          blocks={text}
+          serializers={serializer}
+        />
       )}
     </div>
   );

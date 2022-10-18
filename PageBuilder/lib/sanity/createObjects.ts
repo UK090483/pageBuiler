@@ -1,4 +1,5 @@
-import { Config, SanityObjectDefinition, SomePartial } from "../../types";
+import { Config, SanityObjectDefinition, PageBuilderObject } from "../../types";
+
 import createComponents from "./createComponent";
 import createDefaultObjects from "./createDefaultObjects";
 import createPlugs from "./createPlugs";
@@ -8,7 +9,7 @@ const createObjects = (config: Config) => {
   return objects;
 };
 
-export function resolveObjects(config: Config): SanityObjectDefinition[] {
+export function resolveObjects(config: Config): PageBuilderObject[] {
   return [
     ...(config.objects ? config.objects.map((i) => createObject(i)) : []),
     ...createComponents(config),
@@ -17,10 +18,8 @@ export function resolveObjects(config: Config): SanityObjectDefinition[] {
   ];
 }
 
-function createObject(
-  props: SomePartial<SanityObjectDefinition, "type">
-): SanityObjectDefinition {
-  return { type: "object", ...props };
+function createObject(props: PageBuilderObject): SanityObjectDefinition {
+  return { type: "object", ...props } as SanityObjectDefinition;
 }
 
 export default createObjects;

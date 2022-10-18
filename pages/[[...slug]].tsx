@@ -21,7 +21,6 @@ export type PageResult = layoutQueryResult & appQueryResult & { content?: any };
 const Page = () => {
   return (
     <>
-      <h1>Page</h1>
       <BodyParser
         components={{
           hero: {

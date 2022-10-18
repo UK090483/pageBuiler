@@ -1,5 +1,9 @@
-import { Config, contentType, SanityDocumentDefinition } from "../../types";
-import createComponents from "./createComponent";
+import {
+  Config,
+  PageBuilderContentType,
+  SanityDocumentDefinition,
+} from "../../types";
+
 import { defaultEmptyArray } from "../../helper";
 
 const createContentTypes = (config: Config) => {
@@ -12,16 +16,12 @@ const createContentTypes = (config: Config) => {
   return result;
 };
 
-const defaultBockContent = (config: Config) => {
-  const resolvedComponents = createComponents(config);
-  return {
-    name: "body",
-    type: "array",
-    title: "Page sections",
-    description: "Add, edit, and reorder sections",
-    of: [...resolvedComponents.map((i) => ({ type: i.name }))],
-    group: "content",
-  };
+const getEditor = (config: Config, editor?: string | string[]) => {
+  if (!editor) return [];
+
+  return defaultEmptyArray(config.editor).filter((i) =>
+    Array.isArray(editor) ? editor.includes(i.name) : editor === i.name
+  );
 };
 
 const slug = {
@@ -46,9 +46,10 @@ const slug = {
 
 export function resolveContentType(
   config: Config,
-  props: contentType
+  props: PageBuilderContentType
 ): SanityDocumentDefinition {
-  const { name, title, hasPage, fields = [], hasBlockEditor, ...rest } = props;
+  const { name, title, hasPage, fields = [], editor, ...rest } = props;
+
   return {
     ...rest,
     type: "document",
@@ -91,7 +92,9 @@ export function resolveContentType(
         group: "base",
       },
       ..._if(hasPage !== false, slug),
-      ..._if(hasBlockEditor !== false, defaultBockContent(config)),
+
+      ...getEditor(config, editor),
+
       ...fields,
     ],
   };

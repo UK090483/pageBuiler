@@ -1,5 +1,9 @@
 import { defaultEmptyArray } from "../../helper";
-import { Config, SanityDocumentDefinition } from "../../types";
+import {
+  Config,
+  SanityDocumentDefinition,
+  PageBuilderSetting,
+} from "../../types";
 
 function createSettings(config: Config): SanityDocumentDefinition[] {
   const items = [
@@ -13,9 +17,7 @@ function createSettings(config: Config): SanityDocumentDefinition[] {
   return items;
 }
 
-function createSetting(
-  props: Omit<SanityDocumentDefinition, "type">
-): SanityDocumentDefinition {
+function createSetting(props: PageBuilderSetting): SanityDocumentDefinition {
   return { type: "document", ...props };
 }
 

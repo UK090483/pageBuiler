@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getContentTypeQuery should add components to query 1`] = `
+"_id,_type, 'title': coalesce(title_en,title) ,'description': coalesce(description_en,description) ,'featuredImage': featuredImage{alt,crop,hotspot,'url':asset->url,
+  \\"id\\": asset->assetId,
+\\"type\\": asset->mimeType,
+\\"aspectRatio\\": asset->metadata.dimensions.aspectRatio,
+\\"lqip\\": asset->metadata.lqip,
+'width': asset->metadata.dimensions.width,
+'height': asset->metadata.dimensions.height,
+     } ,'slug': coalesce(slug_en,slug).current, "
+`;
+
+exports[`getContentTypeQuery should create initial Query 1`] = `
+"_id,_type, title ,description ,'featuredImage': featuredImage{alt,crop,hotspot,'url':asset->url,
+  \\"id\\": asset->assetId,
+\\"type\\": asset->mimeType,
+\\"aspectRatio\\": asset->metadata.dimensions.aspectRatio,
+\\"lqip\\": asset->metadata.lqip,
+'width': asset->metadata.dimensions.width,
+'height': asset->metadata.dimensions.height,
+     } ,'slug': slug.current, "
+`;
+
+exports[`getContentTypeQuery should create initial Query with locale 1`] = `
+"_id,_type, 'title': coalesce(title_en,title) ,'description': coalesce(description_en,description) ,'featuredImage': featuredImage{alt,crop,hotspot,'url':asset->url,
+  \\"id\\": asset->assetId,
+\\"type\\": asset->mimeType,
+\\"aspectRatio\\": asset->metadata.dimensions.aspectRatio,
+\\"lqip\\": asset->metadata.lqip,
+'width': asset->metadata.dimensions.width,
+'height': asset->metadata.dimensions.height,
+     } ,'slug': coalesce(slug_en,slug).current, "
+`;
+
+exports[`getContentTypeQuery should handle on create Query 1`] = `
+"_id,_type, 'title': coalesce(title_en,title) ,'description': coalesce(description_en,description) ,'featuredImage': featuredImage{alt,crop,hotspot,'url':asset->url,
+  \\"id\\": asset->assetId,
+\\"type\\": asset->mimeType,
+\\"aspectRatio\\": asset->metadata.dimensions.aspectRatio,
+\\"lqip\\": asset->metadata.lqip,
+'width': asset->metadata.dimensions.width,
+'height': asset->metadata.dimensions.height,
+     } ,'slug': coalesce(slug_en,slug).current,  test,"
+`;

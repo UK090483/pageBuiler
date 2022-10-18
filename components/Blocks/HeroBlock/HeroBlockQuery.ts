@@ -20,6 +20,7 @@ export interface HeroBlogResult {
   _key: string;
   title?: string | null;
   text?: any;
+  image: ImageMetaResult;
 }
 
 export default heroBlockQuery;

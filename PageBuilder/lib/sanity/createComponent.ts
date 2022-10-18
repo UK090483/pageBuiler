@@ -1,5 +1,5 @@
 import { defaultEmptyArray } from "../../helper";
-import { Config, SanityObjectDefinition } from "../../types";
+import { Config, SanityObjectDefinition, PageBuilderObject } from "../../types";
 
 function createComponents(config: Config): SanityObjectDefinition[] {
   const result = [
@@ -13,12 +13,10 @@ function createComponents(config: Config): SanityObjectDefinition[] {
   return result;
 }
 
-function createComponent(
-  props: Omit<SanityObjectDefinition, "type">
-): SanityObjectDefinition {
+function createComponent(props: PageBuilderObject): SanityObjectDefinition {
   const { name, title, fields } = props;
-  //@ts-ignore
-  return { type: "object", name, title, fields };
+
+  return { type: "object", name, title, fields } as SanityObjectDefinition;
 }
 
 export default createComponents;

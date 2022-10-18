@@ -1,7 +1,7 @@
 import { defaultEmptyArray } from "../../../helper";
-import { Config, SanityObjectDefinition } from "../../../types";
+import { Config, PageBuilderComponent } from "../../../types";
 
-function createLinkObject(config: Config): SanityObjectDefinition {
+function createLinkObject(config: Config): PageBuilderComponent {
   return {
     name: "link",
     title: "Link",
@@ -11,6 +11,13 @@ function createLinkObject(config: Config): SanityObjectDefinition {
         name: "internal",
         title: "Internal Link",
         type: "reference",
+
+        query: (props) => {
+          const locale = props?.locale;
+          return locale
+            ? `...(internal->{ 'internal': coalesce(slug_${locale},slug).current })`
+            : `'internal':internal->slug.current`;
+        },
 
         to: [
           ...defaultEmptyArray(config.contentTypes)

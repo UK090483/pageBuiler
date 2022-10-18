@@ -3,7 +3,13 @@ import { Config } from "../PageBuilder/types";
 function Conf(): Config {
   return {
     contentTypes: [
-      { name: "page", title: "Page", hasPage: true, isRoot: true },
+      {
+        name: "page",
+        title: "Page",
+        editor: "body",
+        hasPage: true,
+        isRoot: true,
+      },
     ],
     components: [
       {
@@ -14,11 +20,13 @@ function Conf(): Config {
             name: "title",
             type: "string",
             title: "Title",
+            localize: true,
           },
           {
             name: "content",
             type: "defaultRichtext",
             title: "Content",
+            localize: true,
           },
         ],
       },

@@ -1,5 +1,5 @@
 import { defaultEmptyArray } from "../../helper";
-import { Config, contentType } from "../../types";
+import { Config } from "../../types";
 
 import { contentTypeQuery } from "./fieldsToQuery";
 

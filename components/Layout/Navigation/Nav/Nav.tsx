@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useAppContext } from "@components/AppContext";
+
 import { Logo } from "@components/Layout/Logo";
 import Link from "@components/Link";
 import Svg from "@components/Svg";
@@ -8,14 +8,17 @@ import { LangSwitch } from "@lib/LangSwitcherService/LangSwitch";
 import { HeaderNavigation } from "@lib/Navigation";
 import NavigationMobile from "@lib/Navigation/NavigationMobile";
 import SanityImage from "@lib/SanityImage";
+import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
 import React from "react";
 
 const Nav: React.FC = () => {
   const [open, setOpen] = React.useState(false);
-  const { data } = useAppContext();
-  const mainLogo = data?.footer?.logos && data.footer.logos[0];
-  const navItems = data?.navigation;
-  const langSwitchData = data?.langSwitchData;
+
+  const { data } = usePageBuilderContext();
+
+  const navItems = data?.menu.mainNav;
+
+  // const langSwitchData = data?.langSwitchData;
   const scrolled = useScrollThreshold(800);
 
   return (
@@ -27,13 +30,14 @@ const Nav: React.FC = () => {
           </Link>
 
           <HeaderNavigation
+            //@ts-ignore
             items={navItems || []}
             className="items-center justify-center hidden  menu:flex "
           />
 
-          <div className="flex gap-4   flex-shrink-0 items-center">
+          {/* <div className="flex gap-4   flex-shrink-0 items-center">
             <LangSwitch className="hidden menu:flex" slugs={langSwitchData} />
-          </div>
+          </div> */}
 
           <button
             data-testid="menu-overlay-toggle "
@@ -46,7 +50,7 @@ const Nav: React.FC = () => {
           </button>
         </div>
 
-        {mainLogo && (
+        {/* {mainLogo && (
           <div
             className={`
             transition-transform
@@ -62,22 +66,22 @@ const Nav: React.FC = () => {
               />
             </div>
           </div>
-        )}
+        )} */}
       </nav>
-      <NavigationMobile
+      {/* <NavigationMobile
         items={navItems}
         open={open}
         closeMenu={() => {
           setOpen(false);
         }}
-      >
-        <LangSwitch
+      > */}
+      {/* <LangSwitch
           slugs={langSwitchData}
           onClick={() => {
             setOpen(false);
           }}
-        />
-      </NavigationMobile>
+        /> */}
+      {/* </NavigationMobile> */}
     </>
   );
 };

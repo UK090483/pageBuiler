@@ -1,8 +1,9 @@
+import { PageData } from "PageBuilder.config";
 import React, { useContext } from "react";
-import { PageBuilderContentType } from "./types";
+import { PageBuilderContentTypeResult } from "./types";
 
 interface IPageBuilderContextState {
-  data?: PageBuilderContentType | null;
+  data?: PageData | null;
 }
 
 const defaultState: IPageBuilderContextState = {

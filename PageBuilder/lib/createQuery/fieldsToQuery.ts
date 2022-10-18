@@ -6,8 +6,10 @@ import {
   IArrayField,
   IImageField,
   ISchemaItem,
-  contentType,
+  PageBuilderContentType,
   SanityObjectDefinition,
+  PageBuilderObject,
+  Query,
 } from "../../types";
 import { resolveContentType } from "../sanity/createContentTypes";
 import { resolveObjects } from "../sanity/createObjects";
@@ -30,15 +32,27 @@ export function fieldToQuery(
   };
 
   if (field.query) {
-    return { needsQuery: true, query: field.query };
+    return {
+      needsQuery: true,
+      query:
+        typeof field.query === "function"
+          ? field.query({ locale })
+          : field.query,
+    };
   }
 
   if (field.type === "array") {
     return arrayToQuery(config, field as IArrayField);
   }
 
-  if (field.type === "link") {
-    console.log(field);
+  if (field.type === "slug") {
+    return {
+      needsQuery: false,
+      query:
+        locale && field.localize
+          ? `'${field.name}': coalesce(${field.name}_${locale},${field.name}).current`
+          : `'slug': slug.current`,
+    };
   }
 
   if (field.type === "image") {
@@ -47,7 +61,7 @@ export function fieldToQuery(
 
   const object = resolveObjects(config).find((i) => i.name === field.type);
   if (object) {
-    return objectToQuery(config, object);
+    return objectToQuery(config, object, locale);
   }
 
   const richtext = config.richText?.find((i) => i.name === field.type);
@@ -59,13 +73,15 @@ export function fieldToQuery(
 
 function objectToQuery(
   config: Config,
-  object: SanityObjectDefinition
+  object: PageBuilderObject,
+  locale?: string
 ): queryResult {
   return {
     needsQuery: false,
     query: `'${object.name}': ${object.name}{${fieldsToQuery(
       config,
-      object.fields
+      object.fields,
+      locale
     )}}`,
   };
 }
@@ -73,7 +89,14 @@ function objectToQuery(
 function imageToQuery(config: Config, field: IImageField): queryResult {
   return {
     needsQuery: true,
-    query: `'${field.name}': ${field.name}{ ...asset->{url} }`,
+    query: `'${field.name}': ${field.name}{alt,crop,hotspot,'url':asset->url,
+  "id": asset->assetId,
+"type": asset->mimeType,
+"aspectRatio": asset->metadata.dimensions.aspectRatio,
+"lqip": asset->metadata.lqip,
+'width': asset->metadata.dimensions.width,
+'height': asset->metadata.dimensions.height,
+     }`,
   };
 }
 
@@ -82,6 +105,9 @@ function arrayToQuery(config: Config, field: IArrayField): queryResult {
 
   const objects = defaultEmptyArray(field.of)
     .map((i) => {
+      if (i.type === "block") {
+        return "...";
+      }
       const object = resolvedObjects.find((obj) => obj.name === i.type);
 
       if (object && "fields" in object) {
@@ -127,14 +153,12 @@ export const fieldsToQuery = (
   fields: Field[],
   locale?: string
 ) => {
+  console.log({ fields });
   const queries = fields?.map((i) => fieldToQuery(config, i, locale));
   return queries.map((i) => i.query).join(" ,") + ", ";
 };
 
-export const schemaItemToQuery = (
-  config: Config,
-  item: ISchemaItem | SanityObjectDefinition
-) => {
+export const schemaItemToQuery = (config: Config, item: PageBuilderObject) => {
   if (item.query) {
     return item.query;
   }
@@ -143,9 +167,12 @@ export const schemaItemToQuery = (
 
 export const contentTypeQuery = (
   config: Config,
-  contentType: contentType,
+  contentType: PageBuilderContentType,
   locale?: string
 ) => {
   const resolvedContentType = resolveContentType(config, contentType);
-  return fieldsToQuery(config, resolvedContentType.fields, locale);
+  const res = fieldsToQuery(config, resolvedContentType.fields, locale);
+  console.log(res);
+
+  return res;
 };

@@ -2,9 +2,12 @@ import { isArray } from "lodash";
 import { defaultEmptyArray } from "../helper";
 import { Config, Hooks } from "PageBuilder/types";
 
-function createConfig(input: Config | Config[]): Config {
+function createConfig(
+  input: Config | Config[],
+  options?: Config["options"]
+): Config {
   if (isArray(input)) {
-    return mergeConfig(input);
+    return mergeConfig(input, options);
   }
   return input;
 }
@@ -13,19 +16,21 @@ export default createConfig;
 
 import HooksPubSub from "./Hooks/Hooks";
 
-function mergeConfig(configs: Config[]): Config {
+function mergeConfig(configs: Config[], options?: Config["options"]): Config {
   const finalConfig: Config = {
     settings: [],
     components: [],
     contentTypes: [],
     objects: [],
     plugs: [],
+    editor: [],
     richText: [],
     hooks: {},
     options: {
       link: {
-        query: `'internal': internal->slug.current`,
+        query: `...(internal->{ 'internal': _type + '/' + slug.current})`,
       },
+      ...options,
     },
   };
 
@@ -43,6 +48,10 @@ function mergeConfig(configs: Config[]): Config {
   };
 
   for (const conf of configs) {
+    finalConfig.editor = [
+      ...defaultEmptyArray(finalConfig.editor),
+      ...defaultEmptyArray(conf.editor),
+    ];
     finalConfig.settings = [
       ...defaultEmptyArray(finalConfig.settings),
       ...defaultEmptyArray(conf.settings),

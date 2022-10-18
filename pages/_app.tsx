@@ -12,10 +12,11 @@ import { AppContextProvider } from "@components/AppContext";
 
 import AppConfig from "app.config.json";
 import { PageBuilderContextProvider } from "PageBuilder/PageBuilderContext";
-import { PageBuilderContentType } from "PageBuilder/types";
+import { PageBuilderContentTypeResult } from "PageBuilder/types";
+import { PageData } from "PageBuilder.config";
 
 interface AppPropsWithStaticProps {
-  pageProps: { data: PageBuilderContentType };
+  pageProps: { data: PageData };
   Component: NextComponentType;
 }
 
