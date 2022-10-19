@@ -89,14 +89,7 @@ function objectToQuery(
 function imageToQuery(config: Config, field: IImageField): queryResult {
   return {
     needsQuery: true,
-    query: `'${field.name}': ${field.name}{alt,crop,hotspot,'url':asset->url,
-  "id": asset->assetId,
-"type": asset->mimeType,
-"aspectRatio": asset->metadata.dimensions.aspectRatio,
-"lqip": asset->metadata.lqip,
-'width': asset->metadata.dimensions.width,
-'height': asset->metadata.dimensions.height,
-     }`,
+    query: `'${field.name}': ${field.name}{${config.options?.image?.query}}`,
   };
 }
 
@@ -153,7 +146,6 @@ export const fieldsToQuery = (
   fields: Field[],
   locale?: string
 ) => {
-  console.log({ fields });
   const queries = fields?.map((i) => fieldToQuery(config, i, locale));
   return queries.map((i) => i.query).join(" ,") + ", ";
 };
@@ -172,7 +164,6 @@ export const contentTypeQuery = (
 ) => {
   const resolvedContentType = resolveContentType(config, contentType);
   const res = fieldsToQuery(config, resolvedContentType.fields, locale);
-  console.log(res);
 
   return res;
 };

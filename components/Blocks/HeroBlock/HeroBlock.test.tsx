@@ -22,14 +22,14 @@ jest.mock("react-textfit", () => {
 });
 
 describe("HeroBlock", () => {
-  // it("query should be valid ", async () => {
-  //   const client = mockClient({ database });
-  //   const res = await client.fetch(`*[_type == "page"]{
-  //     'content':content[]{
-  //       ${heroBlockQuery("en")}
-  //     }
-  //   }`);
-  // });
+  it("query should be valid ", async () => {
+    const client = mockClient({ database });
+    const res = await client.fetch(`*[_type == "page"]{
+      'content':content[]{
+        ${heroBlockQuery("en")}
+      }
+    }`);
+  });
   // it("should render", () => {
   //   customRender(<HeroBlock _key="test" />);
   //   expect(screen.getByTestId("heroBlock"));

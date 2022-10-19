@@ -1,6 +1,10 @@
 import { Config } from "../PageBuilder/types";
 
-function Conf(): Config {
+type BlogPluginProps = {
+  editor?: string | string[];
+};
+
+function Conf(props?: BlogPluginProps): Config {
   return {
     contentTypes: [
       {
@@ -8,7 +12,7 @@ function Conf(): Config {
         title: "Post",
         hasPage: true,
         listing: "listing",
-        editor: "",
+        editor: props?.editor,
       },
     ],
   };

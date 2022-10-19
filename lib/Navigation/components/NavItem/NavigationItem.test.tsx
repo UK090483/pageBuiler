@@ -46,7 +46,6 @@ describe("NavigationItem", () => {
     customRender({
       itemProps: { label: "testLabel", link: { href: "/testLink" } },
     });
-
     expect(screen.getByRole("link").getAttribute("href")).toBe("/testLink");
   });
 

@@ -119,7 +119,7 @@ export type PageBuilderLocales = {
 export interface Config {
   options?: {
     link?: { query?: string };
-    image?: any;
+    image?: { query?: string };
     locale?: PageBuilderLocales;
   };
   settings?: PageBuilderSetting[];

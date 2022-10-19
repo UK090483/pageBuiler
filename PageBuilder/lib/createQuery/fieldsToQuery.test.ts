@@ -45,4 +45,8 @@ describe.only("fieldsToQuery", () => {
       fieldToQuery({}, { ...testData.field[field], localize: true }, "en").query
     ).toBe(resEn);
   });
+
+  it("should handle array Field", () => {
+    expect(fieldToQuery({}, testData.field.array).query).toBe("");
+  });
 });

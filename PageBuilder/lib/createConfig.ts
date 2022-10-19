@@ -27,8 +27,17 @@ function mergeConfig(configs: Config[], options?: Config["options"]): Config {
     richText: [],
     hooks: {},
     options: {
+      image: {
+        query: `alt,crop,hotspot,'url':asset->url,
+        "id": asset->assetId,
+      "type": asset->mimeType,
+      "aspectRatio": asset->metadata.dimensions.aspectRatio,
+      "lqip": asset->metadata.lqip,
+      'width': asset->metadata.dimensions.width,
+      'height': asset->metadata.dimensions.height,`,
+      },
       link: {
-        query: `...(internal->{ 'internal': _type + '/' + slug.current})`,
+        query: `...(internal->{ 'internal': select( _type != 'page' => _type + '/' + slug.current, '/' + slug.current ) })`,
       },
       ...options,
     },
@@ -47,36 +56,28 @@ function mergeConfig(configs: Config[], options?: Config["options"]): Config {
     onContentTypeQuery: [],
   };
 
-  for (const conf of configs) {
-    finalConfig.editor = [
-      ...defaultEmptyArray(finalConfig.editor),
-      ...defaultEmptyArray(conf.editor),
-    ];
-    finalConfig.settings = [
-      ...defaultEmptyArray(finalConfig.settings),
-      ...defaultEmptyArray(conf.settings),
-    ];
-    finalConfig.components = [
-      ...defaultEmptyArray(finalConfig.components),
-      ...defaultEmptyArray(conf.components),
-    ];
-    finalConfig.contentTypes = [
-      ...defaultEmptyArray(finalConfig.contentTypes),
-      ...defaultEmptyArray(conf.contentTypes),
-    ];
-    finalConfig.objects = [
-      ...defaultEmptyArray(finalConfig.objects),
-      ...defaultEmptyArray(conf.objects),
-    ];
-    finalConfig.plugs = [
-      ...defaultEmptyArray(finalConfig.plugs),
-      ...defaultEmptyArray(conf.plugs),
-    ];
-    finalConfig.richText = [
-      ...defaultEmptyArray(finalConfig.richText),
-      ...defaultEmptyArray(conf.richText),
-    ];
+  const mergeArrays: (keyof Omit<Config, "hooks" | "options">)[] = [
+    "components",
+    "editor",
+    "settings",
+    "contentTypes",
+    "objects",
+    "plugs",
+    "richText",
+  ];
 
+  for (const conf of configs) {
+    for (const key of mergeArrays) {
+      const a = finalConfig[key];
+      const b = conf[key];
+      if (Array.isArray(a) && Array.isArray(b)) {
+        //@ts-ignore
+        finalConfig[key] = [...a, ...b];
+      }
+    }
+  }
+
+  for (const conf of configs) {
     if (conf.hooks) {
       Object.entries(conf.hooks).forEach(([key, fn]) => {
         //@ts-ignore

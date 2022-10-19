@@ -12,6 +12,11 @@ export const testData = {
         title: "component1_title",
         fields: [this.field.text, this.field.string],
       } as Omit<SanityObjectDefinition, "type">,
+      two: {
+        name: "component2_name",
+        title: "component2_title",
+        fields: [this.field.text, this.field.string],
+      } as Omit<SanityObjectDefinition, "type">,
     };
   },
 
@@ -23,6 +28,9 @@ export const testData = {
       boolean: { name: "boolean", title: "boolean", type: "boolean" },
       slug: { name: "slug", title: "slug", type: "slug" },
       link: { name: "link", title: "link", type: "link" },
+      get array() {
+        return { name: "array", title: "array", type: "array", of: [] };
+      },
     };
   },
 };

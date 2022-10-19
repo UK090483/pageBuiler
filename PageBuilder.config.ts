@@ -10,10 +10,11 @@ import HeroPlugin from "./PageBuilderPlugins/HeroPlugin/HeroPlugin";
 import BlogEditorPlugin from "./PageBuilderPlugins/BlockEditorPlugin/BlogEditorPlugin";
 import { PageBuilderContentTypeResult } from "./PageBuilder/types";
 import { MenuPluginResult } from "PageBuilderPlugins/MenuPlugin/types";
+
 export default createConfig(
   [
     PagePlugin(),
-    BlogPlugin(),
+    BlogPlugin({ editor: "body" }),
     EventPlugin(),
     ListingPlugin(),
     MenuPlugin(),

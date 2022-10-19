@@ -16,7 +16,7 @@ export interface NavItemProps extends NavItem {
 const NavigationItem: React.FC<NavItemProps> = (props) => {
   const { label, items, link, NavigationLink, NavigationItemBase } = props;
   const hasItems = !!items && items.length > 0;
-  const hasLink = !!link && !!link.href;
+  const hasLink = !!link && (!!link.href || !!link?.internal);
 
   const { active } = useIsActive(props);
 
