@@ -48,7 +48,6 @@ const createSettingItems = (
             .schemaType("siteConfig")
             .title("Configuration")
             .id("siteConfig"),
-
           ...props.map((i) =>
             SanityStructureBuilder.documentListItem()
               .schemaType(i.name)

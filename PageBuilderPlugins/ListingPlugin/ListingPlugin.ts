@@ -1,6 +1,6 @@
-import { Config, SanityObjectDefinition } from "../PageBuilder/types";
+import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
 
-import { defaultEmptyArray } from "../PageBuilder/helper";
+import { defaultEmptyArray } from "../../PageBuilder/helper";
 
 type ListingPlugProps = {
   name: string;
@@ -33,6 +33,17 @@ export function createListingComponent(
     title: "Listing",
     name,
     type: "object",
+    query: `
+    contentType,
+    'items':select(
+     ${contentTypesWithListing
+       .map((i) => `contentType == "${i.name}" => [...${i.name}Items[]->] `)
+       .join(",")}
+    )[]{_id, 'slug': slug.current , title,description,'featuredImage':featuredImage{${
+      config.options?.image.query
+    }} }
+
+    `,
     fields: [
       { name: "name", type: "string", title: "Name" },
       {
@@ -52,8 +63,8 @@ export function createListingComponent(
       ...contentTypesWithListing.map((i) => ({
         title: `${i.title} Items`,
         name: `${i.name}Items`,
-        type: "reference",
-        to: [{ type: i.name }],
+        type: "array",
+        of: [{ type: "reference", to: [{ type: i.name }] }],
         hidden: (props: any) => props?.parent?.contentType !== i.name,
       })),
     ],

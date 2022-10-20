@@ -1,6 +1,11 @@
 import { Config } from "../../PageBuilder/types";
 
-function Conf(): Config {
+type RichTextPluginProps = {
+  name: string;
+  plugs?: string[];
+};
+
+function Conf(props: RichTextPluginProps): Config {
   return {
     richText: [
       {

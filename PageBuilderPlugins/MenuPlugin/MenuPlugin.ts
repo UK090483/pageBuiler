@@ -19,7 +19,6 @@ function Conf(props?: MenuPluginProps): Config {
   return {
     hooks: {
       onContentTypeQuery: ({ config, result }) => {
-        config.options?.link;
         return (
           result +
           `'menu':{
@@ -27,12 +26,12 @@ function Conf(props?: MenuPluginProps): Config {
                  'mainNav':mainNav[]{
                      label,
                     'link':link{
-                      ${config.options?.link?.query},
+                      ${config.options && config.options.link.query({})},
                     },
                     'items':items[]{
                       label,
                       'link':link{
-                        ${config.options?.link?.query},
+                        ${config.options && config.options.link.query({})},
                       }
                     }
                   

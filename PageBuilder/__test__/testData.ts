@@ -5,6 +5,9 @@ export const testData = {
     one: { name: "contentType1_name", title: "contentType1_title" },
     two: { name: "contentType2_name", title: "contentType2_title" },
   },
+  linkQuery: "'internal':internal->slug.current ,href, ",
+  linkQueryEn:
+    "...(internal->{ 'internal': coalesce(slug_en,slug).current }) ,href, ",
   get object() {
     return {
       one: {
@@ -20,6 +23,10 @@ export const testData = {
     };
   },
 
+  finalConfig: {
+    options: { link: { query: () => "" }, image: { query: () => "" } },
+  },
+
   get field() {
     return {
       text: { name: "text", title: "text", type: "text" },
@@ -28,9 +35,9 @@ export const testData = {
       boolean: { name: "boolean", title: "boolean", type: "boolean" },
       slug: { name: "slug", title: "slug", type: "slug" },
       link: { name: "link", title: "link", type: "link" },
-      get array() {
-        return { name: "array", title: "array", type: "array", of: [] };
-      },
+      date: { name: "date", title: "date", type: "date" },
+      datetime: { name: "datetime", title: "datetime", type: "datetime" },
+      array: { name: "array", title: "array", type: "array" },
     };
   },
 };

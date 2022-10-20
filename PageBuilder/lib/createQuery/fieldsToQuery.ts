@@ -5,16 +5,11 @@ import {
   RichText,
   IArrayField,
   IImageField,
-  ISchemaItem,
   PageBuilderContentType,
-  SanityObjectDefinition,
   PageBuilderObject,
-  Query,
 } from "../../types";
 import { resolveContentType } from "../sanity/createContentTypes";
 import { resolveObjects } from "../sanity/createObjects";
-
-const pageBuilderFieldTypes = ["link"];
 
 type queryResult = { needsQuery: boolean; query: string };
 
@@ -104,7 +99,7 @@ function arrayToQuery(config: Config, field: IArrayField): queryResult {
       const object = resolvedObjects.find((obj) => obj.name === i.type);
 
       if (object && "fields" in object) {
-        return `_type == '${object.name}' => {_type, ${schemaItemToQuery(
+        return `_type == '${object.name}' => {_type,_key, ${schemaItemToQuery(
           config,
           object
         )}}`;

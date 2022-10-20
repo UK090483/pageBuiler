@@ -29,9 +29,9 @@ const Page = () => {
           section: {
             component: SectionBlock,
           },
-          // listing: {
-          //   component: ListingBlock,
-          // },
+          listing: {
+            component: ListingBlock,
+          },
         }}
       />
     </>

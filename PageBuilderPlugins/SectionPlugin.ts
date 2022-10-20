@@ -2,15 +2,6 @@ import { Config } from "../PageBuilder/types";
 
 function Conf(): Config {
   return {
-    contentTypes: [
-      {
-        name: "page",
-        title: "Page",
-        editor: "body",
-        hasPage: true,
-        isRoot: true,
-      },
-    ],
     components: [
       {
         name: "section",
@@ -31,6 +22,6 @@ function Conf(): Config {
         ],
       },
     ],
-  };
+  };+
 }
 export default Conf;

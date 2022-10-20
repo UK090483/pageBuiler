@@ -30,7 +30,9 @@ export type SPBOptions = {
   revalidate?: Revalidate;
 };
 
-export type SPBResult<P> = {
+export type SPBResult<
+  P extends { [key: string]: any } = { [key: string]: any }
+> = {
   PageComponent: NextPage<FetchStaticPropsResult<any>["props"]>;
   getStaticPaths: GetStaticPaths;
   getStaticProps: GetStaticProps<P>;

@@ -25,16 +25,25 @@ describe.only("fieldsToQuery", () => {
       resEn: "'boolean': coalesce(boolean_en,boolean)",
     },
     {
+      field: "date" as Field,
+      res: `date`,
+      resEn: "'date': coalesce(date_en,date)",
+    },
+    {
+      field: "datetime" as Field,
+      res: `datetime`,
+      resEn: "'datetime': coalesce(datetime_en,datetime)",
+    },
+    {
       field: "slug" as Field,
       res: `'slug': slug.current`,
       resEn: "'slug': coalesce(slug_en,slug).current",
     },
     {
       field: "link" as Field,
-      res: "'link': link{'internal':internal->slug.current ,href, }",
-      res2: "'link': link{...(internal->{ 'internal': coalesce(slug_en,slug).current }) ,href, }",
-      resEn:
-        "'link': link{...(internal->{ 'internal': coalesce(slug_en,slug).current }) ,href, }",
+      res: `'link': link{${testData.linkQuery}}`,
+      res2: `'link': link{${testData.linkQueryEn}}`,
+      resEn: `'link': link{${testData.linkQueryEn}}`,
     },
   ])("should handle $field Field", ({ field, res, resEn, res2 }) => {
     expect(fieldToQuery({}, testData.field[field]).query).toBe(res);
@@ -46,7 +55,35 @@ describe.only("fieldsToQuery", () => {
     ).toBe(resEn);
   });
 
-  it("should handle array Field", () => {
-    expect(fieldToQuery({}, testData.field.array).query).toBe("");
+  it("should handle Field with query", () => {
+    expect(
+      fieldToQuery({}, { ...testData.field.string, query: "testQuery" }).query
+    ).toBe("testQuery");
+    const queryFn = jest
+      .fn()
+      .mockImplementation(({ locale }) =>
+        locale ? "testQueryFn" + locale : "testQueryFn"
+      );
+
+    expect(
+      fieldToQuery({}, { ...testData.field.string, query: queryFn }).query
+    ).toBe("testQueryFn");
+    expect(queryFn).toBeCalledTimes(1);
+    expect(queryFn).toBeCalledWith({ locale: undefined });
+
+    expect(
+      fieldToQuery({}, { ...testData.field.string, query: queryFn }, "En").query
+    ).toBe("testQueryFnEn");
+
+    expect(queryFn).toBeCalledTimes(2);
+    expect(queryFn).toBeCalledWith({ locale: "En" });
+  });
+
+  it("should handle array Field with block", () => {
+    expect(
+      //@ts-ignore
+      fieldToQuery({}, { ...testData.field.array, of: [{ type: "block" }] })
+        .query
+    ).toBe("'array': array[]{...}");
   });
 });

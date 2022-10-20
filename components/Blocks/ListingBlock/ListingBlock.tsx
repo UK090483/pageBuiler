@@ -1,62 +1,32 @@
-import dynamic from "next/dynamic";
-const EventsList = dynamic(
-  () => import("@components/Blocks/ListingBlock/Listings/Events/EventsList")
-);
-const PersonList = dynamic(() => import("./Listings/Persons/PersonList"));
-const TestimonialList = dynamic(
-  () => import("./Listings/Testimonials/TestimonialList")
-);
-
 import React from "react";
 
-import { ListingBlogResult } from "./listingBlockQuery";
-import DefaultList from "./Listings/Default/DefaultList";
+import { ListingPluginResult } from "PageBuilderPlugins/ListingPlugin/types";
+import SanityImage from "@lib/SanityImage";
+import Typo from "@components/Typography/Typography";
+import Section from "@components/Section/Section";
 
-export interface ListingBlockProps extends ListingBlogResult {}
+export interface ListingBlockProps extends ListingPluginResult {}
 const ListingBlock: React.FC<ListingBlockProps> = (props) => {
-  const {
-    title,
-    contentType,
-    filterItems,
-    personItems,
-    testimonialItems,
-    showTitle,
-    eventVariant,
-    eventItems,
-    hideDoneEvents,
-    listItems,
-  } = props;
+  const { items } = props;
 
-  if (contentType === "testimonials") {
-    return <TestimonialList items={testimonialItems || []} />;
-  }
-
-  if (contentType === "persons") {
-    return (
-      <PersonList title={showTitle ? title : null} items={personItems || []} />
-    );
-  }
-  if (contentType === "event") {
-    return (
-      <EventsList
-        hideDoneEvents={hideDoneEvents}
-        title={showTitle ? title : null}
-        filterItems={filterItems}
-        items={eventItems || []}
-        accordion={!(eventVariant === "open")}
-      />
-    );
-  }
   return (
-    <DefaultList
-      filterItems={
-        ["documentations", "art"].includes(contentType || "")
-          ? filterItems
-          : undefined
-      }
-      title={showTitle ? title : null}
-      items={listItems || []}
-    />
+    <Section>
+      <div className=" grid grid-cols-3 gap-8">
+        {items?.map((i) => {
+          return (
+            <div key={i._id} className="w-full">
+              {i.featuredImage && (
+                <div className="w-full h-60 relative">
+                  <SanityImage image={i.featuredImage} objectFit="cover" />
+                </div>
+              )}
+              <Typo variant="h3">{i.title}</Typo>
+              <Typo>{i.description}</Typo>
+            </div>
+          );
+        })}
+      </div>
+    </Section>
   );
 };
 export default ListingBlock;

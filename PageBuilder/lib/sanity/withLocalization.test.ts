@@ -25,23 +25,28 @@ const locale = {
   de: { flag: "flag", title: "Deutsch", isDefault: true },
   en: { flag: "flag", title: "English" },
 };
+const optionFields = { link: { query: () => "" }, image: { query: () => "" } };
 
 describe("withLocalization", () => {
   it("should do nothing without locales...", () => {
-    expect(withLocalization({}, [testDocument()])).toStrictEqual([
-      testDocument(),
-    ]);
+    expect(
+      withLocalization({ options: { ...optionFields } }, [testDocument()])
+    ).toStrictEqual([testDocument()]);
   });
 
   it("should add translationFields", () => {
     expect(
-      withLocalization({ options: { locale } }, [testDocument()])[0].fields
+      withLocalization({ options: { locale, ...optionFields } }, [
+        testDocument(),
+      ])[0].fields
     ).toStrictEqual(testDocument([translateField]).fields);
   });
 
   it("should add field sets", () => {
     expect(
-      withLocalization({ options: { locale } }, [testDocument()])[0].fieldsets
+      withLocalization({ options: { locale, ...optionFields } }, [
+        testDocument(),
+      ])[0].fieldsets
     ).toStrictEqual([
       { title: "testFieldset", name: "testFieldset" },
       {

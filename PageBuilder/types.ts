@@ -18,19 +18,8 @@ export interface IImageField
   type: "image";
 }
 
-// export interface ICustomField {
-//   type: string;
-//   name: string;
-//   title: string;
-// }
-
 export type Field<TType extends Schema.Type = Schema.Type> =
   Schema.FieldDefinition<TType> & { query?: Query; localize?: boolean };
-
-export type FilterHook<T extends unknown = unknown> = (props: {
-  config: Config;
-  result: T;
-}) => T;
 
 export type QueryCreationHook<
   T extends unknown = unknown,
@@ -38,10 +27,6 @@ export type QueryCreationHook<
 > = (props: { config: Config; payload: P }) => T;
 
 interface contentTypeStatic {}
-
-// export type contentType =
-//   | contentTypeFields
-//   | (contentTypeFields & contentTypeStatic);
 
 export type SanityDocumentDefinition = Omit<
   Schema.DocumentDefinition,
@@ -51,7 +36,8 @@ export type SanityDocumentDefinition = Omit<
   fields: Field[];
 };
 
-export type Query = string | ((props?: { locale?: string }) => string);
+export type QueryFn = (props: { locale?: string }) => string;
+export type Query = string | QueryFn;
 
 export type SanityObjectDefinition = Schema.ObjectDefinition & {
   query?: Query;
@@ -102,6 +88,11 @@ export interface PageBuilderEditor
   group: string | string[];
 }
 
+export type FilterHook<T extends unknown = unknown> = (props: {
+  config: Config;
+  result: T;
+}) => T;
+
 export type Hooks = {
   onCreateContentTypes?: FilterHook<SanityDocumentDefinition[]>;
   onCreateComponents?: FilterHook<SanityObjectDefinition[]>;
@@ -116,12 +107,12 @@ export type PageBuilderLocales = {
   [k: string]: { title: string; isDefault?: boolean; flag: string };
 };
 
+export interface IConfigOptions {
+  link: { query: QueryFn };
+  image: { query: Query };
+  locale?: PageBuilderLocales;
+}
 export interface Config {
-  options?: {
-    link?: { query?: string };
-    image?: { query?: string };
-    locale?: PageBuilderLocales;
-  };
   settings?: PageBuilderSetting[];
   hooks?: Hooks;
   contentTypes?: PageBuilderContentType[];
@@ -130,6 +121,7 @@ export interface Config {
   editor?: PageBuilderEditor[];
   objects?: PageBuilderObject[];
   plugs?: PageBuilderObject[];
+  options?: IConfigOptions;
 }
 
 export interface ISchemaItem {

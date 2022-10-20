@@ -1,10 +1,10 @@
 import { isArray } from "lodash";
 import { defaultEmptyArray } from "../helper";
-import { Config, Hooks } from "PageBuilder/types";
+import { Config, Hooks, IConfigOptions } from "PageBuilder/types";
 
 function createConfig(
   input: Config | Config[],
-  options?: Config["options"]
+  options?: Partial<IConfigOptions>
 ): Config {
   if (isArray(input)) {
     return mergeConfig(input, options);
@@ -14,9 +14,16 @@ function createConfig(
 
 export default createConfig;
 
-import HooksPubSub from "./Hooks/Hooks";
+import {
+  DEFAULT_IMAG_QUERY,
+  DEFAULT_LINK_QUERY,
+  DEFAULT_LINK_QUERY_LOCALIZED,
+} from "../constants";
 
-function mergeConfig(configs: Config[], options?: Config["options"]): Config {
+function mergeConfig(
+  configs: Config[],
+  options?: Partial<IConfigOptions>
+): Config {
   const finalConfig: Config = {
     settings: [],
     components: [],
@@ -27,17 +34,10 @@ function mergeConfig(configs: Config[], options?: Config["options"]): Config {
     richText: [],
     hooks: {},
     options: {
-      image: {
-        query: `alt,crop,hotspot,'url':asset->url,
-        "id": asset->assetId,
-      "type": asset->mimeType,
-      "aspectRatio": asset->metadata.dimensions.aspectRatio,
-      "lqip": asset->metadata.lqip,
-      'width': asset->metadata.dimensions.width,
-      'height': asset->metadata.dimensions.height,`,
-      },
+      image: { query: DEFAULT_IMAG_QUERY },
       link: {
-        query: `...(internal->{ 'internal': select( _type != 'page' => _type + '/' + slug.current, '/' + slug.current ) })`,
+        query: ({ locale }) =>
+          locale ? DEFAULT_LINK_QUERY_LOCALIZED(locale) : DEFAULT_LINK_QUERY,
       },
       ...options,
     },

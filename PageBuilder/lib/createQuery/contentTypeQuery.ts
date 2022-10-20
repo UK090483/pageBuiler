@@ -29,6 +29,8 @@ export const getContentTypeQuery = (
       });
     }
 
+    console.log(query);
+
     return query;
   }
   console.warn("unable to find contentType for queryGeneration");
