@@ -108,6 +108,7 @@ export type PageBuilderLocales = {
 };
 
 export interface IConfigOptions {
+  slug: { query: QueryFn };
   link: { query: QueryFn };
   image: { query: Query };
   locale?: PageBuilderLocales;
@@ -135,16 +136,23 @@ export interface ISchemaItem {
 
 type SanitySchemaType = any;
 type titleValue = { title: string; value: string };
-export interface RichText {
-  name: string;
-  title: string;
-  styles: titleValue[];
-  marks: {
-    decorators: titleValue[];
-    annotations: SanitySchemaType[];
-  };
+
+export interface RichText extends Omit<Schema.BlockDefinition, "type"> {
   plugs: string[];
 }
+
+export type RichTextMarks = Schema.MarksDefinition;
+
+// export interface RichText {
+//   name: string;
+//   title: string;
+//   styles: titleValue[];
+//   marks: {
+//     decorators: titleValue[];
+//     annotations: SanitySchemaType[];
+//   };
+//   plugs: string[];
+// }
 
 export type SanityStructureBuilder = typeof S;
 

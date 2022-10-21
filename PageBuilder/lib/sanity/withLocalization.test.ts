@@ -1,3 +1,4 @@
+import { testData } from "../../__test__/testData";
 import { SanityDocumentDefinition, Field } from "../../types";
 import { withLocalization } from "./withLocalization";
 
@@ -25,7 +26,7 @@ const locale = {
   de: { flag: "flag", title: "Deutsch", isDefault: true },
   en: { flag: "flag", title: "English" },
 };
-const optionFields = { link: { query: () => "" }, image: { query: () => "" } };
+const optionFields = testData.finalConfig.options;
 
 describe("withLocalization", () => {
   it("should do nothing without locales...", () => {

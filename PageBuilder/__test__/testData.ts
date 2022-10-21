@@ -24,7 +24,11 @@ export const testData = {
   },
 
   finalConfig: {
-    options: { link: { query: () => "" }, image: { query: () => "" } },
+    options: {
+      link: { query: () => "testLinkQuery" },
+      image: { query: () => "testImageQuery" },
+      slug: { query: () => "testSlugQuery" },
+    },
   },
 
   get field() {

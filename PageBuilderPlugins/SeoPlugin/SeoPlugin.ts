@@ -7,7 +7,7 @@ function Conf(): Config {
     hooks: {
       onContentTypeQuery: ({ config, result }) => {
         config.options?.link;
-        return result + `, seo`;
+        return result + ``;
       },
       onCreateContentTypes: ({ config, result }) => {
         return result.map((i) => {

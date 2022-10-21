@@ -1,8 +1,12 @@
-import { Config } from "../../PageBuilder/types";
+import { Config, RichText, RichTextMarks } from "../../PageBuilder/types";
 
 type RichTextPluginProps = {
   name: string;
   plugs?: string[];
+  lists?: RichText["lists"];
+  annotations?: RichTextMarks["annotations"];
+  decorators?: RichTextMarks["decorators"];
+  styles?: RichText["styles"];
 };
 
 function Conf(props: RichTextPluginProps): Config {
@@ -11,11 +15,15 @@ function Conf(props: RichTextPluginProps): Config {
       {
         name: "defaultRichtext",
         title: "RT",
+        lists: props.lists || [
+          { title: "Bullet", value: "bullet" },
+          { title: "Numbered", value: "number" },
+        ],
         marks: {
-          annotations: [],
-          decorators: [],
+          annotations: [...(props.annotations ? props.annotations : [])],
+          decorators: [...(props.decorators ? props.decorators : [])],
         },
-        plugs: [],
+        plugs: [...(props.plugs ? props.plugs : [])],
         styles: [
           { title: "Normal", value: "normal" },
           { title: "Header", value: "header" },

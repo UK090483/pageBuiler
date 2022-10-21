@@ -1,5 +1,9 @@
-export const DEFAULT_SLUG_QUERY = `select( _type != 'page' => _type + '/' + slug.current, '/' + slug.current )`;
-export const DEFAULT_LINK_QUERY = `...(internal->{ 'internal': select( _type != 'page' => _type + '/' + slug.current, '/' + slug.current ) })`;
+export const DEFAULT_SLUG_QUERY = (locale?: string) =>
+  locale
+    ? `select(_id == *[ _type == 'siteConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + coalesce(slug_${locale},slug).current, '/' + coalesce(slug_${locale},slug).current, )`
+    : `select(_id == *[ _type == 'siteConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + slug.current, '/' + slug.current )`;
+
+export const DEFAULT_LINK_QUERY = `...(internal->{ 'internal': ${DEFAULT_SLUG_QUERY} })`;
 export const DEFAULT_LINK_QUERY_LOCALIZED = (locale: string) =>
   `...(internal->{ 'internal': select( _type != 'page' => _type + '/' + slug.current, '/' + slug.current ) })`;
 export const DEFAULT_IMAG_QUERY = `

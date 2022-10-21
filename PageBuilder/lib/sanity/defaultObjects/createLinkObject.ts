@@ -14,9 +14,9 @@ function createLinkObject(config: Config): PageBuilderComponent {
 
         query: (props) => {
           const locale = props?.locale;
-          return locale
-            ? `...(internal->{ 'internal': coalesce(slug_${locale},slug).current })`
-            : `'internal':internal->slug.current`;
+          return `...(internal->{ 'internal': ${config.options?.slug.query({
+            locale,
+          })}  })`;
         },
 
         to: [

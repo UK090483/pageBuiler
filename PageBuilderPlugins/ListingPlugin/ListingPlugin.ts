@@ -1,16 +1,23 @@
 import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
 
 import { defaultEmptyArray } from "../../PageBuilder/helper";
+import { ProfilePageJsonLd } from "next-seo";
 
-type ListingPlugProps = {
+type ListingItem = {
+  title: string;
   name: string;
 };
-function Conf(props?: ListingPlugProps): Config {
-  const name = props?.name || "listing";
+
+type ListingPlugProps = {
+  name?: string;
+  items: ListingItem[];
+};
+function Conf(props: ListingPlugProps): Config {
+  const name = props.name || "listing";
   return {
     hooks: {
       onCreateComponents: ({ config, result }) => {
-        return [...result, createListingComponent(config, name)];
+        return [...result, createListingComponent(config, name, props.items)];
       },
     },
   };
@@ -20,15 +27,9 @@ export default Conf;
 
 export function createListingComponent(
   config: Config,
-  name: string
+  name: string,
+  items: ListingItem[]
 ): SanityObjectDefinition {
-  const contentTypesWithListing = defaultEmptyArray(config.contentTypes).filter(
-    (i) =>
-      i.listing && Array.isArray(i.listing)
-        ? i.listing.includes(name)
-        : i.listing === name
-  );
-
   return {
     title: "Listing",
     name,
@@ -36,12 +37,14 @@ export function createListingComponent(
     query: `
     contentType,
     'items':select(
-     ${contentTypesWithListing
+     ${items
        .map((i) => `contentType == "${i.name}" => [...${i.name}Items[]->] `)
        .join(",")}
-    )[]{_id, 'slug': slug.current , title,description,'featuredImage':featuredImage{${
+    )[]{_id, 'slug': ${config.options?.slug.query({
+      locale: "",
+    })} , title,description,'featuredImage':featuredImage{${
       config.options?.image.query
-    }} }
+    }}}
 
     `,
     fields: [
@@ -52,7 +55,7 @@ export function createListingComponent(
         type: "string",
         options: {
           list: [
-            ...contentTypesWithListing.map((i) => ({
+            ...items.map((i) => ({
               title: i.title,
               value: i.name,
             })),
@@ -60,7 +63,9 @@ export function createListingComponent(
           layout: "radio",
         },
       },
-      ...contentTypesWithListing.map((i) => ({
+
+      // Build Reference List
+      ...items.map((i) => ({
         title: `${i.title} Items`,
         name: `${i.name}Items`,
         type: "array",

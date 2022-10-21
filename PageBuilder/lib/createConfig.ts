@@ -18,6 +18,7 @@ import {
   DEFAULT_IMAG_QUERY,
   DEFAULT_LINK_QUERY,
   DEFAULT_LINK_QUERY_LOCALIZED,
+  DEFAULT_SLUG_QUERY,
 } from "../constants";
 
 function mergeConfig(
@@ -34,6 +35,9 @@ function mergeConfig(
     richText: [],
     hooks: {},
     options: {
+      slug: {
+        query: ({ locale }) => DEFAULT_SLUG_QUERY(locale),
+      },
       image: { query: DEFAULT_IMAG_QUERY },
       link: {
         query: ({ locale }) =>

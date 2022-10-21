@@ -1,5 +1,4 @@
 import { Config, RichText } from "PageBuilder/types";
-import createLinkObject from "./defaultObjects/createLinkObject";
 
 const createRichtext = (config: Config) => {
   return config.richText
@@ -8,25 +7,29 @@ const createRichtext = (config: Config) => {
 };
 
 const resolveRichtextItem = (config: Config, item: RichText) => {
-  const {
-    name,
-    title,
-    styles,
-    marks: { annotations, decorators },
-    plugs,
-  } = item;
+  const { name, styles, marks, plugs, ...rest } = item;
+
+  const annotations = marks?.annotations || [];
+  const decorators = marks?.decorators || [];
+
   return {
     name,
-    title,
     type: "array",
     of: [
       {
         type: "block",
         title: "Block",
-        styles,
+        ...rest,
         marks: {
-          annotations: [...annotations, createLinkObject(config)],
-          decorators,
+          annotations: [...annotations],
+          decorators: [
+            { title: "Strong", value: "strong" },
+            { title: "Emphasis", value: "em" },
+            { title: "Code", value: "code" },
+            { title: "Underline", value: "underline" },
+            { title: "Strike", value: "strike-through" },
+            ...decorators,
+          ],
         },
       },
       ...plugs.map((i) => ({ type: i })),

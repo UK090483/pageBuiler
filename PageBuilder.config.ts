@@ -7,9 +7,10 @@ import SectionPlugin from "./PageBuilderPlugins/SectionPlugin";
 import SeoPlugin from "./PageBuilderPlugins/SeoPlugin/SeoPlugin";
 import RichText from "./PageBuilderPlugins/RichText/RichText";
 import HeroPlugin from "./PageBuilderPlugins/HeroPlugin/HeroPlugin";
-import BlogEditorPlugin from "./PageBuilderPlugins/BlockEditorPlugin/BlogEditorPlugin";
+import EditorPlugin from "./PageBuilderPlugins/EditorPlugin/EditorPlugin";
 import { PageBuilderContentTypeResult } from "./PageBuilder/types";
 import { MenuPluginResult } from "PageBuilderPlugins/MenuPlugin/types";
+import ImagePlug from "./PageBuilderPlugins/ImagePlug/ImagePlug";
 
 export default createConfig(
   [
@@ -27,12 +28,23 @@ export default createConfig(
     SectionPlugin(),
     BlogPlugin({ editor: "body" }),
     EventPlugin(),
-    ListingPlugin(),
+    ListingPlugin({
+      items: [
+        { name: "page", title: "Page" },
+        { name: "post", title: "Post" },
+        { name: "event", title: "Event" },
+      ],
+    }),
     MenuPlugin(),
     SeoPlugin(),
-    RichText({ name: "defaultRichtext" }),
+    RichText({
+      name: "defaultRichtext",
+      annotations: [{ type: "link" }],
+      plugs: ["imagePlug"],
+    }),
     HeroPlugin(),
-    BlogEditorPlugin({ components: ["hero", "section", "listing"] }),
+    EditorPlugin({ components: ["section", "listing", "hero"] }),
+    ImagePlug(),
   ],
   {
     locale: {

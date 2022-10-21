@@ -26,18 +26,21 @@ function Conf(props?: MenuPluginProps): Config {
                  'mainNav':mainNav[]{
                      label,
                     'link':link{
-                      ${config.options && config.options.link.query({})},
+                      href,
+                      internal
+                      
                     },
                     'items':items[]{
                       label,
                       'link':link{
-                        ${config.options && config.options.link.query({})},
+                        href,
+                      internal
                       }
                     }
                   
                  }
             })
-        }`
+        },`
         );
       },
     },
@@ -139,7 +142,7 @@ function Conf(props?: MenuPluginProps): Config {
                 return `${acc} / ${i.label}`;
               }, "" as string);
             return {
-              title: label + "lll",
+              title: label,
               subtitle: itemLabels,
               media: hasLists ? GrMultiple : RiFileListFill,
             };
@@ -206,8 +209,8 @@ function Conf(props?: MenuPluginProps): Config {
             const { label } = selection;
 
             return {
-              title: label + "ffff",
-              subtitle: "Liiiink",
+              title: label,
+              subtitle: "Link",
               media: AiOutlineLink,
             };
           },

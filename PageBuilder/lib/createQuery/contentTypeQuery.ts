@@ -28,7 +28,6 @@ export const getContentTypeQuery = (
         result: query,
       });
     }
-
     console.log(query);
 
     return query;

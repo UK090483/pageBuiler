@@ -22,6 +22,6 @@ function Conf(): Config {
         ],
       },
     ],
-  };+
+  };
 }
 export default Conf;
