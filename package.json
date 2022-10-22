@@ -16,6 +16,7 @@
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
+    "@vercel/og": "^0.0.19",
     "argon2": "^0.28.3",
     "babel-jest": "^27.3.1",
     "chokidar": "^3.5.3",

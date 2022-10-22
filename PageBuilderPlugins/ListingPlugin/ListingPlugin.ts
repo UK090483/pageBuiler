@@ -1,8 +1,5 @@
 import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
 
-import { defaultEmptyArray } from "../../PageBuilder/helper";
-import { ProfilePageJsonLd } from "next-seo";
-
 type ListingItem = {
   title: string;
   name: string;
@@ -34,18 +31,16 @@ export function createListingComponent(
     title: "Listing",
     name,
     type: "object",
-    query: `
+    query: ({ locale }) => `
     contentType,
     'items':select(
      ${items
        .map((i) => `contentType == "${i.name}" => [...${i.name}Items[]->] `)
        .join(",")}
-    )[]{_id, 'slug': ${config.options?.slug.query({
-      locale: "",
-    })} , title,description,'featuredImage':featuredImage{${
-      config.options?.image.query
-    }}}
-
+    )[]{_id, 'slug': ${config.options?.slug.query({ locale })},
+    'title': coalesce(title_${locale},title),
+    'description': coalesce(description_${locale},description),
+    'featuredImage':featuredImage{${config.options?.image.query}}},
     `,
     fields: [
       { name: "name", type: "string", title: "Name" },

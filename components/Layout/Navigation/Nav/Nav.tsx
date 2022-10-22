@@ -4,10 +4,9 @@ import { Logo } from "@components/Layout/Logo";
 import Link from "@components/Link";
 import Svg from "@components/Svg";
 import { useScrollThreshold } from "@hooks/useScrollThreshold";
-import { LangSwitch } from "@lib/LangSwitcherService/LangSwitch";
+import { LangSwitch } from "PageBuilderPlugins/MenuPlugin/Frontend/LangSwitch";
 import { HeaderNavigation } from "@lib/Navigation";
-import NavigationMobile from "@lib/Navigation/NavigationMobile";
-import SanityImage from "@lib/SanityImage";
+
 import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
 import React from "react";
 
@@ -18,37 +17,39 @@ const Nav: React.FC = () => {
 
   const navItems = data?.menu.mainNav;
 
-  // const langSwitchData = data?.langSwitchData;
+  const langSwitchData = data?.menu.langSwitcher;
+
   const scrolled = useScrollThreshold(800);
 
   return (
     <>
-      <nav>
-        <div className="flex items-center justify-between w-full  border-b-2 border-black h-14 ">
-          <Link aria-label="Home" href="/">
-            <Logo />
-          </Link>
+      <nav className=" flex justify-between w-full">
+        <Link aria-label="Home" href="/">
+          <Logo />
+        </Link>
 
-          <HeaderNavigation
-            //@ts-ignore
-            items={navItems || []}
-            className="items-center justify-center hidden  menu:flex "
+        <HeaderNavigation
+          //@ts-ignore
+          items={navItems || []}
+          className="items-center justify-center hidden  menu:flex "
+        />
+
+        <div className="flex gap-4   flex-shrink-0 items-center">
+          <LangSwitch
+            className="hidden menu:flex"
+            LangSwitcherResult={langSwitchData}
           />
-
-          {/* <div className="flex gap-4   flex-shrink-0 items-center">
-            <LangSwitch className="hidden menu:flex" slugs={langSwitchData} />
-          </div> */}
-
-          <button
-            data-testid="menu-overlay-toggle "
-            onClick={() => setOpen((s) => !s)}
-            aria-label={"Open the menu"}
-            aria-expanded={open}
-            className="menu:hidden mr-2"
-          >
-            <Svg className="w-[30px] h-[30px]" icon="hamburger" />
-          </button>
         </div>
+
+        <button
+          data-testid="menu-overlay-toggle "
+          onClick={() => setOpen((s) => !s)}
+          aria-label={"Open the menu"}
+          aria-expanded={open}
+          className="menu:hidden mr-2"
+        >
+          <Svg className="w-[30px] h-[30px]" icon="hamburger" />
+        </button>
 
         {/* {mainLogo && (
           <div

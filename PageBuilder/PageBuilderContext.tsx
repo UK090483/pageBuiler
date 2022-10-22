@@ -20,6 +20,7 @@ export function PageBuilderContextProvider(
   props: PageBuilderContextProviderProps
 ) {
   const { children, ...rest } = props;
+
   return (
     <PageBuilderContext.Provider
       value={{

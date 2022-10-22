@@ -18,28 +18,50 @@ function Conf(props?: MenuPluginProps): Config {
 
   return {
     hooks: {
-      onContentTypeQuery: ({ config, result }) => {
+      onContentTypeQuery: ({ config, result, locale }) => {
+        const link = `
+        href,
+        ...(internal->{ 'internal':${config.options?.slug.query({
+          locale,
+        })} })`;
+
+        const langSwitcher = config.options?.locale
+          ? `
+        
+        'langSwitcher' : {
+          ${Object.entries(config.options?.locale)
+            .map(([key, lang]) => {
+              return `'${key}': { 'title':'${
+                lang.title
+              }', 'link':${config.options?.slug.query({
+                locale: key,
+              })} }`;
+            })
+            .join(",")}
+        },
+        `
+          : ``;
+
+        const label = locale
+          ? `'label':coalesce(label_${locale},label)`
+          : "label";
+
         return (
           result +
           `'menu':{
             ...(*[ _type == 'menuConfig'][0]{
                  'mainNav':mainNav[]{
-                     label,
-                    'link':link{
-                      href,
-                      internal
-                      
-                    },
+                     ${label},
+                    'link':link{${link}},
                     'items':items[]{
-                      label,
-                      'link':link{
-                        href,
-                      internal
-                      }
+                      ${label},
+                      'link':link{${link}},
                     }
                   
-                 }
-            })
+                 },
+            }),
+
+           ${langSwitcher}
         },`
         );
       },
@@ -80,6 +102,7 @@ function Conf(props?: MenuPluginProps): Config {
             name: "label",
             type: "string",
             title: "Label",
+            localize: true,
             validation: (Rule) => Rule.required(),
           },
           {
@@ -112,6 +135,7 @@ function Conf(props?: MenuPluginProps): Config {
             name: "label",
             type: "string",
             title: "Label",
+            localize: true,
             validation: (Rule) => Rule.required(),
           },
           {
@@ -134,7 +158,6 @@ function Conf(props?: MenuPluginProps): Config {
             const { label, items } = selection;
             const hasLists = //@ts-ignore
               items && items.find((i) => i._type === "navigationMegaMenuItem");
-
             const itemLabels =
               items &&
               //@ts-ignore
@@ -158,6 +181,7 @@ function Conf(props?: MenuPluginProps): Config {
             type: "string",
             title: "Label",
             validation: (Rule) => Rule.required(),
+            localize: true,
           },
 
           {
@@ -192,6 +216,7 @@ function Conf(props?: MenuPluginProps): Config {
             type: "string",
             title: "Label",
             validation: (Rule) => Rule.required(),
+            localize: true,
           },
           {
             name: "link",

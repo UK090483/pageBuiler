@@ -8,10 +8,12 @@ export type BodyParserProps = {
 const BodyParser: React.FC<BodyParserProps> = ({ components }) => {
   const { data } = usePageBuilderContext();
 
+  const saveBlocks = data?.body;
+
   return (
     <>
-      {data?.body &&
-        data.body.map((block) => {
+      {saveBlocks &&
+        saveBlocks.map((block) => {
           if (components[block._type]) {
             const Component = components[block._type].component;
             return <Component key={block._key} {...block} />;

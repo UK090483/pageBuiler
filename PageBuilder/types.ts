@@ -91,6 +91,7 @@ export interface PageBuilderEditor
 export type FilterHook<T extends unknown = unknown> = (props: {
   config: Config;
   result: T;
+  locale?: string;
 }) => T;
 
 export type Hooks = {

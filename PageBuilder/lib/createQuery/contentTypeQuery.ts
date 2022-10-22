@@ -26,9 +26,9 @@ export const getContentTypeQuery = (
       query = config.hooks.onContentTypeQuery({
         config,
         result: query,
+        locale,
       });
     }
-    console.log(query);
 
     return query;
   }

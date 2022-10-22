@@ -37,7 +37,7 @@ export function fieldToQuery(
   }
 
   if (field.type === "array") {
-    return arrayToQuery(config, field as IArrayField);
+    return arrayToQuery(config, field as IArrayField, locale);
   }
 
   if (field.type === "slug") {
@@ -88,7 +88,11 @@ function imageToQuery(config: Config, field: IImageField): queryResult {
   };
 }
 
-function arrayToQuery(config: Config, field: IArrayField): queryResult {
+function arrayToQuery(
+  config: Config,
+  field: IArrayField,
+  locale?: string
+): queryResult {
   const resolvedObjects = resolveObjects(config);
 
   const objects = defaultEmptyArray(field.of)
@@ -101,7 +105,8 @@ function arrayToQuery(config: Config, field: IArrayField): queryResult {
       if (object && "fields" in object) {
         return `_type == '${object.name}' => {_type,_key, ${schemaItemToQuery(
           config,
-          object
+          object,
+          locale
         )}}`;
       }
       return "";
@@ -145,11 +150,17 @@ export const fieldsToQuery = (
   return queries.map((i) => i.query).join(" ,") + ", ";
 };
 
-export const schemaItemToQuery = (config: Config, item: PageBuilderObject) => {
+export const schemaItemToQuery = (
+  config: Config,
+  item: PageBuilderObject,
+  locale?: string
+) => {
   if (item.query) {
-    return item.query;
+    return typeof item.query === "function"
+      ? item.query({ locale })
+      : item.query;
   }
-  return fieldsToQuery(config, item.fields);
+  return fieldsToQuery(config, item.fields, locale);
 };
 
 export const contentTypeQuery = (

@@ -12,8 +12,10 @@ export const testQuery = async (query: string, dataSet?: any[]) => {
     let result = await value.get();
     return result;
   } catch (error) {
-    console.warn({ query });
-
     return false;
   }
+};
+
+export const testProjection = async (projection: string) => {
+  return await testQuery(`*[_type == 'page'][]{${projection}}`);
 };
