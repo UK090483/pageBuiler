@@ -8,17 +8,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"
-            rel="stylesheet"
-          />
 
           <link
-            rel="preload"
-            href="/fonts/PPRightGrotesk-CompactBlack.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin=""
+            href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
+            rel="stylesheet"
           />
         </Head>
 

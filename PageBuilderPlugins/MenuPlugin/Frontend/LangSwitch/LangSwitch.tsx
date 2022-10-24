@@ -33,7 +33,7 @@ export const LangSwitch: React.FC<LangSwitchProps> = (props) => {
             onClick={onClick}
             scroll={false}
             key={item.key}
-            href={item.link || "/"}
+            internal={item.link || "/"}
             locale={item.key}
             className={`px-1 w-9 h-9 flex items-center justify-center rounded-full font-bold  border-black  leading-none hover:underline ${
               item.key === locale ? "border-2" : ""

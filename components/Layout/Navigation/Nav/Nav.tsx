@@ -20,7 +20,7 @@ const Nav: React.FC = () => {
   return (
     <>
       <nav className=" flex justify-between w-full">
-        <Link aria-label="Home" href="/">
+        <Link aria-label="Home" internal="/">
           <Logo />
         </Link>
 

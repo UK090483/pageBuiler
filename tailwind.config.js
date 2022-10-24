@@ -14,8 +14,8 @@ module.exports = {
       ignore: ["menu"],
     },
     fontFamily: {
-      sans: ["Montserrat", "Helvetica", "sans-serif"],
-      header: ["grotesk"],
+      sans: ["Inter", "Helvetica", "sans-serif"],
+      header: ["Inter"],
     },
     fontSize: {
       sm: ["12px", "1.4em"],
