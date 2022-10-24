@@ -1,4 +1,3 @@
-import { useAppContext } from "@components/AppContext";
 import Link from "@components/Link";
 
 // const Social: React.FC = () => {

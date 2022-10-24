@@ -16,7 +16,7 @@ export default function handler(req: NextRequest) {
     // ?title=<title>
     const hasTitle = searchParams.has("title");
     const imageId = searchParams.get("imageId");
-    const imageUrl = builder.image({ _ref: imageId }).width(300).url();
+    const imageUrl = builder.image({ _ref: imageId }).width(1000).url();
 
     console.log({ imageId, imageUrl });
 
@@ -38,22 +38,25 @@ export default function handler(req: NextRequest) {
             justifyContent: "center",
             flexDirection: "column",
             flexWrap: "nowrap",
+            border: "red solid 2px",
           }}
         >
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              justifyItems: "center",
+              width: "100%",
+              border: "red solid 2px",
             }}
           >
             {imageUrl && (
               <img
                 alt="Vercel"
                 src={imageUrl}
-                style={{ margin: "0 30px" }}
-                height={200}
+                style={{
+                  maxHeight: 300,
+
+                  objectFit: "contain",
+                }}
               />
             )}
           </div>

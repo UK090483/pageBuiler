@@ -8,7 +8,7 @@ import List from "./list/List";
 import link from "./marks/link";
 import AutoGalleryPlug from "./Plugs/AutoGalleryPlug/AutoGalleryPlug";
 import EmbedHTML from "./Plugs/EmbedHTML/EmbedHTML";
-import EventPlug from "./Plugs/EventPlug/EventPlug";
+
 import ImagePlug from "./Plugs/ImagePlug/ImagePlug";
 import SeoTextPlug from "./Plugs/SeoTextPlug";
 import SpacerPlug from "./Plugs/Spacer";
@@ -36,7 +36,6 @@ const RichText: React.FC<RichTextPros> = (props: any) => {
         imageGalleryPlug: ImageGalleryPlug,
         spacer: SpacerPlug,
         imagePlug: ImagePlug,
-        eventPlug: EventPlug,
         embedHTML: EmbedHTML,
         seoText: SeoTextPlug,
         playerPlug: PlayerPlug,

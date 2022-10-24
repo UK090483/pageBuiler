@@ -1,7 +1,5 @@
 import { LangSwitch, LangSwitchProps } from "./LangSwitch";
-
-import { getByRole, render, screen } from "@testing-library/react";
-import { serializeEnvelope } from "@sentry/utils";
+import { render, screen } from "@testing-library/react";
 
 jest.mock("next/router", () => ({
   useRouter: () => ({

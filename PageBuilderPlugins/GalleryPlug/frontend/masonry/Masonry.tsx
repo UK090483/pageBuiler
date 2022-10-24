@@ -46,7 +46,11 @@ const Masonry: React.FC<MasonryProps> = (props) => {
   if (!children || !Array.isArray(children)) return null;
 
   return (
-    <ul ref={root} className="relative container mx-auto">
+    <ul
+      ref={root}
+      style={{ transition: "height 1s" }}
+      className="relative container mx-auto "
+    >
       {[...children].map((child) => {
         return React.cloneElement(
           child,

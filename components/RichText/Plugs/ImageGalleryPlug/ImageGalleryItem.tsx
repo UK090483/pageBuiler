@@ -21,7 +21,7 @@ const ImageGalleryItem: React.FunctionComponent<ImageGalleryItemProps> = (
     <>
       <ConditionalLink
         href={link?.href || "/"}
-        external={!!link?.external}
+        internal={link?.internalLink}
         condition={!!link}
         className={`${className} w-full rounded-theme overflow-hidden shadow-2x `}
       >

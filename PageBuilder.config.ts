@@ -14,6 +14,8 @@ import ImagePlug from "./PageBuilderPlugins/ImagePlug/ImagePlug";
 
 import GalleryPlug from "./PageBuilderPlugins/GalleryPlug/GalleryPlug";
 import { SeoQueryResult } from "PageBuilderPlugins/SeoPlugin/query";
+import VideoPlug from "./PageBuilderPlugins/VideoPlug/VideoPlug";
+import EmbedHTML from "./PageBuilderPlugins/EmbedHTML/EmbedHTML";
 
 export default createConfig(
   [
@@ -28,10 +30,12 @@ export default createConfig(
         },
       ],
     },
+    EmbedHTML(),
     GalleryPlug(),
     SectionPlugin(),
     BlogPlugin({ editor: "body" }),
     EventPlugin(),
+    VideoPlug(),
     ListingPlugin({
       items: [
         { name: "page", title: "Page" },
@@ -44,7 +48,7 @@ export default createConfig(
     RichText({
       name: "defaultRichtext",
       annotations: [{ type: "link" }],
-      plugs: ["imagePlug", "imageGalleryPlug"],
+      plugs: ["imagePlug", "imageGalleryPlug", "videoPlug", "embed"],
     }),
     HeroPlugin(),
     EditorPlugin({

@@ -1,4 +1,3 @@
-import { AppContextProvider } from "@components/AppContext";
 import { textBlock } from "@components/RichText/testPrepare";
 import { ImageMetaResult } from "@lib/SanityImage/query";
 import { render, RenderOptions } from "@testing-library/react";
@@ -6,13 +5,7 @@ import { PageResult } from "pages/[[...slug]]";
 
 // Add in any providers here if necessary:
 const Wrap: React.FC<{ data?: PageResult }> = ({ children, data }) => {
-  return (
-    <>
-      <AppContextProvider hostName="testHost" data={data}>
-        {children}
-      </AppContextProvider>
-    </>
-  );
+  return <>{children}</>;
 };
 
 type CustomRenderOptions = {

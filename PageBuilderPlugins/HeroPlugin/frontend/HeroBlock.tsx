@@ -1,5 +1,5 @@
 import React from "react";
-import Hero from "@components/Blocks/HeroBlock/Hero";
+import Hero from "./Hero";
 import { HeroBlogResult } from "./HeroBlockQuery";
 
 export interface HeroBlockProps extends HeroBlogResult {}

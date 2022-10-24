@@ -22,6 +22,7 @@ describe("EmbedHTML", () => {
 
   it("EmbedHTML not render ", async () => {
     customRender({ html: "<div>testHTML</div>" });
+
     expect(screen.getByText("testHTML")).toBeInTheDocument();
   });
 });

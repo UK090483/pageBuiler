@@ -29,7 +29,7 @@ const LinkMark: React.FC<LinkMarkPros> = (props) => {
       {link?.href && (
         <Link
           href={link?.href}
-          external={link?.external}
+          internal={link.internalLink}
           className="underline font-bold"
         >
           {props.children}
