@@ -11,6 +11,8 @@ import {
 import { resolveContentType } from "../sanity/createContentTypes";
 import { resolveObjects } from "../sanity/createObjects";
 
+const FIELD_END = ",";
+
 type queryResult = { needsQuery: boolean; query: string };
 
 export function fieldToQuery(
@@ -97,9 +99,20 @@ function arrayToQuery(
 
   const objects = defaultEmptyArray(field.of)
     .map((i) => {
+      if (i.fields) {
+        if (i.type === "image") {
+          return `
+          'image':{${config.options?.image.query}},
+          ${fieldsToQuery(config, i.fields)}
+          `;
+        }
+        return fieldsToQuery(config, i.fields);
+      }
+
       if (i.type === "block") {
         return "...";
       }
+
       const object = resolvedObjects.find((obj) => obj.name === i.type);
 
       if (object && "fields" in object) {
@@ -109,13 +122,14 @@ function arrayToQuery(
           locale
         )}}`;
       }
+
       return "";
     })
     .filter((i) => !!i);
 
   return {
     needsQuery: false,
-    query: `'${field.name}': ${field.name}[]{${objects.join(", ")}}`,
+    query: `'${field.name}': ${field.name}[]{${objects.join(FIELD_END)}}`,
   };
 }
 
@@ -124,12 +138,12 @@ function richtextToQuery(
   richtext: RichText,
   field: Field
 ): queryResult {
-  const plugs = defaultEmptyArray(config.plugs).filter((i) =>
+  const plugs = defaultEmptyArray(config.components).filter((i) =>
     richtext.plugs.includes(i.name)
   );
 
   const plugQuery = plugs.reduce((acc, item) => {
-    return `${acc} _type == ${item.name} => { _type, ${fieldsToQuery(
+    return `${acc} _type == '${item.name}' => {..., _type, ${fieldsToQuery(
       config,
       item.fields
     )}}`;
@@ -147,7 +161,7 @@ export const fieldsToQuery = (
   locale?: string
 ) => {
   const queries = fields?.map((i) => fieldToQuery(config, i, locale));
-  return queries.map((i) => i.query).join(" ,") + ", ";
+  return queries.map((i) => i.query).join(FIELD_END) + FIELD_END;
 };
 
 export const schemaItemToQuery = (

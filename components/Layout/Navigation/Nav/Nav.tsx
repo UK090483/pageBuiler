@@ -4,21 +4,17 @@ import { Logo } from "@components/Layout/Logo";
 import Link from "@components/Link";
 import Svg from "@components/Svg";
 import { useScrollThreshold } from "@hooks/useScrollThreshold";
-import { LangSwitch } from "PageBuilderPlugins/MenuPlugin/Frontend/LangSwitch";
-import { HeaderNavigation } from "@lib/Navigation";
-
+import { LangSwitch } from "PageBuilderPlugins/MenuPlugin/Frontend/LangSwitch/LangSwitch";
+import { HeaderNavigation } from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation";
+import NavigationMobile from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation/NavigationMobile";
 import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
 import React from "react";
 
 const Nav: React.FC = () => {
   const [open, setOpen] = React.useState(false);
-
   const { data } = usePageBuilderContext();
-
   const navItems = data?.menu.mainNav;
-
   const langSwitchData = data?.menu.langSwitcher;
-
   const scrolled = useScrollThreshold(800);
 
   return (
@@ -69,20 +65,21 @@ const Nav: React.FC = () => {
           </div>
         )} */}
       </nav>
-      {/* <NavigationMobile
+      <NavigationMobile
+        //@ts-ignore
         items={navItems}
         open={open}
         closeMenu={() => {
           setOpen(false);
         }}
-      > */}
-      {/* <LangSwitch
-          slugs={langSwitchData}
+      >
+        <LangSwitch
+          LangSwitcherResult={langSwitchData}
           onClick={() => {
             setOpen(false);
           }}
-        /> */}
-      {/* </NavigationMobile> */}
+        />
+      </NavigationMobile>
     </>
   );
 };

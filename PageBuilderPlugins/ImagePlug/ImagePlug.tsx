@@ -9,7 +9,7 @@ const Image: React.FC<{ value: { image?: string } }> = (props) => {
 
 function ImagePlug(): Config {
   return {
-    plugs: [
+    objects: [
       {
         title: "Image",
         name: "imagePlug",

@@ -12,9 +12,7 @@ import EventPlug from "./Plugs/EventPlug/EventPlug";
 import ImagePlug from "./Plugs/ImagePlug/ImagePlug";
 import SeoTextPlug from "./Plugs/SeoTextPlug";
 import SpacerPlug from "./Plugs/Spacer";
-const ImageGalleryPlug = dynamic(
-  () => import("./Plugs/ImageGalleryPlug/ImageGalleryPlug")
-);
+import ImageGalleryPlug from "PageBuilderPlugins/GalleryPlug/frontend/ImageGalleryPlug";
 const PlayerPlug = dynamic(() => import("./Plugs/PlayerPlug/PlayerPlug"));
 
 const styles: { [k: string]: string } = {

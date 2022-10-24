@@ -10,6 +10,7 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   locale?: string;
   scroll?: boolean;
   role?: string;
+  ["data-testid"]?: string;
 }
 
 export const Link: React.FC<LinkProps> = (props) => {

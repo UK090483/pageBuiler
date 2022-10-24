@@ -1,37 +1,40 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
+import Masonry from "PageBuilderPlugins/GalleryPlug/frontend/masonry/Masonry";
 import * as React from "react";
-
+import useBreakpoint from "use-breakpoint";
 interface IStypeProps {}
-
+const BREAKPOINTS = { 2: 0, 3: 768, 4: 1280 };
+const sizes = new Array(10)
+  .fill(0)
+  .map(() => Math.round(Math.random() * 400 + 80));
 const Style: React.FunctionComponent<IStypeProps> = (props) => {
-  return (
-    <div className=" h-56 bg-blue-400 flex w-full justify-between ">
-      <div className="bg-red px-12 truncate">BEFORE</div>
+  const { breakpoint } = useBreakpoint(BREAKPOINTS, 2);
 
-      {/* <div className="bg-green-300 px-12  h-11 w-[500px] flex">inner</div> */}
-      <div className="grid grid-flow-col ">
-        <div className="h-20  px-10  bg-green-300 truncate ">
-          sdfjsldfkjlsdkfj
-        </div>
-        <div className="h-20 px-10 bg-gray-700 truncate ">
-          sdfklsdkfölsdkfösldkf
-        </div>
-        <div className="h-20 px-10 bg-green-300 truncate ">
-          {" "}
-          sdfjsldfkjlsdkfj
-        </div>
-        <div className="h-20 px-10 bg-gray-700 truncate ">
-          sdfklsdkfölsdkfösldkf
-        </div>
-        <div className="h-20 px-10 bg-green-300 truncate ">
-          {" "}
-          sdfjsldfkjlsdkfj
-        </div>
-        <div className="h-20 px-10 bg-gray-700 truncate ">
-          sdfklsdkfölsdkfösldkf
-        </div>
-      </div>
-      <div className=" bg-red px-12">AFTER</div>
+  return (
+    <div className=" mt-52 ">
+      <Masonry
+        margin={8}
+        columns={parseInt(breakpoint ? breakpoint + "" : "2")}
+      >
+        {sizes.map((size, index) => {
+          return (
+            <button
+              style={{ height: size }}
+              className=" item  flex justify-center items-center"
+              key={index}
+            >
+              <img
+                className=" absolute w-full h-full inset-0 object-cover"
+                src={`https://picsum.photos/300/${size}`}
+                alt=""
+              />
+              {"index:" + index + " /// "}
+              {"size:" + size}
+            </button>
+          );
+        })}
+      </Masonry>
     </div>
   );
 };

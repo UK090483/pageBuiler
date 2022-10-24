@@ -7,7 +7,7 @@ import { Schema } from "sanity-v3-dev-prev/node_modules/@sanity/types/src/schema
 export interface IArrayField
   extends Omit<ArraySchemaType, "jsonType" | "of" | "type"> {
   type: "array";
-  of: { type: string }[];
+  of: { type: string; fields: Field[] }[];
 }
 
 export interface IImageField

@@ -6,17 +6,14 @@ import ListingBlock from "@components/Blocks/ListingBlock";
 import listingBlockQuery from "@components/Blocks/ListingBlock/listingBlockQuery";
 import SectionBlock from "@components/Blocks/SectionBlock";
 import sectionBlockQuery from "@components/Blocks/SectionBlock/SectionBlockQuery";
-import type { layoutQueryResult } from "@components/Layout/LayoutQuery";
-import layoutQuery from "@components/Layout/LayoutQuery";
 import BodyParser from "PageBuilder/BodyParser";
-
+import GalleryPlug from "PageBuilderPlugins/GalleryPlug/frontend/ImageGalleryComponent";
 import { sanityClient } from "@lib/SanityService/sanity.server";
 import type { GetStaticPaths, GetStaticProps } from "next";
-
 import config from "PageBuilder.config";
 import { fetchStaticPath, fetchStaticProps } from "PageBuilder";
 
-export type PageResult = layoutQueryResult & appQueryResult & { content?: any };
+export type PageResult = appQueryResult & { content?: any };
 
 const Page = () => {
   return (
@@ -31,6 +28,9 @@ const Page = () => {
           },
           listing: {
             component: ListingBlock,
+          },
+          imageGalleryPlug: {
+            component: GalleryPlug,
           },
         }}
       />

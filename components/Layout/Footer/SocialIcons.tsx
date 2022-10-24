@@ -1,27 +1,27 @@
 import { useAppContext } from "@components/AppContext";
 import Link from "@components/Link";
 
-const Social: React.FC = () => {
-  const { data } = useAppContext();
-  const items = data?.footer?.socialMedia;
-  return (
-    <div className=" grid grid-cols-3 gap-12  place-content-center ">
-      {items &&
-        items.map((i) => (
-          <Link
-            external={true}
-            href={i.url || "/"}
-            key={i._key}
-            aria-label={`Social media Link ${i.icon}`}
-          >
-            <Icon icon={i.icon}></Icon>
-          </Link>
-        ))}
-    </div>
-  );
-};
+// const Social: React.FC = () => {
+//   const { data } = useAppContext();
+//   const items = data?.footer?.socialMedia;
+//   return (
+//     <div className=" grid grid-cols-3 gap-12  place-content-center ">
+//       {items &&
+//         items.map((i) => (
+//           <Link
+//             external={true}
+//             href={i.url || "/"}
+//             key={i._key}
+//             aria-label={`Social media Link ${i.icon}`}
+//           >
+//             <Icon icon={i.icon}></Icon>
+//           </Link>
+//         ))}
+//     </div>
+//   );
+// };
 
-export default Social;
+// export default Social;
 
 const pathMap = {
   instagram: (

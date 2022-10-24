@@ -72,21 +72,3 @@ const localize = (config: Config, field: Field): Field[] => {
 
   return [field, ...translationFields];
 };
-
-const getTranslationLocale = (config: Config) => {};
-
-//   const localize = (defaultField:string) => {
-//     items.push(defaultField);
-//     return Object.entries(supportedLanguages).map(([key, lang]) => {
-//       if (lang.isDefault) {
-//         return defaultField;
-//       }
-
-//       return {
-//         ...defaultField,
-//         name: `${defaultField.name}_${key}`,
-//         title: `${lang.flag} ${defaultField.title} ${lang.title}`,
-//         fieldset: `${defaultField.name}translations`,
-//       };
-//     });
-//   };

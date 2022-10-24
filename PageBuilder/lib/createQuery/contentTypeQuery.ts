@@ -20,7 +20,7 @@ export const getContentTypeQuery = (
   if (_contentType) {
     const q = contentTypeQuery(config, _contentType, locale);
 
-    let query = "_id,_type, " + q;
+    let query = `_id,\n_type,\n${q}`;
 
     if (config.hooks?.onContentTypeQuery) {
       query = config.hooks.onContentTypeQuery({

@@ -1,11 +1,14 @@
 import { isArray } from "lodash";
-import { defaultEmptyArray } from "../helper";
 import { Config, Hooks, IConfigOptions } from "PageBuilder/types";
 
 function createConfig(
   input: Config | Config[],
   options?: Partial<IConfigOptions>
 ): Config {
+  if (typeof document !== "undefined") {
+    console.error("nooooooo config in frontend");
+  }
+
   if (isArray(input)) {
     return mergeConfig(input, options);
   }
@@ -17,7 +20,6 @@ export default createConfig;
 import {
   DEFAULT_IMAG_QUERY,
   DEFAULT_LINK_QUERY,
-  DEFAULT_LINK_QUERY_LOCALIZED,
   DEFAULT_SLUG_QUERY,
 } from "../constants";
 
@@ -40,8 +42,7 @@ function mergeConfig(
       },
       image: { query: DEFAULT_IMAG_QUERY },
       link: {
-        query: ({ locale }) =>
-          locale ? DEFAULT_LINK_QUERY_LOCALIZED(locale) : DEFAULT_LINK_QUERY,
+        query: ({ locale }) => DEFAULT_LINK_QUERY(locale),
       },
       ...options,
     },

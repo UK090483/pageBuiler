@@ -60,7 +60,6 @@ function Conf(props?: MenuPluginProps): Config {
                   
                  },
             }),
-
            ${langSwitcher}
         },`
         );

@@ -1,4 +1,4 @@
-import { Config } from "../PageBuilder/types";
+import { Config } from "../../PageBuilder/types";
 
 function Conf(): Config {
   return {

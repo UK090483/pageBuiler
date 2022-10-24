@@ -1,13 +1,14 @@
 import { defaultEmptyArray } from "../../PageBuilder/helper";
 import { Config } from "../../PageBuilder/types";
-
 import { AiOutlineSearch } from "react-icons/ai";
+import seoPluginQuery from "./query";
+
 function Conf(): Config {
   return {
     hooks: {
-      onContentTypeQuery: ({ config, result }) => {
+      onContentTypeQuery: ({ config, result, locale }) => {
         config.options?.link;
-        return result + ``;
+        return result + seoPluginQuery({ locale });
       },
       onCreateContentTypes: ({ config, result }) => {
         return result.map((i) => {

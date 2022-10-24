@@ -1,15 +1,7 @@
-import { sanityClient as client } from "@lib/SanityService/sanity.server";
-import heroBlockQuery from "@components/Blocks/HeroBlock/HeroBlockQuery";
-import listingBlockQuery from "@components/Blocks/ListingBlock/listingBlockQuery";
-import sectionBlockQuery from "@components/Blocks/SectionBlock/SectionBlockQuery";
-import layoutQuery from "@components/Layout/LayoutQuery";
-import Typo from "@components/Typography/Typography";
-import fetchStaticProps from "@lib/SanityPageBuilder/lib/fetchStaticProps/fetchStaticProps";
 import * as React from "react";
-import { PageResult } from "./[[...slug]]";
+
 import appConfig from "../app.config.json";
 import Image from "next/image";
-const locales = appConfig.locales;
 
 interface IStypeProps {}
 

@@ -40,10 +40,9 @@ const cases = [
   },
   {
     field: "link" as Field,
-    res: "'link': link{...(internal->{ 'internal': testSlugQuery  }) ,href, }",
-    res2: "'link': link{...(internal->{ 'internal': testSlugQuery  }) ,href, }",
-    resEn:
-      "'link': link{...(internal->{ 'internal': testSlugQuery  }) ,href, }",
+    res: "'link': link{...(internal->{ 'internal': testSlugQuery  }),href,}",
+    res2: "'link': link{...(internal->{ 'internal': testSlugQuery  }),href,}",
+    resEn: "'link': link{...(internal->{ 'internal': testSlugQuery  }),href,}",
   },
 ];
 

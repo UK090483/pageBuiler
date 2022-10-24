@@ -2,6 +2,9 @@
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
 
+import imageUrlBuilder from "@sanity/image-url";
+import { config as sanityConfig } from "lib/SanityService/config";
+const builder = imageUrlBuilder(sanityConfig);
 export const config = {
   runtime: "experimental-edge",
 };
@@ -12,6 +15,11 @@ export default function handler(req: NextRequest) {
 
     // ?title=<title>
     const hasTitle = searchParams.has("title");
+    const imageId = searchParams.get("imageId");
+    const imageUrl = builder.image({ _ref: imageId }).width(300).url();
+
+    console.log({ imageId, imageUrl });
+
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
       : "My default title";
@@ -40,12 +48,14 @@ export default function handler(req: NextRequest) {
               justifyItems: "center",
             }}
           >
-            <img
-              alt="Vercel"
-              src="https://cdn.sanity.io/images/ypuaahj7/production/01412806e72f3d39e5e6db364254feee8b1cef5c-2755x3664.jpg?w=500"
-              style={{ margin: "0 30px" }}
-              height={200}
-            />
+            {imageUrl && (
+              <img
+                alt="Vercel"
+                src={imageUrl}
+                style={{ margin: "0 30px" }}
+                height={200}
+              />
+            )}
           </div>
           <div
             style={{
