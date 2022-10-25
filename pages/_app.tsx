@@ -21,8 +21,7 @@ function App({ Component, pageProps }: AppPropsWithStaticProps) {
       </Layout>
 
       {/* <PreviewIndicator show={!!preview} />
-        <Cookie />
-        <Seo />  */}
+        <Cookie /> */}
     </PageBuilderContextProvider>
   );
 }

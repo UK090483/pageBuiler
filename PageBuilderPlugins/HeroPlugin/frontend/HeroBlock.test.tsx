@@ -1,4 +1,8 @@
-import { customRender, screen, testText } from "@tests/test-utils";
+import {
+  customRender,
+  screen,
+  testText,
+} from "PageBuilder/__test__/test-utils";
 import userEvent from "@testing-library/user-event";
 
 import { mockClient } from "@lib/SanityPageBuilder/lib/MockClient/MockClient";

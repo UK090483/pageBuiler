@@ -1,4 +1,4 @@
-import { PlugProps } from "@lib/SanityPageBuilder/lib/RichText";
+import { PlugProps } from "PageBuilderPlugins/RichText/types";
 import React from "react";
 import { ImageGalleryPlugResult } from "./imageGalleryPlugQuery";
 import ImageGalleryComponent from "./ImageGalleryComponent";

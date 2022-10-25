@@ -2,7 +2,10 @@ import React from "react";
 
 import clsx from "clsx";
 
-import { linkQuery, LinkResult } from "@lib/Navigation/query";
+import {
+  linkQuery,
+  LinkResult,
+} from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation/query";
 import { imageMeta, ImageMetaResult } from "@lib/SanityImage/query";
 import ImageGalleryPlugItem from "./ImageGalleryItem";
 import ImageGalleryItem from "./ImageGalleryItem";

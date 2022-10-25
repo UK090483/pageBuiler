@@ -1,4 +1,3 @@
-import { customRender } from "./test-utils";
 import App from "../pages/_app";
 
 const TestComponent: React.FC = () => {

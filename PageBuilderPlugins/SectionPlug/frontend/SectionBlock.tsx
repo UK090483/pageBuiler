@@ -1,4 +1,4 @@
-import RichText from "@components/RichText/RichText";
+import RichText from "../../RichText/frontend/RichText";
 import Section from "@components/Section/Section";
 import SanityImage from "@lib/SanityImage";
 import type { ImageMetaResult } from "@lib/SanityImage/query";

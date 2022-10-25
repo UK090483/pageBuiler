@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "@components/Link";
-import { LinkResult, linkQuery } from "@lib/Navigation/query";
+import {
+  linkQuery,
+  LinkResult,
+} from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation/query";
 import Button from "@components/Button/Button";
 
 type LinkMarkPros = {

@@ -1,6 +1,11 @@
 import { mockClient } from "@lib/SanityPageBuilder/lib/MockClient/MockClient";
 import sectionBlockQuery from "./SectionBlockQuery";
-import { customRender, screen, testImage, testText } from "@tests/test-utils";
+import {
+  customRender,
+  screen,
+  testImage,
+  testText,
+} from "PageBuilder/__test__/test-utils";
 import SectionBlock from "./SectionBlock";
 
 const database: any[] = [];

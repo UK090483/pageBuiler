@@ -1,7 +1,7 @@
 import React from "react";
 import { ConditionalLink } from "@components/Link";
 import Typo from "@components/Typography/Typography";
-import { LinkResult } from "@lib/Navigation/query";
+import { LinkResult } from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation/query";
 import SanityImage from "@lib/SanityImage";
 import type { ImageMetaResult } from "@lib/SanityImage/query";
 

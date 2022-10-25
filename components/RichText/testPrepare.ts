@@ -1,4 +1,4 @@
-import { SanityBlock } from "@lib/SanityPageBuilder/lib/RichText";
+type SanityBlock = any;
 
 import { v4 as uuid } from "uuid";
 
