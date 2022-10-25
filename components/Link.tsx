@@ -4,7 +4,6 @@ import NextLink from "next/link";
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
   className?: string;
-
   internal?: string | null;
   onClick?: () => void;
   locale?: string;

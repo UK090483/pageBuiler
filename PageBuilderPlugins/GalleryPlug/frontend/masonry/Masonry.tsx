@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useIsomorphicLayoutEffect } from "react-use";
 
 type MasonryProps = {
   columns: number;
@@ -12,10 +13,8 @@ const Masonry: React.FC<MasonryProps> = (props) => {
 
   const root = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const run = () => {
-      console.log("run");
-
       if (!root.current) return;
       const gridItems = [].slice.call(root.current.children) as HTMLElement[];
       const getHeight = (item: HTMLElement) => {

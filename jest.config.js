@@ -28,6 +28,7 @@ module.exports = {
     "^@lib/(.*)$": "<rootDir>/lib/$1",
     "^@tests/(.*)$": "<rootDir>/tests/$1",
     "^@constants/(.*)$": "<rootDir>/constants/$1",
+    "PageBuilderPlugins/(.*)$": "<rootDir>/PageBuilderPlugins/$1",
 
     /* Handle CSS imports (with CSS modules)
       https://jestjs.io/docs/webpack#mocking-css-modules */

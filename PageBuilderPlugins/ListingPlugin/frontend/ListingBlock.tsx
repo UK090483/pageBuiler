@@ -11,18 +11,20 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   const { items } = props;
 
   return (
-    <Section>
-      <div className=" grid grid-cols-3 gap-8">
+    <Section topSpace="m" bottomSpace="m">
+      <div className=" grid grid-cols-1  md:grid-cols-3 gap-8 not-prose ">
         {items?.map((i) => {
           return (
             <Link key={i._id} internal={i.slug || "/"}>
               <a className="w-full">
                 {i.featuredImage && (
-                  <div className="w-full h-60 relative">
+                  <div className="w-full rounded-[0.1rem] overflow-hidden  aspect-w-3 aspect-h-2 relative">
                     <SanityImage image={i.featuredImage} objectFit="cover" />
                   </div>
                 )}
-                <Typo variant="h3">{i.title}</Typo>
+                <Typo className=" mt-3 text-xl font-bold " variant="h2">
+                  {i.title}
+                </Typo>
                 <Typo>{i.description}</Typo>
               </a>
             </Link>

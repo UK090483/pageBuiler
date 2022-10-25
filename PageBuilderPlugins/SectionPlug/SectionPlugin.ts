@@ -44,6 +44,7 @@ function Conf(): Config {
             localize: true,
             group: "content",
           },
+
           {
             title: "Background Color",
             name: "backgroundColor",
@@ -73,6 +74,19 @@ function Conf(): Config {
             group: "style",
             options: {
               list: [...sizesList()],
+            },
+          },
+          {
+            title: "Text Direction",
+            name: "textDirection",
+            type: "string",
+            group: "style",
+            options: {
+              list: [
+                { title: "Left (default)", value: "left" },
+                { title: "Center", value: "center" },
+                { title: "Right", value: "right" },
+              ],
             },
           },
         ],

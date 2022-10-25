@@ -17,6 +17,7 @@ _type == "section" => {
 
 export interface SectionResult {
   title?: string;
+  textDirection?: "left" | "center" | "right";
   backgroundColor?: "white" | "grey" | "black" | "primary" | "secondary";
   topSpace?: "s" | "m" | "l" | "xl" | "xxl";
   bottomSpace?: "s" | "m" | "l" | "xl" | "xxl" | "none";

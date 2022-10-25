@@ -54,6 +54,11 @@ export default createConfig(
     EditorPlugin({
       components: ["section", "listing", "hero", "imageGalleryPlug"],
     }),
+
+    RichText({
+      name: "heroRichtext",
+    }),
+
     ImagePlug(),
   ],
   {

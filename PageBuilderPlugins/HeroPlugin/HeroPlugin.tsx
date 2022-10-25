@@ -28,6 +28,11 @@ function getHero(config: Config) {
         type: "image",
       },
       {
+        title: "Content",
+        name: "content",
+        type: "heroRichtext",
+      },
+      {
         title: "Text",
         name: "text",
         type: "array",

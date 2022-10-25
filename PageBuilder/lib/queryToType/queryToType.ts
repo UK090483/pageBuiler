@@ -13,8 +13,6 @@ export async function queryToType(
   const value = await evaluate(tree, { dataset });
   const result = await value.get();
 
-  console.log(result);
-
   return result;
 }
 

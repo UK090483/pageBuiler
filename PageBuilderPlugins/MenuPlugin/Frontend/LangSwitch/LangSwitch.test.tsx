@@ -58,6 +58,5 @@ describe("<LangSwitch/>", () => {
       LangSwitcherResult: { ...getLang("test1"), ...getLang("test2") },
     });
     expect(screen.getAllByRole("link")[0]).toHaveClass("border-2");
-    screen.debug();
   });
 });

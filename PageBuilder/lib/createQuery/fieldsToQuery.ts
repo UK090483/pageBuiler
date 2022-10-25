@@ -63,7 +63,7 @@ export function fieldToQuery(
 
   const richtext = config.richText?.find((i) => i.name === field.type);
   if (richtext) {
-    return richtextToQuery(config, richtext, field);
+    return richtextToQuery(config, richtext, field, locale);
   }
   return res;
 }
@@ -136,21 +136,32 @@ function arrayToQuery(
 function richtextToQuery(
   config: Config,
   richtext: RichText,
-  field: Field
+  field: Field,
+  locale?: string
 ): queryResult {
-  const plugs = defaultEmptyArray(config.plugs).filter((i) =>
-    richtext.plugs.includes(i.name)
-  );
+  const marks = resolveObjects(config).filter((i) => {
+    return richtext.marks?.annotations?.find(
+      (annotation) => annotation.type === i.name
+    );
+  });
+
   const components = defaultEmptyArray(config.components).filter((i) =>
     richtext.plugs.includes(i.name)
   );
 
-  const plugQuery = [...plugs].reduce((acc, item) => {
+  const mQuery = [...marks].reduce((acc, item) => {
     return `${acc} _type == '${item.name}' => {..., _type, ${fieldsToQuery(
       config,
       item.fields
     )}}`;
   }, "") as string;
+
+  const plugQuery = [...components].reduce((acc, item) => {
+    return `${acc} _type == '${item.name}' => {..., _type, ${fieldsToQuery(
+      config,
+      item.fields
+    )}}`;
+  }, `markDefs[]{...,${mQuery}},`) as string;
 
   return {
     needsQuery: false,

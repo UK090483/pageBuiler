@@ -1,4 +1,3 @@
-import sectionBlockQuery from "./SectionBlockQuery";
 import {
   customRender,
   screen,
@@ -7,6 +6,7 @@ import {
   mockClient,
 } from "../../../PageBuilder/__test__/test-utils";
 import SectionBlock from "./SectionBlock";
+import sectionBlockQuery from "./SectionBlockQuery";
 
 const database: any[] = [];
 
@@ -15,7 +15,7 @@ describe("SectionBlock", () => {
     const client = mockClient({ database });
     await client.fetch(`*[_type == "page"]{
       'content':content[]{
-        ${sectionBlockQuery("en")}
+        ${sectionBlockQuery("en ")}
       }
     }`);
   });

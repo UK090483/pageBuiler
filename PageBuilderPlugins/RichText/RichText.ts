@@ -10,11 +10,11 @@ type RichTextPluginProps = {
 };
 
 function Conf(props: RichTextPluginProps): Config {
-  const { styles = [] } = props;
+  const { styles = [], name } = props;
   return {
     richText: [
       {
-        name: "defaultRichtext",
+        name,
         title: "RT",
         lists: props.lists || [
           { title: "Bullet", value: "bullet" },

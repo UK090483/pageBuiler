@@ -3,7 +3,7 @@ import Link from "@components/Link";
 import {
   linkQuery,
   LinkResult,
-} from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation/query";
+} from "../../../PageBuilderPlugins/MenuPlugin/Frontend/Navigation/query";
 import Button from "@components/Button/Button";
 
 type LinkMarkPros = {
