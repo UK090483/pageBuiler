@@ -42,7 +42,7 @@ export const Section: React.FC<SectionProps> = (props) => {
           style={style}
           className={clsx(
             "mx-auto px-sides",
-            "prose prose-base md:prose-lg lg:prose-xl ",
+            "prose prose-base md:prose-lg lg:prose-xl  prose-teal ",
             className
           )}
         >

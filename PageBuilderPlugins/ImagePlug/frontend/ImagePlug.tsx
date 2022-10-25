@@ -2,7 +2,6 @@ import clsx from "clsx";
 import SanityImage from "@lib/SanityImage";
 import { PortableTextComponent } from "@portabletext/react";
 import type { ImageMetaResult } from "@lib/SanityImage/query";
-import { PlugProps } from "@lib/SanityPageBuilder/lib/RichText";
 
 import React from "react";
 
@@ -32,8 +31,6 @@ const ImagePlug: PortableTextComponent<ImagePlugProps> = (props) => {
   } = props.value;
 
   const hasRatio = ratio && ratio !== "auto";
-
-  console.log(props);
 
   if (!image || !image.id) return null;
 

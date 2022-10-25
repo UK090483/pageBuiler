@@ -12,9 +12,7 @@ export const Layout: React.FC = (props) => {
       <Header>
         <Nav />
       </Header>
-      <main id="main-content" className="min-h-screen  select-none">
-        {children}
-      </main>
+      <main id="main-content">{children}</main>
       {/* <Footer /> */}
     </>
   );

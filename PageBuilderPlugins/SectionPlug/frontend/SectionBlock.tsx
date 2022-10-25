@@ -8,6 +8,10 @@ import type { SectionResult } from "./SectionBlockQuery";
 
 interface SectionBlockProps extends SectionResult {}
 
+const isDefault = (item: any) => {
+  return item === undefined || item === null;
+};
+
 const SectionBlock: React.FC<SectionBlockProps> = (props) => {
   const {
     content,
@@ -17,6 +21,7 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
     image,
     type,
     imagePosition = "l",
+    backgroundColor,
   } = props;
 
   const hasImage = image && image.url;
@@ -25,16 +30,17 @@ const SectionBlock: React.FC<SectionBlockProps> = (props) => {
   return (
     <>
       <Section
+        bg={backgroundColor}
         data-testid="sectionBlock"
         width={type || autoType}
         {...(title && { id: title })}
         className={clsx({
-          "pt-5 md:pt-10": topSpace === "s",
+          "pt-5 md:pt-10": topSpace === "s" || isDefault(topSpace),
           "pt-9 md:pt-20": topSpace === "m",
           "pt-12 md:pt-32": topSpace === "l",
           "pt-16 md:pt-44": topSpace === "xl",
           "pt-24 md:pt-60": topSpace === "xxl",
-          "pb-5 md:pb-10": bottomSpace === "s",
+          "pb-5 md:pb-10": bottomSpace === "s" || isDefault(bottomSpace),
           "pb-9 md:pb-20": bottomSpace === "m",
           "pb-16 md:pb-32": bottomSpace === "l",
           "pb-12 md:pb-44": bottomSpace === "xl",

@@ -16,7 +16,7 @@ function createComponents(config: Config): SanityObjectDefinition[] {
 function createComponent(props: PageBuilderObject): SanityObjectDefinition {
   const { name, title, fields } = props;
 
-  return { type: "object", name, title, fields } as SanityObjectDefinition;
+  return { type: "object", ...props } as SanityObjectDefinition;
 }
 
 export default createComponents;

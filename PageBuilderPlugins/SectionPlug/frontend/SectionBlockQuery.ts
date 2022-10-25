@@ -17,8 +17,9 @@ _type == "section" => {
 
 export interface SectionResult {
   title?: string;
+  backgroundColor?: "white" | "grey" | "black" | "primary" | "secondary";
   topSpace?: "s" | "m" | "l" | "xl" | "xxl";
-  bottomSpace?: "s" | "m" | "l" | "xl" | "xxl";
+  bottomSpace?: "s" | "m" | "l" | "xl" | "xxl" | "none";
   content?: null | any;
   bgImage?: ImageMetaResult;
   imagePosition?: "l" | "r";
