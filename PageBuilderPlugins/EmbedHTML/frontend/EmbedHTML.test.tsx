@@ -3,12 +3,11 @@ import { render, screen } from "@testing-library/react";
 
 const customRender = ({ html }: { html?: string }) => {
   render(
+    //@ts-ignore
     <EmbedHTML
-      _key="testKey"
-      markKey="f"
-      node={{
-        _type: "EventPlug",
-        _key: "test",
+      index={0}
+      isInline
+      value={{
         ...(html ? { html } : {}),
       }}
     />

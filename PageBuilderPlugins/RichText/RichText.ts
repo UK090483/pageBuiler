@@ -10,6 +10,7 @@ type RichTextPluginProps = {
 };
 
 function Conf(props: RichTextPluginProps): Config {
+  const { styles = [] } = props;
   return {
     richText: [
       {
@@ -24,10 +25,7 @@ function Conf(props: RichTextPluginProps): Config {
           decorators: [...(props.decorators ? props.decorators : [])],
         },
         plugs: [...(props.plugs ? props.plugs : [])],
-        styles: [
-          { title: "Normal", value: "normal" },
-          { title: "Header", value: "header" },
-        ],
+        styles,
       },
     ],
   };

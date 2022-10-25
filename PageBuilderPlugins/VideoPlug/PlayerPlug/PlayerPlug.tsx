@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { PortableTextComponent } from "@portabletext/react";
 import { PlugProps } from "PageBuilderPlugins/RichText/types";
 import React from "react";
 import ReactPlayer from "react-player/lazy";
@@ -6,8 +7,8 @@ import { PlayerPlugResult } from "./playerPlugQuery";
 import { useVideoContext, VideoContextWrap } from "./VideoContext";
 import Typo from "@components/Typography/Typography";
 
-const PlayerPlug: React.FC<PlugProps<PlayerPlugResult>> = (props) => {
-  const { url, urls } = props.node;
+const PlayerPlug: PortableTextComponent<PlayerPlugResult> = (props) => {
+  const { url, urls } = props.value;
 
   const hasMultiple = urls && urls.length > 1;
 

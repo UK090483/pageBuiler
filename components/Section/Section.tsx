@@ -21,7 +21,6 @@ export const Section: React.FC<SectionProps> = (props) => {
     className,
     id,
     bg = "white",
-    noPadding = false,
     as: Component = "section",
     asInner: InnerComponent = "div",
     style,
@@ -41,12 +40,11 @@ export const Section: React.FC<SectionProps> = (props) => {
       >
         <InnerComponent
           style={style}
-          className={clsx("mx-auto", "container", className, {
-            "md:max-w-screen-md ": width === "s",
-            "lg:max-w-screen-lg ": width === "m",
-            "xl:max-w-screen-xl ": width === "l",
-            "px-3": width !== "full" && !noPadding,
-          })}
+          className={clsx(
+            "mx-auto px-sides",
+            "prose prose-base md:prose-lg lg:prose-xl ",
+            className
+          )}
         >
           {children}
         </InnerComponent>

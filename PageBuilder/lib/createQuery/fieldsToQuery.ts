@@ -138,11 +138,14 @@ function richtextToQuery(
   richtext: RichText,
   field: Field
 ): queryResult {
-  const plugs = defaultEmptyArray(config.components).filter((i) =>
+  const plugs = defaultEmptyArray(config.plugs).filter((i) =>
+    richtext.plugs.includes(i.name)
+  );
+  const components = defaultEmptyArray(config.components).filter((i) =>
     richtext.plugs.includes(i.name)
   );
 
-  const plugQuery = plugs.reduce((acc, item) => {
+  const plugQuery = [...plugs].reduce((acc, item) => {
     return `${acc} _type == '${item.name}' => {..., _type, ${fieldsToQuery(
       config,
       item.fields

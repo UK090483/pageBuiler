@@ -13,29 +13,10 @@ module.exports = {
     debugScreens: {
       ignore: ["menu"],
     },
-    fontFamily: {
-      sans: ["Inter", "Helvetica", "sans-serif"],
-      header: ["Inter"],
-    },
-    fontSize: {
-      sm: ["12px", "1.4em"],
-      base: ["18px", "1.5em"],
-      "base-mobile": ["16px", "1.5625em"],
-      lg: ["20px", "1.4em"],
-      xl: ["20px", "1.4em"],
-      "2xl": ["22px", "1.1em"],
-      "2xl-mobile": ["16px", "1.1em"],
-      "3xl": ["30px", "1.1em"],
-      "3xl-mobile": ["22px", "1.1em"],
-      "4xl": ["55px", "1.1em"],
-      "4xl-mobile": ["35px", "1.1em"],
-      "5xl": ["65px", "1.1em"],
-      "5xl-mobile": ["55px", "1.1em"],
-    },
 
     extend: {
-      screens: {
-        menu: "1166px",
+      spacing: {
+        sides: "0.5rem",
       },
       height: {
         hero: "calc(100vh - 60px)",

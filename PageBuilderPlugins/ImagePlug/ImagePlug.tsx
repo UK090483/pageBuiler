@@ -9,7 +9,7 @@ const Image: React.FC<{ value: { image?: string } }> = (props) => {
 
 function ImagePlug(): Config {
   return {
-    objects: [
+    plugs: [
       {
         title: "Image",
         name: "imagePlug",
@@ -72,10 +72,10 @@ function ImagePlug(): Config {
 
         preview: {
           select: {
-            image: "image.asset.url",
+            image: "image",
           },
-          //@ts-ignore
-          component: Image,
+          // //@ts-ignore
+          // component: Image,
         },
       },
     ],

@@ -6,7 +6,7 @@ function EmbedHTML(): Config {
       {
         title: "Embed",
         name: "embed",
-        fields: [{ name: "url", type: "url", title: "Url" }],
+        fields: [{ name: "html", type: "text", title: "HTML" }],
       },
     ],
   };

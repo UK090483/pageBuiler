@@ -15,7 +15,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
       <div className=" grid grid-cols-3 gap-8">
         {items?.map((i) => {
           return (
-            <Link key={i._id} href={i.slug || "/"}>
+            <Link key={i._id} internal={i.slug || "/"}>
               <a className="w-full">
                 {i.featuredImage && (
                   <div className="w-full h-60 relative">
