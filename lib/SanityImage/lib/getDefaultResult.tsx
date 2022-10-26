@@ -1,4 +1,4 @@
-import { ImageLoader, ImageProps } from "next/image";
+import { ImageLoader, ImageProps } from "next/legacy/image";
 import type { ImageMetaResult } from "../query";
 
 const loader: ImageLoader = (props) => {

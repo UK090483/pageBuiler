@@ -6,6 +6,9 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  experimental: {
+    appDir: true,
+  },
   i18n: {
     locales: Object.keys(appConfig.locales),
     defaultLocale: Object.entries(appConfig.locales).reduce(

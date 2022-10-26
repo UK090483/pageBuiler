@@ -14,6 +14,7 @@ interface SectionProps {
   topSpace?: "s" | "m" | "l" | "xl" | "xxl" | "none";
   bottomSpace?: "s" | "m" | "l" | "xl" | "xxl" | "none";
   "data-testid"?: string;
+  noProse?: boolean;
 }
 
 const isDefault = (item: any) => {
@@ -32,6 +33,7 @@ export const Section: React.FC<SectionProps> = (props) => {
     as: Component = "section",
     asInner: InnerComponent = "div",
     style,
+    noProse,
   } = props;
 
   return (
@@ -60,8 +62,10 @@ export const Section: React.FC<SectionProps> = (props) => {
           style={style}
           className={clsx(
             "mx-auto px-sides",
-            "prose prose-base md:prose-lg lg:prose-xl ",
-            { "container max-w-7xl": width === "l" },
+            {
+              "container max-w-7xl": width === "l",
+              "prose prose-base md:prose-lg lg:prose-xl ": !noProse,
+            },
             className
           )}
         >

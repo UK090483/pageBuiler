@@ -41,7 +41,13 @@ export const Link: React.FC<LinkProps> = (props) => {
   }
 
   return (
-    <NextLink href={internal} passHref locale={locale} scroll={scroll}>
+    <NextLink
+      legacyBehavior
+      href={internal}
+      passHref
+      locale={locale}
+      scroll={scroll}
+    >
       <a {...rest} onClick={onClick} role={role} className={className}>
         {children}
       </a>

@@ -1,4 +1,4 @@
-import { ImageProps } from "next/image";
+import { ImageProps } from "next/legacy/image";
 import type { ImageMetaResult } from "../query";
 import { UseSanityImageOptions } from "../types";
 import getDefaultResult from "./getDefaultResult";

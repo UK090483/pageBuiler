@@ -47,3 +47,5 @@ studio/backups
 
 # Sentry
 .sentryclirc
+
+.vscode

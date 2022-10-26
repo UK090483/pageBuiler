@@ -102,6 +102,7 @@ function arrayToQuery(
       if (i.fields) {
         if (i.type === "image") {
           return `
+          _type,_key,
           'image':{${config.options?.image.query}},
           ${fieldsToQuery(config, i.fields)}
           `;

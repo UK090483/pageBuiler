@@ -1,4 +1,5 @@
 import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
+import query from "./query";
 
 type ListingItem = {
   title: string;
@@ -31,17 +32,19 @@ export function createListingComponent(
     title: "Listing",
     name,
     type: "object",
-    query: ({ locale }) => `
-    contentType,
-    'items':select(
-     ${items
-       .map((i) => `contentType == "${i.name}" => [...${i.name}Items[]->] `)
-       .join(",")}
-    )[]{_id, 'slug': ${config.options?.slug.query({ locale })},
-    'title': coalesce(title_${locale},title),
-    'description': coalesce(description_${locale},description),
-    'featuredImage':featuredImage{${config.options?.image.query}}},
-    `,
+    query: ({ locale }) => {
+      const res = query({
+        locale,
+        items,
+        slugQuery: config.options ? config.options.slug.query({ locale }) : "",
+        imageQuery:
+          config.options && typeof config.options.image.query === "string"
+            ? config.options.image.query
+            : "",
+      });
+      return res;
+    },
+
     fields: [
       { name: "name", type: "string", title: "Name" },
       {

@@ -1,4 +1,4 @@
-import { ImageLoader, ImageProps } from "next/image";
+import { ImageLoader, ImageProps } from "next/legacy/image";
 import { UseSanityImage } from "./types";
 import handleCrop from "./lib/handleCrop";
 import getDefaultResult from "./lib/getDefaultResult";

@@ -16,20 +16,17 @@ import GalleryPlug from "./PageBuilderPlugins/GalleryPlug/GalleryPlug";
 import { SeoQueryResult } from "PageBuilderPlugins/SeoPlugin/query";
 import VideoPlug from "./PageBuilderPlugins/VideoPlug/VideoPlug";
 import EmbedHTML from "./PageBuilderPlugins/EmbedHTML/EmbedHTML";
+import ContentType from "./PageBuilderPlugins/ContentType/ContentType";
 
 export default createConfig(
   [
-    {
-      contentTypes: [
-        {
-          name: "page",
-          title: "Page",
-          editor: "body",
-          hasPage: true,
-          isRoot: true,
-        },
-      ],
-    },
+    ContentType({
+      name: "page",
+      title: "Page",
+      editor: "body",
+      hasPage: true,
+      isRoot: true,
+    }),
     EmbedHTML(),
     GalleryPlug(),
     SectionPlugin(),

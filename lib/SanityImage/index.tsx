@@ -1,5 +1,5 @@
 import React from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import useSanityImage from "@lib/SanityImage/useSanityImage";
 
 import { SanityImageComponent } from "./types";
@@ -24,12 +24,13 @@ const sizesMap = {
 type sizes = keyof typeof sizesMap;
 
 type sizesBuilderProps = Partial<Record<sizes, string>>;
-export const sizesBuilder = (props: sizesBuilderProps) => {
-  return Object.entries(props).reduce((acc, [screen, size]) => {
-    //@ts-ignore
-    return `${acc} (min-width: ${sizesMap[screen]}px) ${size},`;
-  }, "" as string);
-};
-export default SanityImage;
+// export const sizesBuilder = (props: sizesBuilderProps) => {
+//   return Object.entries(props).reduce((acc, [screen, size]) => {
+//     //@ts-ignore
+//     return `${acc} (min-width: ${sizesMap[screen]}px) ${size},`;
+//   }, "" as string);
+// };
 
-const test = sizesBuilder({ lg: "50vw" });
+// const test = sizesBuilder({ lg: "50vw" });
+
+export default SanityImage;

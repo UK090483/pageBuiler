@@ -1,34 +1,44 @@
 import React, { useRef } from "react";
 import { useIsomorphicLayoutEffect } from "react-use";
 
+type Sizes = Record<number, number>;
 type MasonryProps = {
   columns: number;
   margin?: number;
-
   transition?: number;
   children: React.ReactElement[];
+  sizes?: Sizes;
 };
 
 const Masonry: React.FC<MasonryProps> = (props) => {
-  const { children, columns, margin = 0, transition = 1 } = props;
+  const { children, columns, margin = 0, transition = 1, sizes } = props;
 
   const root = useRef<HTMLUListElement>(null);
 
   useIsomorphicLayoutEffect(() => {
+    let _columns = columns;
     const run = () => {
       if (!root.current) return;
+      if (sizes) {
+        const width = window.innerWidth;
+        _columns = Object.entries(sizes).reduce((acc, item) => {
+          if (width > item[1]) return parseInt(item[0]);
+          return acc;
+        }, _columns as number);
+      }
+
       const gridItems = [].slice.call(root.current.children) as HTMLElement[];
       const getHeight = (item: HTMLElement) => {
         return item.getBoundingClientRect().height;
       };
-      const cols = columnHandler(columns);
+      const cols = columnHandler(_columns);
       gridItems.forEach((item) => {
         const { nextIndex, currentHeight } = cols.getNext();
         cols.add(nextIndex, getHeight(item) + margin);
-        const val = (nextIndex * 100) / columns;
-        const delta = margin / columns;
+        const val = (nextIndex * 100) / _columns;
+        const delta = margin / _columns;
         item.style.transition = ` left ${transition}s ,top ${transition}s `;
-        item.style.width = `calc(${100 / columns}% - ${margin + delta}px)`;
+        item.style.width = `calc(${100 / _columns}% - ${margin + delta}px)`;
         item.style.left = `calc(${val}% + ${margin - nextIndex * delta}px)`;
         item.style.top = `${currentHeight + margin}px`;
       });
@@ -41,7 +51,7 @@ const Masonry: React.FC<MasonryProps> = (props) => {
     return () => {
       window.removeEventListener("resize", run);
     };
-  }, [root, columns, children, margin, transition]);
+  }, [root, columns, children, margin, transition, sizes]);
 
   if (!children || !Array.isArray(children)) return null;
 
@@ -49,7 +59,7 @@ const Masonry: React.FC<MasonryProps> = (props) => {
     <ul
       ref={root}
       style={{ transition: "height 1s" }}
-      className="relative w-full"
+      className="relative w-full "
     >
       {[...children].map((child) => {
         return React.cloneElement(
