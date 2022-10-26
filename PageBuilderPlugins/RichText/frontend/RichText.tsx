@@ -9,7 +9,7 @@ import PlayerPlug from "PageBuilderPlugins/VideoPlug/PlayerPlug/PlayerPlug";
 import React from "react";
 
 type RichTextPros = {
-  content?: TypedObject[];
+  content?: any;
 };
 
 const MarkLink: PortableTextMarkComponent = (props) => {

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useIsomorphicLayoutEffect } from "react-use";
 
 type MasonryProps = {
   columns: number;
   margin?: number;
+
   transition?: number;
   children: React.ReactElement[];
 };
@@ -48,7 +49,7 @@ const Masonry: React.FC<MasonryProps> = (props) => {
     <ul
       ref={root}
       style={{ transition: "height 1s" }}
-      className="relative container mx-auto "
+      className="relative w-full"
     >
       {[...children].map((child) => {
         return React.cloneElement(

@@ -11,7 +11,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
   const { items } = props;
 
   return (
-    <Section topSpace="m" bottomSpace="m">
+    <Section width="l" topSpace="m" bottomSpace="m">
       <div className=" grid grid-cols-1  md:grid-cols-3 gap-8 not-prose ">
         {items?.map((i) => {
           return (

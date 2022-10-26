@@ -13,6 +13,7 @@ export interface HeroBlogResult {
   title?: string | null;
   text?: any;
   image: ImageMetaResult;
+  content: any;
 }
 
 export default heroBlockQuery;

@@ -5,6 +5,7 @@ import { LightBox } from "./LightBox";
 import Masonry from "./masonry/Masonry";
 import SanityImage from "@lib/SanityImage";
 import Grid from "./grid/Grid";
+import Section from "@components/Section/Section";
 
 const ImageGalleryComponent: React.FC<ImageGalleryPlugResult> = (props) => {
   const {
@@ -22,9 +23,9 @@ const ImageGalleryComponent: React.FC<ImageGalleryPlugResult> = (props) => {
   if (!items || items.length < 1) return null;
 
   return (
-    <>
+    <Section width="l">
       {variant === "masonry" && (
-        <Masonry margin={30} columns={rows}>
+        <Masonry margin={0} columns={rows}>
           {items.map((item, index) => {
             return (
               <button
@@ -59,7 +60,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryPlugResult> = (props) => {
           />
         </Portal>
       )}
-    </>
+    </Section>
   );
 };
 

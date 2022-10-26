@@ -7,7 +7,9 @@ export default function resolveProductionUrl(doc) {
   console.log({
     env: process.env,
     previewSecret,
-    env2: process.env.SANITY_STUDIO_API_DATASET,
+    prev1: process.env.PREVIEW_SECRET,
+    prev2: process.env.SANITY_STUDIO_PREVIEW_SECRET,
+    p: process.env.SANITY_STUDIO_API_PROJECT_ID,
   });
   if (!["page"].includes(doc?._type)) return false;
   const baseUrl =
