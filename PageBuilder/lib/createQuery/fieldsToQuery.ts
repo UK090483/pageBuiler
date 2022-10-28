@@ -189,7 +189,10 @@ export const schemaItemToQuery = (
       ? item.query({ locale })
       : item.query;
   }
-  return fieldsToQuery(config, item.fields, locale);
+
+  const res = fieldsToQuery(config, item.fields, locale);
+
+  return res;
 };
 
 export const contentTypeQuery = (

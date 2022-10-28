@@ -37,7 +37,7 @@ function SanityImage(props: ISanityImageProps) {
       {...handleWidthAndHeight(props)}
       className={className}
       placeholder="blur"
-      blurDataURL={src.lqip}
+      blurDataURL={_url + "?w=100&q=50"}
       alt={_alt}
       src={_url}
       loader={loader}

@@ -7,7 +7,7 @@ const createRichtext = (config: Config) => {
 };
 
 const resolveRichtextItem = (config: Config, item: RichText) => {
-  const { name, styles = [], marks, plugs, ...rest } = item;
+  const { name, styles = [], marks, plugs, lists, ...rest } = item;
 
   const annotations = marks?.annotations || [];
   const decorators = marks?.decorators || [];
@@ -15,6 +15,7 @@ const resolveRichtextItem = (config: Config, item: RichText) => {
   return {
     name,
     type: "array",
+    ...rest,
     of: [
       {
         type: "block",
@@ -27,7 +28,7 @@ const resolveRichtextItem = (config: Config, item: RichText) => {
           { title: "H4", value: "h4" },
           ...styles,
         ],
-        ...rest,
+        lists,
         marks: {
           annotations: [...annotations],
           decorators: [

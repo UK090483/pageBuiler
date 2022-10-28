@@ -21,7 +21,9 @@ const Masonry: React.FC<MasonryProps> = (props) => {
       if (!root.current) return;
       if (sizes) {
         const width = window.innerWidth;
-        _columns = Object.entries(sizes).reduce((acc, item) => {
+
+        _columns = Object.entries(sizes).reduce((acc, item, index) => {
+          if (index === 0) return parseInt(item[0]);
           if (width > item[1]) return parseInt(item[0]);
           return acc;
         }, _columns as number);

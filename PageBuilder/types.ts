@@ -158,6 +158,7 @@ export type RichTextMarks = Schema.MarksDefinition;
 export type SanityStructureBuilder = typeof S;
 
 export type PageBuilderContentTypeResult = {
+  featuredImage: any;
   title?: string;
   description?: string;
   body?: any[];

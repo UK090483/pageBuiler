@@ -44,7 +44,7 @@ const Typo: React.FC<TypographyProps> = ({
   }
 
   return (
-    <Component className={clsx({}) + ` ${className}`}>{children}</Component>
+    <Component {...(className ? { className } : {})}>{children}</Component>
   );
 };
 

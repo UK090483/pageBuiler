@@ -1,30 +1,6 @@
-import {
-  Config,
-  PageBuilderContentType,
-  SanityDocumentDefinition,
-} from "../../types";
+import { Field } from "PageBuilder/types";
 
-import { defaultEmptyArray } from "../../helper";
-
-const createContentTypes = (config: Config) => {
-  const result = defaultEmptyArray(config.contentTypes).map((i) => {
-    return resolveContentType(config, i);
-  });
-  if (config.hooks?.onCreateContentTypes) {
-    return config.hooks?.onCreateContentTypes({ config, result });
-  }
-  return result;
-};
-
-const getEditor = (config: Config, editor?: string | string[]) => {
-  if (!editor) return [];
-
-  return defaultEmptyArray(config.editor).filter((i) =>
-    Array.isArray(editor) ? editor.includes(i.name) : editor === i.name
-  );
-};
-
-const slug = {
+const getSlugField = () => ({
   name: "slug",
   type: "slug",
   title: "Slug",
@@ -42,16 +18,23 @@ const slug = {
   ],
   group: "base",
   localize: true,
+});
+
+type createContentTypeProps = {
+  fields: Field[];
+  name: string;
+  title: string;
 };
 
-export function resolveContentType(
-  config: Config,
-  props: PageBuilderContentType
-): SanityDocumentDefinition {
-  const { name, title, fields = [], editor, ...rest } = props;
+export type BaseContentTypeResult = {
+  title?: string;
+  description?: string;
+  featuredImage?: any;
+};
 
+export function createContentType(props: createContentTypeProps) {
+  const { name, title, fields = [] } = props;
   return {
-    ...rest,
     type: "document",
     name: name,
     title: title,
@@ -91,16 +74,13 @@ export function resolveContentType(
         type: "image",
         group: "base",
       },
-      ..._if(props.hasPage !== false, slug),
-
-      ...getEditor(config, editor),
 
       ...fields,
     ],
   };
 }
 
-export default createContentTypes;
+export default createContentType;
 
 const _if = (condition: boolean | undefined, T: any) => {
   return condition ? [T] : [];

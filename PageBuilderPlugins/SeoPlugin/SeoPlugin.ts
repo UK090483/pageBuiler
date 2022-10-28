@@ -12,7 +12,8 @@ function Conf(): Config {
       },
       onCreateContentTypes: ({ config, result }) => {
         return result.map((i) => {
-          if (true) {
+          //@ts-ignore
+          if (i.hasPage) {
             //@ts-ignore
             i.fields = [
               ...i.fields,

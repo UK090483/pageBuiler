@@ -23,7 +23,7 @@ const ImageGalleryComponent: React.FC<ImageGalleryPlugResult> = (props) => {
   if (!items || items.length < 1) return null;
 
   return (
-    <Section width="l" noProse>
+    <Section noProse>
       {variant === "masonry" && (
         <Masonry margin={0} columns={rows} sizes={{ 2: 600, 3: 1000, 4: 1200 }}>
           {items.map((item, index) => {

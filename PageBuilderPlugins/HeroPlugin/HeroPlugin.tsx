@@ -2,16 +2,12 @@ import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
 
 function Conf(): Config {
   return {
-    hooks: {
-      onCreateComponents: ({ config, result }) => {
-        return [...result, getHero(config)];
-      },
-    },
+    components: [getHero()],
   };
 }
 export default Conf;
 
-function getHero(config: Config) {
+function getHero() {
   return {
     name: "hero",
     title: "Hero",
@@ -32,28 +28,16 @@ function getHero(config: Config) {
         name: "content",
         type: "heroRichtext",
       },
-      {
-        title: "Text",
-        name: "text",
-        type: "array",
-        of: [
-          {
-            type: "block",
-            title: "Block",
-            styles: [{ title: "Normal", value: "normal" }],
-            lists: [],
-            marks: {},
-          },
-        ],
-      },
     ],
     preview: {
       select: {
         title: "title",
+        image: "image",
       },
-      prepare({ title }) {
+      prepare({ title, image }) {
         return {
           title: title,
+          media: image,
         };
       },
     },

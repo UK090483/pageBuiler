@@ -4,7 +4,7 @@ import { SectionContextProvider } from "./SectionContext";
 
 interface SectionProps {
   width?: "full" | "m" | "l" | "s" | "responsive";
-  bg?: "white" | "grey" | "black" | "primary" | "secondary";
+  bg?: "white" | "grey" | "black" | "primary" | "secondary" | "dark-grey";
   className?: string;
   id?: string;
   noPadding?: boolean;
@@ -26,10 +26,10 @@ export const Section: React.FC<SectionProps> = (props) => {
     topSpace,
     bottomSpace,
     children,
-    width = "m",
+    width = "responsive",
     className,
     id,
-    bg = "white",
+    bg,
     as: Component = "section",
     asInner: InnerComponent = "div",
     style,
@@ -41,11 +41,12 @@ export const Section: React.FC<SectionProps> = (props) => {
       <Component
         data-testid={props["data-testid"] || "section"}
         id={id}
-        className={clsx(`w-full `, {
+        className={clsx({
           "bg-white": bg === "white",
           "bg-primary": bg === "primary",
           "bg-secondary": bg === "secondary",
-          "bg-gray-300": bg === "grey",
+          "bg-grey-light": bg === "grey",
+          "bg-grey-dark": bg === "dark-grey",
           "pt-5 md:pt-10": topSpace === "s" || isDefault(topSpace),
           "pt-9 md:pt-20": topSpace === "m",
           "pt-12 md:pt-32": topSpace === "l",
@@ -64,7 +65,10 @@ export const Section: React.FC<SectionProps> = (props) => {
             "mx-auto px-sides",
             {
               "container max-w-7xl": width === "l",
+              container: width === "responsive",
               "prose prose-base md:prose-lg lg:prose-xl ": !noProse,
+              " prose-invert  text-white": !noProse && bg === "dark-grey",
+              "  text-white": !!noProse && bg === "dark-grey",
             },
             className
           )}

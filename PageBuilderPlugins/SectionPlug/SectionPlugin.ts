@@ -46,37 +46,6 @@ function Conf(): Config {
           },
 
           {
-            title: "Background Color",
-            name: "backgroundColor",
-            type: "string",
-            group: "style",
-            options: {
-              list: [
-                { title: "Primary", value: "primary" },
-                { title: "Secondary", value: "secondary" },
-                { title: "Grey", value: "grey" },
-              ],
-            },
-          },
-          {
-            title: "Top Space",
-            name: "topSpace",
-            type: "string",
-            group: "style",
-            options: {
-              list: [...sizesList()],
-            },
-          },
-          {
-            title: "Bottom Space",
-            name: "bottomSpace",
-            type: "string",
-            group: "style",
-            options: {
-              list: [...sizesList()],
-            },
-          },
-          {
             title: "Text Direction",
             name: "textDirection",
             type: "string",

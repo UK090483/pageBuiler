@@ -9,17 +9,28 @@ import { HeaderNavigation } from "PageBuilderPlugins/MenuPlugin/Frontend/Navigat
 import NavigationMobile from "PageBuilderPlugins/MenuPlugin/Frontend/Navigation/NavigationMobile";
 import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
 import React from "react";
+import clsx from "clsx";
 
 const Nav: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const { data } = usePageBuilderContext();
   const navItems = data?.menu.mainNav;
   const langSwitchData = data?.menu.langSwitcher;
-  const scrolled = useScrollThreshold(800);
+  const scrolled = useScrollThreshold(300);
 
   return (
     <>
-      <nav className=" flex justify-between w-full">
+      <nav
+        className={clsx(
+          "flex justify-between w-full text-white transition-colors ",
+          {
+            "bg-transparent ": !scrolled,
+          },
+          {
+            "bg-white text-black": scrolled,
+          }
+        )}
+      >
         <Link aria-label="Home" internal="/">
           <Logo />
         </Link>
@@ -44,7 +55,7 @@ const Nav: React.FC = () => {
           aria-expanded={open}
           className="menu:hidden mr-2"
         >
-          <Svg className="w-[30px] h-[30px]" icon="hamburger" />
+          <Svg className="w-[30px] h-[30px] fill-current" icon="hamburger" />
         </button>
 
         {/* {mainLogo && (

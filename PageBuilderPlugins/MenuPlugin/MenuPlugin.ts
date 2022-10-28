@@ -2,6 +2,7 @@ import { Config } from "../../PageBuilder/types";
 import { RiFileListFill } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
 import { GrMultiple } from "react-icons/gr";
+import navigationQuery from "./query";
 
 type MenuPluginProps = {
   dropdown?: boolean;
@@ -19,49 +20,18 @@ function Conf(props?: MenuPluginProps): Config {
   return {
     hooks: {
       onContentTypeQuery: ({ config, result, locale }) => {
-        const link = `
-        href,
-        ...(internal->{ 'internal':${config.options?.slug.query({
-          locale,
-        })} })`;
-
-        const langSwitcher = config.options?.locale
-          ? `
-        
-        'langSwitcher' : {
-          ${Object.entries(config.options?.locale)
-            .map(([key, lang]) => {
-              return `'${key}': { 'title':'${
-                lang.title
-              }', 'link':${config.options?.slug.query({
-                locale: key,
-              })} }`;
-            })
-            .join(",")}
-        },
-        `
-          : ``;
-
-        const label = locale
-          ? `'label':coalesce(label_${locale},label)`
-          : "label";
-
         return (
           result +
-          `'menu':{
-            ...(*[ _type == 'menuConfig'][0]{
-                 'mainNav':mainNav[]{
-                     ${label},
-                    'link':link{${link}},
-                    'items':items[]{
-                      ${label},
-                      'link':link{${link}},
-                    }
-                  
-                 },
-            }),
-           ${langSwitcher}
-        },`
+          navigationQuery({
+            slugQuery:
+              config.options?.slug.query ||
+              function () {
+                return "  ";
+              },
+
+            locale,
+            locales: config.options?.locale,
+          })
         );
       },
     },

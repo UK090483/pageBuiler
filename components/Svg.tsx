@@ -1,7 +1,7 @@
 import React from "react";
 
 const paths = {
-  hamburger: <path stroke="black" d="M2 6h20M2 12h20M2 18h20" />,
+  hamburger: <path d="M2 6h20M2 12h20M2 18h20" />,
   faceBook: (
     <path
       strokeLinecap="round"
@@ -91,7 +91,7 @@ const Svg: React.FC<SvgProps> = ({ icon, className, ...rest }) => {
       {...rest}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className={`inline-block w-12 h-12 stroke-current fill-none  ${className}`}
+      className={`inline-block w-12 h-12 stroke-current   ${className}`}
       fill="none"
     >
       {paths[icon]}

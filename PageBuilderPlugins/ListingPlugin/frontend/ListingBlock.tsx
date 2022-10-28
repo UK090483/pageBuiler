@@ -5,14 +5,15 @@ import SanityImage from "@components/SanityImage";
 import Typo from "@components/Typography/Typography";
 import Section from "@components/Section/Section";
 import Link from "@components/Link";
+import { ComponentStyle } from "../../../PageBuilderPlugins/ComponentStylePlugin/type";
 
 export interface ListingBlockProps extends ListingPluginResult {}
-const ListingBlock: React.FC<ListingBlockProps> = (props) => {
-  const { items } = props;
+const ListingBlock: React.FC<ListingBlockProps & ComponentStyle> = (props) => {
+  const { items, backgroundColor, ...rest } = props;
 
   return (
-    <Section width="l" topSpace="m" bottomSpace="m">
-      <div className=" grid grid-cols-1  md:grid-cols-3 gap-8 not-prose ">
+    <Section bg={backgroundColor} {...rest} noProse>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 typo-sm-size lg:typo-lg-size">
         {items?.map((i) => {
           return (
             <Link className="w-full" key={i._id} internal={i.slug || "/"}>
@@ -26,9 +27,7 @@ const ListingBlock: React.FC<ListingBlockProps> = (props) => {
                   />
                 </div>
               )}
-              <Typo className=" mt-3 text-xl font-bold " variant="h2">
-                {i.title}
-              </Typo>
+              <Typo variant="h2">{i.title}</Typo>
               <Typo>{i.description}</Typo>
             </Link>
           );

@@ -18,7 +18,7 @@ interface Props {
 export const HeaderNavigation = (props: Props) => {
   const { items, NavigationLink, className, NavigationItemBase } = props;
   const hasItems = !!items && items.length > 0;
-  if (!hasItems) return <div>Missing NavItems</div>;
+  if (!hasItems) return null;
 
   return (
     <NavigationContextProvider

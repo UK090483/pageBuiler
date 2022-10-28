@@ -17,7 +17,8 @@ import { SeoQueryResult } from "PageBuilderPlugins/SeoPlugin/query";
 import VideoPlug from "./PageBuilderPlugins/VideoPlug/VideoPlug";
 import EmbedHTML from "./PageBuilderPlugins/EmbedHTML/EmbedHTML";
 import ContentType from "./PageBuilderPlugins/ContentType/ContentType";
-
+import ComponentStyle from "./PageBuilderPlugins/ComponentStylePlugin/ComponentStyle";
+import componentStyleQuery from "./PageBuilderPlugins/ComponentStylePlugin/query";
 export default createConfig(
   [
     ContentType({
@@ -27,6 +28,12 @@ export default createConfig(
       hasPage: true,
       isRoot: true,
     }),
+    ContentType({
+      name: "person",
+      title: "Person/Institution",
+      hasPage: false,
+    }),
+
     EmbedHTML(),
     GalleryPlug(),
     SectionPlugin(),
@@ -34,9 +41,21 @@ export default createConfig(
     EventPlugin(),
     VideoPlug(),
     ListingPlugin({
+      onCreateQuery: ({ query }) => {
+        const e = query + componentStyleQuery;
+        console.log(e);
+        return e;
+      },
       items: [
         { name: "page", title: "Page" },
-        { name: "post", title: "Post" },
+        {
+          name: "post",
+          title: "Post",
+          variants: [
+            { value: "grid", title: "Grid" },
+            { value: "list", title: "List" },
+          ],
+        },
         { name: "event", title: "Event" },
       ],
     }),
@@ -57,6 +76,7 @@ export default createConfig(
     }),
 
     ImagePlug(),
+    ComponentStyle(),
   ],
   {
     locale: {

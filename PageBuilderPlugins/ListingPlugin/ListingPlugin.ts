@@ -1,21 +1,31 @@
 import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
 import query from "./query";
 
-type ListingItem = {
+export type ListingItem = {
   title: string;
   name: string;
+  variants?: { title: string; value: string }[];
 };
 
 type ListingPlugProps = {
   name?: string;
   items: ListingItem[];
+  onCreateQuery?: (props: { query: string }) => string;
 };
 function Conf(props: ListingPlugProps): Config {
   const name = props.name || "listing";
   return {
     hooks: {
       onCreateComponents: ({ config, result }) => {
-        return [...result, createListingComponent(config, name, props.items)];
+        return [
+          ...result,
+          createListingComponent(
+            config,
+            name,
+            props.items,
+            props.onCreateQuery
+          ),
+        ];
       },
     },
   };
@@ -26,7 +36,8 @@ export default Conf;
 export function createListingComponent(
   config: Config,
   name: string,
-  items: ListingItem[]
+  items: ListingItem[],
+  onCreateQuery?: (props: { query: string }) => string
 ): SanityObjectDefinition {
   return {
     title: "Listing",
@@ -42,7 +53,7 @@ export function createListingComponent(
             ? config.options.image.query
             : "",
       });
-      return res;
+      return onCreateQuery ? onCreateQuery({ query: res }) : res;
     },
 
     fields: [
@@ -61,7 +72,23 @@ export function createListingComponent(
           layout: "radio",
         },
       },
-
+      // Build variants List
+      ...items
+        .filter((i) => !!i.variants)
+        .map((i) => ({
+          title: `Variants`,
+          name: `${i.name}Variants`,
+          type: "string",
+          options: {
+            list: [
+              ...[...(i.variants ? i.variants : [])].map((i) => ({
+                title: i.title,
+                value: i.value,
+              })),
+            ],
+          },
+          hidden: (props: any) => props?.parent?.contentType !== i.name,
+        })),
       // Build Reference List
       ...items.map((i) => ({
         title: `${i.title} Items`,

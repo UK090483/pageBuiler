@@ -1,4 +1,8 @@
-import { ListingItem } from "./ListingPlugin";
+export type ListingItem = {
+  title: string;
+  name: string;
+  variants?: { title: string; value: string }[];
+};
 
 type queryProps = {
   locale?: string;
@@ -25,7 +29,6 @@ ${items
     'description': coalesce(description_${locale},description),
     'featuredImage':featuredImage{${imageQuery}}
 },
-
 `;
 
 export default query;
