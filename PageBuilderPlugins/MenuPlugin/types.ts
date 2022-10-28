@@ -1,4 +1,4 @@
-type MenuItem<L extends unknown = unknown> = {
+type MenuItem<L extends unknown = {}> = {
   label: string;
   items?: MenuItem<L>;
   link?: L;
@@ -8,12 +8,7 @@ export type LangSwitcherResult = {
   [key: string]: { title: string; link: string };
 };
 
-export type MenuPluginResult<
-  L extends unknown = { internal?: string; href?: string }
-> = {
-  menu: {
-    mainNav: MenuItem<L>[];
-    bla: string;
-    langSwitcher?: LangSwitcherResult;
-  };
+export type navigationResult = {
+  mainNav: MenuItem[];
+  langSwitcher?: LangSwitcherResult;
 };

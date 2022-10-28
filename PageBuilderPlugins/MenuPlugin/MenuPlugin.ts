@@ -62,155 +62,155 @@ function Conf(props?: MenuPluginProps): Config {
         },
       },
     ],
-    objects: [
-      {
-        title: "List",
-        name: "navigationMegaMenuItem",
-        fields: [
-          {
-            name: "label",
-            type: "string",
-            title: "Label",
-            localize: true,
-            validation: (Rule) => Rule.required(),
-          },
-          {
-            name: "items",
-            type: "array",
-            title: "Main Navigation",
-            of: [{ type: "navigationItem" }],
-            validation: (Rule) => Rule.required(),
-          },
-        ],
-        preview: {
-          select: {
-            label: "label",
-          },
-          prepare(selection: any) {
-            const { label } = selection;
-            return {
-              title: label,
-              subtitle: "List",
-              media: RiFileListFill,
-            };
-          },
-        },
-      },
-      {
-        title: "Mega Menu",
-        name: "navigationMegaMenu",
-        fields: [
-          {
-            name: "label",
-            type: "string",
-            title: "Label",
-            localize: true,
-            validation: (Rule) => Rule.required(),
-          },
-          {
-            name: "items",
-            type: "array",
-            title: "Main Navigation",
-            of: [
-              { type: "navigationMegaMenuItem" },
-              { type: "navigationItem" },
-            ],
-            validation: (Rule) => Rule.required(),
-          },
-        ],
-        preview: {
-          select: {
-            label: "label",
-            items: "items",
-          },
-          prepare(selection: any) {
-            const { label, items } = selection;
-            const hasLists = //@ts-ignore
-              items && items.find((i) => i._type === "navigationMegaMenuItem");
-            const itemLabels =
-              items &&
-              //@ts-ignore
-              items.reduce((acc, i) => {
-                return `${acc} / ${i.label}`;
-              }, "" as string);
-            return {
-              title: label,
-              subtitle: itemLabels,
-              media: hasLists ? GrMultiple : RiFileListFill,
-            };
-          },
-        },
-      },
-      {
-        title: "Navigation Dropdown",
-        name: "navigationDropdown",
-        fields: [
-          {
-            name: "label",
-            type: "string",
-            title: "Label",
-            validation: (Rule) => Rule.required(),
-            localize: true,
-          },
+    // objects: [
+    //   {
+    //     title: "List",
+    //     name: "navigationMegaMenuItem",
+    //     fields: [
+    //       {
+    //         name: "label",
+    //         type: "string",
+    //         title: "Label",
+    //         localize: true,
+    //         validation: (Rule) => Rule.required(),
+    //       },
+    //       {
+    //         name: "items",
+    //         type: "array",
+    //         title: "Main Navigation",
+    //         of: [{ type: "navigationItem" }],
+    //         validation: (Rule) => Rule.required(),
+    //       },
+    //     ],
+    //     preview: {
+    //       select: {
+    //         label: "label",
+    //       },
+    //       prepare(selection: any) {
+    //         const { label } = selection;
+    //         return {
+    //           title: label,
+    //           subtitle: "List",
+    //           media: RiFileListFill,
+    //         };
+    //       },
+    //     },
+    //   },
+    //   {
+    //     title: "Mega Menu",
+    //     name: "navigationMegaMenu",
+    //     fields: [
+    //       {
+    //         name: "label",
+    //         type: "string",
+    //         title: "Label",
+    //         localize: true,
+    //         validation: (Rule) => Rule.required(),
+    //       },
+    //       {
+    //         name: "items",
+    //         type: "array",
+    //         title: "Main Navigation",
+    //         of: [
+    //           { type: "navigationMegaMenuItem" },
+    //           { type: "navigationItem" },
+    //         ],
+    //         validation: (Rule) => Rule.required(),
+    //       },
+    //     ],
+    //     preview: {
+    //       select: {
+    //         label: "label",
+    //         items: "items",
+    //       },
+    //       prepare(selection: any) {
+    //         const { label, items } = selection;
+    //         const hasLists = //@ts-ignore
+    //           items && items.find((i) => i._type === "navigationMegaMenuItem");
+    //         const itemLabels =
+    //           items &&
+    //           //@ts-ignore
+    //           items.reduce((acc, i) => {
+    //             return `${acc} / ${i.label}`;
+    //           }, "" as string);
+    //         return {
+    //           title: label,
+    //           subtitle: itemLabels,
+    //           media: hasLists ? GrMultiple : RiFileListFill,
+    //         };
+    //       },
+    //     },
+    //   },
+    //   {
+    //     title: "Navigation Dropdown",
+    //     name: "navigationDropdown",
+    //     fields: [
+    //       {
+    //         name: "label",
+    //         type: "string",
+    //         title: "Label",
+    //         validation: (Rule) => Rule.required(),
+    //         localize: true,
+    //       },
 
-          {
-            name: "items",
-            type: "array",
-            title: "Main Navigation",
-            of: [{ type: "navigationItem" }],
-            validation: (Rule) => Rule.required(),
-          },
-        ],
-        preview: {
-          select: {
-            label: "label",
-          },
-          prepare(selection: any) {
-            const { label } = selection;
-            return {
-              title: label,
-              subtitle: "Link",
-              media: RiFileListFill,
-            };
-          },
-        },
-      },
-      {
-        title: "Link",
-        name: "navigationItem",
+    //       {
+    //         name: "items",
+    //         type: "array",
+    //         title: "Main Navigation",
+    //         of: [{ type: "navigationItem" }],
+    //         validation: (Rule) => Rule.required(),
+    //       },
+    //     ],
+    //     preview: {
+    //       select: {
+    //         label: "label",
+    //       },
+    //       prepare(selection: any) {
+    //         const { label } = selection;
+    //         return {
+    //           title: label,
+    //           subtitle: "Link",
+    //           media: RiFileListFill,
+    //         };
+    //       },
+    //     },
+    //   },
+    //   {
+    //     title: "Link",
+    //     name: "navigationItem",
 
-        fields: [
-          {
-            name: "label",
-            type: "string",
-            title: "Label",
-            validation: (Rule) => Rule.required(),
-            localize: true,
-          },
-          {
-            name: "link",
-            title: "Link",
-            type: "link",
-            validation: (Rule) => Rule.required(),
-          },
-        ],
+    //     fields: [
+    //       {
+    //         name: "label",
+    //         type: "string",
+    //         title: "Label",
+    //         validation: (Rule) => Rule.required(),
+    //         localize: true,
+    //       },
+    //       {
+    //         name: "link",
+    //         title: "Link",
+    //         type: "link",
+    //         validation: (Rule) => Rule.required(),
+    //       },
+    //     ],
 
-        preview: {
-          select: {
-            label: "label",
-          },
-          prepare(selection: any) {
-            const { label } = selection;
+    //     preview: {
+    //       select: {
+    //         label: "label",
+    //       },
+    //       prepare(selection: any) {
+    //         const { label } = selection;
 
-            return {
-              title: label,
-              subtitle: "Link",
-              media: AiOutlineLink,
-            };
-          },
-        },
-      },
-    ],
+    //         return {
+    //           title: label,
+    //           subtitle: "Link",
+    //           media: AiOutlineLink,
+    //         };
+    //       },
+    //     },
+    //   },
+    // ],
   };
 }
 export default Conf;

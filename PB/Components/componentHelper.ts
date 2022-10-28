@@ -78,16 +78,16 @@ export type backgroundColorResult = {
 const style = [topSpace, bottomSpace, backgroundColor];
 
 export const componentStyleProjection = `
-${topSpace}
-${bottomSpace}
-${backgroundColor}
+${topSpaceProjection}
+${bottomSpaceProjection}
+${backgroundColorProjection}
 `;
 
 export type componentStyleResult = topSpaceResult &
   bottomSpaceResult &
   backgroundColorResult;
 
-const addComponentStyle = (component: any) => {
+export const addComponentStyle = (component: any) => {
   component.groups = [...(component.groups ? component.groups : []), group];
   component.fields = [...(component.fields ? component.fields : []), ...style];
 };

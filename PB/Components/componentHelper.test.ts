@@ -1,11 +1,9 @@
 import { componentStyleProjection } from "./componentHelper";
-import { testProjection } from "../../PageBuilder/__test__/querytest";
+import { testProjection } from "../__test__/queryTest";
 
 describe("Component Helper", () => {
-  it("projection should be Valid", async () => {
+  it("projection should be Valid ", async () => {
     const res = await testProjection(componentStyleProjection);
-    console.log(res);
-
-    expect(res).toBeTruthy();
+    expect(res.error).toBeFalsy();
   });
 });

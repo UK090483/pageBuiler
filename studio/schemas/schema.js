@@ -16,18 +16,21 @@ import Navigation from "./Navigation";
 import siteConfig from "./siteConfig";
 import Redirect from "./Redirect";
 
+import { navigationSchema } from "../../PB/Navigation/navigation.schema";
+
 import { createSchema as cs } from "../../PageBuilder";
 
 import config from "../../PageBuilder.config";
 
 const SSSS = cs(config);
 
-console.log(SSSS);
+console.log(navigationSchema);
 export default createSchema({
   name: "default",
 
   types: schemaTypes.concat([
     // tag,
+    ...navigationSchema,
     siteConfig,
     ...SSSS,
 

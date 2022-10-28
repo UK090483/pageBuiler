@@ -11,7 +11,12 @@ type queryProps = {
   imageQuery: string;
 };
 
-const query = ({ locale, items, slugQuery, imageQuery }: queryProps) => `
+export const listingQuery = ({
+  locale,
+  items,
+  slugQuery,
+  imageQuery,
+}: queryProps) => `
 ...,
 contentType,
 ${items
@@ -30,5 +35,3 @@ ${items
     'featuredImage':featuredImage{${imageQuery}}
 },
 `;
-
-export default query;
