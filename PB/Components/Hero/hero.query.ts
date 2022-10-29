@@ -1,4 +1,4 @@
-import { IMAG_PROJECTION } from "PB/constants";
+import { IMAG_PROJECTION } from "../../constants";
 import { localizedQueryFn, localizeValue } from "../../helper/withLocalization";
 
 export const heroQueryProjection: localizedQueryFn = (locale) => `

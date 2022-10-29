@@ -1,4 +1,4 @@
-import { ImageResult, IMAG_PROJECTION } from "PB/constants";
+import { ImageResult, IMAG_PROJECTION } from "../../../constants";
 
 export const imageGalleryPlugQuery = `
 _type == "imageGalleryPlug" => {
