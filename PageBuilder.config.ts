@@ -21,62 +21,62 @@ import ComponentStyle from "./PageBuilderPlugins/ComponentStylePlugin/ComponentS
 import componentStyleQuery from "./PageBuilderPlugins/ComponentStylePlugin/query";
 export default createConfig(
   [
-    ContentType({
-      name: "page",
-      title: "Page",
-      editor: "body",
-      hasPage: true,
-      isRoot: true,
-    }),
-    ContentType({
-      name: "person",
-      title: "Person/Institution",
-      hasPage: false,
-    }),
+    // ContentType({
+    //   name: "page",
+    //   title: "Page",
+    //   editor: "body",
+    //   hasPage: true,
+    //   isRoot: true,
+    // }),
+    // ContentType({
+    //   name: "person",
+    //   title: "Person/Institution",
+    //   hasPage: false,
+    // }),
 
-    EmbedHTML(),
-    GalleryPlug(),
-    SectionPlugin(),
-    BlogPlugin({ editor: "body" }),
-    EventPlugin(),
+    // EmbedHTML(),
+    // GalleryPlug(),
+    // SectionPlugin(),
+    // BlogPlugin({ editor: "body" }),
+    // EventPlugin(),
     VideoPlug(),
-    ListingPlugin({
-      onCreateQuery: ({ query }) => {
-        const e = query + componentStyleQuery;
-        console.log(e);
-        return e;
-      },
-      items: [
-        { name: "page", title: "Page" },
-        {
-          name: "post",
-          title: "Post",
-          variants: [
-            { value: "grid", title: "Grid" },
-            { value: "list", title: "List" },
-          ],
-        },
-        { name: "event", title: "Event" },
-      ],
-    }),
-    MenuPlugin(),
-    SeoPlugin(),
-    RichText({
-      name: "defaultRichtext",
-      annotations: [{ type: "link" }],
-      plugs: ["imagePlug", "imageGalleryPlug", "videoPlug", "embed"],
-    }),
-    HeroPlugin(),
-    EditorPlugin({
-      components: ["section", "listing", "hero", "imageGalleryPlug"],
-    }),
+    // ListingPlugin({
+    //   onCreateQuery: ({ query }) => {
+    //     const e = query + componentStyleQuery;
+    //     console.log(e);
+    //     return e;
+    //   },
+    //   items: [
+    //     { name: "page", title: "Page" },
+    //     {
+    //       name: "post",
+    //       title: "Post",
+    //       variants: [
+    //         { value: "grid", title: "Grid" },
+    //         { value: "list", title: "List" },
+    //       ],
+    //     },
+    //     { name: "event", title: "Event" },
+    //   ],
+    // }),
+    // MenuPlugin(),
+    // SeoPlugin(),
+    // RichText({
+    //   name: "defaultRichtext",
+    //   annotations: [{ type: "link" }],
+    //   plugs: ["imagePlug", "imageGalleryPlug", "videoPlug", "embed"],
+    // }),
+    // HeroPlugin(),
+    // EditorPlugin({
+    //   components: ["section", "listing", "hero", "imageGalleryPlug"],
+    // }),
 
-    RichText({
-      name: "heroRichtext",
-    }),
+    // RichText({
+    //   name: "heroRichtext",
+    // }),
 
-    ImagePlug(),
-    ComponentStyle(),
+    // ImagePlug(),
+    // ComponentStyle(),
   ],
   {
     locale: {

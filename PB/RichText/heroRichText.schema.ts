@@ -1,4 +1,5 @@
-const defaultRichText = {
+import { ArrayDefinition } from "../types";
+const defaultRichText: ArrayDefinition = {
   name: "heroRichText",
   type: "array",
 

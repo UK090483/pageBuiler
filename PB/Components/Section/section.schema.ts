@@ -1,8 +1,10 @@
-import { addComponentStyle } from "PB/Components/componentHelper";
+import { addComponentStyle } from "../componentHelper";
+import { ObjectDefinition } from "../../types";
 
-export const sectionSchema = addComponentStyle({
+const sectionSchema: ObjectDefinition = {
   name: "section",
   title: "Section",
+  type: "object",
   groups: [
     {
       name: "content",
@@ -23,7 +25,7 @@ export const sectionSchema = addComponentStyle({
     },
     {
       name: "content",
-      type: "defaultRichtext",
+      type: "defaultRichText",
       title: "Content",
       localize: true,
       group: "content",
@@ -43,4 +45,6 @@ export const sectionSchema = addComponentStyle({
       },
     },
   ],
-});
+};
+
+export default addComponentStyle(sectionSchema);

@@ -1,5 +1,4 @@
-import { testData } from "../../__test__/testData";
-import { SanityDocumentDefinition, Field } from "../../types";
+import { SchemaItem, Field } from "../types";
 import { withLocalization } from "./withLocalization";
 
 const testDocument = (fields?: Field[]) =>
@@ -12,7 +11,7 @@ const testDocument = (fields?: Field[]) =>
       { name: "test", title: "test", type: "string", localize: true },
       ...(fields ? fields : []),
     ],
-  } as SanityDocumentDefinition);
+  } as SchemaItem);
 
 const translateField = {
   fieldset: "testtranslations",
@@ -26,28 +25,21 @@ const locale = {
   de: { flag: "flag", title: "Deutsch", isDefault: true },
   en: { flag: "flag", title: "English" },
 };
-const optionFields = testData.finalConfig.options;
 
 describe("withLocalization", () => {
   it("should do nothing without locales...", () => {
-    expect(
-      withLocalization({ options: { ...optionFields } }, [testDocument()])
-    ).toStrictEqual([testDocument()]);
+    expect(withLocalization([testDocument()])).toStrictEqual([testDocument()]);
   });
 
   it("should add translationFields", () => {
-    expect(
-      withLocalization({ options: { locale, ...optionFields } }, [
-        testDocument(),
-      ])[0].fields
-    ).toStrictEqual(testDocument([translateField]).fields);
+    expect(withLocalization([testDocument()], locale)[0].fields).toStrictEqual(
+      testDocument([translateField]).fields
+    );
   });
 
   it("should add field sets", () => {
     expect(
-      withLocalization({ options: { locale, ...optionFields } }, [
-        testDocument(),
-      ])[0].fieldsets
+      withLocalization([testDocument()], locale)[0].fieldsets
     ).toStrictEqual([
       { title: "testFieldset", name: "testFieldset" },
       {

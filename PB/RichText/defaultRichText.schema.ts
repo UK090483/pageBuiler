@@ -1,7 +1,9 @@
-const defaultRichText = {
-  name: "defaultRichText",
-  type: "array",
+import { ArrayDefinition } from "../types";
 
+const defaultRichText: ArrayDefinition = {
+  name: "defaultRichText",
+  title: "defaultRichText",
+  type: "array",
   of: [
     {
       type: "block",

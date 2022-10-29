@@ -1,4 +1,5 @@
-const HeroObject = {
+import { ObjectDefinition } from "../../types";
+const HeroObject: ObjectDefinition = {
   name: "hero",
   title: "Hero",
   type: "object",
@@ -16,7 +17,7 @@ const HeroObject = {
     {
       title: "Content",
       name: "content",
-      type: "heroRichtext",
+      type: "heroRichText",
     },
   ],
   preview: {

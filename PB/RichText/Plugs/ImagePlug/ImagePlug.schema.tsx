@@ -1,12 +1,14 @@
 import React from "react";
 
+import { ObjectDefinition } from "../../../types";
+
 const Image: React.FC<{ value: { image?: string } }> = (props) => {
   if (!props?.value?.image) return <span>{"no Image"}</span>;
   // eslint-disable-next-line @next/next/no-img-element
   return <img alt="" width="100%" src={`${props?.value?.image}?w=500`} />;
 };
 
-const ImagePlugSchema = {
+const ImagePlugSchema: ObjectDefinition = {
   title: "Image",
   name: "imagePlug",
   type: "object",

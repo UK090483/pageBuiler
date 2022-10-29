@@ -1,3 +1,5 @@
+import { ObjectDefinition } from "../types";
+
 export function sizesList(skip?: string | string[]) {
   const list = [
     { title: "s", value: "s" },
@@ -87,7 +89,11 @@ export type componentStyleResult = topSpaceResult &
   bottomSpaceResult &
   backgroundColorResult;
 
-export const addComponentStyle = (component: any) => {
+export function addComponentStyle(
+  component: ObjectDefinition
+): ObjectDefinition {
   component.groups = [...(component.groups ? component.groups : []), group];
   component.fields = [...(component.fields ? component.fields : []), ...style];
-};
+
+  return component;
+}

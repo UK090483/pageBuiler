@@ -2,7 +2,7 @@ import { Config, SanityObjectDefinition } from "../../PageBuilder/types";
 
 function Conf(): Config {
   return {
-    components: [getHero()],
+    components: [],
   };
 }
 export default Conf;

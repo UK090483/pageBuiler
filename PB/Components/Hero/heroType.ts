@@ -1,3 +1,3 @@
-export type heroType = {
+export type heroResult = {
   title: string;
 };

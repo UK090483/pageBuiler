@@ -1,8 +1,9 @@
+import { DocumentDefinition, ObjectDefinition } from "../types";
 import { RiFileListFill } from "react-icons/ri";
 import { AiOutlineLink } from "react-icons/ai";
 import { GrMultiple } from "react-icons/gr";
 
-const navigationSettingsDocument = {
+const navigationSettingsDocument: DocumentDefinition = {
   icon: AiOutlineLink,
   name: "menuConfig",
   title: "Menu config",
@@ -15,7 +16,7 @@ const navigationSettingsDocument = {
       of: [
         { type: "navigationItem" },
         { type: "navigationDropdown" },
-        // { type: "navigationMegaMenu" },
+        { type: "navigationMegaMenu" },
       ],
       // validation: (Rule) => Rule.required(),
     },
@@ -46,7 +47,7 @@ const getItemFields = (
   of: items.map((i) => ({ type: i })),
   validation: (Rule: any) => Rule.required(),
 });
-const megaMenuItem = {
+const megaMenuItem: ObjectDefinition = {
   title: "List",
   name: "navigationMegaMenuItem",
   type: "object",
@@ -66,7 +67,7 @@ const megaMenuItem = {
   },
 };
 
-const megaMenu = {
+const megaMenu: ObjectDefinition = {
   title: "Mega Menu",
   name: "navigationMegaMenu",
   type: "object",
@@ -98,7 +99,7 @@ const megaMenu = {
   },
 };
 
-const navigationDropdown = {
+const navigationDropdown: ObjectDefinition = {
   title: "Navigation Dropdown",
   name: "navigationDropdown",
   type: "object",
@@ -118,7 +119,7 @@ const navigationDropdown = {
   },
 };
 
-const navigationLink = {
+const navigationLink: ObjectDefinition = {
   title: "Link",
   name: "navigationItem",
   type: "object",
@@ -149,7 +150,7 @@ const navigationLink = {
 };
 
 export const navigationSchema = [
-  //   navigationSettingsDocument,
+  navigationSettingsDocument,
   navigationLink,
   navigationDropdown,
   megaMenuItem,

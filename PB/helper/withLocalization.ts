@@ -1,32 +1,24 @@
-import {
-  Config,
-  SanityDocumentDefinition,
-  SanityObjectDefinition,
-  Field,
-} from "../../types";
+import { SchemaItem, PageBuilderLocales, Field } from "../types";
 
 export const withLocalization = (
-  config: Config,
-  docs: (SanityDocumentDefinition | SanityObjectDefinition)[]
+  docs: SchemaItem[],
+  locales?: PageBuilderLocales
 ) => {
-  if (config.options?.locale) {
-    return docs.map((i) => addLocale(config, i));
+  if (locales) {
+    return docs.map((i) => addLocale(i, locales));
   }
   return docs;
 };
 
-const addLocale = (
-  config: Config,
-  doc: SanityDocumentDefinition | SanityObjectDefinition
-) => {
-  const oldFields = [...(doc.fields ? doc.fields : [])] as Field[];
+const addLocale = (doc: SchemaItem, locales: PageBuilderLocales) => {
+  const oldFields = [...(doc.fields ? doc.fields : [])];
   const { fields, needsLocalization, fieldSets } = oldFields.reduce(
     (acc, field) => {
       if (field.localize) {
         return {
           ...acc,
           needsLocalization: true,
-          fields: [...acc.fields, ...localize(config, field)],
+          fields: [...acc.fields, ...localize(field, locales)],
           fieldSets: [
             ...acc.fieldSets,
             {
@@ -56,9 +48,9 @@ const addLocale = (
 
 const getFieldsetName = (field: Field) => `${field.name}translations`;
 
-const localize = (config: Config, field: Field): Field[] => {
-  const translationFields = config.options?.locale
-    ? Object.entries(config.options.locale)
+const localize = (field: Field, locales?: PageBuilderLocales): Field[] => {
+  const translationFields = locales
+    ? Object.entries(locales)
         .filter((i) => !i[1].isDefault)
         .map(([locale, { flag, title }]) => {
           return {
