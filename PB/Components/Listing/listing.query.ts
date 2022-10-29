@@ -33,5 +33,8 @@ ${items
 },
 `;
 
-export const listProjection: localizedQueryFn = (locale) =>
-  listingQuery({ locale, items });
+export const listProjection: localizedQueryFn = (locale) => `
+_type == 'listing'=>{
+${listingQuery({ locale, items })}
+},
+`;

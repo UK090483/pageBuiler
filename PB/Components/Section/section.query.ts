@@ -15,8 +15,7 @@ _type == "section" => {
   'content':(coalesce(content_${locale},content))[]{${defaultRichTextQuery(
   locale
 )}},
-  image{${IMAG_PROJECTION}}
-},
+  },
 `;
 
 export interface SectionResult {

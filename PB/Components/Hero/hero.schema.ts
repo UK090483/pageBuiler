@@ -18,6 +18,7 @@ const HeroObject: ObjectDefinition = {
       title: "Content",
       name: "content",
       type: "heroRichText",
+      localize: true,
     },
   ],
   preview: {

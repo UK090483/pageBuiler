@@ -8,7 +8,7 @@ export type LangSwitcherResult = {
   [key: string]: { title: string; link: string };
 };
 
-export type MenuPluginResult<
+export type NavigationResult<
   L extends unknown = { internal?: string; href?: string }
 > = {
   menu: {

@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import SanityImage from "@components/SanityImage";
-import BlockContent, { Serializers } from "@sanity/block-content-to-react";
-import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
+import { usePageBuilderContext } from "PB/PageBuilderContext";
 import RichText from "PageBuilderPlugins/RichText/frontend/RichText";
 import React from "react";
 import { HeroBlogResult } from "./HeroBlockQuery";

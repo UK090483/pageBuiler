@@ -1,4 +1,4 @@
-import BodyParser from "PageBuilder/BodyParser";
+import BodyParser from "PB/BodyParser";
 import GalleryPlug from "PB/Components/ImageGallery/frontend/ImageGalleryPlug";
 import SectionBlock from "PB/Components/Section/frontend/SectionBlock";
 import HeroBlock from "PB/Components/Hero/frontend/HeroBlock";

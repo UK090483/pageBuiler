@@ -2,11 +2,11 @@ import { ImageResult, IMAG_PROJECTION } from "../../constants";
 import { localizedQueryFn } from "../../helper/withLocalization";
 export const imageGalleryPlugQuery: localizedQueryFn = () => `
 _type == "imageGalleryPlug" => {
-   
   _type,
   _key,
   'items':items[]{
-    'image': image{${IMAG_PROJECTION}},
+    ...,
+    'image': {${IMAG_PROJECTION}},
   },
   rows,
   rows_mobile,
