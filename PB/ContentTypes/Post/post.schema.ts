@@ -1,5 +1,6 @@
 import { addSeo } from "../../Objects/Seo/Seo.decorator";
-import createContentType, { getEditorField, getSlugField } from "../helper";
+import { getEditorField } from "../Base/Editor/editor.field";
+import createContentType, { getSlugField } from "../helper";
 
 const pageSchema = createContentType({
   name: "post",

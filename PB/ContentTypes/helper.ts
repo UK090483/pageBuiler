@@ -1,5 +1,6 @@
 import { Field, DocumentDefinition } from "../types";
-import { ImageResult, IMAG_PROJECTION } from "PB/constants";
+import { ImageResult, IMAG_PROJECTION } from "../constants";
+import { localizeValue } from "../helper/withLocalization";
 
 export const getSlugField = () => ({
   name: "slug",
@@ -21,15 +22,6 @@ export const getSlugField = () => ({
   localize: true,
 });
 
-export const getEditorField = (components: any[]) => ({
-  name: "body",
-  type: "array",
-  title: "Page sections",
-  description: "Add, edit, and reorder sections",
-  of: [...components],
-  group: "content",
-});
-
 type createContentTypeProps = {
   fields: Field[];
   name: string;
@@ -42,13 +34,10 @@ export type BaseContentTypeResult = {
   featuredImage?: ImageResult;
 };
 
-const localize = (name: string, locale?: string) =>
-  location ? `'${name}':coalesce(${name}_${location},${name})` : `${name}`;
-
 export const BaseContentTypeProjection = (locale?: string) => `
-    ${localize("title", locale)},
-    ${localize("description", locale)},
-    'featuredImage'=>${IMAG_PROJECTION},
+    ${localizeValue("title", locale)},
+    ${localizeValue("description", locale)},
+    'featuredImage':featuredImage{${IMAG_PROJECTION}},
     `;
 
 export function createContentType(

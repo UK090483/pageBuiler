@@ -2,7 +2,7 @@ import Link from "@components/Link";
 import { useRouter } from "next/router";
 import React from "react";
 
-import { LangSwitcherResult } from "../types";
+import { LangSwitcherResult } from "../navigation.types";
 
 export interface LangSwitchProps {
   className?: string;

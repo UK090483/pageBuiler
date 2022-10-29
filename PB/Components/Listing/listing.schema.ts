@@ -1,6 +1,6 @@
 import { ObjectDefinition } from "../../types";
 
-const items = [
+export const items = [
   { name: "page", title: "Page" },
   {
     name: "post",

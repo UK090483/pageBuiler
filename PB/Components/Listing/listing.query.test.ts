@@ -1,15 +1,9 @@
 import { testProjection } from "../../__test__/queryTest";
-import { listingQuery } from "./listing.query";
+import { listProjection } from "./listing.query";
 
 describe("Component Helper", () => {
   it("projection should be Valid ", async () => {
-    const res = await testProjection(
-      listingQuery({
-        imageQuery: "img",
-        slugQuery: "slug",
-        items: [{ name: "test", title: "Title" }],
-      })
-    );
+    const res = await testProjection(listProjection());
     expect(res.error).toBeFalsy();
   });
 });

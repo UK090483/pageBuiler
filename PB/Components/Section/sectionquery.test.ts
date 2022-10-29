@@ -1,9 +1,9 @@
 import { testProjection } from "../../__test__/queryTest";
-import { sectionQuery } from "./section.query";
+import { sectionBlockQuery } from "./section.query";
 
 describe("Component Helper", () => {
   it("projection should be Valid ", async () => {
-    const res = await testProjection(sectionQuery());
+    const res = await testProjection(sectionBlockQuery());
     expect(res.error).toBeFalsy();
   });
 });

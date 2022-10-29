@@ -8,8 +8,8 @@ import SeoPlugin from "./PageBuilderPlugins/SeoPlugin/SeoPlugin";
 import RichText from "./PageBuilderPlugins/RichText/RichText";
 import HeroPlugin from "./PageBuilderPlugins/HeroPlugin/HeroPlugin";
 import EditorPlugin from "./PageBuilderPlugins/EditorPlugin/EditorPlugin";
-import { PageBuilderContentTypeResult } from "./PageBuilder/types";
-import { MenuPluginResult } from "PageBuilderPlugins/MenuPlugin/types";
+// import { PageBuilderContentTypeResult } from "./PageBuilder/types";
+// import { MenuPluginResult } from "PageBuilderPlugins/MenuPlugin/types";
 import ImagePlug from "./PageBuilderPlugins/ImagePlug/ImagePlug";
 
 import GalleryPlug from "./PageBuilderPlugins/GalleryPlug/GalleryPlug";
@@ -86,6 +86,4 @@ export default createConfig(
   }
 );
 
-export type PageData = PageBuilderContentTypeResult &
-  MenuPluginResult &
-  SeoQueryResult;
+export type PageData = any;

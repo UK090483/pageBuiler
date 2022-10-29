@@ -1,3 +1,7 @@
+import { IMAG_PROJECTION, SLUG_PROJECTION } from "../../constants";
+import { localizedQueryFn } from "../../helper/withLocalization";
+import { items } from "./listing.schema";
+
 export type ListingItem = {
   title: string;
   name: string;
@@ -7,16 +11,9 @@ export type ListingItem = {
 type queryProps = {
   locale?: string;
   items: ListingItem[];
-  slugQuery: string;
-  imageQuery: string;
 };
 
-export const listingQuery = ({
-  locale,
-  items,
-  slugQuery,
-  imageQuery,
-}: queryProps) => `
+const listingQuery = ({ locale, items }: queryProps) => `
 ...,
 contentType,
 ${items
@@ -29,9 +26,12 @@ ${items
    .join(",")}
 )[]{
     _id,
-    'slug': ${slugQuery},
+    'slug': ${SLUG_PROJECTION(locale)},
     'title': coalesce(title_${locale},title),
     'description': coalesce(description_${locale},description),
-    'featuredImage':featuredImage{${imageQuery}}
+    'featuredImage':featuredImage{${IMAG_PROJECTION}}
 },
 `;
+
+export const listProjection: localizedQueryFn = (locale) =>
+  listingQuery({ locale, items });

@@ -13,7 +13,7 @@ const BodyParser: React.FC<BodyParserProps> = ({ components }) => {
   return (
     <>
       {saveBlocks &&
-        saveBlocks.map((block) => {
+        saveBlocks.map((block: any) => {
           if (components[block._type]) {
             const Component = components[block._type].component;
             return <Component key={block._key} {...block} />;

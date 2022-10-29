@@ -1,18 +1,14 @@
 import { PageBuilderLocales } from "PageBuilder/types";
+import { localizedQueryFn } from "PB/helper/withLocalization";
+import { SLUG_PROJECTION, locale } from "../constants";
 
-type navigationQueryProps = {
-  locales?: PageBuilderLocales;
-  locale?: string;
-  slugQuery: (props: { locale?: string }) => string;
-  items?: { name: string }[];
-};
+const locales = locale;
+const items = [{ name: "mainNav" }];
 
-export const navigationQuery = (props: navigationQueryProps) => {
-  const { slugQuery, locales, locale, items = [{ name: "mainNav" }] } = props;
-
+export const navigationQuery: localizedQueryFn = (locale) => {
   const link = `
     href,
-    ...(internal->{ 'internal':${slugQuery({ locale })}})
+    ...(internal->{ 'internal':${SLUG_PROJECTION(locale)}})
     `;
 
   const langSwitcher = locales
@@ -20,9 +16,9 @@ export const navigationQuery = (props: navigationQueryProps) => {
   'langSwitcher' : {
     ${Object.entries(locales)
       .map(([key, lang]) => {
-        return `'${key}': { 'title':'${lang.title}', 'link':${slugQuery({
-          locale: key,
-        })} }`;
+        return `'${key}': { 'title':'${lang.title}', 'link':${SLUG_PROJECTION(
+          key
+        )} }`;
       })
       .join(",")}
   },

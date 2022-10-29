@@ -13,6 +13,8 @@ interface AppPropsWithStaticProps {
 }
 
 function App({ Component, pageProps }: AppPropsWithStaticProps) {
+  // console.log(pageProps.data);
+
   return (
     <PageBuilderContextProvider data={pageProps.data}>
       <Seo />

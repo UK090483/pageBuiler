@@ -3,9 +3,7 @@ import { navigationQuery } from "./navigation.query";
 
 describe("Navigation", () => {
   it("should create Valid Query", async () => {
-    const query = await testProjection(
-      navigationQuery({ slugQuery: () => "slug" })
-    );
+    const query = await testProjection(navigationQuery());
     expect(query.error).toBeFalsy();
   });
 });

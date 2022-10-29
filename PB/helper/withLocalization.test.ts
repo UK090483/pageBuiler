@@ -32,13 +32,16 @@ describe("withLocalization", () => {
   });
 
   it("should add translationFields", () => {
+    //@ts-ignore
     expect(withLocalization([testDocument()], locale)[0].fields).toStrictEqual(
+      //@ts-ignore
       testDocument([translateField]).fields
     );
   });
 
   it("should add field sets", () => {
     expect(
+      //@ts-ignore
       withLocalization([testDocument()], locale)[0].fieldsets
     ).toStrictEqual([
       { title: "testFieldset", name: "testFieldset" },

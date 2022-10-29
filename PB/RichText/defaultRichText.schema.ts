@@ -27,6 +27,9 @@ const defaultRichText: ArrayDefinition = {
         ],
       },
     },
+    { type: "embed" },
+    { type: "videoPlug" },
+    { type: "imagePlug" },
   ],
 };
 

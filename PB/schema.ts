@@ -18,6 +18,7 @@ import EmbedHtmlSchema from "./RichText/Plugs/EmbedHTML/EmbedHtml.schema";
 import VideoPlugSchema from "./RichText/Plugs/videoPlug/video.schema";
 import linkSchema from "./Objects/link/link.schema";
 import { locale } from "./constants";
+
 export default withLocalization(
   [
     ...navigationSchema,

@@ -1,7 +1,9 @@
+import { localizedQueryFn } from "../../helper/withLocalization";
+
 type seoPluginQueryProps = {
   locale?: string;
 };
-export const seoQuery = ({ locale }: seoPluginQueryProps) => `
+export const seoQuery: localizedQueryFn = (locale) => `
   
   'seo':{
     'metaTitle':coalesce( seo.metaTitle_${locale} , seo.metaTitle, title_${locale} , title ,  *[_type == 'seoConfig'][0].seo.metaTitle),
@@ -9,7 +11,7 @@ export const seoQuery = ({ locale }: seoPluginQueryProps) => `
     'shareGraphic':coalesce(featuredImage, *[_type == 'seoConfig'][0].seo.shareGraphic),
     'metaDesc':coalesce( seo.metaDesc_${locale} , seo.metaDesc,  description_${locale}, description, *[_type == 'seoConfig'][0].seo.metaDesc),
     'shareDesc': coalesce( seo.shareDesc_${locale} , seo.shareDesc,  description_${locale},description,*[_type == 'seoConfig'][0].seo.shareDesc),
-  }
+  },
   `;
 
 export type SeoQueryResult = {

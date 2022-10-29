@@ -5,8 +5,8 @@ const imageGalleryItem = {
   type: "image",
 
   fields: [
-    { name: "title", title: "title", type: "string" },
-    { name: "text", title: "Text", type: "text" },
+    { name: "title", title: "title", type: "string", localize: true },
+    { name: "text", title: "Text", type: "text", localize: true },
 
     {
       title: "Variant",

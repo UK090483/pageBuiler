@@ -1,12 +1,9 @@
 import { PortableTextComponent } from "@portabletext/react";
-import { PlugProps } from "PageBuilderPlugins/RichText/types";
+
 import React from "react";
+import { embedQueryResult } from "../embed.query";
 
-interface IEmbedHTMLProps {
-  html?: string | null;
-}
-
-const EmbedHTML: PortableTextComponent<IEmbedHTMLProps> = (props) => {
+const EmbedHTML: PortableTextComponent<embedQueryResult> = (props) => {
   const { value } = props;
   if (!value?.html) return null;
   return <div dangerouslySetInnerHTML={{ __html: value?.html }} />;

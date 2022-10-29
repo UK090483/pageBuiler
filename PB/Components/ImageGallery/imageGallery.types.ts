@@ -17,6 +17,7 @@ export interface ImageGalleryPlugItem {
 
 export interface ImageGalleryPlugResult {
   _type: "imageGalleryPlug";
+  _key: string;
   variant?: variant | null;
   imageView?: imageView | null;
   name?: string;

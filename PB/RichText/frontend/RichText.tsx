@@ -1,7 +1,7 @@
 import { PortableText, PortableTextMarkComponent } from "@portabletext/react";
 
 import Link from "@components/Link";
-import EmbedHTML from "PageBuilderPlugins/EmbedHTML/frontend/EmbedHTML";
+import EmbedHTML from "../Plugs/EmbedHTML/frontend/EmbedHTML";
 import ImagePlug from "PageBuilderPlugins/ImagePlug/frontend/ImagePlug";
 import PlayerPlug from "PageBuilderPlugins/VideoPlug/PlayerPlug/PlayerPlug";
 import React from "react";

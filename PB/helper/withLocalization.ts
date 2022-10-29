@@ -11,6 +11,7 @@ export const withLocalization = (
 };
 
 const addLocale = (doc: SchemaItem, locales: PageBuilderLocales) => {
+  if (doc.type === "array") return doc;
   const oldFields = [...(doc.fields ? doc.fields : [])];
   const { fields, needsLocalization, fieldSets } = oldFields.reduce(
     (acc, field) => {
@@ -64,3 +65,8 @@ const localize = (field: Field, locales?: PageBuilderLocales): Field[] => {
 
   return [field, ...translationFields];
 };
+
+export const localizeValue = (name: string, locale?: string) =>
+  locale ? `'${name}':coalesce(${name}_${locale},${name})` : `${name}`;
+
+export type localizedQueryFn = (locale?: string) => string;
