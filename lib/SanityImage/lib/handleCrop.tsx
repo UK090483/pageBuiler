@@ -1,6 +1,6 @@
-import type { ImageMetaResult } from "../query";
+import { ImageResult } from "PageBuilder/constants";
 
-const handleCrop = (image: ImageMetaResult) => {
+const handleCrop = (image: ImageResult) => {
   if (!image.crop) return null;
   const { crop } = image;
   const left = Math.round(crop.left * image.width);

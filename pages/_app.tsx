@@ -3,27 +3,25 @@ import "../styles/globals.css";
 import { Layout } from "@components/Layout/Layout";
 import { NextComponentType, NextPageContext } from "next";
 
-import { PageBuilderContextProvider } from "PB/PageBuilderContext";
-import { PageData } from "PageBuilder.config";
-import Seo from "PageBuilderPlugins/SeoPlugin/frontend/Seo";
+import { PageBuilderContextProvider } from "PageBuilder/PageBuilderContext";
+import { PageResult } from "PageBuilder/ContentTypes/Page/page.types";
+import Seo from "PageBuilder/Objects/Seo/frontend/Seo";
+import PreviewIndicator from "PageBuilder/Preview/PreviewIndicator";
 
 interface AppPropsWithStaticProps {
-  pageProps: { data: PageData };
+  pageProps: { data: PageResult; query?: string };
   Component: NextComponentType;
 }
 
 function App({ Component, pageProps }: AppPropsWithStaticProps) {
-  //console.log(pageProps.data);
-
   return (
-    <PageBuilderContextProvider data={pageProps.data}>
+    <PageBuilderContextProvider query={pageProps.query} data={pageProps.data}>
       <Seo />
       <Layout>
         <Component />
       </Layout>
-
-      {/* <PreviewIndicator show={!!preview} />
-        <Cookie /> */}
+      <PreviewIndicator />
+      {/* <Cookie />  */}
     </PageBuilderContextProvider>
   );
 }

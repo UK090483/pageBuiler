@@ -1,5 +1,5 @@
-import { textBlock } from "@components/RichText/testPrepare";
-import { ImageMetaResult } from "@lib/SanityImage/query";
+import { textBlock } from "./richtextTestPrepare";
+
 import { render, RenderOptions } from "@testing-library/react";
 
 type PageResult = any;
@@ -59,7 +59,7 @@ export * from "@testing-library/react";
 
 export { customRender };
 
-type TestImage = (props?: Partial<ImageMetaResult>) => ImageMetaResult;
+type TestImage = (props?: Partial<ImageResult>) => ImageResult;
 export const testImage: TestImage = (props = {}) => {
   return {
     alt: "testImage",
@@ -89,6 +89,7 @@ export const testText: TestText = (props) => {
 
 import type { SanityClient } from "@sanity/client/sanityClient";
 import { parse, evaluate } from "groq-js";
+import { ImageResult } from "PageBuilder/constants";
 
 type MockSanityClient = {
   mockReturnValue?: any;

@@ -16,7 +16,9 @@ class MyDocument extends Document {
         </Head>
 
         <body
-          className={`break-words  ${isDevelopment ? "debug-screens" : ""} `}
+          className={`break-words typo-colors typo-sizes typo-weights  ${
+            isDevelopment ? "debug-screens" : ""
+          } `}
         >
           <Main />
           <div id="app-portal" />

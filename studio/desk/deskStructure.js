@@ -2,8 +2,6 @@ import S from "@sanity/desk-tool/structure-builder";
 
 import Iframe from "sanity-plugin-iframe-pane";
 import resolveProductionUrl from "../parts/resolveProductionUrl";
-import createDeskStructure from "../../PageBuilder/lib/sanity/createDeskStructure";
-import config from "../../PageBuilder.config";
 
 import { AiOutlineSetting } from "react-icons/ai";
 
@@ -21,11 +19,6 @@ export const getDefaultDocumentNode = (doc) => {
   ]);
 };
 
-// export default () =>
-//   S.list()
-//     .title("Base")
-//     .items([...createDeskStructure(config, S)]);
-
 export default () =>
   S.list()
     .title("Base")
@@ -39,10 +32,6 @@ export default () =>
             .title("Settings")
             .items([
               S.documentListItem()
-                .schemaType("siteConfig")
-                .title("Configuration")
-                .id("siteConfig"),
-              S.documentListItem()
                 .schemaType("seoConfig")
                 .title("Seo")
                 .id("seoConfig"),
@@ -55,4 +44,5 @@ export default () =>
 
       S.listItem().title("Page").child(S.documentTypeList("page")),
       S.listItem().title("Post").child(S.documentTypeList("post")),
+      S.listItem().title("Person").child(S.documentTypeList("person")),
     ]);

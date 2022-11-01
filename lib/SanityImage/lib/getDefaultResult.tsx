@@ -1,21 +1,23 @@
-import { ImageLoader, ImageProps } from "next/legacy/image";
-import type { ImageMetaResult } from "../query";
+// import { ImageLoader, ImageProps } from "next/legacy/image";
+// import type { ImageMetaResult } from "../query";
 
-const loader: ImageLoader = (props) => {
-  const { src, width, quality } = props;
-  const res = `${src}&w=${width}${quality ? "&q=" + quality : ""}`;
-  return res;
-};
+// const loader: ImageLoader = (props) => {
+//   const { src, width, quality } = props;
+//   const res = `${src}&w=${width}${quality ? "&q=" + quality : ""}`;
+//   return res;
+// };
 
-const getDefaultResult = (image: ImageMetaResult): ImageProps => {
-  const url = `${image.url}?auto=format`;
-  return {
-    draggable: false,
-    blurDataURL: image.lqip,
-    src: url,
-    loader,
-    placeholder: "blur",
-  };
-};
+// const getDefaultResult = (image: ImageMetaResult): ImageProps => {
+//   const url = `${image.url}?auto=format`;
+//   return {
+//     draggable: false,
+//     blurDataURL: image.lqip,
+//     src: url,
+//     loader,
+//     placeholder: "blur",
+//   };
+// };
 
-export default getDefaultResult;
+// export default getDefaultResult;
+
+export {};

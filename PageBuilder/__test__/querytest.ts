@@ -10,6 +10,7 @@ export const testQuery = async (query: string, dataSet?: any[]) => {
     const tree = parse(query);
     let value = await evaluate(tree, { dataset: dataSet || _dataset });
     let result = await value.get();
+
     return result;
   } catch (error) {
     return false;
@@ -17,9 +18,10 @@ export const testQuery = async (query: string, dataSet?: any[]) => {
 };
 
 export const testProjection = async (projection: string) => {
-  try {
-    return await testQuery(`*[_type == 'page'][]{${projection}}`);
-  } catch (error) {
-    return false;
+  if (!projection) return { error: { projection } };
+  const res = await testQuery(`*[_type == 'page'][]{${projection}}`);
+  if (!res) {
+    return { error: { projection } };
   }
+  return { error: false };
 };

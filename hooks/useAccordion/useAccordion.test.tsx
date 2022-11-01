@@ -1,6 +1,6 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
-import { renderHook, act } from "@testing-library/react-hooks";
+
+import { renderHook, act } from "@testing-library/react";
 import useAccordion from "./useAccordion";
 
 const TestComponent = () => {

@@ -1,17 +1,20 @@
-import BodyParser from "PB/BodyParser";
-import GalleryPlug from "PB/Components/ImageGallery/frontend/ImageGalleryPlug";
-import SectionBlock from "PB/Components/Section/frontend/SectionBlock";
-import HeroBlock from "PB/Components/Hero/frontend/HeroBlock";
-import ListingBlock from "PageBuilderPlugins/ListingPlugin/frontend/ListingBlock";
+import BodyParser from "PageBuilder/BodyParser";
+import GalleryPlug from "PageBuilder/Components/ImageGallery/frontend/ImageGalleryComponent";
+import SectionBlock from "PageBuilder/Components/Section/frontend/SectionBlock";
+import HeroBlock from "PageBuilder/Components/Hero/frontend/HeroBlock";
+import ListingBlock from "PageBuilder/Components/Listing/frontend/ListingBlock";
 
-import { sanityClient } from "@lib/SanityService/sanity.server";
+import {
+  getSanityClient,
+  sanityClient,
+} from "@lib/SanityService/sanity.server";
 
 import type { GetStaticPaths, GetStaticProps } from "next";
 
-import fetchStaticPath from "PB/next/fetchStaticPath";
-import fetchStaticProps from "PB/next/fetchStaticProps";
+import fetchStaticPath from "PageBuilder/next/fetchStaticPath";
+import fetchStaticProps from "PageBuilder/next/fetchStaticProps";
 
-import { pageQuery } from "PB/ContentTypes/Page/page.query";
+import { pageQuery } from "PageBuilder/ContentTypes/Page/page.query";
 export type PageResult = { content?: any };
 
 const Page = () => {
@@ -46,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 export const getStaticProps: GetStaticProps = async (context) => {
   return await fetchStaticProps({
     context,
-    sanityClient,
+    getSanityClient,
     items: {
       page: { query: pageQuery },
       post: { query: pageQuery },

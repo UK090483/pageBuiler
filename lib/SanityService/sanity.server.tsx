@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import createClient from "@sanity/client";
 
 import { config } from "./config";
 
@@ -21,12 +21,19 @@ export function createPreviewClient(token: string) {
 }
 
 // Helper function for easily switching between normal client and preview client
-export function getSanityClient(preview?: {
-  active: boolean;
-  token: string | undefined;
-}) {
-  if (preview?.active && preview.token) {
-    return createPreviewClient(preview.token);
+// export function getSanityClient(preview?: {
+//   active: boolean;
+//   token: string | undefined;
+// }) {
+//   if (preview?.active && preview.token) {
+//     return createPreviewClient(preview.token);
+//   }
+//   return sanityClient;
+// }
+
+export function getSanityClient(preview?: boolean) {
+  if (preview) {
+    return previewClient;
   }
   return sanityClient;
 }

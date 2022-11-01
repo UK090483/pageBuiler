@@ -1,16 +1,11 @@
-const remoteUrl = `https://perspectiv.vercel.app/`;
+import { REMOTE_URL } from "../../PageBuilder/constants";
+
+const remoteUrl = REMOTE_URL;
 const localUrl = `http://localhost:3000`;
 
 const previewSecret = "j8heapkqy4rdz6kudrvsc7ywpvfhrv022abyx5zgmuwpc1xv";
 
 export default function resolveProductionUrl(doc) {
-  // console.log({
-  //   env: process.env,
-  //   previewSecret,
-  //   prev1: process.env.PREVIEW_SECRET,
-  //   prev2: process.env.SANITY_STUDIO_PREVIEW_SECRET,
-  //   p: process.env.SANITY_STUDIO_API_PROJECT_ID,
-  // });
   if (!["page"].includes(doc?._type)) return false;
   const baseUrl =
     window.location.hostname === "localhost" ? localUrl : remoteUrl;

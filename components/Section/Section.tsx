@@ -36,6 +36,7 @@ export const Section: React.FC<SectionProps> = (props) => {
     noProse,
   } = props;
 
+  const shouldInvert = bg === "dark-grey" || bg === "primary";
   return (
     <SectionContextProvider bgColor={bg} width={width}>
       <Component
@@ -65,10 +66,10 @@ export const Section: React.FC<SectionProps> = (props) => {
             "mx-auto px-sides",
             {
               "container max-w-7xl": width === "l",
+              "container max-w-5xl": width === "m",
               container: width === "responsive",
-              "prose prose-base md:prose-lg lg:prose-xl ": !noProse,
-              " prose-invert  text-white": !noProse && bg === "dark-grey",
-              "  text-white": !!noProse && bg === "dark-grey",
+              "container typo typo-spacings max-w-2xl": !noProse,
+              "typo-invert": shouldInvert,
             },
             className
           )}

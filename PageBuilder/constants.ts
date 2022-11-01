@@ -1,20 +1,39 @@
-export const DEFAULT_SLUG_QUERY = (locale?: string) =>
+export const SLUG_PROJECTION = (locale?: string) =>
   locale
-    ? `select(_id == *[ _type == 'siteConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + coalesce(slug_${locale},slug).current, '/' + coalesce(slug_${locale},slug).current, )`
-    : `select(_id == *[ _type == 'siteConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + slug.current, '/' + slug.current )`;
+    ? `select(_id == *[ _type == 'menuConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + coalesce(slug_${locale},slug).current, '/' + coalesce(slug_${locale},slug).current, )`
+    : `select(_id == *[ _type == 'menuConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + slug.current, '/' + slug.current, )`;
 
-export const DEFAULT_LINK_QUERY = (locale?: string) =>
-  `...(internal->{ 'internal': ${DEFAULT_SLUG_QUERY(locale)} })`;
+export type SlugResult = string;
 
-export const DEFAULT_IMAG_QUERY = `
-  alt,  
-  crop,
-  hotspot,
-  'url':asset->url,
-  "id": asset->assetId,
-  "type": asset->mimeType,
-  "aspectRatio": asset->metadata.dimensions.aspectRatio,
-  "lqip": asset->metadata.lqip,
-  'width': asset->metadata.dimensions.width,
-  'height': asset->metadata.dimensions.height,
+export const REMOTE_URL = "https://remoteUrl.com/";
+
+export const IMAG_PROJECTION = `
+crop,
+hotspot,
+asset,
+...(asset->{
+    'alt':altText, 
+    url,
+    'aspectRatio':metadata.dimensions.aspectRatio,
+    "lqip":metadata.lqip,
+    'width':metadata.dimensions.width,
+    'height':metadata.dimensions.height  
+  }),
+  alt
 `;
+
+export type ImageResult = {
+  alt?: string | null;
+  url?: string;
+  hotspot?: { x: number; y: number } | null;
+  crop?: { bottom: number; top: number; right: number; left: number } | null;
+  aspectRatio: number;
+  width: number;
+  height: number;
+  lqip: string;
+};
+
+export const locale = {
+  de: { title: "Deutsch", isDefault: true, flag: "🇩🇪" },
+  en: { title: "Englisch", flag: "🇺🇸" },
+};

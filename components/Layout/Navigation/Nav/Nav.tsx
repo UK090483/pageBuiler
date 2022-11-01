@@ -4,10 +4,10 @@ import { Logo } from "@components/Layout/Logo";
 import Link from "@components/Link";
 import Svg from "@components/Svg";
 import { useScrollThreshold } from "@hooks/useScrollThreshold";
-import { LangSwitch } from "PB/Navigation/Frontend/LangSwitch";
-import { HeaderNavigation } from "PB/Navigation/Frontend/Navigation/HeaderNavigation";
-import NavigationMobile from "PB/Navigation/Frontend/Navigation/NavigationMobile";
-import { usePageBuilderContext } from "PB/PageBuilderContext";
+import { LangSwitch } from "PageBuilder/Navigation/Frontend/LangSwitch/LangSwitch";
+import { HeaderNavigation } from "PageBuilder/Navigation/Frontend/Navigation/HeaderNavigation";
+import NavigationMobile from "PageBuilder/Navigation/Frontend/Navigation/NavigationMobile";
+import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
 import React from "react";
 import clsx from "clsx";
 
