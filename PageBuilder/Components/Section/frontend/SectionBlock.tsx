@@ -6,10 +6,6 @@ import React from "react";
 import type { SectionResult } from "../section.query";
 import { ImageResult } from "PageBuilder/constants";
 
-const isDefault = (item: any) => {
-  return item === undefined || item === null;
-};
-
 const SectionBlock: React.FC<SectionResult> = (props) => {
   const {
     content,
@@ -36,10 +32,9 @@ const SectionBlock: React.FC<SectionResult> = (props) => {
         width={type || autoType}
         {...(title && { id: title })}
         className={clsx({
-          "grid  grid-cols-1  md:grid-cols-2 lg:grid-cols-3 md:gap-8 ":
-            hasImage,
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8": hasImage,
           "text-center": textDirection === "center",
-          " text-right ": textDirection === "right",
+          "text-right": textDirection === "right",
         })}
       >
         {hasImage ? (
@@ -51,7 +46,7 @@ const SectionBlock: React.FC<SectionResult> = (props) => {
         )}
       </Section>
 
-      <div className="clear-both "></div>
+      <div className="clear-both"></div>
     </>
   );
 };
@@ -64,7 +59,7 @@ const WithImage: React.FC<{
     <>
       <div
         className={clsx(
-          "relative overflow-hidden aspect-w-1 aspect-h-1 border-2 ",
+          "relative overflow-hidden aspect-w-1 aspect-h-1 border-2",
           {
             " md:order-2 ": place === "r",
           }

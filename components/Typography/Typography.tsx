@@ -26,7 +26,6 @@ interface TypographyProps {
   as?: ElementKeys;
   className?: string;
   spacer?: boolean;
-
   space?: boolean;
 }
 

@@ -22,7 +22,7 @@ function ListWrap<T>(props: IListWrapAutoProps<T>) {
 
   return (
     <ul
-      className={clsx("grid   grid-flow-row gap-8 ", {
+      className={clsx("grid grid-flow-row gap-8 ", {
         "grid-cols-1": columnsMobile === 1,
         "grid-cols-2": columnsMobile === 2,
         "grid-cols-3": columnsMobile === 3,
@@ -44,13 +44,6 @@ function ListWrap<T>(props: IListWrapAutoProps<T>) {
     </ul>
   );
 }
-
-interface IListItemProps {}
-
-const ListItem: React.FC<IListItemProps> = (props) => {
-  const { children } = props;
-  return <li>{children}</li>;
-};
 
 const List = { wrap: ListWrap };
 export default List;

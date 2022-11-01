@@ -4,7 +4,8 @@
   "cSpell.words": [
     "clsx",
     "hotspot",
-    "lqip"
+    "lqip",
+    "testid"
   ],
   "files.exclude": {
     "**/.git": true,

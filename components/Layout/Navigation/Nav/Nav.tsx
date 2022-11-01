@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { Logo } from "@components/Layout/Logo";
 import Link from "@components/Link";
 import Svg from "@components/Svg";

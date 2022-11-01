@@ -64,10 +64,11 @@ export const LightBox: React.FC<LightBoxProps> = (props) => {
                 key={i._key}
                 className="flex flex-col flex-shrink-0 w-screen"
               >
-                <div className="relative h-full">
+                <div className="relative h-full ">
                   <SanityImage
                     sizes="60vw"
                     src={i.image}
+                    fill
                     className={"object-contain"}
                   />
                 </div>

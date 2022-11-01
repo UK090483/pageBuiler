@@ -1,7 +1,6 @@
+import * as React from "react";
 import CardImage from "./CardImage";
 import CardWrap from "./CardWrap";
-
-import * as React from "react";
 import clsx from "clsx";
 
 interface ICardTitleProps {}
@@ -25,7 +24,7 @@ const CardInfo: React.FunctionComponent<ICardInfoProps> = (props) => {
   return (
     <div
       className={clsx("w-full flex flex-col gap-2", {
-        " text-center ": center,
+        "text-center": center,
       })}
     >
       {children}

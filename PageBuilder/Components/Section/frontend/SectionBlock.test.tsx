@@ -5,9 +5,6 @@ import {
   testText,
 } from "../../../__test__/test-utils";
 import SectionBlock from "./SectionBlock";
-import sectionBlockQuery from "../section.query";
-
-const database: any[] = [];
 
 describe("SectionBlock", () => {
   it("smoke", () => {
