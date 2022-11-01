@@ -1,3 +1,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .typo-colors {
+    --tw-typo-body: #374151;
+    --tw-typo-headings: #111827;
+    --tw-typo-lead: #4b5563;
+    --tw-typo-links: #111827;
+    --tw-typo-bold: #111827;
+    --tw-typo-light: #d1d5db;
+    --tw-typo-invert-body: #d1d5db;
+    --tw-typo-invert-headings: #fff;
+    --tw-typo-invert-lead: #9ca3af;
+    --tw-typo-invert-links: #fff;
+    --tw-typo-invert-bold: #fff;
+    --tw-typo-invert-light: #d1d5db;
+  }
+
+  .typo-invert {
+    --tw-typo-body: var(--tw-typo-invert-body);
+    --tw-typo-headings: var(--tw-typo-invert-headings);
+    --tw-typo-lead: var(--tw-typo-invert-lead);
+    --tw-typo-links: var(--tw-typo-invert-links);
+    --tw-typo-bold: var(--tw-typo-invert-bold);
+    --tw-typo-invert-light: var(--tw-typo-invert-light);
+  }
+
+  .typo-colors :where(p, a, ul, ol, blockquote) {
+    color: var(--tw-typo-body);
+  }
+  .typo-colors :where(h1, h2, h3, h4) {
+    color: var(--tw-typo-headings);
+  }
+  .typo-colors :where(a) {
+    color: var(--tw-typo-link);
+  }
+
+  .typo-spacings :where(h1, h2, h3, h4, p, a, ul, ol, blockquote) {
+    @apply mb-[1.2em] last:mb-0;
+  }
+
+  .typo-weights :where(h1) {
+    @apply font-black;
+  }
+  .typo-weights :where(h2) {
+    @apply font-extrabold;
+  }
+  .typo-weights :where(h3, h4) {
+    @apply font-bold;
+  }
+
+  .typo-sizes :where(h1) {
+    @apply text-4xl lg:text-5xl;
+  }
+  .typo-sizes :where(h2) {
+    @apply text-3xl lg:text-4xl;
+  }
+  .typo-sizes :where(h3) {
+    @apply text-2xl lg:text-3xl;
+  }
+  .typo-sizes ul li,
+  .typo-sizes ol li {
+    @apply mb-3;
+  }
+
+  .typo :where(ul):not(.list-none) {
+    @apply list-disc pl-[0.8em];
+  }
+  .typo :where(ol):not(.list-none) {
+    @apply list-decimal pl-[1.1em];
+  }
+
+  ul li::marker {
+    color: var(--tw-typo-light);
+  }
+
+  .typo blockquote {
+    @apply italic relative pl-3 border-l-8 py-3 font-semibold;
+    color: var(--tw-typo-bold);
+    border-color: var(--tw-typo-light);
+  }
+}

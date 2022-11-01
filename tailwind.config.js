@@ -3,11 +3,9 @@ const tStyles = require("@tailwindcss/typography/src/styles");
 
 module.exports = {
   content: [
-    "./PB/**/*.{js,ts,jsx,tsx}",
-    "./PageBuilderPlugins/**/*.{js,ts,jsx,tsx}",
+    "./PageBuilder/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    "./services/**/*.{js,ts,jsx,tsx}",
     "./lib/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "media", // or 'media' or 'class'
@@ -107,8 +105,8 @@ module.exports = {
               const SizeCss = {};
               const SpaceCss = {};
 
-              console.log({ cssKey, cssValue });
-              console.log("+++++--");
+              // console.log({ cssKey, cssValue });
+              // console.log("+++++--");
 
               SizeCss["font-size"] = cssValue.fontSize;
               SizeCss["line-height"] = cssValue.lineHeight;
@@ -127,32 +125,31 @@ module.exports = {
         return acc;
       }, {});
 
-      console.log(classes);
       addComponents({
-        ...classes,
-
-        ".typo-space": {
-          h1: {
-            ["margin-bottom"]: "0.8333333em",
-          },
-          h2: {
-            ["margin-top"]: "1.5em",
-            ["margin-bottom"]: "2em",
-          },
-          h3: {
-            ["margin-top"]: "1.6em",
-            ["margin-bottom"]: "0.6em",
-          },
-          h4: {
-            ["margin-top"]: "1.5em",
-            ["margin-bottom"]: "0.5em",
-          },
-        },
+        // ...classes,
+        // ".typo-space": {
+        //   h1: {
+        //     ["margin-bottom"]: "0.8333333em",
+        //   },
+        //   h2: {
+        //     ["margin-top"]: "1.5em",
+        //     ["margin-bottom"]: "2em",
+        //   },
+        //   h3: {
+        //     ["margin-top"]: "1.6em",
+        //     ["margin-bottom"]: "0.6em",
+        //   },
+        //   h4: {
+        //     ["margin-top"]: "1.5em",
+        //     ["margin-bottom"]: "0.5em",
+        //   },
+        // },
       });
       // Add your custom styles here
     }),
     require("@tailwindcss/typography"),
     require("tailwindcss-debug-screens"),
     require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/line-clamp"),
   ],
 };
