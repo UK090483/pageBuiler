@@ -12,7 +12,7 @@ crop,
 hotspot,
 asset,
 ...(asset->{
-    'alt':altText, 
+  'alt':altText, 
     url,
     'aspectRatio':metadata.dimensions.aspectRatio,
     "lqip":metadata.lqip,

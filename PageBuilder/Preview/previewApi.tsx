@@ -26,6 +26,8 @@ const getPreviewApi = (options?: getPreviewApiProps) => {
   } = options || defaultProps;
 
   if (!client) throw new Error("SanityClient missing in PreviewApi");
+  if (!client.config().token)
+    throw new Error("SanityClient missing token in PreviewApi");
 
   const previewApi = (req: NextApiRequest, res: NextApiResponse) => {
     const { query } = req;

@@ -1,4 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
+
+import SanityImage from "@components/SanityImage";
+import Image from "next/image";
+
 /* eslint-disable @next/next/no-img-element */
 const MarUp = (props: { className?: string }) => {
   return (
@@ -71,27 +75,25 @@ const MarUp = (props: { className?: string }) => {
 };
 
 const Style = () => {
+  const src = {
+    alt: "ss",
+    aspectRatio: 1.5,
+    asset: {
+      _ref: "image-ed6a157978dd3b47dd433fc4e4ceb7972ffcf02c-6192x4128-jpg",
+      _type: "reference",
+    },
+    crop: null,
+    height: 4128,
+    hotspot: null,
+    lqip: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAUGAQT/xAAkEAACAQQABQUAAAAAAAAAAAABAwIABAURBgcSIUETIlFxgf/EABcBAAMBAAAAAAAAAAAAAAAAAAACAwT/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/AEB5i5CGQXKNhBGPhHXqziSJ/tdF7zDbC4WLhu0tX1SVAb1uneMaeLOH0Yu7itC2xInNUADoHwPFbgOWmKseIi5rGXUVAdEGRGh9/NZ5FFLjrRt/YW9ysARYsH3DvRVP2UBCEQIgaAFFNkG1/9k=",
+    url: "https://cdn.sanity.io/images/j3oofl7g/development/ed6a157978dd3b47dd433fc4e4ceb7972ffcf02c-6192x4128.jpg",
+    width: 6192,
+  };
   return (
     <div className="mt-44 ">
-      {/* <div className=" mx-auto w-full h-[1000px] relative">
-        <img
-          style={{
-            border: "red solid 1px",
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-            left: 0,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            color: "transparent",
-            backgroundSize: "cover",
-            backgroundPosition: "50% 50%",
-            backgroundRepeat: "no-repeat",
-            backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http%3A//www.w3.org/2000/svg'%3E%3Cimage style='filter:blur(0px)' x='0' y='0' height='100%25' width='100%25' href='data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAALABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAYBBAUH/8QAIhAAAgIBAwQDAAAAAAAAAAAAAQIDBAAFERIGIjFxExQh/8QAFgEBAQEAAAAAAAAAAAAAAAAAAQAD/8QAGhEBAAMAAwAAAAAAAAAAAAAAAQAREwIhMf/aAAwDAQACEQMRAD8A5X0vTs1Z6tnTy0gff5fztUe8s6hFD1FcaS/ZSs0a8VJG3LFbT79utWKwWJI138KcmaV5HXmxb3muat3A5h1U2Kt+jpsf1SrzFCe9fBwxaZ2DEAnbfDLIfYas/9k='/%3E%3C/svg%3E")`,
-          }}
-        />
-      </div> */}
+      <SanityImage src={src} width={500} height={500} sizes="200px" />
+
+      <Image alt="test" src={src.url} width={500} height={500} sizes="200px" />
 
       <MarUp className="prose  mx-auto debug  " />
 

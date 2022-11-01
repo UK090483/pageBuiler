@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import type { SanityClient } from "@sanity/client/sanityClient";
+import { SLUG_PROJECTION } from "PageBuilder/constants";
 
 export default async function preview(
   req: NextApiRequest,
@@ -23,15 +24,22 @@ export default async function preview(
   }
 
   const doc = await client.fetch(
-    `*[ _id == "${req.query.id}" ][0]{ 'slug':select( defined(pageType) => pageType->slug.current +'/'+ slug.current , slug.current)}`
+    `*[ _id == "${req.query.id}" || _id == "drafts.${
+      req.query.id
+    }" ][0]{ 'slug':${SLUG_PROJECTION()}}`
   );
+
+  if (!doc?.slug) {
+    res.send("setting the slug is mandatory !!!");
+    return;
+  }
 
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({});
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.writeHead(307, { location: doc.slug ? `/${doc.slug}` : "/" });
+  res.writeHead(307, { location: doc.slug ? `${doc.slug}` : "/" });
 
   return res.end();
 }
