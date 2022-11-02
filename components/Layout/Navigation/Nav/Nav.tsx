@@ -5,7 +5,7 @@ import { useScrollThreshold } from "@hooks/useScrollThreshold";
 import { LangSwitch } from "PageBuilder/Navigation/Frontend/LangSwitch/LangSwitch";
 import { HeaderNavigation } from "PageBuilder/Navigation/Frontend/Navigation/HeaderNavigation";
 import NavigationMobile from "PageBuilder/Navigation/Frontend/Navigation/NavigationMobile";
-import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
+import { usePageBuilderContext } from "PageBuilder/lib/PageBuilderContext";
 import React from "react";
 import clsx from "clsx";
 

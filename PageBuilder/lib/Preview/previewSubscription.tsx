@@ -1,5 +1,5 @@
 import { createPreviewSubscriptionHook } from "next-sanity";
-import { config } from "../../lib/SanityPageBuilder/lib/config";
+import { config } from "../../../lib/SanityService/config";
 
 const usePreviewSubscription = createPreviewSubscriptionHook({
   ...config,

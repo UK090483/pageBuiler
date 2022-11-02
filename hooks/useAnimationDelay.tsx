@@ -10,6 +10,7 @@ type UseAnimationDelayProps = {
   delay: number;
   listener?: boolean;
 };
+
 const useAnimationDelay = ({ delay, listener }: UseAnimationDelayProps) => {
   const timeout = useRef<NodeJS.Timeout | null>(null);
 

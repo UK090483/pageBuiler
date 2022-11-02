@@ -2,7 +2,7 @@ import React from "react";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
-import { usePageBuilderContext } from "../../../PageBuilderContext";
+import { usePageBuilderContext } from "../../../lib/PageBuilderContext";
 
 const metaImageParams = "?w=1200&h=630&bg=fff&fit=fillmax";
 const titlePrefix = "Pagetitle | ";

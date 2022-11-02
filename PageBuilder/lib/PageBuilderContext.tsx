@@ -1,4 +1,4 @@
-import { PageResult } from "./ContentTypes/Page/page.types";
+import { PageResult } from "../ContentTypes/Page/page.types";
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import usePreviewSubscription from "./Preview/previewSubscription";

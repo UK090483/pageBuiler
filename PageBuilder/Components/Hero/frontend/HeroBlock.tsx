@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import SanityImage from "@components/SanityImage";
-import { usePageBuilderContext } from "PageBuilder/PageBuilderContext";
+import { usePageBuilderContext } from "PageBuilder/lib/PageBuilderContext";
 import RichText from "PageBuilder/RichText/frontend/RichText";
 import React from "react";
 import { heroResult } from "../hero.query";

@@ -1,6 +1,6 @@
 import type { SanityClient } from "@sanity/client";
 import { GetStaticPropsResult, GetStaticPropsContext } from "next";
-import { localizedQueryFn } from "../helper/withLocalization";
+import { localizedQueryFn } from "../../helper/withLocalization";
 
 type fetchStaticPropsProps = {
   items: Record<string, { query: localizedQueryFn }>;

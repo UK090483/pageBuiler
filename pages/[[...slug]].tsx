@@ -1,4 +1,4 @@
-import BodyParser from "PageBuilder/BodyParser";
+import BodyParser from "PageBuilder/lib/BodyParser";
 import GalleryPlug from "PageBuilder/Components/ImageGallery/frontend/ImageGalleryComponent";
 import SectionBlock from "PageBuilder/Components/Section/frontend/SectionBlock";
 import HeroBlock from "PageBuilder/Components/Hero/frontend/HeroBlock";
@@ -11,8 +11,8 @@ import {
 
 import type { GetStaticPaths, GetStaticProps } from "next";
 
-import fetchStaticPath from "PageBuilder/next/fetchStaticPath";
-import fetchStaticProps from "PageBuilder/next/fetchStaticProps";
+import fetchStaticPath from "PageBuilder/lib/next/fetchStaticPath";
+import fetchStaticProps from "PageBuilder/lib/next/fetchStaticProps";
 
 import { pageQuery } from "PageBuilder/ContentTypes/Page/page.query";
 export type PageResult = { content?: any };

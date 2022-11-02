@@ -1,4 +1,3 @@
-import { mockClient } from "@lib/SanityPageBuilder/lib/MockClient/MockClient";
 import heroBlockQuery from "./HeroBlock";
 import HeroBlock from "./HeroBlock";
 
