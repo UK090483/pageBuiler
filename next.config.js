@@ -8,6 +8,7 @@ const config = {
   reactStrictMode: true,
   // experimental: {
   //   appDir: true,
+  
   // },
   i18n: {
     locales: Object.keys(appConfig.locales),
