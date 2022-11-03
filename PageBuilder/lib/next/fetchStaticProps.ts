@@ -51,7 +51,6 @@ const fetchStaticProps = async (
 
   console.time(context.params?.slug && context.params?.slug[1]);
   const res = await getSanityClient(!!context.preview).fetch(query);
-
   console.timeEnd(context.params?.slug && context.params?.slug[1]);
 
   if (res) {

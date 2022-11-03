@@ -1,6 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 
+import Carousel from "@components/Carousel/Carousel";
+import { CarouselContextProvider } from "@components/Carousel/CarouselContext";
+import CarouselItemWrap from "@components/Carousel/CarouselItemWrap";
+import Dots from "@components/Carousel/Dots";
+import Navigation from "@components/Carousel/Navigation";
 import SanityImage from "@components/SanityImage";
+import clsx from "clsx";
+import { divide } from "lodash";
 import Image from "next/image";
 
 /* eslint-disable @next/next/no-img-element */
@@ -89,16 +96,50 @@ const Style = () => {
     url: "https://cdn.sanity.io/images/j3oofl7g/development/ed6a157978dd3b47dd433fc4e4ceb7972ffcf02c-6192x4128.jpg",
     width: 6192,
   };
+
+  const items = [{ title: "a" }, { title: "b" }, { title: "c" }];
   return (
     <div className="mt-44 ">
-      <SanityImage src={src} width={500} height={500} sizes="200px" />
+      <Carousel items={items}>
+        <div className="text-red h-52 bg-gray-500  ">1</div>
+        <div className="text-red h-52 bg-gray-500  ">2</div>
+        <div className="text-red h-52 bg-gray-500  ">3</div>
+      </Carousel>
+
+      {/* <CarouselContextProvider items={items}>
+        <Navigation>
+          <CarouselItemWrap>
+            {({ activeItem }) => {
+              return items.map((i, index) => {
+                console.log({ activeItem, index });
+
+                const isActive = activeItem === index;
+
+                return (
+                  <div
+                    className={clsx(
+                      "w-full   col-start-1 col-span-1 row-start-1 row-span-1 text-9xl transition-opacity flex justify-center items-center",
+                      { " opacity-100 ": isActive, " opacity-0 ": !isActive }
+                    )}
+                    key={i.title}
+                  >
+                    {i.title}
+                  </div>
+                );
+              });
+            }}
+          </CarouselItemWrap>
+        </Navigation>
+        <Dots />
+      </CarouselContextProvider> */}
+      {/* <SanityImage src={src} width={500} height={500} sizes="200px" />
 
       <Image alt="test" src={src.url} width={500} height={500} sizes="200px" />
 
       <MarUp className="prose  mx-auto debug  " />
 
       <MarUp className="max-w-2xl mx-auto typo typo-spacings typo-sizes typo-weigths " />
-      <MarUp className="max-w-2xl mx-auto bg-black typo-invert  typo-spacings typo-sizes typo-weigths  " />
+      <MarUp className="max-w-2xl mx-auto bg-black typo-invert  typo-spacings typo-sizes typo-weigths  " /> */}
     </div>
   );
 };

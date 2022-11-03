@@ -1,7 +1,7 @@
 export const SLUG_PROJECTION = (locale?: string) =>
   locale
-    ? `select(_id == *[ _type == 'menuConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + coalesce(slug_${locale},slug).current, '/' + coalesce(slug_${locale},slug).current, )`
-    : `select(_id == *[ _type == 'menuConfig'][0].indexPage._ref => '/', _type != 'page' => _type + '/' + slug.current, '/' + slug.current, )`;
+    ? `select(_id == *[ _type == 'menuConfig'][0].indexPage._ref => '/', _type != 'page' =>'/'+ _type + '/' + coalesce(slug_${locale},slug).current, '/' + coalesce(slug_${locale},slug).current, )`
+    : `select(_id == *[ _type == 'menuConfig'][0].indexPage._ref => '/', _type != 'page' => '/'+ _type + '/' + slug.current, '/' + slug.current, )`;
 
 export type SlugResult = string;
 

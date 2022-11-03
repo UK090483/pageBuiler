@@ -10,8 +10,8 @@ const CardWrap: React.FunctionComponent<ICardWrapProps> = (props) => {
   const { variant = "vertical", children, ...rest } = props;
   return (
     <Link
-      className={clsx("flex flex-col gap-2 ", {
-        "flex-row gap-8": variant === "horizontal",
+      className={clsx("flex flex-col gap-2", {
+        " md:flex-row md:gap-8": variant === "horizontal",
       })}
       {...rest}
     >

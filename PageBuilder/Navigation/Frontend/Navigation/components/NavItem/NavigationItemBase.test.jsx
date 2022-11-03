@@ -1,11 +1,18 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
-import NavigationModulItemBase from "./NavigationItemBase";
+import NavigationItemBase from "./NavigationItemBase";
+
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 
 
 describe("NavigationModulItemBase", () => {
+
   it("smoke  ", () => {
-    render(<NavigationModulItemBase/>)
+    useRouter.mockImplementation(() => ({
+      query: { locale: "de" },
+      asPath: "",
+    }));
+    render(<NavigationItemBase item={{link:{internal:'/'}}}/>)
   });
 });

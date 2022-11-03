@@ -16,7 +16,7 @@ const NavigationLink: React.FC<NavigationLinkProps> = (props) => {
       className={`flex items-center leading-none text-center ${
         focus ? "" : ""
       }`}
-      href={href || "/"}
+      {...(href ? { href } : {})}
       internal={internal}
     >
       {children}

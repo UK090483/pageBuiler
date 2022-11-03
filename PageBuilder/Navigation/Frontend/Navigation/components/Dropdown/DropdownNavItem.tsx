@@ -1,21 +1,19 @@
-import { useNavigation, useNavigationOpen } from "../../NavigationContext";
+import { useNavigationOpen } from "../../NavigationContext";
 import React, { useRef } from "react";
 import { NavItem } from "../../types";
-import { NavigationModulDropdownContainer } from "./NavigationModulDropdownContainer";
-import useIsActive from "../../helper/useIsActive";
+import { NavigationDropdownContainer } from "./NavigationDropdownContainer";
 import NavigationItemBase from "../NavItem/NavigationItemBase";
 
-type NavigationModulDropdownProps = {
+type NavigationDropdownProps = {
   items?: NavItem[];
   id: string;
 };
 
-const DropdownNavItem: React.FC<NavigationModulDropdownProps> = (props) => {
+const DropdownNavItem: React.FC<NavigationDropdownProps> = (props) => {
   const { children, items, id } = props;
   const hasItems = items && items.length > 0;
 
   const { open, setOpen } = useNavigationOpen(id);
-  const { active } = useIsActive({ items });
 
   const [bottom, setBottom] = React.useState<number>(0);
   const [target, setTarget] = React.useState<{ x: number; y: number }>({
@@ -68,17 +66,11 @@ const DropdownNavItem: React.FC<NavigationModulDropdownProps> = (props) => {
         onClick={handleNavClick}
         data-testid={"DropdownNavItem_" + id}
       >
-        <NavigationItemBase
-          active={active}
-          props={props}
-          place="dropdown"
-          icon
-          hover={open}
-        >
+        <NavigationItemBase item={props} place="dropdown" icon hover={open}>
           {children}
         </NavigationItemBase>
       </button>
-      <NavigationModulDropdownContainer
+      <NavigationDropdownContainer
         ref={wrapRef}
         handleMouseLeave={handleMouseLeave}
         handleMouseEnter={handleMouseEnter}

@@ -1,3 +1,7 @@
+import Carousel from "@components/Carousel/Carousel";
+import CarouselItemWrap from "@components/Carousel/CarouselItemWrap";
+import Dots from "@components/Carousel/Dots";
+import Navigation from "@components/Carousel/Navigation";
 import clsx from "clsx";
 import * as React from "react";
 
@@ -11,18 +15,35 @@ interface IListWrapProps {
 interface IListWrapAutoProps<T extends unknown = {}> {
   columns?: number;
   columnsMobile?: number;
-  variant?: "grid";
+  variant?: "grid" | "carousel";
   items: T[];
-  key: keyof T;
+  useKey: keyof T;
   children: (props: T) => React.ReactNode;
 }
 
 function ListWrap<T>(props: IListWrapAutoProps<T>) {
-  const { children, columns = 3, columnsMobile = 1, items, key } = props;
+  const {
+    children,
+    columns = 3,
+    columnsMobile = 1,
+    items,
+    useKey,
+    variant = "grid",
+  } = props;
+
+  if (variant === "carousel") {
+    return (
+      <Carousel items={items}>
+        {items.map((i) => (
+          <li key={i[useKey] as string | number}>{children(i)}</li>
+        ))}
+      </Carousel>
+    );
+  }
 
   return (
     <ul
-      className={clsx("grid grid-flow-row gap-8 ", {
+      className={clsx("grid grid-flow-row gap-8  ", {
         "grid-cols-1": columnsMobile === 1,
         "grid-cols-2": columnsMobile === 2,
         "grid-cols-3": columnsMobile === 3,
@@ -39,7 +60,7 @@ function ListWrap<T>(props: IListWrapAutoProps<T>) {
     >
       {items &&
         items.map((i) => (
-          <li key={i[key] as string | number}>{children(i)}</li>
+          <li key={i[useKey] as string | number}>{children(i)}</li>
         ))}
     </ul>
   );

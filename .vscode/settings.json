@@ -10,8 +10,8 @@
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
+    "**/.hg": false,
+    "**/CVS": false,
     "**/.DS_Store": true,
     "**/Thumbs.db": true
   },

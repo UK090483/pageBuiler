@@ -12,19 +12,21 @@ const CardImage: React.FunctionComponent<ICardImageProps> = (props) => {
   if (!props.src) return null;
 
   return (
-    <div
-      className={clsx("shadow-xl overflow-hidden   relative", {
-        "w-full aspect-w-3 aspect-h-2 rounded-lg": variant === "aspect",
-        "w-60 h-60 mx-auto rounded-full ": variant === "round",
-        "w-full": variant === "intrinsic",
-      })}
-    >
-      <SanityImage
-        {...rest}
-        fill={variant !== "intrinsic"}
-        className=" object-cover "
-        sizes="200px"
-      />
+    <div className="w-full">
+      <div
+        className={clsx("shadow-xl overflow-hidden   relative", {
+          "w-full aspect-w-3 aspect-h-2 rounded-lg": variant === "aspect",
+          "w-60 h-60 mx-auto rounded-full ": variant === "round",
+          "w-full": variant === "intrinsic",
+        })}
+      >
+        <SanityImage
+          {...rest}
+          fill={variant !== "intrinsic"}
+          className=" object-cover "
+          sizes="600px"
+        />
+      </div>
     </div>
   );
 };

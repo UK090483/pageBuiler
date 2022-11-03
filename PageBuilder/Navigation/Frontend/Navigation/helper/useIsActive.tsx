@@ -1,33 +1,18 @@
+import { useRouter } from "next/router";
 import { NavItem } from "../types";
 interface useIsActiveProps extends NavItem {}
 const useIsActive = (props: useIsActiveProps) => {
-  const pathName =
-    typeof window !== "undefined" ? window.location?.pathname : "";
+  const { items, link } = props;
+  const { asPath } = useRouter();
 
-  const isActive = (navItem: NavItem): boolean => {
-    return checkActive(navItem, pathName);
-  };
+  const cleanAsPath = asPath.split("?")[0];
 
-  return {
-    isActive,
-    active: checkActive(props, pathName),
-  };
-};
-
-export default useIsActive;
-
-const checkActive = (item: NavItem, asPath: string): boolean => {
-  if (item.link) {
-    return item.link.href === asPath;
+  if (link) {
+    return link.internal === cleanAsPath;
   }
-
-  if (item.items) {
-    const res = item.items.find((i) => {
-      return checkActive(i, asPath);
-    });
-
+  if (items) {
+    const res = items.find((i) => i.link?.internal === cleanAsPath);
     return !!res;
   }
-
-  return false;
 };
+export default useIsActive;

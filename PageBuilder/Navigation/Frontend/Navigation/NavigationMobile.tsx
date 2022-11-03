@@ -158,13 +158,13 @@ const ConditionalButton: React.FC<
   const hasChildren = props.items && props.items.length > 0;
   return hasChildren ? (
     <button onClick={() => onClick("item")}>
-      <NavigationItemBaseComponent active={true} icon props={props}>
+      <NavigationItemBaseComponent icon item={props}>
         {label}
       </NavigationItemBaseComponent>
     </button>
   ) : (
     <NavigationLinkComponent onClick={() => onClick("link")} {...props.link}>
-      <NavigationItemBaseComponent active={false} props={props}>
+      <NavigationItemBaseComponent item={props}>
         {label}
       </NavigationItemBaseComponent>
     </NavigationLinkComponent>

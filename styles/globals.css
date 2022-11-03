@@ -60,8 +60,7 @@
   .typo-sizes :where(h3) {
     @apply text-2xl lg:text-3xl;
   }
-  .typo-sizes ul li,
-  .typo-sizes ol li {
+  .typo-sizes :where(ul, ol):not(.list-none) li {
     @apply mb-3;
   }
 

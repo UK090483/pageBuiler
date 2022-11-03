@@ -1,5 +1,5 @@
 import React from "react";
-import NavigationModulItemBase from "./components/NavItem/NavigationItemBase";
+import NavigationItemBase from "./components/NavItem/NavigationItemBase";
 import Dropdown from "./components/Dropdown/Dropdown";
 import prepareNavItems from "./helper/prepareNavItems";
 import { NavItem } from "./types";
@@ -23,15 +23,9 @@ const NavOverview: React.FC<Props> = (props) => {
 
           return (
             <li key={item.label} className="m-2 ">
-              <NavigationModulItemBase
-                active={false}
-                props={item}
-                bold
-                icon
-                hover
-              >
+              <NavigationItemBase item={item} bold icon hover>
                 {item.label}
-              </NavigationModulItemBase>
+              </NavigationItemBase>
               <Dropdown list={list} items={items} />
             </li>
           );

@@ -18,8 +18,6 @@ const NavigationItem: React.FC<NavItemProps> = (props) => {
   const hasItems = !!items && items.length > 0;
   const hasLink = !!link && (!!link.href || !!link?.internal);
 
-  const { active } = useIsActive(props);
-
   const {
     NavItemBase: DefaultNavigationItemBase,
     NavItemLink: DefaultNavigationLink,
@@ -36,7 +34,7 @@ const NavigationItem: React.FC<NavItemProps> = (props) => {
   if (!hasItems && hasLink) {
     return (
       <NavigationLinkComponent {...link}>
-        <NavigationItemBaseComponent active={active} props={props} place="link">
+        <NavigationItemBaseComponent item={props} place="link">
           {label}
         </NavigationItemBaseComponent>
       </NavigationLinkComponent>
@@ -51,7 +49,7 @@ const NavigationItem: React.FC<NavItemProps> = (props) => {
     );
   }
   return (
-    <NavigationItemBaseComponent active={active} props={props}>
+    <NavigationItemBaseComponent item={props}>
       {label}
     </NavigationItemBaseComponent>
   );

@@ -1,26 +1,31 @@
+import clsx from "clsx";
+import useIsActive from "../../helper/useIsActive";
+import { NavItem } from "../../types";
+
 export type NavItemBaseProps = {
   icon?: boolean;
   hover?: boolean;
   bold?: boolean;
   place?: "link" | "dropdown" | "header" | "dropdown/link";
-  props: { [k: string]: any };
-  active: boolean;
+  item: NavItem;
 };
 
-export const NavigationItemBase: React.FC<NavItemBaseProps> = ({
-  children,
-  icon,
-  hover,
-  bold,
-  place,
-}) => {
+export const NavigationItemBase: React.FC<NavItemBaseProps> = (props) => {
+  const { children, icon, hover, bold, place, item } = props;
+  const active = useIsActive(item);
+
   return (
     <span
-      className={`block w-full px-5 py-4 hover:underline decoration-2 underline-offset-2 leading-none whitespace-nowrap transition-colors duration-500 font-bold text-base-mobile xl:text-base truncate ${
-        place === "dropdown/link"
-          ? "text-black hover:bg-black  hover:text-white "
-          : ""
-      }  ${bold ? " font-bold " : ""}  `}
+      className={clsx(
+        "block w-full px-5 py-4 leading-none whitespace-nowrap transition-colors font-bold text-base-mobile xl:text-base truncate ",
+        "hover:underline decoration-2  underline-offset-4",
+        {
+          "text-black hover:bg-black  hover:text-white ":
+            place === "dropdown/link",
+          "font-bold": bold,
+          "underline ": active,
+        }
+      )}
     >
       {children}
       {icon && (

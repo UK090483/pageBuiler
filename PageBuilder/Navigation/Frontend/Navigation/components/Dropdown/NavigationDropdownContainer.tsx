@@ -50,7 +50,7 @@ const Render: React.ForwardRefRenderFunction<
   );
 };
 
-export const NavigationModulDropdownContainer = React.forwardRef<
+export const NavigationDropdownContainer = React.forwardRef<
   HTMLDivElement,
   NavigationModuleDropdownContainerProps
 >(Render);

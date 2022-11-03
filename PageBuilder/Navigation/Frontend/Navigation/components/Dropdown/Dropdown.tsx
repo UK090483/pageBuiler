@@ -14,7 +14,7 @@ interface DropdownProps {
 const Dropdown: React.FC<DropdownProps> = ({ items, list, onClick }) => {
   const ref = useRef<HTMLUListElement | null>(null);
   return (
-    <ul ref={ref} className=" flex justify-between w-full ">
+    <ul ref={ref} className=" flex justify-between w-full list-none ">
       {list &&
         list.map((i, index) => (
           <List
@@ -42,17 +42,10 @@ export const List: React.FC<{
     NavItemLink: DefaultNavigationLink,
   } = useNavigation();
 
-  const { isActive } = useIsActive({});
-
   return (
     <li>
       {label && (
-        <DefaultNavigationItemBase
-          active={false}
-          props={props}
-          place="header"
-          bold
-        >
+        <DefaultNavigationItemBase item={props} place="header" bold>
           {label}
         </DefaultNavigationItemBase>
       )}
@@ -62,11 +55,7 @@ export const List: React.FC<{
           return (
             <li key={label}>
               <DefaultNavigationLink onClick={onClick} {...link}>
-                <DefaultNavigationItemBase
-                  active={isActive(props)}
-                  props={props}
-                  place="dropdown/link"
-                >
+                <DefaultNavigationItemBase item={props} place="dropdown/link">
                   {label}
                 </DefaultNavigationItemBase>
               </DefaultNavigationLink>
