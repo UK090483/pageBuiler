@@ -34,13 +34,13 @@ type createContentTypeProps = {
 export type BaseContentTypeResult = {
   title?: string;
   description?: string;
-  featuredImage?: ImageResult;
+  mainImage?: ImageResult;
 };
 
 export const BaseContentTypeProjection = (locale?: string) => `
     ${localizeValue("title", locale)},
     ${localizeValue("description", locale)},
-    'featuredImage':featuredImage{${IMAG_PROJECTION}},
+    'mainImage':mainImage{${IMAG_PROJECTION}},
     `;
 
 export const getContentTypeBaseFields = ({ group }: { group?: string }) => [
@@ -66,7 +66,7 @@ export const getContentTypeBaseFields = ({ group }: { group?: string }) => [
     ...(group ? { group } : {}),
   },
   {
-    name: "featuredImage",
+    name: "mainImage",
     type: "defaultImage",
     ...(group ? { group } : {}),
   },
@@ -96,7 +96,7 @@ export function createContentType(
 
     preview: {
       select: {
-        media: "featuredImage",
+        media: "mainImage",
         title: "title",
         slug: "slug.current",
       },

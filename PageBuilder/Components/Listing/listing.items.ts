@@ -21,7 +21,7 @@ const customItem: ArrayOfType = {
       ],
     },
     {
-      name: "featuredImage",
+      name: "mainImage",
       type: "image",
     },
     {
@@ -36,6 +36,8 @@ export type listingItem = {
   title: string;
   reference?: string;
   variants?: { value: string; title: string }[];
+  filter?: { value: string; title: string; queryFilter: string }[];
+  projection?: string;
   items?: ArrayOfType[];
 };
 
@@ -56,6 +58,10 @@ export const items: listingItem[] = [
     name: "post",
     title: "Post",
     reference: "post",
+    filter: [
+      { title: "All", value: "all", queryFilter: `&& title match "mag*"` },
+      { title: "With A", value: "withA", queryFilter: `&& title match "a*"` },
+    ],
     variants: [
       { value: "grid", title: "Grid" },
       { value: "list", title: "List" },

@@ -49,9 +49,9 @@ const ListingBlock: React.FC<listingQueryResult & componentStyleResult> = (
   return (
     <Section bg={backgroundColor} {...rest} noProse>
       <List.wrap columns={columns} items={items} useKey="key">
-        {({ featuredImage, slug, title, description }) => (
+        {({ mainImage, slug, title, description }) => (
           <Card.Wrap internal={slug || "/"} variant={cardVariant}>
-            <Card.Image variant={imageVariant} src={featuredImage} />
+            <Card.Image variant={imageVariant} src={mainImage} />
             <Card.Info center={infoAlign}>
               <Card.Title>{title}</Card.Title>
               <Card.Description>{description}</Card.Description>

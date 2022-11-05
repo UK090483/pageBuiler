@@ -1,7 +1,7 @@
-import { testProjection } from "../../__test__/queryTest";
+import { testProjection, testQuery } from "../../__test__/queryTest";
 import { listProjection } from "./listing.query";
 
-describe("Component Helper", () => {
+describe("Listing Query", () => {
   it("projection should be Valid ", async () => {
     const res = await testProjection(listProjection());
     const resEn = await testProjection(listProjection("en"));

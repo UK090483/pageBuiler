@@ -11,7 +11,7 @@ const Hero: React.FC<heroResult> = (props) => {
 
   const { data } = usePageBuilderContext();
 
-  const _image = image && image.url ? image : data?.featuredImage;
+  const _image = image && image.url ? image : data?.mainImage;
 
   const _content = content ? (
     <RichText content={content} />

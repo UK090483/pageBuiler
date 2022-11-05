@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@charlietango/use-focus-trap": "^1.3.0",
+    "@ngneat/falso": "^6.1.0",
     "@portabletext/react": "^1.0.6",
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
@@ -45,6 +46,7 @@
     "react-textfit": "^1.1.1",
     "react-tooltip": "^4.2.21",
     "react-use": "^17.3.1",
+    "request": "^2.88.2",
     "sanity-v3-dev-prev": "npm:sanity@^3.0.0-dev-preview.20",
     "sharp": "^0.30.2",
     "sitemap": "^7.1.1",
@@ -67,6 +69,7 @@
     "@types/node": "16.11.6",
     "@types/react": "17.0.34",
     "@types/react-textfit": "^1.1.0",
+    "@types/request": "^2.48.8",
     "@types/uuid": "^8.3.3",
     "@types/xml2js": "^0.4.9",
     "autoprefixer": "^10.4.2",

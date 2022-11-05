@@ -43,6 +43,25 @@ const listingSchema: ObjectDefinition = {
         },
         hidden: (props: any) => props?.parent?.contentType !== i.name,
       })),
+
+    // Build filter List
+    ...items
+      .filter((i) => !!i.filter)
+      .map((i) => ({
+        group: "content",
+        title: `Filter`,
+        name: `${i.name}Filter`,
+        type: "string",
+        options: {
+          list: [
+            ...[...(i.filter ? i.filter : [])].map((i) => ({
+              title: i.title,
+              value: i.value,
+            })),
+          ],
+        },
+        hidden: (props: any) => props?.parent?.contentType !== i.name,
+      })),
     // Build Reference List
     ...items
       .filter((i) => !!i.items)

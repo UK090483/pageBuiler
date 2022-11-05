@@ -10,38 +10,49 @@ export type ListingItem = {
   key: string;
   title: string;
   name: string;
-  featuredImage: ImageResult;
+  mainImage: ImageResult;
   slug?: string;
   description: string;
-  variants?: { title: string; value: string }[];
 };
 
 type queryProps = {
   locale?: string;
 };
 
+const variants = items
+  .filter((i) => !!i.variants)
+  .reduce((acc, i) => acc + `${i.name}Variants,`, "");
+
+const getFilterQuery = (item: typeof items[0]) => {
+  if (!item.filter) return "";
+  return item.filter.reduce((acc, filter) => {
+    return (
+      acc +
+      `contentType == "${item.name}" && ${item.name}Filter == "${filter.value}"  => *[_type == "${item.name}" ${filter.queryFilter}],`
+    );
+  }, "");
+};
+const getReferenceQuery = (item: typeof items[0]) => {
+  return `contentType == "${item.name}" => [...${item.name}Items[]${
+    item.reference ? "->" : ""
+  }]`;
+};
+
 const listingQuery: localizedQueryFn = (locale) => `
 ...,
 contentType,
-${items
-  .filter((i) => !!i.variants)
-  .reduce((acc, i) => acc + `${i.name}Variants,`, "")}
-
+${variants}
 'items':select(
- ${items
-   .map(
-     (i) =>
-       `contentType == "${i.name}" => [...${i.name}Items[]${
-         i.reference ? "->" : ""
-       }] `
-   )
-   .join(",")}
+ ${items.reduce(
+   (acc, i) => acc + getFilterQuery(i) + getReferenceQuery(i) + ",",
+   ""
+ )}
 )[]{
     'key': coalesce(_id,_key),
     'slug': ${SLUG_PROJECTION(locale)},
     ${localizeValue("title", locale)},
     ${localizeValue("description", locale)},
-    'featuredImage':featuredImage{${IMAG_PROJECTION}}
+    'mainImage':mainImage{${IMAG_PROJECTION}}
 },
 `;
 
@@ -57,4 +68,5 @@ export type listingQueryResult = {
   _key: string;
   contentType: string;
   items: ListingItem[];
+  variant: string;
 } & componentStyleResult;
