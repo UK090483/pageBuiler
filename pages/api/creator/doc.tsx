@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import request from "request";
 
-import { randPost, randSlug, randImg } from "@ngneat/falso";
+import { randPost, randSlug, randImg, randTextRange } from "@ngneat/falso";
 import { DocumentDefinition } from "PageBuilder/types";
 
 import { v4 as uuid } from "uuid";
@@ -45,6 +45,8 @@ async function createDocument({ client }: createDocumentProps) {
     _id: `__fakeItem__${uuid()}`,
     title: randPost().title,
     title_en: randPost().title,
+    description: randTextRange({ min: 50, max: 160 }),
+    description_en: randTextRange({ min: 50, max: 160 }),
     slug: { _type: "slug", current: randSlug() },
     slug_en: { _type: "slug", current: randSlug() },
     mainImage,

@@ -13,6 +13,8 @@ export const testQuery = async (query: string, dataSet?: any[]) => {
 
     return result;
   } catch (error) {
+    console.log(error);
+
     return false;
   }
 };

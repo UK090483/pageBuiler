@@ -1,3 +1,4 @@
+import buildQuery from "../../lib/listingBuilder/buildQuery";
 import { ImageResult, IMAG_PROJECTION, SLUG_PROJECTION } from "../../constants";
 import { localizedQueryFn, localizeValue } from "../../helper/withLocalization";
 import {
@@ -19,45 +20,21 @@ type queryProps = {
   locale?: string;
 };
 
-const variants = items
-  .filter((i) => !!i.variants)
-  .reduce((acc, i) => acc + `${i.name}Variants,`, "");
-
-const getFilterQuery = (item: typeof items[0]) => {
-  if (!item.filter) return "";
-  return item.filter.reduce((acc, filter) => {
-    return (
-      acc +
-      `contentType == "${item.name}" && ${item.name}Filter == "${filter.value}"  => *[_type == "${item.name}" ${filter.queryFilter}],`
-    );
-  }, "");
-};
-const getReferenceQuery = (item: typeof items[0]) => {
-  return `contentType == "${item.name}" => [...${item.name}Items[]${
-    item.reference ? "->" : ""
-  }]`;
-};
-
-const listingQuery: localizedQueryFn = (locale) => `
-...,
-contentType,
-${variants}
-'items':select(
- ${items.reduce(
-   (acc, i) => acc + getFilterQuery(i) + getReferenceQuery(i) + ",",
-   ""
- )}
-)[]{
+const listingQuery: localizedQueryFn = (locale) =>
+  buildQuery(
+    items,
+    ` 
     'key': coalesce(_id,_key),
     'slug': ${SLUG_PROJECTION(locale)},
     ${localizeValue("title", locale)},
     ${localizeValue("description", locale)},
     'mainImage':mainImage{${IMAG_PROJECTION}}
-},
-`;
+  `
+  );
 
 export const listProjection: localizedQueryFn = (locale) => `
 _type == 'listing'=>{
+  _type,
 ${listingQuery(locale)}
 ${componentStyleProjection}
 },

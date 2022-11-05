@@ -1,3 +1,4 @@
+import { listingBuilderItem } from "PageBuilder/lib/listingBuilder/types";
 import { ArrayOfType } from "PageBuilder/types";
 
 const customItem: ArrayOfType = {
@@ -41,26 +42,33 @@ export type listingItem = {
   items?: ArrayOfType[];
 };
 
-export const items: listingItem[] = [
+export const items: listingBuilderItem[] = [
   {
     name: "person",
-    reference: "person",
+
     title: "Person",
     items: [{ type: "reference", to: [{ type: "person" }] }],
   },
   {
     name: "page",
-    reference: "page",
+
     title: "Page",
     items: [{ type: "reference", to: [{ type: "page" }] }],
   },
   {
     name: "post",
     title: "Post",
-    reference: "post",
     filter: [
-      { title: "All", value: "all", queryFilter: `&& title match "mag*"` },
-      { title: "With A", value: "withA", queryFilter: `&& title match "a*"` },
+      {
+        title: "All",
+        value: "all",
+        queryFilter: { filter: `title match "mag*"` },
+      },
+      {
+        title: "With A",
+        value: "withA",
+        queryFilter: { filter: `title match "a*"` },
+      },
     ],
     variants: [
       { value: "grid", title: "Grid" },
