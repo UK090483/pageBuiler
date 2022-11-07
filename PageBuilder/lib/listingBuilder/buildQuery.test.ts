@@ -31,6 +31,15 @@ const builderItems: listingBuilderItem[] = [
         title: "F2",
         queryFilter: { filter: "value > 1", order: "value desc" },
       },
+      {
+        value: "testFilter3",
+        title: "F3",
+        queryFilter: {
+          filter: "value > 0",
+
+          slice: { start: 1, end: 4 },
+        },
+      },
     ],
   },
   {
@@ -135,5 +144,14 @@ describe("Build listing Query", () => {
       })
     );
     expect(res.list?.items.map((i) => i.value)).toEqual([5, 4, 3, 2]);
+  });
+  it("result items to have the requested filter Items Slice", async () => {
+    const res = await runTestQuery(
+      builderItems,
+      getData({
+        list: { contentType: "A", AFilter: "testFilter3" },
+      })
+    );
+    expect(res.list?.items.map((i) => i.value)).toEqual([2, 3, 4]);
   });
 });

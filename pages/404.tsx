@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import appConfig from "../app.config.json";
 import Image from "next/legacy/image";
 
 interface IStypeProps {}

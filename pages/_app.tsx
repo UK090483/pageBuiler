@@ -7,6 +7,8 @@ import { PageBuilderContextProvider } from "PageBuilder/lib/PageBuilderContext";
 import { PageResult } from "PageBuilder/ContentTypes/Page/page.types";
 import Seo from "PageBuilder/Objects/Seo/frontend/Seo";
 import PreviewIndicator from "PageBuilder/lib/Preview/PreviewIndicator";
+import ErrorBoundary from "PageBuilder/lib/next/ErrorBoundary";
+import { useEffect } from "react";
 
 interface AppPropsWithStaticProps {
   pageProps: { data: PageResult; query?: string };
@@ -14,15 +16,21 @@ interface AppPropsWithStaticProps {
 }
 
 function App({ Component, pageProps }: AppPropsWithStaticProps) {
+  useEffect(() => {
+    console.log("rendered");
+  }, []);
+
   return (
-    <PageBuilderContextProvider query={pageProps.query} data={pageProps.data}>
-      <Seo />
-      <Layout>
-        <Component />
-      </Layout>
-      <PreviewIndicator />
-      {/* <Cookie />  */}
-    </PageBuilderContextProvider>
+    <ErrorBoundary>
+      <PageBuilderContextProvider query={pageProps.query} data={pageProps.data}>
+        <Seo />
+        <Layout>
+          <Component />
+        </Layout>
+        <PreviewIndicator />
+        {/* <Cookie />  */}
+      </PageBuilderContextProvider>
+    </ErrorBoundary>
   );
 }
 

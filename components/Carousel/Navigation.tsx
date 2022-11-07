@@ -1,5 +1,5 @@
 import React from "react";
-import { useCarousel } from "./CarouselContext";
+import { useCarouselContext } from "./CarouselContext";
 import { HiArrowLeft } from "react-icons/hi";
 
 type NavigationProps = {
@@ -10,7 +10,7 @@ type NavigationProps = {
 };
 export const Navigation: React.FC<NavigationProps> = (props) => {
   const { children, className } = props;
-  const { next, prev, itemCount } = useCarousel();
+  const { next, prev, itemCount } = useCarouselContext();
   if (itemCount < 2) return <></>;
 
   return (

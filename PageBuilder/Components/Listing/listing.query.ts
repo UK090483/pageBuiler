@@ -35,6 +35,7 @@ const listingQuery: localizedQueryFn = (locale) =>
 export const listProjection: localizedQueryFn = (locale) => `
 _type == 'listing'=>{
   _type,
+  _key,
 ${listingQuery(locale)}
 ${componentStyleProjection}
 },

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import * as React from "react";
 
 interface ICardImageProps extends ISanityImageProps {
-  variant?: "aspect" | "round" | "intrinsic";
+  variant?: "aspect" | "round" | "square" | "intrinsic";
 }
 
 const CardImage: React.FunctionComponent<ICardImageProps> = (props) => {
@@ -16,7 +16,9 @@ const CardImage: React.FunctionComponent<ICardImageProps> = (props) => {
       <div
         className={clsx("shadow-xl overflow-hidden   relative", {
           "w-full aspect-w-3 aspect-h-2 rounded-lg": variant === "aspect",
+          "w-full aspect-w-1 aspect-h-1 rounded-lg ": variant === "square",
           "w-60 h-60 mx-auto rounded-full ": variant === "round",
+
           "w-full": variant === "intrinsic",
         })}
       >

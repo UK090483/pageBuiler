@@ -50,14 +50,16 @@
   },
   "include": [
     "next-env.d.ts",
+    "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "PageBuilderPlugins/SeoPlugin",
-    "tsBuilder/build.js",
-    ".next/types/**/*.ts"
+    "**/*.js",
   ],
   "exclude": [
     "node_modules",
-    "studio/**"
+    "studio/**",
+    "cypress",
+    "coverage",
+    "cypress.config.ts",
   ]
 }

@@ -1,4 +1,4 @@
-import { listingBuilderItem } from "./types";
+import { listingBuilderItem, listingBuilderItemFilter } from "./types";
 
 const getVariant = (items: listingBuilderItem[]) =>
   items
@@ -9,6 +9,13 @@ const getVariant = (items: listingBuilderItem[]) =>
       "select("
     ) + "),";
 
+const getFilterOrder = (filter: listingBuilderItemFilter) =>
+  filter.queryFilter?.order ? `| order(${filter.queryFilter.order})` : "";
+const getFilterSlice = (filter: listingBuilderItemFilter) =>
+  filter.queryFilter.slice
+    ? `[${filter.queryFilter.slice.start}...${filter.queryFilter.slice.end}]`
+    : "";
+
 const getFilterQuery = (item: listingBuilderItem) => {
   if (!item.filter) return "";
   return item.filter.reduce((acc, filter) => {
@@ -16,9 +23,9 @@ const getFilterQuery = (item: listingBuilderItem) => {
       acc +
       `contentType == "${item.name}" && ${item.name}Filter == "${
         filter.value
-      }"  => *[_type == "${item.name}" && ${filter.queryFilter.filter}]${
-        filter.queryFilter.order ? `| order(${filter.queryFilter.order})` : ""
-      },`
+      }"  => *[_type == "${item.name}" && ${
+        filter.queryFilter.filter
+      }]${getFilterOrder(filter)}${getFilterSlice(filter)},`
     );
   }, "");
 };

@@ -24,11 +24,11 @@ function SanityImage(props: ISanityImageProps) {
 
   return (
     <Image
-      style={{ ...style }}
+      style={{ ...style, backgroundSize: "cover" }}
       {...rest}
       className={className}
       placeholder="blur"
-      blurDataURL={src?.lqip}
+      blurDataURL={src.lqip}
       alt={_alt}
       src={_url}
       loader={loader}

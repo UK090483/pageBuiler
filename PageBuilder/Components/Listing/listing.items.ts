@@ -62,7 +62,7 @@ export const items: listingBuilderItem[] = [
       {
         title: "All",
         value: "all",
-        queryFilter: { filter: `title match "mag*"` },
+        queryFilter: { filter: `defined(_id)` },
       },
       {
         title: "With A",

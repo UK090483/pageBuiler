@@ -2,7 +2,7 @@
 
 import Carousel from "@components/Carousel/Carousel";
 import { CarouselContextProvider } from "@components/Carousel/CarouselContext";
-import CarouselItemWrap from "@components/Carousel/CarouselItemWrap";
+import CarouselItemWrap from "@components/Carousel/CarouselItemAnimationWrap";
 import Dots from "@components/Carousel/Dots";
 import Navigation from "@components/Carousel/Navigation";
 import SanityImage from "@components/SanityImage";
@@ -11,6 +11,15 @@ import { divide } from "lodash";
 import Image from "next/image";
 
 /* eslint-disable @next/next/no-img-element */
+
+function chunk(arr: any[], chunkSize: number): any[] {
+  const res = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    res.push(arr.slice(i, i + chunkSize));
+  }
+  return res;
+}
+
 const MarUp = (props: { className?: string }) => {
   return (
     <div className={props.className + " "}>
@@ -97,46 +106,43 @@ const Style = () => {
     width: 6192,
   };
 
-  const items = [{ title: "a" }, { title: "b" }, { title: "c" }];
+  const items = [
+    { title: "a" },
+    { title: "b" },
+    { title: "c" },
+    { title: "d" },
+    { title: "e" },
+    { title: "f" },
+  ];
+
   return (
     <div className="mt-44 ">
-      <Carousel items={items}>
+      {/* <Carousel items={items}>
         <div className="text-red h-52 bg-gray-500  ">1</div>
         <div className="text-red h-52 bg-gray-500  ">2</div>
         <div className="text-red h-52 bg-gray-500  ">3</div>
+      </Carousel> */}
+
+      <Carousel>
+        {items.map((i, index) => {
+          return (
+            <div
+              className={clsx("w-full text-9xl grid grid-cols-2 ")}
+              key={i.title}
+            >
+              {i.title}
+            </div>
+          );
+        })}
       </Carousel>
 
-      {/* <CarouselContextProvider items={items}>
-        <Navigation>
-          <CarouselItemWrap>
-            {({ activeItem }) => {
-              return items.map((i, index) => {
-                console.log({ activeItem, index });
+      {/* <div className=" w-96 h-96 relative">
+        <SanityImage fill src={src} className={"object-cover"} sizes="2000px" />
+      </div>
 
-                const isActive = activeItem === index;
+      <Image alt="test" src={src.url} width={500} height={500} sizes="200px" /> */}
 
-                return (
-                  <div
-                    className={clsx(
-                      "w-full   col-start-1 col-span-1 row-start-1 row-span-1 text-9xl transition-opacity flex justify-center items-center",
-                      { " opacity-100 ": isActive, " opacity-0 ": !isActive }
-                    )}
-                    key={i.title}
-                  >
-                    {i.title}
-                  </div>
-                );
-              });
-            }}
-          </CarouselItemWrap>
-        </Navigation>
-        <Dots />
-      </CarouselContextProvider> */}
-      {/* <SanityImage src={src} width={500} height={500} sizes="200px" />
-
-      <Image alt="test" src={src.url} width={500} height={500} sizes="200px" />
-
-      <MarUp className="prose  mx-auto debug  " />
+      {/* <MarUp className="prose  mx-auto debug  " />
 
       <MarUp className="max-w-2xl mx-auto typo typo-spacings typo-sizes typo-weigths " />
       <MarUp className="max-w-2xl mx-auto bg-black typo-invert  typo-spacings typo-sizes typo-weigths  " /> */}

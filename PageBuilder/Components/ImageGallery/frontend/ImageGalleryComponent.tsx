@@ -2,7 +2,7 @@ import React from "react";
 import { ImageGalleryPlugResult } from "../imageGallery.query";
 import Portal from "@components/Portal/Portal";
 import { LightBox } from "./LightBox";
-import Masonry from "./masonry/Masonry";
+import Masonry from "@components/Masonry/Masonry";
 import SanityImage from "@components/SanityImage";
 import Grid from "./grid/Grid";
 import Section from "@components/Section/Section";
@@ -25,7 +25,11 @@ const ImageGalleryComponent: React.FC<ImageGalleryPlugResult> = (props) => {
   return (
     <Section noProse>
       {variant === "masonry" && (
-        <Masonry margin={0} columns={rows} sizes={{ 2: 600, 3: 1000, 4: 1200 }}>
+        <Masonry
+          margin={20}
+          columns={rows}
+          sizes={{ 2: 600, 3: 1000, 4: 1200 }}
+        >
           {items.map((item, index) => {
             return (
               <button
@@ -35,7 +39,6 @@ const ImageGalleryComponent: React.FC<ImageGalleryPlugResult> = (props) => {
                 tabIndex={lightBox ? 1 : -1}
               >
                 <SanityImage sizes="20vw" src={item.image} />
-                {""}
               </button>
             );
           })}

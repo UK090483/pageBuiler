@@ -1,6 +1,8 @@
-const appConfig = require("./app.config.json");
-const withPWA = require("next-pwa");
-const { withSentryConfig } = require("@sentry/nextjs");
+const locale = {
+  de: { title: "Deutsch", isDefault: true, flag: "🇩🇪" },
+  en: { title: "Englisch", flag: "🇺🇸" },
+};
+
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 /** @type {import('next').NextConfig} */
@@ -8,11 +10,10 @@ const config = {
   reactStrictMode: true,
   // experimental: {
   //   appDir: true,
-  
   // },
   i18n: {
-    locales: Object.keys(appConfig.locales),
-    defaultLocale: Object.entries(appConfig.locales).reduce(
+    locales: Object.keys(locale),
+    defaultLocale: Object.entries(locale).reduce(
       (acc, [key, lang]) => (lang.isDefault ? key : acc),
       null
     ),
@@ -47,18 +48,6 @@ const config = {
     }
     return config;
   },
-};
-
-const sentryWebpackPluginOptions = {
-  // Additional config options for the Sentry Webpack plugin. Keep in mind that
-  // the following options are set automatically, and overriding them is not
-  // recommended:
-  //   release, url, org, project, authToken, configFile, stripPrefix,
-  //   urlPrefix, include, ignore
-
-  silent: true, // Suppresses all logs
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options.
 };
 
 module.exports = config;

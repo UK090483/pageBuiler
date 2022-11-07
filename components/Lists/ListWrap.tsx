@@ -1,5 +1,5 @@
 import Carousel from "@components/Carousel/Carousel";
-import CarouselItemWrap from "@components/Carousel/CarouselItemWrap";
+import CarouselItemWrap from "@components/Carousel/CarouselItemAnimationWrap";
 import Dots from "@components/Carousel/Dots";
 import Navigation from "@components/Carousel/Navigation";
 import clsx from "clsx";
@@ -33,7 +33,7 @@ function ListWrap<T>(props: IListWrapAutoProps<T>) {
 
   if (variant === "carousel") {
     return (
-      <Carousel items={items}>
+      <Carousel>
         {items.map((i) => (
           <li key={i[useKey] as string | number}>{children(i)}</li>
         ))}

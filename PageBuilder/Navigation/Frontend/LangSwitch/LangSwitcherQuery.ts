@@ -1,6 +1,6 @@
-import { LocationConfig } from "types";
+import { PageBuilderLocales } from "PageBuilder/types";
 
-const LangSwitcherQuery = (locales: LocationConfig) => {
+const LangSwitcherQuery = (locales: PageBuilderLocales) => {
   const query = Object.entries(locales).reduce((acc, [key, value]) => {
     return value.isDefault
       ? `${acc} 'href': select( 

@@ -15,6 +15,7 @@ import fetchStaticPath from "PageBuilder/lib/next/fetchStaticPath";
 import fetchStaticProps from "PageBuilder/lib/next/fetchStaticProps";
 
 import { pageQuery } from "PageBuilder/ContentTypes/Page/page.query";
+
 export type PageResult = { content?: any };
 
 const Page = () => {

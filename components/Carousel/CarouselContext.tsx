@@ -58,6 +58,6 @@ export function CarouselContextProvider<T>(
   );
 }
 
-export const useCarousel = () => {
+export const useCarouselContext = () => {
   return useContext(CarouselContext);
 };

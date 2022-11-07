@@ -1,7 +1,7 @@
 import { getSanityClient } from "@lib/SanityService/sanity.server";
 import buildSitemap from "@lib/SiteMap/buildSitemap";
 import { GetServerSideProps } from "next";
-import AppConfig from "../app.config.json";
+
 const Sitemap = () => {};
 
 let pages: { slug: string }[] | undefined;
@@ -23,14 +23,14 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
       `
     );
   }
-  const sitemap = await buildSitemap({
-    pages: pages || [],
-    hostname: AppConfig.hostname,
-    locales: AppConfig.locales,
-  });
+  // const sitemap = await buildSitemap({
+  //   pages: pages || [],
+  //   hostname: AppConfig.hostname,
+  //   locales: AppConfig.locales,
+  // });
 
   res.setHeader("Content-Type", "text/xml");
-  res.write(sitemap);
+  res.write("sitemap");
   res.end();
 
   return {

@@ -1,9 +1,8 @@
 import React from "react";
 import clsx from "clsx";
-import { AppColor } from "types";
 
 type TransitionProps = {
-  color?: AppColor;
+  color?: string;
   pos: "top" | "bottom";
 };
 const topD = "M1000 100H-2.14577e-05V1.66893e-06L1000 100Z";
