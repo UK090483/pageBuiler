@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { listingQueryResult } from "../listing.query";
 import Section from "@components/Section/Section";
 import { componentStyleResult } from "../../componentStyle";
@@ -31,9 +31,9 @@ const presetMap: Record<
     infoAlign: true,
   },
   post: {
-    listVariant: "carousel",
+    listVariant: "grid",
     imageVariant: "square",
-    columns: 4,
+    columns: 1,
     cardVariant: "horizontal",
     infoAlign: false,
   },

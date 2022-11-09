@@ -22,7 +22,10 @@ const delay = (callback: () => any, ms: number) => {
       return;
     }
     clearTimeout(timer);
-    timer = setTimeout(callback, ms);
+    timer = setTimeout(() => {
+      timer = null;
+      callback();
+    }, ms);
   };
   return [run, clear];
 };
@@ -45,10 +48,8 @@ const Masonry: React.FC<MasonryProps> = (props) => {
           return acc;
         }, _columns as number);
       }
-
       const gridItems = [].slice.call(root.current.children) as HTMLElement[];
       const getHeight = (item: HTMLElement) => {
-        // return item.getBoundingClientRect().height;
         return item.clientHeight;
       };
       const cols = columnHandler(_columns);
@@ -64,7 +65,7 @@ const Masonry: React.FC<MasonryProps> = (props) => {
         item.style.opacity = "1";
       });
       root.current.style.height = cols.getHeight() + margin + "px";
-    }, 200);
+    }, 100);
 
     run();
 

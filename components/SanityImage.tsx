@@ -24,7 +24,7 @@ function SanityImage(props: ISanityImageProps) {
 
   return (
     <Image
-      style={{ ...style, backgroundSize: "cover" }}
+      style={{ ...style }}
       {...rest}
       className={className}
       placeholder="blur"

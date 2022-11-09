@@ -124,12 +124,9 @@ const Style = () => {
       </Carousel> */}
 
       <Carousel>
-        {items.map((i, index) => {
+        {items.map((i) => {
           return (
-            <div
-              className={clsx("w-full text-9xl grid grid-cols-2 ")}
-              key={i.title}
-            >
+            <div className={clsx("w-full text-9xl")} key={i.title}>
               {i.title}
             </div>
           );
