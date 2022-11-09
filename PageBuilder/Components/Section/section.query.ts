@@ -14,6 +14,7 @@ _type == "section" => {
   title,
   type,
   imagePosition,
+  textDirection,
   'image':image{${IMAG_PROJECTION}},
   'content':(coalesce(content_${locale},content))[]{${defaultRichTextQuery(
   locale
