@@ -1,28 +1,43 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 
-export interface useCarouselProps<T> {
-  items: T[];
+export interface useCarouselProps {
+  items: any[] | number;
   initialActiveItem?: number;
 }
 
-export function useCarousel<T extends any>(props: useCarouselProps<T>) {
+export function useCarousel(props: useCarouselProps) {
   const { initialActiveItem, items } = props;
 
-  const [activeItemId, setActiveItemId] = useState(initialActiveItem || 0);
-  const [lastActiveItemId, setLastActiveItemId] = useState(
-    initialActiveItem || 0
+  const [[activeItemIndex, lastActiveItemIndex], setActiveItem] = useState<
+    [number, number | null]
+  >([initialActiveItem || 0, null]);
+  const itemCount = useMemo(
+    () => (Array.isArray(items) ? items.length : items),
+    [items]
   );
-  const itemCount = items.length;
+
   const next = useCallback(
-    () => setActiveItemId((x) => (x + 1) % itemCount),
+    () => setActiveItem(([current]) => [(current + 1) % itemCount, current]),
     [itemCount]
   );
   const prev = useCallback(
-    () => setActiveItemId((x) => (x === 0 ? itemCount - 1 : x - 1)),
-    []
+    () =>
+      setActiveItem(([current]) => [
+        current === 0 ? itemCount - 1 : current - 1,
+        current,
+      ]),
+    [itemCount]
   );
-  const reset = () => setActiveItemId(initialActiveItem || 0);
-  const set = (index: number) => setActiveItemId(index || 0);
+  const reset = () => setActiveItem([initialActiveItem || 0, null]);
+  const set = (index: number) => setActiveItem(([current]) => [index, current]);
 
-  return { next, prev, reset, set, activeItemId, lastActiveItemId };
+  return {
+    next,
+    prev,
+    reset,
+    set,
+    activeItemIndex,
+    lastActiveItemIndex,
+    itemCount,
+  };
 }

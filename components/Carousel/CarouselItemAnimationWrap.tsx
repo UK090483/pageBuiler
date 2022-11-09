@@ -16,7 +16,7 @@ interface ICarouselItemWrapProps {
 function CarouselItemWrap(props: ICarouselItemWrapProps) {
   const { children, delay = 500, nextOnClick = true } = props;
 
-  const { activeItem: _active, next } = useCarouselContext();
+  const { activeItemIndex: _active, next } = useCarouselContext();
 
   const [animateIn, setAnimateIn] = useState(false);
   const [animateOut, setAnimateOut] = useState(false);
